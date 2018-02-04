@@ -1,0 +1,13 @@
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe.config
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.pdb
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.xml
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1.resources
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Resources.resources
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.GenerateResource.Cache
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.exe
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.xml
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.pdb
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbprojResolveAssemblyReference.cache
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\quickfix_net.dll
+C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\quickfix_net_messages.dll
