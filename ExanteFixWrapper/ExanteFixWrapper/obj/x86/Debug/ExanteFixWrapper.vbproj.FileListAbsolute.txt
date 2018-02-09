@@ -11,3 +11,22 @@ C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug
 C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbprojResolveAssemblyReference.cache
 C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\quickfix_net.dll
 C:\Users\111\Dropbox\ЛШП 2017\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\quickfix_net_messages.dll
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe.config
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.exe
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.xml
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.pdb
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.pdb
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.xml
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbprojResolveAssemblyReference.cache
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1.resources
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Resources.resources
+D:\Новая папка\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.GenerateResource.Cache
+C:\Users\Artem\Desktop\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe.config
+C:\Users\Artem\Desktop\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.exe
+C:\Users\Artem\Desktop\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.xml
+C:\Users\Artem\Desktop\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.pdb
+C:\Users\Artem\Desktop\Новая папка\ExanteFixWrapper\bin\x86\Debug\ExanteFixWrapper.exe.config
+C:\Users\Artem\Desktop\Новая папка\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.exe
+C:\Users\Artem\Desktop\Новая папка\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.xml
+C:\Users\Artem\Desktop\Новая папка\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.pdb
