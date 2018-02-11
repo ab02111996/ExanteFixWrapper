@@ -138,6 +138,8 @@
     </Compile>
     <Compile Include="QuickFIXFeedApplication.vb" />
     <Compile Include="QuoteFixReciever.vb" />
+    <Compile Include="QuotesInfo.vb" />
+    <Compile Include="SubscribeInfo.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

@@ -4,23 +4,16 @@ Imports QuickFix44
 
 Public Class QuickFIXFeedApplication
     Implements QuickFix.Application
-    Public Delegate Sub UpdateQuoteCourseCallBack(askPrice As Double, askVolume As Double, bidPrice As Double, bidVolume As Double, timeStamp As DateTime)
-    Dim updateQuotesInfoCallback As UpdateQuoteCourseCallBack
-    Private sessionid As QuickFix.SessionID
+
+    Public subscribeInfos As List(Of SubscribeInfo)
+    Public sessionid As QuickFix.SessionID
     Private fixPassword As String
 
     Sub New(password As String)
         Me.fixPassword = password
+        Me.subscribeInfos = New List(Of SubscribeInfo)
     End Sub
-    Protected Overrides Sub Finalize()
-        Try
-            Session.lookupSession(sessionid).logout()
-        Catch ex As Exception
-
-        Finally
-            MyBase.Finalize()
-        End Try
-    End Sub
+    
     Public Sub fromAdmin(message As QuickFix.Message, sessionID As SessionID) Implements Application.fromAdmin
 
     End Sub
@@ -37,7 +30,7 @@ Public Class QuickFIXFeedApplication
                 Dim mdEntryType As MDEntryType = New MDEntryType()
                 Dim mdEntryPx As MDEntryPx = New MDEntryPx()
                 Dim mDEntrySize As MDEntrySize = New MDEntrySize()
-                Dim askPrice, askVolume, bidPrice, bidVolume As Double
+                Dim quotesInfo As QuotesInfo = New QuotesInfo()
                 For index As UInteger = 1 To noMDEntries.getValue()
                     message.getGroup(index, mdEntriesGroup)
                     mdEntriesGroup.get(mdEntryType)
@@ -45,15 +38,21 @@ Public Class QuickFIXFeedApplication
                     mdEntriesGroup.get(mDEntrySize)
                     Select Case mdEntryType.getValue()
                         Case mdEntryType.BID
-                            bidPrice = mdEntryPx.getValue()
-                            bidVolume = mDEntrySize.getValue()
+                            quotesInfo.BidPrice = mdEntryPx.getValue()
+                            quotesInfo.BidVolume = mDEntrySize.getValue()
                         Case mdEntryType.OFFER
-                            askPrice = mdEntryPx.getValue()
-                            askVolume = mDEntrySize.getValue()
+                            quotesInfo.AskPrice = mdEntryPx.getValue()
+                            quotesInfo.AskVolume = mDEntrySize.getValue()
+                        Case mdEntryType.TRADE
+                            quotesInfo.TradePrice = mdEntryPx.getValue()
+                            quotesInfo.TradeVolume = mDEntrySize.getValue()
                         Case Else
                     End Select
                 Next
-                updateQuotesInfoCallback.Invoke(askPrice, askVolume, bidPrice, bidVolume, DateTime.Now)
+                For Each info As SubscribeInfo In subscribeInfos
+                    quotesInfo.TimeStamp = DateTime.Now
+                    info.UpdateQuotesCallback.Invoke(quotesInfo)
+                Next
             Catch ex As Exception
 
             End Try
@@ -77,7 +76,6 @@ Public Class QuickFIXFeedApplication
         Dim msgType As MsgType = New MsgType()
         message.getHeader().getField(msgType)
         If msgType.getValue = QuickFix.MsgType.Logon Then
-
             message.setField(New Password(Me.fixPassword))
         End If
     End Sub
@@ -85,7 +83,7 @@ Public Class QuickFIXFeedApplication
     Public Sub toApp(message As QuickFix.Message, sessionID As SessionID) Implements Application.toApp
 
     End Sub
-    Public Sub SubscribeOnQuoteInfo(updatequotesinfocallback As UpdateQuoteCourseCallBack)
-        Me.updateQuotesInfoCallback = updatequotesinfocallback
+    Public Sub SubscribeOnQuoteInfo(subscribeInfo As SubscribeInfo)
+        Me.subscribeInfos.Add(subscribeInfo)
     End Sub
 End Class

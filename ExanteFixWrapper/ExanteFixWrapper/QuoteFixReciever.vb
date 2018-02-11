@@ -1,13 +1,14 @@
 ﻿Imports QuickFix
 Imports System.Threading
 Imports ExanteFixWrapper.QuickFIXFeedApplication
+Imports ExanteFixWrapper.SubscribeInfo
 
 Public Class QuoteFixReciever
     Dim initiator As SocketInitiator
     Dim settings As SessionSettings
     Dim application As QuickFIXFeedApplication
     Dim currentState As Boolean
-    Delegate Sub UpdateConnectionStateCallBack(State As Boolean)
+    Delegate Sub UpdateConnectionStateCallBack(State As Boolean, ThreadAlive As Boolean)
     Public updateConnStateCallback As UpdateConnectionStateCallBack
     Dim updateConnStatusThread As Thread
     Public Sub New(fixFeedConfigPath As String, updStateCallback As UpdateConnectionStateCallBack)
@@ -32,10 +33,19 @@ Public Class QuoteFixReciever
 
         End Try
     End Sub
+    Sub Logout()
+        Try
+            Session.lookupSession(application.sessionid).logout()
+            updateConnStatusThread = Nothing
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Sub SubscribeForQuotes(exanteID As String, updateQuotesCallback As UpdateQuoteCourseCallBack)
+        Dim subscribeInfo As SubscribeInfo = New SubscribeInfo(exanteID, updateQuotesCallback)
         Dim marketDataRequest As QuickFix44.MarketDataRequest = New QuickFix44.MarketDataRequest()
-        marketDataRequest.set(New MDReqID(System.Guid.NewGuid().ToString()))
+        marketDataRequest.set(New MDReqID(subscribeInfo.Guid.ToString()))
         marketDataRequest.set(New SubscriptionRequestType(SubscriptionRequestType.SNAPSHOT_PLUS_UPDATES))
         marketDataRequest.set(New MarketDepth(0))
         marketDataRequest.set(New MDUpdateType(MDUpdateType.FULL_REFRESH))
@@ -45,21 +55,55 @@ Public Class QuoteFixReciever
         marketDataRequest.addGroup(entryTypesGroup)
         entryTypesGroup.set(New MDEntryType(MDEntryType.OFFER))
         marketDataRequest.addGroup(entryTypesGroup)
+        entryTypesGroup.set(New MDEntryType(MDEntryType.TRADE))
+        marketDataRequest.addGroup(entryTypesGroup)
         Dim relatedSymGroup As QuickFix44.MarketDataRequest.NoRelatedSym = New QuickFix44.MarketDataRequest.NoRelatedSym()
         relatedSymGroup.set(New SecurityIDSource("111"))
         relatedSymGroup.set(New SecurityID(exanteID))
         relatedSymGroup.set(New Symbol(exanteID))
         marketDataRequest.addGroup(relatedSymGroup)
         Session.sendToTarget(marketDataRequest, initiator.getSessions(0))
-        application.SubscribeOnQuoteInfo(updateQuotesCallback)
+        application.SubscribeOnQuoteInfo(subscribeInfo)
     End Sub
 
+    Sub UnsubscribeForQuotes(subscribeInfo As SubscribeInfo)
+        Dim marketDataRequest As QuickFix44.MarketDataRequest = New QuickFix44.MarketDataRequest()
+        marketDataRequest.set(New MDReqID(subscribeInfo.Guid.ToString()))
+        marketDataRequest.set(New SubscriptionRequestType(SubscriptionRequestType.UNSUBSCRIBE))
+        marketDataRequest.set(New MarketDepth(0))
+        marketDataRequest.set(New MDUpdateType(MDUpdateType.FULL_REFRESH))
+        marketDataRequest.set(New AggregatedBook(True))
+        Dim entryTypesGroup As QuickFix44.MarketDataRequest.NoMDEntryTypes = New QuickFix44.MarketDataRequest.NoMDEntryTypes()
+        entryTypesGroup.set(New MDEntryType(MDEntryType.BID))
+        marketDataRequest.addGroup(entryTypesGroup)
+        entryTypesGroup.set(New MDEntryType(MDEntryType.OFFER))
+        marketDataRequest.addGroup(entryTypesGroup)
+        entryTypesGroup.set(New MDEntryType(MDEntryType.TRADE))
+        marketDataRequest.addGroup(entryTypesGroup)
+        Dim relatedSymGroup As QuickFix44.MarketDataRequest.NoRelatedSym = New QuickFix44.MarketDataRequest.NoRelatedSym()
+        relatedSymGroup.set(New SecurityIDSource("111"))
+        relatedSymGroup.set(New SecurityID(subscribeInfo.ExanteId))
+        relatedSymGroup.set(New Symbol(subscribeInfo.ExanteId))
+        marketDataRequest.addGroup(relatedSymGroup)
+        Session.sendToTarget(marketDataRequest, initiator.getSessions(0))
+        application.subscribeInfos.Remove(subscribeInfo)
+    End Sub
+    Function GetSubscribeInfos() As List(Of SubscribeInfo)
+        Return application.subscribeInfos
+    End Function
     Sub CheckingConnectonState()
         While True
             Thread.Sleep(1000)
             If isConnected() <> currentState Then
                 currentState = isConnected()
-                updateConnStateCallback.Invoke(currentState)
+                If updateConnStatusThread IsNot Nothing Then
+                    updateConnStateCallback.Invoke(currentState, True)
+                Else
+                    updateConnStateCallback.Invoke(currentState, False)
+                    Exit While
+                End If
+
+
             End If
         End While
     End Sub
