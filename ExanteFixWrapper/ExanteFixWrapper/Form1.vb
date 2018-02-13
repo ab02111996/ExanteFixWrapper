@@ -3,19 +3,17 @@ Imports System.Threading
 Public Class Form1
     Dim fixConfigPath As String = "FIX\fix_vendor.ini"
     Dim feedReciever As QuoteFixReciever
-    Dim minPrice As Double
-    Dim maxPrice As Double
-    Sub InitializationMinAndMaxPrices()
-        minPrice = 9999999
-        maxPrice = 0
-    End Sub
+    Public cp As ChartPainting
+    Dim volume As Double = 0
+    Dim currentMaxPrice As Double
+    Dim currentMinPrice As Double
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
             feedReciever = Nothing
         End If
         feedReciever = New QuoteFixReciever(fixConfigPath, AddressOf CheckingState)
-        InitializationMinAndMaxPrices()
     End Sub
 
     Sub CheckingState(state As Boolean, threadAlive As Boolean)
@@ -33,9 +31,8 @@ Public Class Form1
 
     End Sub
 
-
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        cp = New ChartPainting(New List(Of Point), 20, 999999999, 0, 0)
         Dim subscribes = feedReciever.GetSubscribeInfos()
         If subscribes.Count > 0 Then
             feedReciever.UnsubscribeForQuotes(subscribes(0))
@@ -58,8 +55,7 @@ Public Class Form1
                                         BidVolumeTextBox.Text = quotesInfo.BidVolume
                                     End Sub)
 
-            Dim currentMaxPrice As Double
-            Dim currentMinPrice As Double
+
             If (quotesInfo.AskPrice > quotesInfo.BidPrice) Then
                 currentMaxPrice = quotesInfo.AskPrice
                 currentMinPrice = quotesInfo.BidPrice
@@ -68,25 +64,18 @@ Public Class Form1
                 currentMinPrice = quotesInfo.AskPrice
             End If
 
-            If (currentMaxPrice > maxPrice) Then
-                maxPrice = currentMaxPrice
+            If (currentMaxPrice > cp.maxPrice) Then
+                cp.maxPrice = currentMaxPrice
             End If
 
-            If (currentMinPrice < minPrice) Then
-                minPrice = currentMinPrice
+            If (currentMinPrice < cp.minPrice) Then
+                cp.minPrice = currentMinPrice
             End If
 
-            Chart1.Invoke(Sub()
-                              Me.Chart1.Series("AskPrice").Points.AddXY(DateTime.Now.ToLongTimeString, quotesInfo.AskPrice)
-                              Me.Chart1.Series("BidPrice").Points.AddXY(DateTime.Now.ToLongTimeString, quotesInfo.BidPrice)
-                              Me.Chart1.ChartAreas(0).AxisY.Minimum = minPrice - 10.0
-                              Me.Chart1.ChartAreas(0).AxisY.Maximum = maxPrice + 10.0
-                          End Sub)
+            cp.points.Add(New Point(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, volume, DateTime.Now))
+            cp.prePainting(QuotesPctBox.Width)
+            cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
 
-            Chart2.Invoke(Sub()
-                              Me.Chart2.Series("AskVolume").Points.AddXY(DateTime.Now.ToLongTimeString, quotesInfo.AskVolume)
-                              Me.Chart2.Series("BidVolume").Points.AddXY(DateTime.Now.ToLongTimeString, quotesInfo.BidVolume)
-                          End Sub)
         Else
             TradePriceTextBox.Invoke(Sub()
                                          TradePriceTextBox.Text = quotesInfo.TradePrice
@@ -97,11 +86,11 @@ Public Class Form1
         End If
 
 
-        
+
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        DoubleBuffered = True
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -109,5 +98,11 @@ Public Class Form1
             feedReciever.Logout()
         End If
         System.Windows.Forms.Application.Exit()
+    End Sub
+
+    Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox.MouseMove
+        Dim p As PointF = e.Location
+        Label4.Text = e.X.ToString() + " " + e.Y.ToString()
+
     End Sub
 End Class
