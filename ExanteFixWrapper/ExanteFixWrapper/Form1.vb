@@ -4,6 +4,7 @@ Public Class Form1
     Dim fixConfigPath As String = "FIX\fix_vendor.ini"
     Dim feedReciever As QuoteFixReciever
     Public cp As ChartPainting
+    Public yRangePublic As Double
     Dim volume As Double = 0
     Dim currentMaxPrice As Double
     Dim currentMinPrice As Double
@@ -32,7 +33,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        cp = New ChartPainting(New List(Of Point), 20, 999999999, 0, 0)
+        cp = New ChartPainting(New List(Of Point), 100, 999999999, 0, 0)
         Dim subscribes = feedReciever.GetSubscribeInfos()
         If subscribes.Count > 0 Then
             feedReciever.UnsubscribeForQuotes(subscribes(0))
@@ -72,8 +73,7 @@ Public Class Form1
                 cp.minPrice = currentMinPrice
             End If
 
-            cp.points.Add(New Point(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, volume, DateTime.Now))
-            cp.prePainting(QuotesPctBox.Width)
+            cp.points.Add(New Point(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, volume, DateTime.Now, Nothing, Nothing))
             cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
 
         Else
@@ -101,8 +101,20 @@ Public Class Form1
     End Sub
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox.MouseMove
-        Dim p As PointF = e.Location
-        Label4.Text = e.X.ToString() + " " + e.Y.ToString()
+        'Dim p As PointF = e.Location
+        Dim proportion As Double = cp.yRange - (e.Y / QuotesPctBox.Height) * cp.yRange
+        Label4.Text = Format((cp.minPrice - cp.minPrice * 0.0025) + proportion, "0.00")
+
+        'Dim x As Double = 
+        Dim indexOfPoint = CInt(Math.Floor(e.X / cp.interval))
+        If (indexOfPoint >= cp.points.Count) Then
+            indexOfPoint = cp.points.Count - 1
+            Label5.Text = cp.points(cp.currentPoint + indexOfPoint).time.ToLongTimeString
+        Else
+            Label5.Text = cp.points(cp.currentPoint + indexOfPoint).time.ToLongTimeString
+        End If
 
     End Sub
+
+
 End Class

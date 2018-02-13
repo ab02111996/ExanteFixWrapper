@@ -45,6 +45,7 @@ Partial Class Form1
         Me.TimesPctBox = New System.Windows.Forms.PictureBox()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.QuotesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -202,7 +203,7 @@ Partial Class Form1
         '
         'QuotesPctBox
         '
-        Me.QuotesPctBox.Location = New System.Drawing.Point(107, 107)
+        Me.QuotesPctBox.Location = New System.Drawing.Point(138, 109)
         Me.QuotesPctBox.Name = "QuotesPctBox"
         Me.QuotesPctBox.Size = New System.Drawing.Size(1374, 465)
         Me.QuotesPctBox.TabIndex = 18
@@ -210,7 +211,7 @@ Partial Class Form1
         '
         'PictureBox2
         '
-        Me.PictureBox2.Location = New System.Drawing.Point(107, 630)
+        Me.PictureBox2.Location = New System.Drawing.Point(138, 632)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(1374, 165)
         Me.PictureBox2.TabIndex = 19
@@ -218,7 +219,7 @@ Partial Class Form1
         '
         'PricesPctBox
         '
-        Me.PricesPctBox.Location = New System.Drawing.Point(2, 107)
+        Me.PricesPctBox.Location = New System.Drawing.Point(33, 109)
         Me.PricesPctBox.Name = "PricesPctBox"
         Me.PricesPctBox.Size = New System.Drawing.Size(105, 465)
         Me.PricesPctBox.TabIndex = 20
@@ -226,7 +227,7 @@ Partial Class Form1
         '
         'PictureBox4
         '
-        Me.PictureBox4.Location = New System.Drawing.Point(2, 630)
+        Me.PictureBox4.Location = New System.Drawing.Point(33, 632)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(105, 165)
         Me.PictureBox4.TabIndex = 21
@@ -234,7 +235,7 @@ Partial Class Form1
         '
         'TimesPctBox
         '
-        Me.TimesPctBox.Location = New System.Drawing.Point(107, 578)
+        Me.TimesPctBox.Location = New System.Drawing.Point(138, 580)
         Me.TimesPctBox.Name = "TimesPctBox"
         Me.TimesPctBox.Size = New System.Drawing.Size(1374, 36)
         Me.TimesPctBox.TabIndex = 22
@@ -251,17 +252,27 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(253, 26)
+        Me.Label4.Location = New System.Drawing.Point(262, 9)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(51, 17)
         Me.Label4.TabIndex = 24
         Me.Label4.Text = "Label4"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(262, 40)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 17)
+        Me.Label5.TabIndex = 25
+        Me.Label5.Text = "Label5"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1510, 827)
+        Me.ClientSize = New System.Drawing.Size(1550, 827)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.PictureBox6)
         Me.Controls.Add(Me.TimesPctBox)
@@ -321,4 +332,5 @@ Partial Class Form1
     Friend WithEvents TimesPctBox As PictureBox
     Friend WithEvents PictureBox6 As PictureBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
 End Class
