@@ -46,6 +46,10 @@ Partial Class Form1
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.QuotesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,7 +71,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(104, 27)
+        Me.Label1.Location = New System.Drawing.Point(107, 27)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(116, 17)
@@ -76,7 +80,7 @@ Partial Class Form1
         '
         'ExanteIDTextBox
         '
-        Me.ExanteIDTextBox.Location = New System.Drawing.Point(442, 27)
+        Me.ExanteIDTextBox.Location = New System.Drawing.Point(321, 27)
         Me.ExanteIDTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ExanteIDTextBox.Name = "ExanteIDTextBox"
         Me.ExanteIDTextBox.Size = New System.Drawing.Size(291, 22)
@@ -85,7 +89,7 @@ Partial Class Form1
         '
         'BidPriceTextBox
         '
-        Me.BidPriceTextBox.Location = New System.Drawing.Point(976, 78)
+        Me.BidPriceTextBox.Location = New System.Drawing.Point(1189, 75)
         Me.BidPriceTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BidPriceTextBox.Name = "BidPriceTextBox"
         Me.BidPriceTextBox.Size = New System.Drawing.Size(132, 22)
@@ -94,7 +98,7 @@ Partial Class Form1
         'LabelBid
         '
         Me.LabelBid.AutoSize = True
-        Me.LabelBid.Location = New System.Drawing.Point(920, 81)
+        Me.LabelBid.Location = New System.Drawing.Point(1133, 78)
         Me.LabelBid.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LabelBid.Name = "LabelBid"
         Me.LabelBid.Size = New System.Drawing.Size(28, 17)
@@ -104,7 +108,7 @@ Partial Class Form1
         'LabelAsk
         '
         Me.LabelAsk.AutoSize = True
-        Me.LabelAsk.Location = New System.Drawing.Point(920, 30)
+        Me.LabelAsk.Location = New System.Drawing.Point(1133, 27)
         Me.LabelAsk.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LabelAsk.Name = "LabelAsk"
         Me.LabelAsk.Size = New System.Drawing.Size(31, 17)
@@ -113,7 +117,7 @@ Partial Class Form1
         '
         'AskPriceTextBox
         '
-        Me.AskPriceTextBox.Location = New System.Drawing.Point(976, 30)
+        Me.AskPriceTextBox.Location = New System.Drawing.Point(1189, 27)
         Me.AskPriceTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.AskPriceTextBox.Name = "AskPriceTextBox"
         Me.AskPriceTextBox.Size = New System.Drawing.Size(132, 22)
@@ -121,7 +125,7 @@ Partial Class Form1
         '
         'AskVolumeTextBox
         '
-        Me.AskVolumeTextBox.Location = New System.Drawing.Point(1135, 30)
+        Me.AskVolumeTextBox.Location = New System.Drawing.Point(1348, 27)
         Me.AskVolumeTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.AskVolumeTextBox.Name = "AskVolumeTextBox"
         Me.AskVolumeTextBox.Size = New System.Drawing.Size(132, 22)
@@ -129,7 +133,7 @@ Partial Class Form1
         '
         'BidVolumeTextBox
         '
-        Me.BidVolumeTextBox.Location = New System.Drawing.Point(1135, 78)
+        Me.BidVolumeTextBox.Location = New System.Drawing.Point(1348, 75)
         Me.BidVolumeTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.BidVolumeTextBox.Name = "BidVolumeTextBox"
         Me.BidVolumeTextBox.Size = New System.Drawing.Size(132, 22)
@@ -138,7 +142,7 @@ Partial Class Form1
         'PriceLabel
         '
         Me.PriceLabel.AutoSize = True
-        Me.PriceLabel.Location = New System.Drawing.Point(1020, 9)
+        Me.PriceLabel.Location = New System.Drawing.Point(1233, 6)
         Me.PriceLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.PriceLabel.Name = "PriceLabel"
         Me.PriceLabel.Size = New System.Drawing.Size(40, 17)
@@ -148,7 +152,7 @@ Partial Class Form1
         'VolumeLabel
         '
         Me.VolumeLabel.AutoSize = True
-        Me.VolumeLabel.Location = New System.Drawing.Point(1176, 9)
+        Me.VolumeLabel.Location = New System.Drawing.Point(1389, 6)
         Me.VolumeLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.VolumeLabel.Name = "VolumeLabel"
         Me.VolumeLabel.Size = New System.Drawing.Size(55, 17)
@@ -157,7 +161,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(754, 23)
+        Me.Button2.Location = New System.Drawing.Point(400, 59)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(116, 28)
@@ -168,7 +172,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(262, 71)
+        Me.Label2.Location = New System.Drawing.Point(757, 27)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(178, 17)
@@ -177,7 +181,7 @@ Partial Class Form1
         '
         'TradeVolumeTextBox
         '
-        Me.TradeVolumeTextBox.Location = New System.Drawing.Point(454, 68)
+        Me.TradeVolumeTextBox.Location = New System.Drawing.Point(959, 28)
         Me.TradeVolumeTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.TradeVolumeTextBox.Name = "TradeVolumeTextBox"
         Me.TradeVolumeTextBox.Size = New System.Drawing.Size(132, 22)
@@ -186,7 +190,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(595, 71)
+        Me.Label3.Location = New System.Drawing.Point(767, 70)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(168, 17)
@@ -195,7 +199,7 @@ Partial Class Form1
         '
         'TradePriceTextBox
         '
-        Me.TradePriceTextBox.Location = New System.Drawing.Point(775, 68)
+        Me.TradePriceTextBox.Location = New System.Drawing.Point(959, 74)
         Me.TradePriceTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.TradePriceTextBox.Name = "TradePriceTextBox"
         Me.TradePriceTextBox.Size = New System.Drawing.Size(132, 22)
@@ -211,7 +215,7 @@ Partial Class Form1
         '
         'PictureBox2
         '
-        Me.PictureBox2.Location = New System.Drawing.Point(138, 632)
+        Me.PictureBox2.Location = New System.Drawing.Point(138, 661)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(1374, 165)
         Me.PictureBox2.TabIndex = 19
@@ -227,7 +231,7 @@ Partial Class Form1
         '
         'PictureBox4
         '
-        Me.PictureBox4.Location = New System.Drawing.Point(33, 632)
+        Me.PictureBox4.Location = New System.Drawing.Point(33, 661)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(105, 165)
         Me.PictureBox4.TabIndex = 21
@@ -243,7 +247,7 @@ Partial Class Form1
         '
         'PictureBox6
         '
-        Me.PictureBox6.Location = New System.Drawing.Point(107, 790)
+        Me.PictureBox6.Location = New System.Drawing.Point(138, 823)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(1374, 36)
         Me.PictureBox6.TabIndex = 23
@@ -252,26 +256,66 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(262, 9)
+        Me.Label4.Location = New System.Drawing.Point(651, 33)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(51, 17)
+        Me.Label4.Size = New System.Drawing.Size(40, 17)
         Me.Label4.TabIndex = 24
-        Me.Label4.Text = "Label4"
+        Me.Label4.Text = "Price"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(262, 40)
+        Me.Label5.Location = New System.Drawing.Point(651, 64)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(51, 17)
+        Me.Label5.Size = New System.Drawing.Size(39, 17)
         Me.Label5.TabIndex = 25
-        Me.Label5.Text = "Label5"
+        Me.Label5.Text = "Time"
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(138, 622)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(675, 33)
+        Me.Button3.TabIndex = 26
+        Me.Button3.Text = "<- Left"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(829, 622)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(683, 33)
+        Me.Button4.TabIndex = 27
+        Me.Button4.Text = "Right ->"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(1518, 109)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(48, 233)
+        Me.Button5.TabIndex = 28
+        Me.Button5.Text = "+"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(1519, 348)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(47, 233)
+        Me.Button6.TabIndex = 29
+        Me.Button6.Text = "-"
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1550, 827)
+        Me.ClientSize = New System.Drawing.Size(1682, 885)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.PictureBox6)
@@ -333,4 +377,8 @@ Partial Class Form1
     Friend WithEvents PictureBox6 As PictureBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button6 As Button
 End Class
