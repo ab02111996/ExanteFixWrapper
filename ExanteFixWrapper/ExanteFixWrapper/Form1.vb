@@ -6,10 +6,10 @@ Public Class Form1
     Public cp As ChartPainting
     Public yRangePublic As Double
     Dim volume As Double = 0
-    Dim currentMaxPrice As Double
-    Dim currentMinPrice As Double
-
-
+    Dim currentMaxPriceQuotes As Double
+    Dim currentMinPriceQuotes As Double
+    Dim currentMaxPriceTrades As Double
+    Dim currentMinPriceTrades As Double
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -44,6 +44,7 @@ Public Class Form1
 
     Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
         If (quotesInfo.AskPrice IsNot Nothing And quotesInfo.BidPrice IsNot Nothing) Then
+            'котировки
             AskPriceTextBox.Invoke(Sub()
                                        AskPriceTextBox.Text = quotesInfo.AskPrice
                                    End Sub)
@@ -57,34 +58,48 @@ Public Class Form1
                                         BidVolumeTextBox.Text = quotesInfo.BidVolume
                                     End Sub)
 
-
             If (quotesInfo.AskPrice > quotesInfo.BidPrice) Then
-                currentMaxPrice = quotesInfo.AskPrice
-                currentMinPrice = quotesInfo.BidPrice
+                currentMaxPriceQuotes = quotesInfo.AskPrice
+                currentMinPriceQuotes = quotesInfo.BidPrice
             Else
-                currentMaxPrice = quotesInfo.BidPrice
-                currentMinPrice = quotesInfo.AskPrice
+                currentMaxPriceQuotes = quotesInfo.BidPrice
+                currentMinPriceQuotes = quotesInfo.AskPrice
             End If
 
-            If (currentMaxPrice > cp.maxPrice) Then
-                cp.maxPrice = currentMaxPrice
+            If (currentMaxPriceQuotes > cp.maxPriceQuotes) Then
+                cp.maxPriceQuotes = currentMaxPriceQuotes
             End If
 
-            If (currentMinPrice < cp.minPrice) Then
-                cp.minPrice = currentMinPrice
+            If (currentMinPriceQuotes < cp.minPriceQuotes) Then
+                cp.minPriceQuotes = currentMinPriceQuotes
             End If
 
-            cp.points.Add(New Point(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, volume, DateTime.Now, Nothing, Nothing))
-
-            cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+            cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
+            Me.Invoke(Sub()
+                          cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                      End Sub)
 
         Else
+            'сделки
             TradePriceTextBox.Invoke(Sub()
                                          TradePriceTextBox.Text = quotesInfo.TradePrice
                                      End Sub)
             TradeVolumeTextBox.Invoke(Sub()
                                           TradeVolumeTextBox.Text = quotesInfo.TradeVolume
                                       End Sub)
+
+            If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
+                cp.maxPriceTrades = quotesInfo.TradePrice
+            End If
+
+            If (quotesInfo.TradePrice < cp.minPriceTrades) Then
+                cp.minPriceTrades = quotesInfo.TradePrice
+            End If
+
+            cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, DateTime.Now))
+            Me.Invoke(Sub()
+                          cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+                      End Sub)
         End If
 
 
@@ -93,7 +108,6 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DoubleBuffered = True
-
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -104,65 +118,66 @@ Public Class Form1
     End Sub
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox.MouseMove
-        Try
-            Dim proportion As Double = cp.yRange - (e.Y / QuotesPctBox.Height) * cp.yRange
-            Label4.Text = Format((cp.minPrice - cp.minPrice * 0.0025) + proportion, "0.00")
+        If (Not cp Is Nothing) Then
+            Dim proportion As Double = cp.yRangeQuotes - (e.Y / QuotesPctBox.Height) * cp.yRangeQuotes
+            Label4.Text = Format((cp.minPriceQuotes - cp.minPriceQuotes * 0.0025) + proportion, "0.00")
 
-            Dim indexOfPoint = CInt(Math.Floor(e.X / cp.interval))
+            Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalQuotes))
             If (indexOfPoint < 0) Then
                 indexOfPoint = 0
             End If
-            If (indexOfPoint >= cp.points.Count) Then
-                indexOfPoint = cp.points.Count - 1
-                Label5.Text = cp.points(indexOfPoint).time.ToLongTimeString
+            If (indexOfPoint >= cp.pointsQuotes.Count) Then
+                indexOfPoint = cp.pointsQuotes.Count - 1
+                Label5.Text = cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
             Else
-                If (cp.currentPoint + indexOfPoint > cp.points.Count) Then
-                    Label5.Text = cp.points(cp.lastPoint).time.ToLongTimeString
+                If (cp.currentPointQuotes + indexOfPoint > cp.pointsQuotes.Count) Then
+                    Label5.Text = cp.pointsQuotes(cp.lastPointQuotes).time.ToLongTimeString
 
                 Else
-                    Label5.Text = cp.points(cp.currentPoint + indexOfPoint).time.ToLongTimeString
+                    Label5.Text = cp.pointsQuotes(cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
                 End If
             End If
-        Catch ex As Exception
-        End Try
+        End If
+
+
     End Sub
 
     'left
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        cp.currentPoint = cp.currentPoint - 10
-        If (cp.currentPoint < 0) Then
-            cp.currentPoint = 0
+        cp.currentPointQuotes = cp.currentPointQuotes - 10
+        If (cp.currentPointQuotes < 0) Then
+            cp.currentPointQuotes = 0
         End If
-        cp.needRePainting = False
+        cp.needRePaintingQuotes = False
         Try
-            cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+            cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
         Catch ex As Exception
-            cp.currentPoint -= 1
-            If (cp.currentPoint < 0) Then
-                cp.currentPoint = 0
+            cp.currentPointQuotes -= 1
+            If (cp.currentPointQuotes < 0) Then
+                cp.currentPointQuotes = 0
             End If
         End Try
     End Sub
 
     'rigth
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If (cp.points.Count > cp.pointsOnScreen) Then
-            cp.currentPoint = cp.currentPoint + 10
-            If (cp.currentPoint + cp.pointsOnScreen > cp.points.Count) Then
-                cp.currentPoint = cp.points.Count - cp.pointsOnScreen
+        If (cp.pointsQuotes.Count > cp.pointsOnScreenQuotes) Then
+            cp.currentPointQuotes = cp.currentPointQuotes + 10
+            If (cp.currentPointQuotes + cp.pointsOnScreenQuotes > cp.pointsQuotes.Count) Then
+                cp.currentPointQuotes = cp.pointsQuotes.Count - cp.pointsOnScreenQuotes
             End If
 
-            If (Not cp.lastPoint = cp.points.Count - 1) Then
+            If (Not cp.lastPointQuotes = cp.pointsQuotes.Count - 1) Then
                 Try
-                    cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+                    cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
                 Catch ex As Exception
-                    cp.currentPoint -= 1
-                    If (cp.currentPoint < 0) Then
-                        cp.currentPoint = 0
+                    cp.currentPointQuotes -= 1
+                    If (cp.currentPointQuotes < 0) Then
+                        cp.currentPointQuotes = 0
                     End If
                 End Try
             Else
-                cp.needRePainting = True
+                cp.needRePaintingQuotes = True
             End If
         End If
 
@@ -170,31 +185,31 @@ Public Class Form1
 
     '+
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        cp.pointsOnScreen += 15
-        If (cp.pointsOnScreen > cp.maxPointsOnScreen) Then
-            cp.pointsOnScreen = cp.maxPointsOnScreen
+        cp.pointsOnScreenQuotes += 15
+        If (cp.pointsOnScreenQuotes > cp.maxPointsOnScreenQuotes) Then
+            cp.pointsOnScreenQuotes = cp.maxPointsOnScreenQuotes
         End If
-        cp.needRePainting = False
-        If (cp.lastPoint < cp.points.Count - 1) Then
+        cp.needRePaintingQuotes = False
+        If (cp.lastPointQuotes < cp.pointsQuotes.Count - 1) Then
             Try
-                cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+                cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
             Catch ex As Exception
-                cp.currentPoint -= 1
-                If (cp.currentPoint < 0) Then
-                    cp.currentPoint = 0
+                cp.currentPointQuotes -= 1
+                If (cp.currentPointQuotes < 0) Then
+                    cp.currentPointQuotes = 0
                 End If
             End Try
         Else
-            cp.currentPoint -= 7
-            If (cp.currentPoint < 0) Then
-                cp.currentPoint = 0
+            cp.currentPointQuotes -= 7
+            If (cp.currentPointQuotes < 0) Then
+                cp.currentPointQuotes = 0
             End If
             Try
-                cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+                cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
             Catch ex As Exception
-                cp.currentPoint -= 1
-                If (cp.currentPoint < 0) Then
-                    cp.currentPoint = 0
+                cp.currentPointQuotes -= 1
+                If (cp.currentPointQuotes < 0) Then
+                    cp.currentPointQuotes = 0
                 End If
             End Try
         End If
@@ -202,18 +217,128 @@ Public Class Form1
 
     '-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        cp.pointsOnScreen -= 15
-        If (cp.pointsOnScreen < cp.minPointsOnScreen) Then
-            cp.pointsOnScreen = cp.minPointsOnScreen
+        cp.pointsOnScreenQuotes -= 15
+        If (cp.pointsOnScreenQuotes < cp.minPointsOnScreenQuotes) Then
+            cp.pointsOnScreenQuotes = cp.minPointsOnScreenQuotes
         End If
-        cp.needRePainting = False
+        cp.needRePaintingQuotes = False
         Try
-            cp.painting(QuotesPctBox, TimesPctBox, PricesPctBox)
+            cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
         Catch ex As Exception
-            cp.currentPoint -= 1
-            If (cp.currentPoint < 0) Then
-                cp.currentPoint = 0
+            cp.currentPointQuotes -= 1
+            If (cp.currentPointQuotes < 0) Then
+                cp.currentPointQuotes = 0
             End If
         End Try
+    End Sub
+
+    'left
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        cp.currentPointTrades = cp.currentPointTrades - 10
+        If (cp.currentPointTrades < 0) Then
+            cp.currentPointTrades = 0
+        End If
+        cp.needRePaintingTrades = False
+        Try
+            cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+        Catch ex As Exception
+            cp.currentPointTrades -= 1
+            If (cp.currentPointTrades < 0) Then
+                cp.currentPointTrades = 0
+            End If
+        End Try
+    End Sub
+
+    'right
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        If (cp.pointsTrades.Count > cp.pointsOnScreenTrades) Then
+            cp.currentPointTrades = cp.currentPointTrades + 10
+            If (cp.currentPointTrades + cp.pointsOnScreenTrades > cp.pointsTrades.Count) Then
+                cp.currentPointTrades = cp.pointsTrades.Count - cp.pointsOnScreenTrades
+            End If
+
+            If (Not cp.lastPointTrades = cp.pointsTrades.Count - 1) Then
+                Try
+                    cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+                Catch ex As Exception
+                    cp.currentPointTrades -= 1
+                    If (cp.currentPointTrades < 0) Then
+                        cp.currentPointTrades = 0
+                    End If
+                End Try
+            Else
+                cp.needRePaintingTrades = True
+            End If
+        End If
+    End Sub
+
+    '+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        cp.pointsOnScreenTrades += 15
+        If (cp.pointsOnScreenTrades > cp.maxPointsOnScreenTrades) Then
+            cp.pointsOnScreenTrades = cp.maxPointsOnScreenTrades
+        End If
+        cp.needRePaintingTrades = False
+        If (cp.lastPointTrades < cp.pointsTrades.Count - 1) Then
+            Try
+                cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+            Catch ex As Exception
+                cp.currentPointTrades -= 1
+                If (cp.currentPointTrades < 0) Then
+                    cp.currentPointTrades = 0
+                End If
+            End Try
+        Else
+            cp.currentPointTrades -= 7
+            If (cp.currentPointTrades < 0) Then
+                cp.currentPointTrades = 0
+            End If
+            Try
+                cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+            Catch ex As Exception
+                cp.currentPointTrades -= 1
+                If (cp.currentPointTrades < 0) Then
+                    cp.currentPointTrades = 0
+                End If
+            End Try
+        End If
+    End Sub
+
+    '-
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        cp.pointsOnScreenTrades -= 15
+        If (cp.pointsOnScreenTrades < cp.minPointsOnScreenTrades) Then
+            cp.pointsOnScreenTrades = cp.minPointsOnScreenTrades
+        End If
+        cp.needRePaintingTrades = False
+        Try
+            cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+        Catch ex As Exception
+            cp.currentPointTrades -= 1
+            If (cp.currentPointTrades < 0) Then
+                cp.currentPointTrades = 0
+            End If
+        End Try
+    End Sub
+
+    Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox.MouseMove
+        Dim proportion As Double = cp.yRangeTrades - (e.Y / TradesPctBox.Height) * cp.yRangeTrades
+        Label4.Text = Format((cp.minPriceTrades - cp.minPriceTrades * 0.0025) + proportion, "0.00")
+
+        Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalTrades))
+        If (indexOfPoint < 0) Then
+            indexOfPoint = 0
+        End If
+        If (indexOfPoint >= cp.pointsTrades.Count) Then
+            indexOfPoint = cp.pointsTrades.Count - 1
+            Label5.Text = cp.pointsTrades(indexOfPoint).time.ToLongTimeString
+        Else
+            If (cp.currentPointTrades + indexOfPoint > cp.pointsTrades.Count) Then
+                Label5.Text = cp.pointsTrades(cp.lastPointTrades).time.ToLongTimeString
+
+            Else
+                Label5.Text = cp.pointsTrades(cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
+            End If
+        End If
     End Sub
 End Class

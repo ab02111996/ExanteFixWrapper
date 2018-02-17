@@ -137,7 +137,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Point.vb" />
+    <Compile Include="PointQuotes.vb" />
+    <Compile Include="PointTrades.vb" />
     <Compile Include="QuickFIXFeedApplication.vb" />
     <Compile Include="QuoteFixReciever.vb" />
     <Compile Include="QuotesInfo.vb" />
