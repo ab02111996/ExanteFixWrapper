@@ -20,8 +20,11 @@ Public Class QuickFIXFeedApplication
 
     Public Sub fromApp(message As QuickFix.Message, sessionID As SessionID) Implements Application.fromApp
         Dim msgType As MsgType = New MsgType()
+        Dim timeStampField As UtcTimeStampField = New UtcTimeStampField(52, True)
         Dim marketSnapshotDataMessage As MarketDataSnapshotFullRefresh = CType(message, MarketDataSnapshotFullRefresh)
         marketSnapshotDataMessage.getHeader().getField(msgType)
+        marketSnapshotDataMessage.getHeader().getField(timeStampField)
+        Dim localTimeStamp As DateTime = timeStampField.getValue().ToLocalTime()
         If msgType.getValue() = msgType.MarketDataSnapshotFullRefresh Then
             Try
                 Dim requestId As String = marketSnapshotDataMessage.getMDReqID().ToString()
@@ -50,7 +53,7 @@ Public Class QuickFIXFeedApplication
                     End Select
                 Next
                 For Each info As SubscribeInfo In subscribeInfos
-                    quotesInfo.TimeStamp = DateTime.Now
+                    quotesInfo.TimeStamp = localTimeStamp
                     info.UpdateQuotesCallback.Invoke(quotesInfo)
                 Next
             Catch ex As Exception
