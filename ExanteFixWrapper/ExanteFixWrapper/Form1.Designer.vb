@@ -59,7 +59,9 @@ Partial Class Form1
         Me.TimesTradesPctBox = New System.Windows.Forms.PictureBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button11 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button12 = New System.Windows.Forms.Button()
         CType(Me.QuotesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesQuotesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,7 +97,7 @@ Partial Class Form1
         '
         'ExanteIDTextBox
         '
-        Me.ExanteIDTextBox.Location = New System.Drawing.Point(42, 35)
+        Me.ExanteIDTextBox.Location = New System.Drawing.Point(76, 28)
         Me.ExanteIDTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.ExanteIDTextBox.Name = "ExanteIDTextBox"
         Me.ExanteIDTextBox.Size = New System.Drawing.Size(291, 22)
@@ -176,10 +178,10 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(121, 67)
+        Me.Button2.Location = New System.Drawing.Point(391, 28)
         Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(116, 28)
+        Me.Button2.Size = New System.Drawing.Size(179, 28)
         Me.Button2.TabIndex = 11
         Me.Button2.Text = "Подписаться"
         Me.Button2.UseVisualStyleBackColor = True
@@ -247,7 +249,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(381, 40)
+        Me.Label4.Location = New System.Drawing.Point(772, 55)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 17)
         Me.Label4.TabIndex = 24
@@ -256,7 +258,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(381, 71)
+        Me.Label5.Location = New System.Drawing.Point(772, 86)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 17)
         Me.Label5.TabIndex = 25
@@ -414,6 +416,8 @@ Partial Class Form1
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button12)
+        Me.TabPage1.Controls.Add(Me.Button11)
         Me.TabPage1.Controls.Add(Me.Charts)
         Me.TabPage1.Controls.Add(Me.ExanteIDTextBox)
         Me.TabPage1.Controls.Add(Me.Label5)
@@ -439,6 +443,15 @@ Partial Class Form1
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(76, 59)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(212, 23)
+        Me.Button11.TabIndex = 31
+        Me.Button11.Text = "Рисовать линию (Аск / Бид)"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
         'TabPage2
         '
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
@@ -449,11 +462,20 @@ Partial Class Form1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Button12
+        '
+        Me.Button12.Location = New System.Drawing.Point(76, 88)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(212, 23)
+        Me.Button12.TabIndex = 32
+        Me.Button12.Text = "Рисовать линию (Сделки)"
+        Me.Button12.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1735, 1045)
+        Me.ClientSize = New System.Drawing.Size(1882, 1045)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
@@ -514,4 +536,6 @@ Partial Class Form1
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Button12 As Button
 End Class

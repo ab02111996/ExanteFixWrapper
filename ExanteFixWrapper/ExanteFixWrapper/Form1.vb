@@ -35,6 +35,7 @@ Public Class Form1
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         cp = New ChartPainting()
+        TabControl1.TabPages(0).Text = ExanteIDTextBox.Text
         Dim subscribes = feedReciever.GetSubscribeInfos()
         If subscribes.Count > 0 Then
             feedReciever.UnsubscribeForQuotes(subscribes(0))
@@ -76,9 +77,11 @@ Public Class Form1
 
             cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
             Me.Invoke(Sub()
-                          cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
-                      End Sub)
 
+                          If (Not cp.isDrawingStartedQuotes) Then
+                              cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                          End If
+                      End Sub)
         Else
             'сделки
             TradePriceTextBox.Invoke(Sub()
@@ -119,31 +122,57 @@ Public Class Form1
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox.MouseMove
         If (Not cp Is Nothing) Then
-            Dim proportion As Double = cp.yRangeQuotes - (e.Y / QuotesPctBox.Height) * cp.yRangeQuotes
-            Label4.Text = Format((cp.minPriceQuotes - cp.minPriceQuotes * 0.0025) + proportion, "0.00")
+            Try
+                Dim proportion As Double = cp.yRangeQuotes - (e.Y / QuotesPctBox.Height) * cp.yRangeQuotes
+                Label4.Text = Format((cp.minPriceQuotes - cp.minPriceQuotes * 0.0025) + proportion, "0.00")
 
-            Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalQuotes))
-            If (indexOfPoint < 0) Then
-                indexOfPoint = 0
-            End If
-            If (indexOfPoint >= cp.pointsQuotes.Count) Then
-                indexOfPoint = cp.pointsQuotes.Count - 1
-                Label5.Text = cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
-            Else
-                If (cp.currentPointQuotes + indexOfPoint > cp.pointsQuotes.Count) Then
-                    Label5.Text = cp.pointsQuotes(cp.lastPointQuotes).time.ToLongTimeString
-
-                Else
-                    Label5.Text = cp.pointsQuotes(cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
+                Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalQuotes))
+                If (indexOfPoint < 0) Then
+                    indexOfPoint = 0
                 End If
-            End If
+                If (indexOfPoint >= cp.pointsQuotes.Count) Then
+                    indexOfPoint = cp.pointsQuotes.Count - 1
+                    Label5.Text = cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
+                Else
+                    If (cp.currentPointQuotes + indexOfPoint > cp.pointsQuotes.Count) Then
+                        Label5.Text = cp.pointsQuotes(cp.lastPointQuotes).time.ToLongTimeString
+
+                    Else
+                        Label5.Text = cp.pointsQuotes(cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
         End If
-
-
     End Sub
 
-    'left
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        cp.needDrawLineQuotes = True
+        cp.needRePaintingQuotes = False
+    End Sub
+
+    Private Sub QuotesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles QuotesPctBox.MouseClick
+        If (cp.needDrawLineQuotes And Not cp.isDrawingStartedQuotes) Then
+            cp.point1Quotes.X = e.X
+            cp.point1Quotes.Y = e.Y
+            cp.isDrawingStartedQuotes = True
+            Exit Sub
+        End If
+        If (cp.needDrawLineQuotes And cp.isDrawingStartedQuotes) Then
+            cp.point2Quotes.X = e.X
+            cp.point2Quotes.Y = e.Y
+            cp.isDrawingStartedQuotes = False
+            cp.isLineReadyQuotes = True
+            cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+            Exit Sub
+        End If
+    End Sub
+
+    'left quotes
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        cp.needDrawLineQuotes = False
+        cp.isLineReadyQuotes = False
         cp.currentPointQuotes = cp.currentPointQuotes - 10
         If (cp.currentPointQuotes < 0) Then
             cp.currentPointQuotes = 0
@@ -159,8 +188,10 @@ Public Class Form1
         End Try
     End Sub
 
-    'rigth
+    'rigth quotes
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        cp.needDrawLineQuotes = False
+        cp.isLineReadyQuotes = False
         If (cp.pointsQuotes.Count > cp.pointsOnScreenQuotes) Then
             cp.currentPointQuotes = cp.currentPointQuotes + 10
             If (cp.currentPointQuotes + cp.pointsOnScreenQuotes > cp.pointsQuotes.Count) Then
@@ -183,8 +214,10 @@ Public Class Form1
 
     End Sub
 
-    '+
+    '+ quotes
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        cp.needDrawLineQuotes = False
+        cp.isLineReadyQuotes = False
         cp.pointsOnScreenQuotes += 15
         If (cp.pointsOnScreenQuotes > cp.maxPointsOnScreenQuotes) Then
             cp.pointsOnScreenQuotes = cp.maxPointsOnScreenQuotes
@@ -215,8 +248,10 @@ Public Class Form1
         End If
     End Sub
 
-    '-
+    '- quotes
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        cp.needDrawLineQuotes = False
+        cp.isLineReadyQuotes = False
         cp.pointsOnScreenQuotes -= 15
         If (cp.pointsOnScreenQuotes < cp.minPointsOnScreenQuotes) Then
             cp.pointsOnScreenQuotes = cp.minPointsOnScreenQuotes
@@ -232,8 +267,10 @@ Public Class Form1
         End Try
     End Sub
 
-    'left
+    'left trades
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        cp.needDrawLineTrades = False
+        cp.isLineReadyTrades = False
         cp.currentPointTrades = cp.currentPointTrades - 10
         If (cp.currentPointTrades < 0) Then
             cp.currentPointTrades = 0
@@ -249,8 +286,10 @@ Public Class Form1
         End Try
     End Sub
 
-    'right
+    'right trades
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        cp.needDrawLineTrades = False
+        cp.isLineReadyTrades = False
         If (cp.pointsTrades.Count > cp.pointsOnScreenTrades) Then
             cp.currentPointTrades = cp.currentPointTrades + 10
             If (cp.currentPointTrades + cp.pointsOnScreenTrades > cp.pointsTrades.Count) Then
@@ -272,8 +311,10 @@ Public Class Form1
         End If
     End Sub
 
-    '+
+    '+ trades
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        cp.needDrawLineTrades = False
+        cp.isLineReadyTrades = False
         cp.pointsOnScreenTrades += 15
         If (cp.pointsOnScreenTrades > cp.maxPointsOnScreenTrades) Then
             cp.pointsOnScreenTrades = cp.maxPointsOnScreenTrades
@@ -304,8 +345,10 @@ Public Class Form1
         End If
     End Sub
 
-    '-
+    '- trades
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        cp.needDrawLineTrades = False
+        cp.isLineReadyTrades = False
         cp.pointsOnScreenTrades -= 15
         If (cp.pointsOnScreenTrades < cp.minPointsOnScreenTrades) Then
             cp.pointsOnScreenTrades = cp.minPointsOnScreenTrades
@@ -322,23 +365,51 @@ Public Class Form1
     End Sub
 
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox.MouseMove
-        Dim proportion As Double = cp.yRangeTrades - (e.Y / TradesPctBox.Height) * cp.yRangeTrades
-        Label4.Text = Format((cp.minPriceTrades - cp.minPriceTrades * 0.0025) + proportion, "0.00")
+        If (Not cp Is Nothing) Then
+            Try
+                Dim proportion As Double = cp.yRangeTrades - (e.Y / TradesPctBox.Height) * cp.yRangeTrades
+                Label4.Text = Format((cp.minPriceTrades - cp.minPriceTrades * 0.0025) + proportion, "0.00")
 
-        Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalTrades))
-        If (indexOfPoint < 0) Then
-            indexOfPoint = 0
+                Dim indexOfPoint = CInt(Math.Floor(e.X / cp.intervalTrades))
+                If (indexOfPoint < 0) Then
+                    indexOfPoint = 0
+                End If
+                If (indexOfPoint >= cp.pointsTrades.Count) Then
+                    indexOfPoint = cp.pointsTrades.Count - 1
+                    Label5.Text = cp.pointsTrades(indexOfPoint).time.ToLongTimeString
+                Else
+                    If (cp.currentPointTrades + indexOfPoint > cp.pointsTrades.Count) Then
+                        Label5.Text = cp.pointsTrades(cp.lastPointTrades).time.ToLongTimeString
+
+                    Else
+                        Label5.Text = cp.pointsTrades(cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
         End If
-        If (indexOfPoint >= cp.pointsTrades.Count) Then
-            indexOfPoint = cp.pointsTrades.Count - 1
-            Label5.Text = cp.pointsTrades(indexOfPoint).time.ToLongTimeString
-        Else
-            If (cp.currentPointTrades + indexOfPoint > cp.pointsTrades.Count) Then
-                Label5.Text = cp.pointsTrades(cp.lastPointTrades).time.ToLongTimeString
+    End Sub
 
-            Else
-                Label5.Text = cp.pointsTrades(cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
-            End If
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        cp.needDrawLineTrades = True
+        cp.needRePaintingTrades = False
+    End Sub
+
+    Private Sub TradesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles TradesPctBox.MouseClick
+        If (cp.needDrawLineTrades And Not cp.isDrawingStartedTrades) Then
+            cp.point1Trades.X = e.X
+            cp.point1Trades.Y = e.Y
+            cp.isDrawingStartedTrades = True
+            Exit Sub
+        End If
+        If (cp.needDrawLineTrades And cp.isDrawingStartedTrades) Then
+            cp.point2Trades.X = e.X
+            cp.point2Trades.Y = e.Y
+            cp.isDrawingStartedTrades = False
+            cp.isLineReadyTrades = True
+            cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+            Exit Sub
         End If
     End Sub
 End Class

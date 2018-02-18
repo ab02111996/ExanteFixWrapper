@@ -28,6 +28,18 @@ Public Class ChartPainting
     Public highBorderTrades As Double
     Public maxPointsOnScreenTrades As Integer
     Public minPointsOnScreenTrades As Integer
+    'рисование линии - котировки
+    Public needDrawLineQuotes As Boolean
+    Public point1Quotes As PointF
+    Public point2Quotes As PointF
+    Public isDrawingStartedQuotes As Boolean
+    Public isLineReadyQuotes As Boolean
+    'рисование линии - сделки
+    Public needDrawLineTrades As Boolean
+    Public point1Trades As PointF
+    Public point2Trades As PointF
+    Public isDrawingStartedTrades As Boolean
+    Public isLineReadyTrades As Boolean
 
     Public Sub New()
         'котировки
@@ -48,6 +60,13 @@ Public Class ChartPainting
         Me.needRePaintingTrades = True
         Me.maxPointsOnScreenTrades = 400
         Me.minPointsOnScreenTrades = 10
+        'рисование линий
+        Me.needDrawLineQuotes = False
+        Me.isDrawingStartedQuotes = False
+        Me.isLineReadyQuotes = False
+        Me.needDrawLineTrades = False
+        Me.isDrawingStartedTrades = False
+        Me.isLineReadyTrades = False
     End Sub
 
     Public Sub paintingQuotes(QuotesPctBox As PictureBox, TimesQuotesPctBox As PictureBox, PricesQuotesPctBox As PictureBox)
@@ -165,6 +184,11 @@ Public Class ChartPainting
             Next
         End If
 
+        If (Me.isLineReadyQuotes) Then
+            Dim P_BlackLine As New Pen(Color.Black, 1)
+            G_Quotes.DrawLine(P_BlackLine, Me.point1Quotes, Me.point2Quotes)
+        End If
+
     End Sub
 
     Public Sub paintingTrades(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox)
@@ -276,9 +300,13 @@ Public Class ChartPainting
                     G_Prices.DrawString(Format(lowBorderTrades + yRangeTrades * 0.25, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.75)
                     G_Prices.DrawString(Format(lowBorderTrades + yRangeTrades * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
                 End If
-
             Next
         End If
 
+        If (Me.isLineReadyTrades) Then
+            Dim P_BlackLine As New Pen(Color.Black, 1)
+            G_Trades.DrawLine(P_BlackLine, Me.point1Trades, Me.point2Trades)
+        End If
     End Sub
+
 End Class
