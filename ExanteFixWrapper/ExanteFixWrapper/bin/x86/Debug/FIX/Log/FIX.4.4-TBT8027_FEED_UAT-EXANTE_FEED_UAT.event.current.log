@@ -4647,3 +4647,38 @@
 20180220-16:04:35.128 : Initiated logout request
 20180220-16:04:35.263 : Received logout response
 20180220-16:04:35.263 : Disconnecting
+20180220-16:14:10.353 : Created session
+20180220-16:14:10.367 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:14:10.544 : Initiated logon request
+20180220-16:14:10.714 : Socket Error: Connection reset by peer.
+20180220-16:14:10.714 : Disconnecting
+20180220-16:14:11.365 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:14:11.503 : Initiated logon request
+20180220-16:14:11.649 : Socket Error: Connection reset by peer.
+20180220-16:14:11.649 : Disconnecting
+20180220-16:25:46.723 : Created session
+20180220-16:25:46.737 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:25:47.011 : Initiated logon request
+20180220-16:25:47.525 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-16:25:47.526 : Received logon response
+20180220-16:27:31.460 : Created session
+20180220-16:27:31.475 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:27:31.652 : Initiated logon request
+20180220-16:27:32.093 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-16:27:32.094 : Received logon response
+20180220-16:28:00.218 : Initiated logout request
+20180220-16:28:00.361 : Received logout response
+20180220-16:28:00.361 : Disconnecting
+20180220-16:30:57.482 : Created session
+20180220-16:30:57.503 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:30:57.679 : Initiated logon request
+20180220-16:30:58.123 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-16:30:58.124 : Received logon response
+20180220-16:32:56.849 : Initiated logout request
+20180220-16:32:56.987 : Received logout response
+20180220-16:32:56.987 : Disconnecting
+20180220-16:43:18.290 : Created session
+20180220-16:43:18.306 : Connecting to fixuat2.exante.eu on port 8100
+20180220-16:43:18.480 : Initiated logon request
+20180220-16:43:18.908 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-16:43:18.909 : Received logon response

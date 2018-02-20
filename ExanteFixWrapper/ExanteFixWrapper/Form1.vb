@@ -3,11 +3,7 @@ Imports System.Threading
 Public Class Form1
     Dim fixConfigPath As String = "FIX\fix_vendor.ini"
     Dim feedReciever As QuoteFixReciever
-    Public cp As ChartPainting
-    Public yRangePublic As Double
-    Dim volume As Double = 0
     Dim pageList As List(Of Page) = New List(Of Page)
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -15,34 +11,34 @@ Public Class Form1
         End If
         feedReciever = New QuoteFixReciever(fixConfigPath, AddressOf CheckingState)
 
-        Dim newPage = New Page(Nothing, New ChartPainting, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
+        Dim newPage = New Page(New ChartPainting, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
                 LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox1, PricesQuotesPctBox1, TimesQuotesPctBox1, TradesPctBox1, PricesTradesPctBox1, TimesTradesPctBox1,
+        newPage = New Page(New ChartPainting, QuotesPctBox1, PricesQuotesPctBox1, TimesQuotesPctBox1, TradesPctBox1, PricesTradesPctBox1, TimesTradesPctBox1,
                 LeftQuotesButton1, RightQuotesButton1, PlusQuotesButton1, MinusQuotesButton1, LeftTradesButton1, RightButtonTrades1, PlusTradesButton1, MinusTradesButton1)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox2, PricesQuotesPctBox2, TimesQuotesPctBox2, TradesPctBox2, PricesTradesPctBox2, TimesTradesPctBox2,
+        newPage = New Page(New ChartPainting, QuotesPctBox2, PricesQuotesPctBox2, TimesQuotesPctBox2, TradesPctBox2, PricesTradesPctBox2, TimesTradesPctBox2,
                 LeftQuotesButton2, RightQuotesButton2, PlusQuotesButton2, MinusQuotesButton2, LeftTradesButton2, RightButtonTrades2, PlusTradesButton2, MinusTradesButton2)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox3, PricesQuotesPctBox3, TimesQuotesPctBox3, TradesPctBox3, PricesTradesPctBox3, TimesTradesPctBox3,
+        newPage = New Page(New ChartPainting, QuotesPctBox3, PricesQuotesPctBox3, TimesQuotesPctBox3, TradesPctBox3, PricesTradesPctBox3, TimesTradesPctBox3,
                 LeftQuotesButton3, RightQuotesButton3, PlusQuotesButton3, MinusQuotesButton3, LeftTradesButton3, RightButtonTrades3, PlusTradesButton3, MinusTradesButton3)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox4, PricesQuotesPctBox4, TimesQuotesPctBox4, TradesPctBox4, PricesTradesPctBox4, TimesTradesPctBox4,
+        newPage = New Page(New ChartPainting, QuotesPctBox4, PricesQuotesPctBox4, TimesQuotesPctBox4, TradesPctBox4, PricesTradesPctBox4, TimesTradesPctBox4,
                 LeftQuotesButton4, RightQuotesButton4, PlusQuotesButton4, MinusQuotesButton4, LeftTradesButton4, RightButtonTrades4, PlusTradesButton4, MinusTradesButton4)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox5, PricesQuotesPctBox5, TimesQuotesPctBox5, TradesPctBox5, PricesTradesPctBox5, TimesTradesPctBox5,
+        newPage = New Page(New ChartPainting, QuotesPctBox5, PricesQuotesPctBox5, TimesQuotesPctBox5, TradesPctBox5, PricesTradesPctBox5, TimesTradesPctBox5,
                 LeftQuotesButton5, RightQuotesButton5, PlusQuotesButton5, MinusQuotesButton5, LeftTradesButton5, RightButtonTrades5, PlusTradesButton5, MinusTradesButton5)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox6, PricesQuotesPctBox6, TimesQuotesPctBox6, TradesPctBox6, PricesTradesPctBox6, TimesTradesPctBox6,
+        newPage = New Page(New ChartPainting, QuotesPctBox6, PricesQuotesPctBox6, TimesQuotesPctBox6, TradesPctBox6, PricesTradesPctBox6, TimesTradesPctBox6,
                 LeftQuotesButton6, RightQuotesButton6, PlusQuotesButton6, MinusQuotesButton6, LeftTradesButton6, RightButtonTrades6, PlusTradesButton6, MinusTradesButton6)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox7, PricesQuotesPctBox7, TimesQuotesPctBox7, TradesPctBox7, PricesTradesPctBox7, TimesTradesPctBox7,
+        newPage = New Page(New ChartPainting, QuotesPctBox7, PricesQuotesPctBox7, TimesQuotesPctBox7, TradesPctBox7, PricesTradesPctBox7, TimesTradesPctBox7,
                 LeftQuotesButton7, RightQuotesButton7, PlusQuotesButton7, MinusQuotesButton7, LeftTradesButton7, RightButtonTrades7, PlusTradesButton7, MinusTradesButton7)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox8, PricesQuotesPctBox8, TimesQuotesPctBox8, TradesPctBox8, PricesTradesPctBox8, TimesTradesPctBox8,
+        newPage = New Page(New ChartPainting, QuotesPctBox8, PricesQuotesPctBox8, TimesQuotesPctBox8, TradesPctBox8, PricesTradesPctBox8, TimesTradesPctBox8,
                 LeftQuotesButton8, RightQuotesButton8, PlusQuotesButton8, MinusQuotesButton8, LeftTradesButton8, RightButtonTrades8, PlusTradesButton8, MinusTradesButton8)
         pageList.Add(newPage)
-        newPage = New Page(Nothing, New ChartPainting, QuotesPctBox9, PricesQuotesPctBox9, TimesQuotesPctBox9, TradesPctBox9, PricesTradesPctBox9, TimesTradesPctBox9,
+        newPage = New Page(New ChartPainting, QuotesPctBox9, PricesQuotesPctBox9, TimesQuotesPctBox9, TradesPctBox9, PricesTradesPctBox9, TimesTradesPctBox9,
                 LeftQuotesButton9, RightQuotesButton9, PlusQuotesButton9, MinusQuotesButton9, LeftTradesButton9, RightButtonTrades9, PlusTradesButton9, MinusTradesButton9)
         pageList.Add(newPage)
     End Sub
@@ -64,6 +60,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
+        pageList(TabControl.SelectedIndex).cp.isSubscribed = True
         TabControl.TabPages(TabControl.SelectedIndex).Text = ExanteIDTextBox0.Text
         Dim subscribes = feedReciever.GetSubscribeInfos()
         feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(TabControl.SelectedIndex).OnMarketDataUpdate)
@@ -147,29 +144,32 @@ Public Class Form1
     End Sub
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseMove, TradesPctBox2.MouseMove, QuotesPctBox9.MouseMove, QuotesPctBox8.MouseMove, QuotesPctBox7.MouseMove, QuotesPctBox6.MouseMove, QuotesPctBox5.MouseMove, QuotesPctBox4.MouseMove, QuotesPctBox3.MouseMove, QuotesPctBox2.MouseMove, QuotesPctBox1.MouseMove
-        If (Not pageList Is Nothing) Then
-            Try
-                Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeQuotes - (e.Y / QuotesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeQuotes
-                PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes - pageList(TabControl.SelectedIndex).cp.minPriceQuotes * 0.0025) + proportion, "0.00")
+        If (pageList.Count > 0) Then
+            If (pageList(TabControl.SelectedIndex).cp.isSubscribed) Then
+                Try
+                    Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeQuotes - (e.Y / QuotesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeQuotes
+                    PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes - pageList(TabControl.SelectedIndex).cp.minPriceQuotes * 0.0025) + proportion, "0.00")
 
-                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalQuotes))
-                If (indexOfPoint < 0) Then
-                    indexOfPoint = 0
-                End If
-                If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
-                    indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - 1
-                    TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
-                Else
-                    If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
-                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.lastPointQuotes).time.ToLongTimeString
-
-                    Else
-                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
+                    Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalQuotes))
+                    If (indexOfPoint < 0) Then
+                        indexOfPoint = 0
                     End If
-                End If
-            Catch ex As Exception
+                    If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
+                        indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - 1
+                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
+                    Else
+                        If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
+                            TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.lastPointQuotes).time.ToLongTimeString
 
-            End Try
+                        Else
+                            TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
+                        End If
+                    End If
+                Catch ex As Exception
+
+                End Try
+            End If
+
         End If
     End Sub
 

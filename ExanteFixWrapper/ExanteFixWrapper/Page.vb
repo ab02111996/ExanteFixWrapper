@@ -1,5 +1,4 @@
 ﻿Public Class Page
-    Public subscribeInfo As SubscribeInfo
     Public cp As ChartPainting
     Public QuotesPctBox As PictureBox
     Public PricesQuotesPctBox As PictureBox
@@ -16,8 +15,7 @@
     Public PlusTradesButton As Button
     Public MinusTradesButton As Button
 
-    Public Sub New(subscribeInfo As SubscribeInfo,
-                   cp As ChartPainting,
+    Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
                    PricesQuotesPctBox As PictureBox,
                    TimesQuotesPctBox As PictureBox,
@@ -33,7 +31,6 @@
                    PlusTradesButton As Button,
                    MinusTradesButton As Button)
 
-        Me.subscribeInfo = subscribeInfo
         Me.cp = cp
         Me.QuotesPctBox = QuotesPctBox
         Me.PricesQuotesPctBox = PricesQuotesPctBox

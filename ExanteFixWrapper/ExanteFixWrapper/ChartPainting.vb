@@ -41,6 +41,8 @@ Public Class ChartPainting
     Public isDrawingStartedTrades As Boolean
     Public isLineReadyTrades As Boolean
 
+    Public isSubscribed As Boolean
+
     Public Sub New()
         'котировки
         Me.pointsQuotes = New List(Of PointQuotes)
@@ -67,6 +69,8 @@ Public Class ChartPainting
         Me.needDrawLineTrades = False
         Me.isDrawingStartedTrades = False
         Me.isLineReadyTrades = False
+
+        Me.isSubscribed = False
     End Sub
 
     Public Sub paintingQuotes(QuotesPctBox As PictureBox, TimesQuotesPctBox As PictureBox, PricesQuotesPctBox As PictureBox)
