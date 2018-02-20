@@ -73,7 +73,7 @@
                 Me.cp.minPriceQuotes = currentMinPriceQuotes
             End If
 
-            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
+            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp))
             Me.QuotesPctBox.Invoke(Sub()
                                        If (Not Me.cp.isDrawingStartedQuotes) Then
                                            Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
@@ -89,7 +89,7 @@
                 cp.minPriceTrades = quotesInfo.TradePrice
             End If
 
-            cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, DateTime.Now))
+            cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
             Me.TradesPctBox.Invoke(Sub()
                                        Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
                                    End Sub)
