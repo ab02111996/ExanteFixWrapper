@@ -53,8 +53,10 @@ Public Class QuickFIXFeedApplication
                     End Select
                 Next
                 For Each info As SubscribeInfo In subscribeInfos
-                    quotesInfo.TimeStamp = localTimeStamp
-                    info.UpdateQuotesCallback.Invoke(quotesInfo)
+                    If info.Guid.ToString() = requestId Then
+                        quotesInfo.TimeStamp = localTimeStamp
+                        info.UpdateQuotesCallback.Invoke(quotesInfo)
+                    End If
                 Next
             Catch ex As Exception
 
