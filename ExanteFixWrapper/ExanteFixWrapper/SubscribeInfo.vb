@@ -5,7 +5,7 @@
     Public UpdateQuotesCallback As UpdateQuoteCourseCallBack
     Public Sub New(exanteID As String, callback As UpdateQuoteCourseCallBack)
         Me.UpdateQuotesCallback = callback
-        Me.Guid = New Guid()
+        Me.Guid = System.Guid.NewGuid()
         Me.ExanteId = exanteID
     End Sub
 
