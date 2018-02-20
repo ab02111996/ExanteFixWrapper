@@ -4500,3 +4500,142 @@
 20180218-15:05:19.119 : Initiated logout request
 20180218-15:05:19.232 : Received logout response
 20180218-15:05:19.232 : Disconnecting
+20180218-17:01:28.015 : Created session
+20180218-17:01:28.046 : Connecting to fixuat2.exante.eu on port 8100
+20180218-17:01:28.312 : Initiated logon request
+20180218-17:01:28.702 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180218-17:01:28.702 : Received logon response
+20180218-17:01:40.626 : Initiated logout request
+20180218-17:01:40.735 : Received logout response
+20180218-17:01:40.735 : Disconnecting
+20180219-02:52:31.056 : Created session
+20180219-02:52:31.212 : Connecting to fixuat2.exante.eu on port 8100
+20180219-02:52:32.899 : Initiated logon request
+20180219-02:52:33.165 : Received logout request
+20180219-02:52:33.165 : Sending logout response
+20180219-02:52:33.165 : Disconnecting
+20180219-02:52:33.587 : Connecting to fixuat2.exante.eu on port 8100
+20180219-02:52:33.727 : Initiated logon request
+20180219-02:52:34.149 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-02:52:34.149 : Received logon response
+20180219-02:53:12.681 : Initiated logout request
+20180219-02:53:12.837 : Received logout response
+20180219-02:53:12.837 : Disconnecting
+20180219-03:04:29.762 : Created session
+20180219-03:04:29.777 : Connecting to fixuat2.exante.eu on port 8100
+20180219-03:04:30.121 : Initiated logon request
+20180219-03:04:30.643 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-03:04:30.644 : Received logon response
+20180219-03:04:49.138 : Initiated logout request
+20180219-03:04:49.279 : Received logout response
+20180219-03:04:49.279 : Disconnecting
+20180219-03:08:25.367 : Created session
+20180219-03:08:25.382 : Connecting to fixuat2.exante.eu on port 8100
+20180219-03:08:25.757 : Initiated logon request
+20180219-03:08:26.742 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-03:08:26.742 : Received logon response
+20180219-03:09:06.607 : Initiated logout request
+20180219-03:09:06.763 : Received logout response
+20180219-03:09:06.763 : Disconnecting
+20180219-03:10:27.737 : Created session
+20180219-03:10:27.752 : Connecting to fixuat2.exante.eu on port 8100
+20180219-03:10:28.561 : Initiated logon request
+20180219-03:10:29.532 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-03:10:29.534 : Received logon response
+20180219-03:14:18.358 : Initiated logout request
+20180219-03:14:18.521 : Received logout response
+20180219-03:14:18.521 : Disconnecting
+20180219-14:39:28.959 : Created session
+20180219-14:39:28.976 : Connecting to fixuat2.exante.eu on port 8100
+20180219-14:39:29.347 : Initiated logon request
+20180219-14:39:29.784 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-14:39:29.785 : Received logon response
+20180219-14:39:50.896 : Initiated logout request
+20180219-14:39:51.046 : Received logout response
+20180219-14:39:51.046 : Disconnecting
+20180219-14:41:06.082 : Created session
+20180219-14:41:06.096 : Connecting to fixuat2.exante.eu on port 8100
+20180219-14:41:06.284 : Initiated logon request
+20180219-14:41:06.723 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-14:41:06.724 : Received logon response
+20180219-14:42:08.314 : Initiated logout request
+20180219-14:42:08.460 : Received logout response
+20180219-14:42:08.461 : Disconnecting
+20180219-16:10:16.155 : Created session
+20180219-16:10:16.173 : Connecting to fixuat2.exante.eu on port 8100
+20180219-16:10:16.518 : Initiated logon request
+20180219-16:10:16.940 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180219-16:10:16.941 : Received logon response
+20180220-10:09:17.793 : Created session
+20180220-10:09:17.807 : Connecting to fixuat2.exante.eu on port 8100
+20180220-10:09:18.070 : Initiated logon request
+20180220-10:09:18.496 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-10:09:18.497 : Received logon response
+20180220-10:10:29.220 : Initiated logout request
+20180220-10:10:29.381 : Received logout response
+20180220-10:10:29.381 : Disconnecting
+20180220-10:14:12.404 : Created session
+20180220-10:14:12.412 : Connecting to fixuat2.exante.eu on port 8100
+20180220-10:14:12.600 : Initiated logon request
+20180220-10:14:13.050 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-10:14:13.051 : Received logon response
+20180220-10:16:28.056 : Initiated logout request
+20180220-10:16:28.181 : Received logout response
+20180220-10:16:28.197 : Disconnecting
+20180220-10:17:56.523 : Created session
+20180220-10:17:56.539 : Connecting to fixuat2.exante.eu on port 8100
+20180220-10:17:56.712 : Initiated logon request
+20180220-10:17:57.352 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-10:17:57.352 : Received logon response
+20180220-10:18:00.346 : Initiated logout request
+20180220-10:18:00.502 : Received logout response
+20180220-10:18:00.502 : Disconnecting
+20180220-10:18:07.208 : Created session
+20180220-10:18:07.224 : Connecting to fixuat2.exante.eu on port 8100
+20180220-10:18:26.145 : Created session
+20180220-10:18:26.161 : Connecting to fixuat2.exante.eu on port 8100
+20180220-10:18:26.333 : Initiated logon request
+20180220-10:18:26.788 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-10:18:26.788 : Received logon response
+20180220-10:25:08.477 : Initiated logout request
+20180220-10:25:08.626 : Received logout response
+20180220-10:25:08.626 : Disconnecting
+20180220-15:18:20.368 : Created session
+20180220-15:18:20.384 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:18:21.234 : Initiated logon request
+20180220-15:18:22.391 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:18:22.391 : Received logon response
+20180220-15:18:56.527 : Initiated logout request
+20180220-15:18:56.668 : Received logout response
+20180220-15:18:56.668 : Disconnecting
+20180220-15:36:47.895 : Created session
+20180220-15:36:47.910 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:36:48.301 : Initiated logon request
+20180220-15:36:49.290 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:36:49.290 : Received logon response
+20180220-15:39:29.791 : Initiated logout request
+20180220-15:39:29.921 : Received logout response
+20180220-15:39:29.921 : Disconnecting
+20180220-15:39:52.688 : Created session
+20180220-15:39:52.704 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:39:52.876 : Initiated logon request
+20180220-15:39:53.329 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:39:53.329 : Received logon response
+20180220-15:42:12.712 : Initiated logout request
+20180220-15:42:12.852 : Received logout response
+20180220-15:42:12.852 : Disconnecting
+20180220-15:48:49.375 : Created session
+20180220-15:48:49.395 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:48:49.569 : Initiated logon request
+20180220-15:48:50.002 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:48:50.003 : Received logon response
+20180220-15:52:26.735 : Created session
+20180220-15:52:26.753 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:52:26.936 : Initiated logon request
+20180220-15:52:27.374 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:52:27.374 : Received logon response
+20180220-15:53:49.868 : Created session
+20180220-15:53:49.884 : Connecting to fixuat2.exante.eu on port 8100
+20180220-15:53:50.063 : Initiated logon request
+20180220-15:53:50.505 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180220-15:53:50.507 : Received logon response
