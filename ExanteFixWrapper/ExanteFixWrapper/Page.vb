@@ -14,6 +14,9 @@
     Public RightTradesButton As Button
     Public PlusTradesButton As Button
     Public MinusTradesButton As Button
+    Public Chart As TabControl
+    Public VolumesTradesPctBox As PictureBox
+    Public VolumesVolumesTradesPctBox As PictureBox
 
     Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
@@ -29,7 +32,10 @@
                    LeftTradesButton As Button,
                    RightTradesButton As Button,
                    PlusTradesButton As Button,
-                   MinusTradesButton As Button)
+                   MinusTradesButton As Button,
+                   Chart As TabControl,
+                   VolumesTradesPctBox As PictureBox,
+                   VolumesVolumesTradesPctBox As PictureBox)
 
         Me.cp = cp
         Me.QuotesPctBox = QuotesPctBox
@@ -46,6 +52,9 @@
         Me.RightTradesButton = RightTradesButton
         Me.PlusTradesButton = PlusTradesButton
         Me.MinusTradesButton = MinusTradesButton
+        Me.Chart = Chart
+        Me.VolumesTradesPctBox = VolumesTradesPctBox
+        Me.VolumesVolumesTradesPctBox = VolumesVolumesTradesPctBox
 
     End Sub
 
@@ -70,7 +79,7 @@
                 Me.cp.minPriceQuotes = currentMinPriceQuotes
             End If
 
-            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp))
+            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
             Me.QuotesPctBox.Invoke(Sub()
                                        If (Not Me.cp.isDrawingStartedQuotes) Then
                                            Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
@@ -86,9 +95,13 @@
                 cp.minPriceTrades = quotesInfo.TradePrice
             End If
 
-            cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
+            If (quotesInfo.TradeVolume > cp.maxVolumeTrades) Then
+                cp.maxVolumeTrades = quotesInfo.TradeVolume
+            End If
+
+            cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, DateTime.Now))
             Me.TradesPctBox.Invoke(Sub()
-                                       Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+                                       Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
                                    End Sub)
         End If
     End Sub

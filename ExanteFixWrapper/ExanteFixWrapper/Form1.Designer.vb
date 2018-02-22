@@ -25,7 +25,7 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.TabControl10 = New System.Windows.Forms.TabControl()
+        Me.Charts9 = New System.Windows.Forms.TabControl()
         Me.QuotesTab9 = New System.Windows.Forms.TabPage()
         Me.PricesQuotesPctBox9 = New System.Windows.Forms.PictureBox()
         Me.MinusQuotesButton9 = New System.Windows.Forms.Button()
@@ -35,6 +35,8 @@ Partial Class Form1
         Me.LeftQuotesButton9 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox9 = New System.Windows.Forms.PictureBox()
         Me.TradesTab9 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox9 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox9 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox9 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton9 = New System.Windows.Forms.Button()
         Me.TradesPctBox9 = New System.Windows.Forms.PictureBox()
@@ -53,6 +55,8 @@ Partial Class Form1
         Me.LeftQuotesButton8 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox8 = New System.Windows.Forms.PictureBox()
         Me.TradesTab8 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox8 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox8 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox8 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton8 = New System.Windows.Forms.Button()
         Me.TradesPctBox8 = New System.Windows.Forms.PictureBox()
@@ -71,6 +75,8 @@ Partial Class Form1
         Me.LeftQuotesButton7 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox7 = New System.Windows.Forms.PictureBox()
         Me.TradesTab7 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox7 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox7 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox7 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton7 = New System.Windows.Forms.Button()
         Me.TradesPctBox7 = New System.Windows.Forms.PictureBox()
@@ -89,6 +95,8 @@ Partial Class Form1
         Me.LeftQuotesButton6 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox6 = New System.Windows.Forms.PictureBox()
         Me.TradesTab6 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox6 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox6 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox6 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton6 = New System.Windows.Forms.Button()
         Me.TradesPctBox6 = New System.Windows.Forms.PictureBox()
@@ -107,6 +115,8 @@ Partial Class Form1
         Me.LeftQuotesButton5 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox5 = New System.Windows.Forms.PictureBox()
         Me.TradesTab5 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox5 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox5 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox5 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton5 = New System.Windows.Forms.Button()
         Me.TradesPctBox5 = New System.Windows.Forms.PictureBox()
@@ -125,6 +135,8 @@ Partial Class Form1
         Me.LeftQuotesButton4 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox4 = New System.Windows.Forms.PictureBox()
         Me.TradesTab4 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox4 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox4 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox4 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton4 = New System.Windows.Forms.Button()
         Me.TradesPctBox4 = New System.Windows.Forms.PictureBox()
@@ -143,6 +155,8 @@ Partial Class Form1
         Me.LeftQuotesButton3 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox3 = New System.Windows.Forms.PictureBox()
         Me.TradesTab3 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox3 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox3 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox3 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton3 = New System.Windows.Forms.Button()
         Me.TradesPctBox3 = New System.Windows.Forms.PictureBox()
@@ -161,6 +175,8 @@ Partial Class Form1
         Me.LeftQuotesButton2 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox2 = New System.Windows.Forms.PictureBox()
         Me.TradesTab2 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox2 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox2 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox2 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton2 = New System.Windows.Forms.Button()
         Me.TradesPctBox2 = New System.Windows.Forms.PictureBox()
@@ -179,6 +195,8 @@ Partial Class Form1
         Me.LeftQuotesButton1 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox1 = New System.Windows.Forms.PictureBox()
         Me.TradesTab1 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox1 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox1 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox1 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton1 = New System.Windows.Forms.Button()
         Me.TradesPctBox1 = New System.Windows.Forms.PictureBox()
@@ -197,6 +215,8 @@ Partial Class Form1
         Me.LeftQuotesButton0 = New System.Windows.Forms.Button()
         Me.TimesQuotesPctBox0 = New System.Windows.Forms.PictureBox()
         Me.TradesTab0 = New System.Windows.Forms.TabPage()
+        Me.VolumesVolumesTradesPctBox0 = New System.Windows.Forms.PictureBox()
+        Me.VolumesTradesPctBox0 = New System.Windows.Forms.PictureBox()
         Me.PricesTradesPctBox0 = New System.Windows.Forms.PictureBox()
         Me.MinusTradesButton0 = New System.Windows.Forms.Button()
         Me.TradesPctBox0 = New System.Windows.Forms.PictureBox()
@@ -211,13 +231,21 @@ Partial Class Form1
         Me.PriceLabel0 = New System.Windows.Forms.Label()
         Me.SubscribreButton0 = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
+        Me.VolumeLabel = New System.Windows.Forms.Label()
+        Me.CurVolumeLabel = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.TabPage9.SuspendLayout()
-        Me.TabControl10.SuspendLayout()
+        Me.Charts9.SuspendLayout()
         Me.QuotesTab9.SuspendLayout()
         CType(Me.PricesQuotesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.QuotesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab9.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,6 +256,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab8.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -238,6 +268,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab7.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox7, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -248,6 +280,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab6.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,6 +292,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab5.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox5, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -268,6 +304,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab4.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -278,6 +316,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab3.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -288,6 +328,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab2.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -298,6 +340,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab1.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -308,6 +352,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesQuotesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TradesTab0.SuspendLayout()
+        CType(Me.VolumesVolumesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VolumesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PricesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -316,7 +362,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(150, 6)
+        Me.Button1.Location = New System.Drawing.Point(150, 9)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(115, 28)
@@ -327,7 +373,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(26, 9)
+        Me.Label1.Location = New System.Drawing.Point(20, 14)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(116, 17)
@@ -336,7 +382,7 @@ Partial Class Form1
         '
         'TabPage9
         '
-        Me.TabPage9.Controls.Add(Me.TabControl10)
+        Me.TabPage9.Controls.Add(Me.Charts9)
         Me.TabPage9.Location = New System.Drawing.Point(4, 25)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
@@ -345,15 +391,15 @@ Partial Class Form1
         Me.TabPage9.Text = "TabPage9"
         Me.TabPage9.UseVisualStyleBackColor = True
         '
-        'TabControl10
+        'Charts9
         '
-        Me.TabControl10.Controls.Add(Me.QuotesTab9)
-        Me.TabControl10.Controls.Add(Me.TradesTab9)
-        Me.TabControl10.Location = New System.Drawing.Point(3, 6)
-        Me.TabControl10.Name = "TabControl10"
-        Me.TabControl10.SelectedIndex = 0
-        Me.TabControl10.Size = New System.Drawing.Size(1697, 801)
-        Me.TabControl10.TabIndex = 44
+        Me.Charts9.Controls.Add(Me.QuotesTab9)
+        Me.Charts9.Controls.Add(Me.TradesTab9)
+        Me.Charts9.Location = New System.Drawing.Point(3, 6)
+        Me.Charts9.Name = "Charts9"
+        Me.Charts9.SelectedIndex = 0
+        Me.Charts9.Size = New System.Drawing.Size(1697, 801)
+        Me.Charts9.TabIndex = 44
         '
         'QuotesTab9
         '
@@ -434,6 +480,8 @@ Partial Class Form1
         '
         'TradesTab9
         '
+        Me.TradesTab9.Controls.Add(Me.VolumesVolumesTradesPctBox9)
+        Me.TradesTab9.Controls.Add(Me.VolumesTradesPctBox9)
         Me.TradesTab9.Controls.Add(Me.PricesTradesPctBox9)
         Me.TradesTab9.Controls.Add(Me.MinusTradesButton9)
         Me.TradesTab9.Controls.Add(Me.TradesPctBox9)
@@ -449,11 +497,27 @@ Partial Class Form1
         Me.TradesTab9.Text = "Сделки"
         Me.TradesTab9.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox9
+        '
+        Me.VolumesVolumesTradesPctBox9.Location = New System.Drawing.Point(3, 431)
+        Me.VolumesVolumesTradesPctBox9.Name = "VolumesVolumesTradesPctBox9"
+        Me.VolumesVolumesTradesPctBox9.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox9.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox9.TabStop = False
+        '
+        'VolumesTradesPctBox9
+        '
+        Me.VolumesTradesPctBox9.Location = New System.Drawing.Point(108, 431)
+        Me.VolumesTradesPctBox9.Name = "VolumesTradesPctBox9"
+        Me.VolumesTradesPctBox9.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox9.TabIndex = 40
+        Me.VolumesTradesPctBox9.TabStop = False
+        '
         'PricesTradesPctBox9
         '
         Me.PricesTradesPctBox9.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox9.Name = "PricesTradesPctBox9"
-        Me.PricesTradesPctBox9.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox9.Size = New System.Drawing.Size(105, 422)
         Me.PricesTradesPctBox9.TabIndex = 37
         Me.PricesTradesPctBox9.TabStop = False
         '
@@ -470,7 +534,7 @@ Partial Class Form1
         '
         Me.TradesPctBox9.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox9.Name = "TradesPctBox9"
-        Me.TradesPctBox9.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox9.Size = New System.Drawing.Size(1521, 425)
         Me.TradesPctBox9.TabIndex = 30
         Me.TradesPctBox9.TabStop = False
         '
@@ -485,7 +549,7 @@ Partial Class Form1
         '
         'RightButtonTrades9
         '
-        Me.RightButtonTrades9.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades9.Location = New System.Drawing.Point(870, 733)
         Me.RightButtonTrades9.Name = "RightButtonTrades9"
         Me.RightButtonTrades9.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades9.TabIndex = 34
@@ -494,7 +558,7 @@ Partial Class Form1
         '
         'LeftTradesButton9
         '
-        Me.LeftTradesButton9.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton9.Location = New System.Drawing.Point(108, 733)
         Me.LeftTradesButton9.Name = "LeftTradesButton9"
         Me.LeftTradesButton9.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton9.TabIndex = 33
@@ -503,7 +567,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox9
         '
-        Me.TimesTradesPctBox9.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox9.Location = New System.Drawing.Point(108, 691)
         Me.TimesTradesPctBox9.Name = "TimesTradesPctBox9"
         Me.TimesTradesPctBox9.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox9.TabIndex = 32
@@ -609,6 +673,8 @@ Partial Class Form1
         '
         'TradesTab8
         '
+        Me.TradesTab8.Controls.Add(Me.VolumesVolumesTradesPctBox8)
+        Me.TradesTab8.Controls.Add(Me.VolumesTradesPctBox8)
         Me.TradesTab8.Controls.Add(Me.PricesTradesPctBox8)
         Me.TradesTab8.Controls.Add(Me.MinusTradesButton8)
         Me.TradesTab8.Controls.Add(Me.TradesPctBox8)
@@ -624,11 +690,27 @@ Partial Class Form1
         Me.TradesTab8.Text = "Сделки"
         Me.TradesTab8.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox8
+        '
+        Me.VolumesVolumesTradesPctBox8.Location = New System.Drawing.Point(3, 430)
+        Me.VolumesVolumesTradesPctBox8.Name = "VolumesVolumesTradesPctBox8"
+        Me.VolumesVolumesTradesPctBox8.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox8.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox8.TabStop = False
+        '
+        'VolumesTradesPctBox8
+        '
+        Me.VolumesTradesPctBox8.Location = New System.Drawing.Point(108, 430)
+        Me.VolumesTradesPctBox8.Name = "VolumesTradesPctBox8"
+        Me.VolumesTradesPctBox8.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox8.TabIndex = 40
+        Me.VolumesTradesPctBox8.TabStop = False
+        '
         'PricesTradesPctBox8
         '
         Me.PricesTradesPctBox8.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox8.Name = "PricesTradesPctBox8"
-        Me.PricesTradesPctBox8.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox8.Size = New System.Drawing.Size(105, 421)
         Me.PricesTradesPctBox8.TabIndex = 37
         Me.PricesTradesPctBox8.TabStop = False
         '
@@ -645,7 +727,7 @@ Partial Class Form1
         '
         Me.TradesPctBox8.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox8.Name = "TradesPctBox8"
-        Me.TradesPctBox8.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox8.Size = New System.Drawing.Size(1521, 424)
         Me.TradesPctBox8.TabIndex = 30
         Me.TradesPctBox8.TabStop = False
         '
@@ -660,7 +742,7 @@ Partial Class Form1
         '
         'RightButtonTrades8
         '
-        Me.RightButtonTrades8.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades8.Location = New System.Drawing.Point(870, 732)
         Me.RightButtonTrades8.Name = "RightButtonTrades8"
         Me.RightButtonTrades8.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades8.TabIndex = 34
@@ -669,7 +751,7 @@ Partial Class Form1
         '
         'LeftTradesButton8
         '
-        Me.LeftTradesButton8.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton8.Location = New System.Drawing.Point(108, 732)
         Me.LeftTradesButton8.Name = "LeftTradesButton8"
         Me.LeftTradesButton8.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton8.TabIndex = 33
@@ -678,7 +760,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox8
         '
-        Me.TimesTradesPctBox8.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox8.Location = New System.Drawing.Point(108, 690)
         Me.TimesTradesPctBox8.Name = "TimesTradesPctBox8"
         Me.TimesTradesPctBox8.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox8.TabIndex = 32
@@ -784,6 +866,8 @@ Partial Class Form1
         '
         'TradesTab7
         '
+        Me.TradesTab7.Controls.Add(Me.VolumesVolumesTradesPctBox7)
+        Me.TradesTab7.Controls.Add(Me.VolumesTradesPctBox7)
         Me.TradesTab7.Controls.Add(Me.PricesTradesPctBox7)
         Me.TradesTab7.Controls.Add(Me.MinusTradesButton7)
         Me.TradesTab7.Controls.Add(Me.TradesPctBox7)
@@ -799,11 +883,27 @@ Partial Class Form1
         Me.TradesTab7.Text = "Сделки"
         Me.TradesTab7.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox7
+        '
+        Me.VolumesVolumesTradesPctBox7.Location = New System.Drawing.Point(3, 429)
+        Me.VolumesVolumesTradesPctBox7.Name = "VolumesVolumesTradesPctBox7"
+        Me.VolumesVolumesTradesPctBox7.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox7.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox7.TabStop = False
+        '
+        'VolumesTradesPctBox7
+        '
+        Me.VolumesTradesPctBox7.Location = New System.Drawing.Point(108, 429)
+        Me.VolumesTradesPctBox7.Name = "VolumesTradesPctBox7"
+        Me.VolumesTradesPctBox7.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox7.TabIndex = 40
+        Me.VolumesTradesPctBox7.TabStop = False
+        '
         'PricesTradesPctBox7
         '
         Me.PricesTradesPctBox7.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox7.Name = "PricesTradesPctBox7"
-        Me.PricesTradesPctBox7.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox7.Size = New System.Drawing.Size(105, 420)
         Me.PricesTradesPctBox7.TabIndex = 37
         Me.PricesTradesPctBox7.TabStop = False
         '
@@ -820,7 +920,7 @@ Partial Class Form1
         '
         Me.TradesPctBox7.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox7.Name = "TradesPctBox7"
-        Me.TradesPctBox7.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox7.Size = New System.Drawing.Size(1521, 423)
         Me.TradesPctBox7.TabIndex = 30
         Me.TradesPctBox7.TabStop = False
         '
@@ -835,7 +935,7 @@ Partial Class Form1
         '
         'RightButtonTrades7
         '
-        Me.RightButtonTrades7.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades7.Location = New System.Drawing.Point(870, 731)
         Me.RightButtonTrades7.Name = "RightButtonTrades7"
         Me.RightButtonTrades7.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades7.TabIndex = 34
@@ -844,7 +944,7 @@ Partial Class Form1
         '
         'LeftTradesButton7
         '
-        Me.LeftTradesButton7.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton7.Location = New System.Drawing.Point(108, 731)
         Me.LeftTradesButton7.Name = "LeftTradesButton7"
         Me.LeftTradesButton7.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton7.TabIndex = 33
@@ -853,7 +953,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox7
         '
-        Me.TimesTradesPctBox7.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox7.Location = New System.Drawing.Point(108, 689)
         Me.TimesTradesPctBox7.Name = "TimesTradesPctBox7"
         Me.TimesTradesPctBox7.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox7.TabIndex = 32
@@ -959,6 +1059,8 @@ Partial Class Form1
         '
         'TradesTab6
         '
+        Me.TradesTab6.Controls.Add(Me.VolumesVolumesTradesPctBox6)
+        Me.TradesTab6.Controls.Add(Me.VolumesTradesPctBox6)
         Me.TradesTab6.Controls.Add(Me.PricesTradesPctBox6)
         Me.TradesTab6.Controls.Add(Me.MinusTradesButton6)
         Me.TradesTab6.Controls.Add(Me.TradesPctBox6)
@@ -974,11 +1076,27 @@ Partial Class Form1
         Me.TradesTab6.Text = "Сделки"
         Me.TradesTab6.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox6
+        '
+        Me.VolumesVolumesTradesPctBox6.Location = New System.Drawing.Point(3, 432)
+        Me.VolumesVolumesTradesPctBox6.Name = "VolumesVolumesTradesPctBox6"
+        Me.VolumesVolumesTradesPctBox6.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox6.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox6.TabStop = False
+        '
+        'VolumesTradesPctBox6
+        '
+        Me.VolumesTradesPctBox6.Location = New System.Drawing.Point(108, 432)
+        Me.VolumesTradesPctBox6.Name = "VolumesTradesPctBox6"
+        Me.VolumesTradesPctBox6.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox6.TabIndex = 40
+        Me.VolumesTradesPctBox6.TabStop = False
+        '
         'PricesTradesPctBox6
         '
         Me.PricesTradesPctBox6.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox6.Name = "PricesTradesPctBox6"
-        Me.PricesTradesPctBox6.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox6.Size = New System.Drawing.Size(105, 423)
         Me.PricesTradesPctBox6.TabIndex = 37
         Me.PricesTradesPctBox6.TabStop = False
         '
@@ -995,7 +1113,7 @@ Partial Class Form1
         '
         Me.TradesPctBox6.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox6.Name = "TradesPctBox6"
-        Me.TradesPctBox6.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox6.Size = New System.Drawing.Size(1521, 426)
         Me.TradesPctBox6.TabIndex = 30
         Me.TradesPctBox6.TabStop = False
         '
@@ -1010,7 +1128,7 @@ Partial Class Form1
         '
         'RightButtonTrades6
         '
-        Me.RightButtonTrades6.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades6.Location = New System.Drawing.Point(870, 734)
         Me.RightButtonTrades6.Name = "RightButtonTrades6"
         Me.RightButtonTrades6.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades6.TabIndex = 34
@@ -1019,7 +1137,7 @@ Partial Class Form1
         '
         'LeftTradesButton6
         '
-        Me.LeftTradesButton6.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton6.Location = New System.Drawing.Point(108, 734)
         Me.LeftTradesButton6.Name = "LeftTradesButton6"
         Me.LeftTradesButton6.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton6.TabIndex = 33
@@ -1028,7 +1146,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox6
         '
-        Me.TimesTradesPctBox6.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox6.Location = New System.Drawing.Point(108, 692)
         Me.TimesTradesPctBox6.Name = "TimesTradesPctBox6"
         Me.TimesTradesPctBox6.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox6.TabIndex = 32
@@ -1134,6 +1252,8 @@ Partial Class Form1
         '
         'TradesTab5
         '
+        Me.TradesTab5.Controls.Add(Me.VolumesVolumesTradesPctBox5)
+        Me.TradesTab5.Controls.Add(Me.VolumesTradesPctBox5)
         Me.TradesTab5.Controls.Add(Me.PricesTradesPctBox5)
         Me.TradesTab5.Controls.Add(Me.MinusTradesButton5)
         Me.TradesTab5.Controls.Add(Me.TradesPctBox5)
@@ -1149,11 +1269,27 @@ Partial Class Form1
         Me.TradesTab5.Text = "Сделки"
         Me.TradesTab5.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox5
+        '
+        Me.VolumesVolumesTradesPctBox5.Location = New System.Drawing.Point(3, 432)
+        Me.VolumesVolumesTradesPctBox5.Name = "VolumesVolumesTradesPctBox5"
+        Me.VolumesVolumesTradesPctBox5.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox5.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox5.TabStop = False
+        '
+        'VolumesTradesPctBox5
+        '
+        Me.VolumesTradesPctBox5.Location = New System.Drawing.Point(108, 432)
+        Me.VolumesTradesPctBox5.Name = "VolumesTradesPctBox5"
+        Me.VolumesTradesPctBox5.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox5.TabIndex = 40
+        Me.VolumesTradesPctBox5.TabStop = False
+        '
         'PricesTradesPctBox5
         '
         Me.PricesTradesPctBox5.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox5.Name = "PricesTradesPctBox5"
-        Me.PricesTradesPctBox5.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox5.Size = New System.Drawing.Size(105, 423)
         Me.PricesTradesPctBox5.TabIndex = 37
         Me.PricesTradesPctBox5.TabStop = False
         '
@@ -1170,7 +1306,7 @@ Partial Class Form1
         '
         Me.TradesPctBox5.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox5.Name = "TradesPctBox5"
-        Me.TradesPctBox5.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox5.Size = New System.Drawing.Size(1521, 426)
         Me.TradesPctBox5.TabIndex = 30
         Me.TradesPctBox5.TabStop = False
         '
@@ -1185,7 +1321,7 @@ Partial Class Form1
         '
         'RightButtonTrades5
         '
-        Me.RightButtonTrades5.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades5.Location = New System.Drawing.Point(870, 734)
         Me.RightButtonTrades5.Name = "RightButtonTrades5"
         Me.RightButtonTrades5.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades5.TabIndex = 34
@@ -1194,7 +1330,7 @@ Partial Class Form1
         '
         'LeftTradesButton5
         '
-        Me.LeftTradesButton5.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton5.Location = New System.Drawing.Point(108, 734)
         Me.LeftTradesButton5.Name = "LeftTradesButton5"
         Me.LeftTradesButton5.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton5.TabIndex = 33
@@ -1203,7 +1339,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox5
         '
-        Me.TimesTradesPctBox5.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox5.Location = New System.Drawing.Point(108, 692)
         Me.TimesTradesPctBox5.Name = "TimesTradesPctBox5"
         Me.TimesTradesPctBox5.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox5.TabIndex = 32
@@ -1309,6 +1445,8 @@ Partial Class Form1
         '
         'TradesTab4
         '
+        Me.TradesTab4.Controls.Add(Me.VolumesVolumesTradesPctBox4)
+        Me.TradesTab4.Controls.Add(Me.VolumesTradesPctBox4)
         Me.TradesTab4.Controls.Add(Me.PricesTradesPctBox4)
         Me.TradesTab4.Controls.Add(Me.MinusTradesButton4)
         Me.TradesTab4.Controls.Add(Me.TradesPctBox4)
@@ -1324,11 +1462,27 @@ Partial Class Form1
         Me.TradesTab4.Text = "Сделки"
         Me.TradesTab4.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox4
+        '
+        Me.VolumesVolumesTradesPctBox4.Location = New System.Drawing.Point(3, 432)
+        Me.VolumesVolumesTradesPctBox4.Name = "VolumesVolumesTradesPctBox4"
+        Me.VolumesVolumesTradesPctBox4.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox4.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox4.TabStop = False
+        '
+        'VolumesTradesPctBox4
+        '
+        Me.VolumesTradesPctBox4.Location = New System.Drawing.Point(108, 432)
+        Me.VolumesTradesPctBox4.Name = "VolumesTradesPctBox4"
+        Me.VolumesTradesPctBox4.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox4.TabIndex = 40
+        Me.VolumesTradesPctBox4.TabStop = False
+        '
         'PricesTradesPctBox4
         '
         Me.PricesTradesPctBox4.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox4.Name = "PricesTradesPctBox4"
-        Me.PricesTradesPctBox4.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox4.Size = New System.Drawing.Size(105, 423)
         Me.PricesTradesPctBox4.TabIndex = 37
         Me.PricesTradesPctBox4.TabStop = False
         '
@@ -1345,7 +1499,7 @@ Partial Class Form1
         '
         Me.TradesPctBox4.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox4.Name = "TradesPctBox4"
-        Me.TradesPctBox4.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox4.Size = New System.Drawing.Size(1521, 426)
         Me.TradesPctBox4.TabIndex = 30
         Me.TradesPctBox4.TabStop = False
         '
@@ -1360,7 +1514,7 @@ Partial Class Form1
         '
         'RightButtonTrades4
         '
-        Me.RightButtonTrades4.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades4.Location = New System.Drawing.Point(870, 734)
         Me.RightButtonTrades4.Name = "RightButtonTrades4"
         Me.RightButtonTrades4.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades4.TabIndex = 34
@@ -1369,7 +1523,7 @@ Partial Class Form1
         '
         'LeftTradesButton4
         '
-        Me.LeftTradesButton4.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton4.Location = New System.Drawing.Point(108, 734)
         Me.LeftTradesButton4.Name = "LeftTradesButton4"
         Me.LeftTradesButton4.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton4.TabIndex = 33
@@ -1378,7 +1532,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox4
         '
-        Me.TimesTradesPctBox4.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox4.Location = New System.Drawing.Point(108, 692)
         Me.TimesTradesPctBox4.Name = "TimesTradesPctBox4"
         Me.TimesTradesPctBox4.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox4.TabIndex = 32
@@ -1484,6 +1638,8 @@ Partial Class Form1
         '
         'TradesTab3
         '
+        Me.TradesTab3.Controls.Add(Me.VolumesVolumesTradesPctBox3)
+        Me.TradesTab3.Controls.Add(Me.VolumesTradesPctBox3)
         Me.TradesTab3.Controls.Add(Me.PricesTradesPctBox3)
         Me.TradesTab3.Controls.Add(Me.MinusTradesButton3)
         Me.TradesTab3.Controls.Add(Me.TradesPctBox3)
@@ -1499,11 +1655,27 @@ Partial Class Form1
         Me.TradesTab3.Text = "Сделки"
         Me.TradesTab3.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox3
+        '
+        Me.VolumesVolumesTradesPctBox3.Location = New System.Drawing.Point(3, 432)
+        Me.VolumesVolumesTradesPctBox3.Name = "VolumesVolumesTradesPctBox3"
+        Me.VolumesVolumesTradesPctBox3.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox3.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox3.TabStop = False
+        '
+        'VolumesTradesPctBox3
+        '
+        Me.VolumesTradesPctBox3.Location = New System.Drawing.Point(108, 432)
+        Me.VolumesTradesPctBox3.Name = "VolumesTradesPctBox3"
+        Me.VolumesTradesPctBox3.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox3.TabIndex = 40
+        Me.VolumesTradesPctBox3.TabStop = False
+        '
         'PricesTradesPctBox3
         '
         Me.PricesTradesPctBox3.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox3.Name = "PricesTradesPctBox3"
-        Me.PricesTradesPctBox3.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox3.Size = New System.Drawing.Size(105, 423)
         Me.PricesTradesPctBox3.TabIndex = 37
         Me.PricesTradesPctBox3.TabStop = False
         '
@@ -1520,7 +1692,7 @@ Partial Class Form1
         '
         Me.TradesPctBox3.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox3.Name = "TradesPctBox3"
-        Me.TradesPctBox3.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox3.Size = New System.Drawing.Size(1521, 426)
         Me.TradesPctBox3.TabIndex = 30
         Me.TradesPctBox3.TabStop = False
         '
@@ -1535,7 +1707,7 @@ Partial Class Form1
         '
         'RightButtonTrades3
         '
-        Me.RightButtonTrades3.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades3.Location = New System.Drawing.Point(870, 734)
         Me.RightButtonTrades3.Name = "RightButtonTrades3"
         Me.RightButtonTrades3.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades3.TabIndex = 34
@@ -1544,7 +1716,7 @@ Partial Class Form1
         '
         'LeftTradesButton3
         '
-        Me.LeftTradesButton3.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton3.Location = New System.Drawing.Point(108, 734)
         Me.LeftTradesButton3.Name = "LeftTradesButton3"
         Me.LeftTradesButton3.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton3.TabIndex = 33
@@ -1553,7 +1725,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox3
         '
-        Me.TimesTradesPctBox3.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox3.Location = New System.Drawing.Point(108, 692)
         Me.TimesTradesPctBox3.Name = "TimesTradesPctBox3"
         Me.TimesTradesPctBox3.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox3.TabIndex = 32
@@ -1659,6 +1831,8 @@ Partial Class Form1
         '
         'TradesTab2
         '
+        Me.TradesTab2.Controls.Add(Me.VolumesVolumesTradesPctBox2)
+        Me.TradesTab2.Controls.Add(Me.VolumesTradesPctBox2)
         Me.TradesTab2.Controls.Add(Me.PricesTradesPctBox2)
         Me.TradesTab2.Controls.Add(Me.MinusTradesButton2)
         Me.TradesTab2.Controls.Add(Me.TradesPctBox2)
@@ -1674,11 +1848,27 @@ Partial Class Form1
         Me.TradesTab2.Text = "Сделки"
         Me.TradesTab2.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox2
+        '
+        Me.VolumesVolumesTradesPctBox2.Location = New System.Drawing.Point(3, 431)
+        Me.VolumesVolumesTradesPctBox2.Name = "VolumesVolumesTradesPctBox2"
+        Me.VolumesVolumesTradesPctBox2.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox2.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox2.TabStop = False
+        '
+        'VolumesTradesPctBox2
+        '
+        Me.VolumesTradesPctBox2.Location = New System.Drawing.Point(108, 431)
+        Me.VolumesTradesPctBox2.Name = "VolumesTradesPctBox2"
+        Me.VolumesTradesPctBox2.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox2.TabIndex = 40
+        Me.VolumesTradesPctBox2.TabStop = False
+        '
         'PricesTradesPctBox2
         '
         Me.PricesTradesPctBox2.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox2.Name = "PricesTradesPctBox2"
-        Me.PricesTradesPctBox2.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox2.Size = New System.Drawing.Size(105, 422)
         Me.PricesTradesPctBox2.TabIndex = 37
         Me.PricesTradesPctBox2.TabStop = False
         '
@@ -1695,7 +1885,7 @@ Partial Class Form1
         '
         Me.TradesPctBox2.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox2.Name = "TradesPctBox2"
-        Me.TradesPctBox2.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox2.Size = New System.Drawing.Size(1521, 425)
         Me.TradesPctBox2.TabIndex = 30
         Me.TradesPctBox2.TabStop = False
         '
@@ -1710,7 +1900,7 @@ Partial Class Form1
         '
         'RightButtonTrades2
         '
-        Me.RightButtonTrades2.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades2.Location = New System.Drawing.Point(870, 733)
         Me.RightButtonTrades2.Name = "RightButtonTrades2"
         Me.RightButtonTrades2.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades2.TabIndex = 34
@@ -1719,7 +1909,7 @@ Partial Class Form1
         '
         'LeftTradesButton2
         '
-        Me.LeftTradesButton2.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton2.Location = New System.Drawing.Point(108, 733)
         Me.LeftTradesButton2.Name = "LeftTradesButton2"
         Me.LeftTradesButton2.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton2.TabIndex = 33
@@ -1728,7 +1918,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox2
         '
-        Me.TimesTradesPctBox2.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox2.Location = New System.Drawing.Point(108, 691)
         Me.TimesTradesPctBox2.Name = "TimesTradesPctBox2"
         Me.TimesTradesPctBox2.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox2.TabIndex = 32
@@ -1834,6 +2024,8 @@ Partial Class Form1
         '
         'TradesTab1
         '
+        Me.TradesTab1.Controls.Add(Me.VolumesVolumesTradesPctBox1)
+        Me.TradesTab1.Controls.Add(Me.VolumesTradesPctBox1)
         Me.TradesTab1.Controls.Add(Me.PricesTradesPctBox1)
         Me.TradesTab1.Controls.Add(Me.MinusTradesButton1)
         Me.TradesTab1.Controls.Add(Me.TradesPctBox1)
@@ -1849,11 +2041,27 @@ Partial Class Form1
         Me.TradesTab1.Text = "Сделки"
         Me.TradesTab1.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox1
+        '
+        Me.VolumesVolumesTradesPctBox1.Location = New System.Drawing.Point(3, 433)
+        Me.VolumesVolumesTradesPctBox1.Name = "VolumesVolumesTradesPctBox1"
+        Me.VolumesVolumesTradesPctBox1.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox1.TabIndex = 41
+        Me.VolumesVolumesTradesPctBox1.TabStop = False
+        '
+        'VolumesTradesPctBox1
+        '
+        Me.VolumesTradesPctBox1.Location = New System.Drawing.Point(108, 433)
+        Me.VolumesTradesPctBox1.Name = "VolumesTradesPctBox1"
+        Me.VolumesTradesPctBox1.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox1.TabIndex = 40
+        Me.VolumesTradesPctBox1.TabStop = False
+        '
         'PricesTradesPctBox1
         '
         Me.PricesTradesPctBox1.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox1.Name = "PricesTradesPctBox1"
-        Me.PricesTradesPctBox1.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox1.Size = New System.Drawing.Size(105, 424)
         Me.PricesTradesPctBox1.TabIndex = 37
         Me.PricesTradesPctBox1.TabStop = False
         '
@@ -1870,7 +2078,7 @@ Partial Class Form1
         '
         Me.TradesPctBox1.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox1.Name = "TradesPctBox1"
-        Me.TradesPctBox1.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox1.Size = New System.Drawing.Size(1521, 427)
         Me.TradesPctBox1.TabIndex = 30
         Me.TradesPctBox1.TabStop = False
         '
@@ -1885,7 +2093,7 @@ Partial Class Form1
         '
         'RightButtonTrades1
         '
-        Me.RightButtonTrades1.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades1.Location = New System.Drawing.Point(870, 735)
         Me.RightButtonTrades1.Name = "RightButtonTrades1"
         Me.RightButtonTrades1.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades1.TabIndex = 34
@@ -1894,7 +2102,7 @@ Partial Class Form1
         '
         'LeftTradesButton1
         '
-        Me.LeftTradesButton1.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton1.Location = New System.Drawing.Point(108, 735)
         Me.LeftTradesButton1.Name = "LeftTradesButton1"
         Me.LeftTradesButton1.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton1.TabIndex = 33
@@ -1903,7 +2111,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox1
         '
-        Me.TimesTradesPctBox1.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox1.Location = New System.Drawing.Point(108, 693)
         Me.TimesTradesPctBox1.Name = "TimesTradesPctBox1"
         Me.TimesTradesPctBox1.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox1.TabIndex = 32
@@ -2009,6 +2217,8 @@ Partial Class Form1
         '
         'TradesTab0
         '
+        Me.TradesTab0.Controls.Add(Me.VolumesVolumesTradesPctBox0)
+        Me.TradesTab0.Controls.Add(Me.VolumesTradesPctBox0)
         Me.TradesTab0.Controls.Add(Me.PricesTradesPctBox0)
         Me.TradesTab0.Controls.Add(Me.MinusTradesButton0)
         Me.TradesTab0.Controls.Add(Me.TradesPctBox0)
@@ -2024,19 +2234,35 @@ Partial Class Form1
         Me.TradesTab0.Text = "Сделки"
         Me.TradesTab0.UseVisualStyleBackColor = True
         '
+        'VolumesVolumesTradesPctBox0
+        '
+        Me.VolumesVolumesTradesPctBox0.Location = New System.Drawing.Point(3, 431)
+        Me.VolumesVolumesTradesPctBox0.Name = "VolumesVolumesTradesPctBox0"
+        Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox0.TabIndex = 39
+        Me.VolumesVolumesTradesPctBox0.TabStop = False
+        '
+        'VolumesTradesPctBox0
+        '
+        Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(108, 431)
+        Me.VolumesTradesPctBox0.Name = "VolumesTradesPctBox0"
+        Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox0.TabIndex = 38
+        Me.VolumesTradesPctBox0.TabStop = False
+        '
         'PricesTradesPctBox0
         '
         Me.PricesTradesPctBox0.Location = New System.Drawing.Point(3, 3)
         Me.PricesTradesPctBox0.Name = "PricesTradesPctBox0"
-        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(105, 507)
+        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(105, 422)
         Me.PricesTradesPctBox0.TabIndex = 37
         Me.PricesTradesPctBox0.TabStop = False
         '
         'MinusTradesButton0
         '
-        Me.MinusTradesButton0.Location = New System.Drawing.Point(1635, 246)
+        Me.MinusTradesButton0.Location = New System.Drawing.Point(1635, 353)
         Me.MinusTradesButton0.Name = "MinusTradesButton0"
-        Me.MinusTradesButton0.Size = New System.Drawing.Size(47, 267)
+        Me.MinusTradesButton0.Size = New System.Drawing.Size(47, 345)
         Me.MinusTradesButton0.TabIndex = 36
         Me.MinusTradesButton0.Text = "-"
         Me.MinusTradesButton0.UseVisualStyleBackColor = True
@@ -2045,7 +2271,7 @@ Partial Class Form1
         '
         Me.TradesPctBox0.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox0.Name = "TradesPctBox0"
-        Me.TradesPctBox0.Size = New System.Drawing.Size(1521, 510)
+        Me.TradesPctBox0.Size = New System.Drawing.Size(1521, 425)
         Me.TradesPctBox0.TabIndex = 30
         Me.TradesPctBox0.TabStop = False
         '
@@ -2053,14 +2279,14 @@ Partial Class Form1
         '
         Me.PlusTradesButton0.Location = New System.Drawing.Point(1635, 6)
         Me.PlusTradesButton0.Name = "PlusTradesButton0"
-        Me.PlusTradesButton0.Size = New System.Drawing.Size(48, 234)
+        Me.PlusTradesButton0.Size = New System.Drawing.Size(48, 341)
         Me.PlusTradesButton0.TabIndex = 35
         Me.PlusTradesButton0.Text = "+"
         Me.PlusTradesButton0.UseVisualStyleBackColor = True
         '
         'RightButtonTrades0
         '
-        Me.RightButtonTrades0.Location = New System.Drawing.Point(870, 558)
+        Me.RightButtonTrades0.Location = New System.Drawing.Point(870, 733)
         Me.RightButtonTrades0.Name = "RightButtonTrades0"
         Me.RightButtonTrades0.Size = New System.Drawing.Size(759, 33)
         Me.RightButtonTrades0.TabIndex = 34
@@ -2069,7 +2295,7 @@ Partial Class Form1
         '
         'LeftTradesButton0
         '
-        Me.LeftTradesButton0.Location = New System.Drawing.Point(108, 558)
+        Me.LeftTradesButton0.Location = New System.Drawing.Point(108, 733)
         Me.LeftTradesButton0.Name = "LeftTradesButton0"
         Me.LeftTradesButton0.Size = New System.Drawing.Size(756, 33)
         Me.LeftTradesButton0.TabIndex = 33
@@ -2078,7 +2304,7 @@ Partial Class Form1
         '
         'TimesTradesPctBox0
         '
-        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(108, 516)
+        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(108, 691)
         Me.TimesTradesPctBox0.Name = "TimesTradesPctBox0"
         Me.TimesTradesPctBox0.Size = New System.Drawing.Size(1521, 36)
         Me.TimesTradesPctBox0.TabIndex = 32
@@ -2086,25 +2312,25 @@ Partial Class Form1
         '
         'DrawLineTrades0
         '
-        Me.DrawLineTrades0.Location = New System.Drawing.Point(1249, 12)
+        Me.DrawLineTrades0.Location = New System.Drawing.Point(1440, 8)
         Me.DrawLineTrades0.Name = "DrawLineTrades0"
-        Me.DrawLineTrades0.Size = New System.Drawing.Size(212, 23)
+        Me.DrawLineTrades0.Size = New System.Drawing.Size(212, 29)
         Me.DrawLineTrades0.TabIndex = 32
         Me.DrawLineTrades0.Text = "Рисовать линию (Сделки)"
         Me.DrawLineTrades0.UseVisualStyleBackColor = True
         '
         'DrawLineQuotes0
         '
-        Me.DrawLineQuotes0.Location = New System.Drawing.Point(1467, 12)
+        Me.DrawLineQuotes0.Location = New System.Drawing.Point(1222, 8)
         Me.DrawLineQuotes0.Name = "DrawLineQuotes0"
-        Me.DrawLineQuotes0.Size = New System.Drawing.Size(212, 23)
+        Me.DrawLineQuotes0.Size = New System.Drawing.Size(212, 29)
         Me.DrawLineQuotes0.TabIndex = 31
         Me.DrawLineQuotes0.Text = "Рисовать линию (Аск / Бид)"
         Me.DrawLineQuotes0.UseVisualStyleBackColor = True
         '
         'ExanteIDTextBox0
         '
-        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(290, 9)
+        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(290, 12)
         Me.ExanteIDTextBox0.Margin = New System.Windows.Forms.Padding(4)
         Me.ExanteIDTextBox0.Name = "ExanteIDTextBox0"
         Me.ExanteIDTextBox0.Size = New System.Drawing.Size(291, 22)
@@ -2114,24 +2340,24 @@ Partial Class Form1
         'TimeLabel0
         '
         Me.TimeLabel0.AutoSize = True
-        Me.TimeLabel0.Location = New System.Drawing.Point(1045, 13)
+        Me.TimeLabel0.Location = New System.Drawing.Point(946, 31)
         Me.TimeLabel0.Name = "TimeLabel0"
-        Me.TimeLabel0.Size = New System.Drawing.Size(39, 17)
+        Me.TimeLabel0.Size = New System.Drawing.Size(13, 17)
         Me.TimeLabel0.TabIndex = 25
-        Me.TimeLabel0.Text = "Time"
+        Me.TimeLabel0.Text = "-"
         '
         'PriceLabel0
         '
         Me.PriceLabel0.AutoSize = True
-        Me.PriceLabel0.Location = New System.Drawing.Point(965, 12)
+        Me.PriceLabel0.Location = New System.Drawing.Point(867, 31)
         Me.PriceLabel0.Name = "PriceLabel0"
-        Me.PriceLabel0.Size = New System.Drawing.Size(40, 17)
+        Me.PriceLabel0.Size = New System.Drawing.Size(13, 17)
         Me.PriceLabel0.TabIndex = 24
-        Me.PriceLabel0.Text = "Price"
+        Me.PriceLabel0.Text = "-"
         '
         'SubscribreButton0
         '
-        Me.SubscribreButton0.Location = New System.Drawing.Point(605, 9)
+        Me.SubscribreButton0.Location = New System.Drawing.Point(603, 9)
         Me.SubscribreButton0.Margin = New System.Windows.Forms.Padding(4)
         Me.SubscribreButton0.Name = "SubscribreButton0"
         Me.SubscribreButton0.Size = New System.Drawing.Size(179, 28)
@@ -2151,17 +2377,77 @@ Partial Class Form1
         Me.TabControl.Controls.Add(Me.TabPage7)
         Me.TabControl.Controls.Add(Me.TabPage8)
         Me.TabControl.Controls.Add(Me.TabPage9)
-        Me.TabControl.Location = New System.Drawing.Point(12, 41)
+        Me.TabControl.Location = New System.Drawing.Point(12, 60)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(1717, 874)
         Me.TabControl.TabIndex = 31
         '
+        'VolumeLabel
+        '
+        Me.VolumeLabel.AutoSize = True
+        Me.VolumeLabel.Location = New System.Drawing.Point(1018, 31)
+        Me.VolumeLabel.Name = "VolumeLabel"
+        Me.VolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.VolumeLabel.TabIndex = 33
+        Me.VolumeLabel.Text = "-"
+        '
+        'CurVolumeLabel
+        '
+        Me.CurVolumeLabel.AutoSize = True
+        Me.CurVolumeLabel.Location = New System.Drawing.Point(1104, 31)
+        Me.CurVolumeLabel.Name = "CurVolumeLabel"
+        Me.CurVolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.CurVolumeLabel.TabIndex = 34
+        Me.CurVolumeLabel.Text = "-"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(1104, 6)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(81, 17)
+        Me.Label2.TabIndex = 38
+        Me.Label2.Text = "Cur Volume"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(1018, 6)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(55, 17)
+        Me.Label3.TabIndex = 37
+        Me.Label3.Text = "Volume"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(946, 6)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(39, 17)
+        Me.Label4.TabIndex = 36
+        Me.Label4.Text = "Time"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(867, 6)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(40, 17)
+        Me.Label5.TabIndex = 35
+        Me.Label5.Text = "Price"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1732, 877)
+        Me.ClientSize = New System.Drawing.Size(1732, 1026)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.CurVolumeLabel)
+        Me.Controls.Add(Me.VolumeLabel)
         Me.Controls.Add(Me.DrawLineTrades0)
         Me.Controls.Add(Me.TimeLabel0)
         Me.Controls.Add(Me.DrawLineQuotes0)
@@ -2175,12 +2461,14 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "A&K Trader 1.0"
         Me.TabPage9.ResumeLayout(False)
-        Me.TabControl10.ResumeLayout(False)
+        Me.Charts9.ResumeLayout(False)
         Me.QuotesTab9.ResumeLayout(False)
         CType(Me.PricesQuotesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.QuotesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab9.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox9, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2191,6 +2479,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab8.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox8, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2201,6 +2491,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab7.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox7, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2211,6 +2503,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab6.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox6, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2221,6 +2515,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab5.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox5, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2231,6 +2527,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab4.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2241,6 +2539,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab3.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2251,6 +2551,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab2.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2261,6 +2563,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab1.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2271,6 +2575,8 @@ Partial Class Form1
         CType(Me.QuotesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesQuotesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TradesTab0.ResumeLayout(False)
+        CType(Me.VolumesVolumesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VolumesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PricesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2282,7 +2588,7 @@ Partial Class Form1
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TabPage9 As TabPage
-    Friend WithEvents TabControl10 As TabControl
+    Friend WithEvents Charts9 As TabControl
     Friend WithEvents QuotesTab9 As TabPage
     Friend WithEvents PricesQuotesPctBox9 As PictureBox
     Friend WithEvents MinusQuotesButton9 As Button
@@ -2468,4 +2774,30 @@ Partial Class Form1
     Friend WithEvents PriceLabel0 As Label
     Friend WithEvents SubscribreButton0 As Button
     Friend WithEvents TabControl As TabControl
+    Friend WithEvents VolumesVolumesTradesPctBox0 As PictureBox
+    Friend WithEvents VolumesTradesPctBox0 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox9 As PictureBox
+    Friend WithEvents VolumesTradesPctBox9 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox8 As PictureBox
+    Friend WithEvents VolumesTradesPctBox8 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox7 As PictureBox
+    Friend WithEvents VolumesTradesPctBox7 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox6 As PictureBox
+    Friend WithEvents VolumesTradesPctBox6 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox5 As PictureBox
+    Friend WithEvents VolumesTradesPctBox5 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox4 As PictureBox
+    Friend WithEvents VolumesTradesPctBox4 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox3 As PictureBox
+    Friend WithEvents VolumesTradesPctBox3 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox2 As PictureBox
+    Friend WithEvents VolumesTradesPctBox2 As PictureBox
+    Friend WithEvents VolumesVolumesTradesPctBox1 As PictureBox
+    Friend WithEvents VolumesTradesPctBox1 As PictureBox
+    Friend WithEvents VolumeLabel As Label
+    Friend WithEvents CurVolumeLabel As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
 End Class

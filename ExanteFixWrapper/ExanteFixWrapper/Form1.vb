@@ -12,34 +12,34 @@ Public Class Form1
         feedReciever = New QuoteFixReciever(fixConfigPath, AddressOf CheckingState)
 
         Dim newPage = New Page(New ChartPainting, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
-                LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0)
+                LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox1, PricesQuotesPctBox1, TimesQuotesPctBox1, TradesPctBox1, PricesTradesPctBox1, TimesTradesPctBox1,
-                LeftQuotesButton1, RightQuotesButton1, PlusQuotesButton1, MinusQuotesButton1, LeftTradesButton1, RightButtonTrades1, PlusTradesButton1, MinusTradesButton1)
+                LeftQuotesButton1, RightQuotesButton1, PlusQuotesButton1, MinusQuotesButton1, LeftTradesButton1, RightButtonTrades1, PlusTradesButton1, MinusTradesButton1, Charts1, VolumesTradesPctBox1, VolumesVolumesTradesPctBox1)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox2, PricesQuotesPctBox2, TimesQuotesPctBox2, TradesPctBox2, PricesTradesPctBox2, TimesTradesPctBox2,
-                LeftQuotesButton2, RightQuotesButton2, PlusQuotesButton2, MinusQuotesButton2, LeftTradesButton2, RightButtonTrades2, PlusTradesButton2, MinusTradesButton2)
+                LeftQuotesButton2, RightQuotesButton2, PlusQuotesButton2, MinusQuotesButton2, LeftTradesButton2, RightButtonTrades2, PlusTradesButton2, MinusTradesButton2, Charts2, VolumesTradesPctBox2, VolumesVolumesTradesPctBox2)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox3, PricesQuotesPctBox3, TimesQuotesPctBox3, TradesPctBox3, PricesTradesPctBox3, TimesTradesPctBox3,
-                LeftQuotesButton3, RightQuotesButton3, PlusQuotesButton3, MinusQuotesButton3, LeftTradesButton3, RightButtonTrades3, PlusTradesButton3, MinusTradesButton3)
+                LeftQuotesButton3, RightQuotesButton3, PlusQuotesButton3, MinusQuotesButton3, LeftTradesButton3, RightButtonTrades3, PlusTradesButton3, MinusTradesButton3, Charts3, VolumesTradesPctBox3, VolumesVolumesTradesPctBox3)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox4, PricesQuotesPctBox4, TimesQuotesPctBox4, TradesPctBox4, PricesTradesPctBox4, TimesTradesPctBox4,
-                LeftQuotesButton4, RightQuotesButton4, PlusQuotesButton4, MinusQuotesButton4, LeftTradesButton4, RightButtonTrades4, PlusTradesButton4, MinusTradesButton4)
+                LeftQuotesButton4, RightQuotesButton4, PlusQuotesButton4, MinusQuotesButton4, LeftTradesButton4, RightButtonTrades4, PlusTradesButton4, MinusTradesButton4, Charts4, VolumesTradesPctBox4, VolumesVolumesTradesPctBox4)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox5, PricesQuotesPctBox5, TimesQuotesPctBox5, TradesPctBox5, PricesTradesPctBox5, TimesTradesPctBox5,
-                LeftQuotesButton5, RightQuotesButton5, PlusQuotesButton5, MinusQuotesButton5, LeftTradesButton5, RightButtonTrades5, PlusTradesButton5, MinusTradesButton5)
+                LeftQuotesButton5, RightQuotesButton5, PlusQuotesButton5, MinusQuotesButton5, LeftTradesButton5, RightButtonTrades5, PlusTradesButton5, MinusTradesButton5, Charts5, VolumesTradesPctBox5, VolumesVolumesTradesPctBox5)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox6, PricesQuotesPctBox6, TimesQuotesPctBox6, TradesPctBox6, PricesTradesPctBox6, TimesTradesPctBox6,
-                LeftQuotesButton6, RightQuotesButton6, PlusQuotesButton6, MinusQuotesButton6, LeftTradesButton6, RightButtonTrades6, PlusTradesButton6, MinusTradesButton6)
+                LeftQuotesButton6, RightQuotesButton6, PlusQuotesButton6, MinusQuotesButton6, LeftTradesButton6, RightButtonTrades6, PlusTradesButton6, MinusTradesButton6, Charts6, VolumesTradesPctBox6, VolumesVolumesTradesPctBox6)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox7, PricesQuotesPctBox7, TimesQuotesPctBox7, TradesPctBox7, PricesTradesPctBox7, TimesTradesPctBox7,
-                LeftQuotesButton7, RightQuotesButton7, PlusQuotesButton7, MinusQuotesButton7, LeftTradesButton7, RightButtonTrades7, PlusTradesButton7, MinusTradesButton7)
+                LeftQuotesButton7, RightQuotesButton7, PlusQuotesButton7, MinusQuotesButton7, LeftTradesButton7, RightButtonTrades7, PlusTradesButton7, MinusTradesButton7, Charts7, VolumesTradesPctBox7, VolumesVolumesTradesPctBox7)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox8, PricesQuotesPctBox8, TimesQuotesPctBox8, TradesPctBox8, PricesTradesPctBox8, TimesTradesPctBox8,
-                LeftQuotesButton8, RightQuotesButton8, PlusQuotesButton8, MinusQuotesButton8, LeftTradesButton8, RightButtonTrades8, PlusTradesButton8, MinusTradesButton8)
+                LeftQuotesButton8, RightQuotesButton8, PlusQuotesButton8, MinusQuotesButton8, LeftTradesButton8, RightButtonTrades8, PlusTradesButton8, MinusTradesButton8, Charts8, VolumesTradesPctBox8, VolumesVolumesTradesPctBox8)
         pageList.Add(newPage)
         newPage = New Page(New ChartPainting, QuotesPctBox9, PricesQuotesPctBox9, TimesQuotesPctBox9, TradesPctBox9, PricesTradesPctBox9, TimesTradesPctBox9,
-                LeftQuotesButton9, RightQuotesButton9, PlusQuotesButton9, MinusQuotesButton9, LeftTradesButton9, RightButtonTrades9, PlusTradesButton9, MinusTradesButton9)
+                LeftQuotesButton9, RightQuotesButton9, PlusQuotesButton9, MinusQuotesButton9, LeftTradesButton9, RightButtonTrades9, PlusTradesButton9, MinusTradesButton9, Charts9, VolumesTradesPctBox9, VolumesVolumesTradesPctBox9)
         pageList.Add(newPage)
     End Sub
 
@@ -66,72 +66,6 @@ Public Class Form1
         feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(TabControl.SelectedIndex).OnMarketDataUpdate)
     End Sub
 
-    'Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
-    '    If (quotesInfo.AskPrice IsNot Nothing And quotesInfo.BidPrice IsNot Nothing) Then
-    '        'котировки
-    '        AskPriceTextBox.Invoke(Sub()
-    '                                   AskPriceTextBox.Text = quotesInfo.AskPrice
-    '                               End Sub)
-    '        AskVolumeTextBox.Invoke(Sub()
-    '                                    AskVolumeTextBox.Text = quotesInfo.AskVolume
-    '                                End Sub)
-    '        BidPriceTextBox.Invoke(Sub()
-    '                                   BidPriceTextBox.Text = quotesInfo.BidPrice
-    '                               End Sub)
-    '        BidVolumeTextBox.Invoke(Sub()
-    '                                    BidVolumeTextBox.Text = quotesInfo.BidVolume
-    '                                End Sub)
-
-    '        If (quotesInfo.AskPrice > quotesInfo.BidPrice) Then
-    '            currentMaxPriceQuotes = quotesInfo.AskPrice
-    '            currentMinPriceQuotes = quotesInfo.BidPrice
-    '        Else
-    '            currentMaxPriceQuotes = quotesInfo.BidPrice
-    '            currentMinPriceQuotes = quotesInfo.AskPrice
-    '        End If
-
-    '        If (currentMaxPriceQuotes > cp.maxPriceQuotes) Then
-    '            cp.maxPriceQuotes = currentMaxPriceQuotes
-    '        End If
-
-    '        If (currentMinPriceQuotes < cp.minPriceQuotes) Then
-    '            cp.minPriceQuotes = currentMinPriceQuotes
-    '        End If
-
-    '        cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
-    '        Me.Invoke(Sub()
-
-    '                      If (Not cp.isDrawingStartedQuotes) Then
-    '                          cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
-    '                      End If
-    '                  End Sub)
-    '    Else
-    '        'сделки
-    '        TradePriceTextBox.Invoke(Sub()
-    '                                     TradePriceTextBox.Text = quotesInfo.TradePrice
-    '                                 End Sub)
-    '        TradeVolumeTextBox.Invoke(Sub()
-    '                                      TradeVolumeTextBox.Text = quotesInfo.TradeVolume
-    '                                  End Sub)
-
-    '        If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
-    '            cp.maxPriceTrades = quotesInfo.TradePrice
-    '        End If
-
-    '        If (quotesInfo.TradePrice < cp.minPriceTrades) Then
-    '            cp.minPriceTrades = quotesInfo.TradePrice
-    '        End If
-
-    '        cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, DateTime.Now))
-    '        Me.Invoke(Sub()
-    '                      cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
-    '                  End Sub)
-    '    End If
-
-
-
-    'End Sub
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DoubleBuffered = True
     End Sub
@@ -148,8 +82,8 @@ Public Class Form1
             If (pageList(TabControl.SelectedIndex).cp.isSubscribed) Then
                 Try
                     Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeQuotes - (e.Y / QuotesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeQuotes
-                    PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes - pageList(TabControl.SelectedIndex).cp.minPriceQuotes * 0.0025) + proportion, "0.00")
-
+                    'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes - pageList(TabControl.SelectedIndex).cp.minPriceQuotes * 0.0025) + proportion, "0.00")
+                    PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalQuotes))
                     If (indexOfPoint < 0) Then
                         indexOfPoint = 0
@@ -303,7 +237,7 @@ Public Class Form1
         End If
         pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox)
+            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
         Catch ex As Exception
             pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
             If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
@@ -324,7 +258,7 @@ Public Class Form1
 
             If (Not pageList(TabControl.SelectedIndex).cp.lastPointTrades = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1) Then
                 Try
-                    pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox)
+                    pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
                 Catch ex As Exception
                     pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
                     If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
@@ -348,7 +282,7 @@ Public Class Form1
         pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
         If (pageList(TabControl.SelectedIndex).cp.lastPointTrades < pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1) Then
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox)
+                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
             Catch ex As Exception
                 pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
                 If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
@@ -361,7 +295,7 @@ Public Class Form1
                 pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
             End If
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox)
+                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
             Catch ex As Exception
                 pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
                 If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
@@ -381,7 +315,7 @@ Public Class Form1
         End If
         pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox)
+            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
         Catch ex As Exception
             pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
             If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
@@ -394,8 +328,8 @@ Public Class Form1
         If (Not pageList Is Nothing) Then
             Try
                 Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeTrades - (e.Y / TradesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeTrades
-                PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades - pageList(TabControl.SelectedIndex).cp.minPriceTrades * 0.0025) + proportion, "0.00")
-
+                'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades - pageList(TabControl.SelectedIndex).cp.minPriceTrades * 0.0025) + proportion, "0.00")
+                PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades) + proportion, "0.00")
                 Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalTrades))
                 If (indexOfPoint < 0) Then
                     indexOfPoint = 0
@@ -434,12 +368,66 @@ Public Class Form1
             pageList(TabControl.SelectedIndex).cp.point2Trades.Y = e.Y
             pageList(TabControl.SelectedIndex).cp.isDrawingStartedTrades = False
             pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = True
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0)
+            pageList(TabControl.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
             Exit Sub
         End If
     End Sub
 
     Private Sub TradesTab_Click(sender As Object, e As EventArgs) Handles TradesTab0.Click
 
+    End Sub
+
+    Private Sub TabControl_TabIndexChanged(sender As Object, e As EventArgs)
+
+
+    End Sub
+
+    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl.SelectedIndexChanged
+        If (pageList(TabControl.SelectedIndex).cp.isSubscribed) Then
+            Try
+                If (pageList(TabControl.SelectedIndex).Chart.SelectedIndex = 0) Then
+                    pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
+                Else
+                    pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+                End If
+            Catch ex As Exception
+                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = -1
+                pageList(TabControl.SelectedIndex).cp.currentPointTrades = -1
+                If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
+                    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+                End If
+                If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
+                    pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+                End If
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub VolumesTradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles VolumesTradesPctBox0.MouseMove, VolumesTradesPctBox9.MouseMove, VolumesTradesPctBox8.MouseMove, VolumesTradesPctBox7.MouseMove, VolumesTradesPctBox6.MouseMove, VolumesTradesPctBox5.MouseMove, VolumesTradesPctBox4.MouseMove, VolumesTradesPctBox3.MouseMove, VolumesTradesPctBox2.MouseMove, VolumesTradesPctBox1.MouseMove
+        If (Not pageList Is Nothing) Then
+            Try
+                Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / TradesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeVolumesTrades
+                VolumeLabel.Text = Format(proportion, "0.00")
+
+                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalTrades))
+                If (indexOfPoint < 0) Then
+                    indexOfPoint = 0
+                End If
+                If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
+                    indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1
+                    CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
+                Else
+                    If (pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
+                        CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.lastPointTrades).tradeVolume
+
+                    Else
+                        CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint).tradeVolume
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
     End Sub
 End Class
