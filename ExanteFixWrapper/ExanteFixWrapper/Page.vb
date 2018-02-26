@@ -83,6 +83,10 @@
             Me.QuotesPctBox.Invoke(Sub()
                                        If (Not Me.cp.isDrawingStartedQuotes) Then
                                            Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                                           Dim selInd = Form1.Tabs.SelectedIndex
+                                           Dim c = Form1.pageList(selInd).cp.pointsQuotes.Count
+                                           Form1.AskPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).askPrice
+                                           Form1.BidPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).bidPrice
                                        End If
                                    End Sub)
         Else
@@ -102,6 +106,10 @@
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, DateTime.Now))
             Me.TradesPctBox.Invoke(Sub()
                                        Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+                                       Dim selInd = Form1.Tabs.SelectedIndex
+                                       Dim c = Form1.pageList(selInd).cp.pointsTrades.Count
+                                       Form1.TradePriceLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradePrice
+                                       Form1.TradeVolumeLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradeVolume
                                    End Sub)
         End If
     End Sub

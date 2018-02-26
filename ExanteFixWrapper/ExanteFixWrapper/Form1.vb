@@ -3,7 +3,7 @@ Imports System.Threading
 Public Class Form1
     Dim fixConfigPath As String = "FIX\fix_vendor.ini"
     Dim feedReciever As QuoteFixReciever
-    Dim pageList As List(Of Page) = New List(Of Page)
+    Public pageList As List(Of Page) = New List(Of Page)
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -60,10 +60,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
-        pageList(TabControl.SelectedIndex).cp.isSubscribed = True
-        TabControl.TabPages(TabControl.SelectedIndex).Text = ExanteIDTextBox0.Text
+        pageList(Tabs.SelectedIndex).cp.isSubscribed = True
+        Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
         Dim subscribes = feedReciever.GetSubscribeInfos()
-        feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(TabControl.SelectedIndex).OnMarketDataUpdate)
+        feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -79,24 +79,24 @@ Public Class Form1
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseMove, TradesPctBox2.MouseMove, QuotesPctBox9.MouseMove, QuotesPctBox8.MouseMove, QuotesPctBox7.MouseMove, QuotesPctBox6.MouseMove, QuotesPctBox5.MouseMove, QuotesPctBox4.MouseMove, QuotesPctBox3.MouseMove, QuotesPctBox2.MouseMove, QuotesPctBox1.MouseMove
         If (pageList.Count > 0) Then
-            If (pageList(TabControl.SelectedIndex).cp.isSubscribed) Then
+            If (pageList(Tabs.SelectedIndex).cp.isSubscribed) Then
                 Try
-                    Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeQuotes - (e.Y / QuotesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeQuotes
-                    'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes - pageList(TabControl.SelectedIndex).cp.minPriceQuotes * 0.0025) + proportion, "0.00")
-                    PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes) + proportion, "0.00")
-                    Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalQuotes))
+                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeQuotes - (e.Y / QuotesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeQuotes
+                    PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.minPriceQuotes - pageList(Tabs.SelectedIndex).cp.minPriceQuotes * 0.0001) + proportion, "0.00")
+                    'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceQuotes) + proportion, "0.00")
+                    Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalQuotes))
                     If (indexOfPoint < 0) Then
                         indexOfPoint = 0
                     End If
-                    If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
-                        indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - 1
-                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
+                    If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
+                        indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1
+                        TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsQuotes(indexOfPoint).time.ToLongTimeString
                     Else
-                        If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
-                            TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.lastPointQuotes).time.ToLongTimeString
+                        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
+                            TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsQuotes(pageList(Tabs.SelectedIndex).cp.lastPointQuotes).time.ToLongTimeString
 
                         Else
-                            TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsQuotes(pageList(TabControl.SelectedIndex).cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
+                            TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsQuotes(pageList(Tabs.SelectedIndex).cp.currentPointQuotes + indexOfPoint).time.ToLongTimeString
                         End If
                     End If
                 Catch ex As Exception
@@ -108,67 +108,67 @@ Public Class Form1
     End Sub
 
     Private Sub DrawLineQuotes_Click(sender As Object, e As EventArgs) Handles DrawLineQuotes0.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes = True
-        pageList(TabControl.SelectedIndex).cp.needRePaintingQuotes = False
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = True
+        pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
     End Sub
 
     Private Sub QuotesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseClick, TradesPctBox3.MouseClick, QuotesPctBox9.MouseClick, QuotesPctBox8.MouseClick, QuotesPctBox7.MouseClick, QuotesPctBox6.MouseClick, QuotesPctBox5.MouseClick, QuotesPctBox4.MouseClick, QuotesPctBox3.MouseClick, QuotesPctBox2.MouseClick, QuotesPctBox1.MouseClick
-        If (pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes And Not pageList(TabControl.SelectedIndex).cp.isDrawingStartedQuotes) Then
-            pageList(TabControl.SelectedIndex).cp.point1Quotes.X = e.X
-            pageList(TabControl.SelectedIndex).cp.point1Quotes.Y = e.Y
-            pageList(TabControl.SelectedIndex).cp.isDrawingStartedQuotes = True
+        If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.point1Quotes.X = e.X
+            pageList(Tabs.SelectedIndex).cp.point1Quotes.Y = e.Y
+            pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = True
             Exit Sub
         End If
-        If (pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes And pageList(TabControl.SelectedIndex).cp.isDrawingStartedQuotes) Then
-            pageList(TabControl.SelectedIndex).cp.point2Quotes.X = e.X
-            pageList(TabControl.SelectedIndex).cp.point2Quotes.Y = e.Y
-            pageList(TabControl.SelectedIndex).cp.isDrawingStartedQuotes = False
-            pageList(TabControl.SelectedIndex).cp.isLineReadyQuotes = True
-            pageList(TabControl.SelectedIndex).cp.paintingQuotes(QuotesPctBox0, TimesQuotesPctBox0, PricesQuotesPctBox0)
+        If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.point2Quotes.X = e.X
+            pageList(Tabs.SelectedIndex).cp.point2Quotes.Y = e.Y
+            pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = False
+            pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = True
+            pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
             Exit Sub
         End If
     End Sub
 
     'left quotes
     Private Sub LeftQuotesButton_Click(sender As Object, e As EventArgs) Handles LeftQuotesButton0.Click, LeftQuotesButton1.Click, LeftQuotesButton2.Click, LeftQuotesButton8.Click, LeftTradesButton7.Click, LeftQuotesButton7.Click, LeftQuotesButton6.Click, LeftQuotesButton5.Click, LeftQuotesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyQuotes = False
-        pageList(TabControl.SelectedIndex).cp.currentPointQuotes = pageList(TabControl.SelectedIndex).cp.currentPointQuotes - 10
-        If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-            pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+        pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes - 10
+        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingQuotes = False
+        pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
+            pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
         Catch ex As Exception
-            pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 1
-            If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+            If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
             End If
         End Try
     End Sub
 
     'rigth quotes
     Private Sub RightQuotesButton_Click(sender As Object, e As EventArgs) Handles RightQuotesButton0.Click, RightQuotesButton3.Click, RightQuotesButton2.Click, RightQuotesButton1.Click, RightQuotesButton8.Click, RightButtonTrades7.Click, RightQuotesButton7.Click, RightQuotesButton6.Click, RightQuotesButton5.Click, RightQuotesButton4.Click, RightQuotesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyQuotes = False
-        If (pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count > pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes) Then
-            pageList(TabControl.SelectedIndex).cp.currentPointQuotes = pageList(TabControl.SelectedIndex).cp.currentPointQuotes + 10
-            If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes + pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes > pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+        If (pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes + 10
+            If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes
             End If
 
-            If (Not pageList(TabControl.SelectedIndex).cp.lastPointQuotes = pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - 1) Then
+            If (Not pageList(Tabs.SelectedIndex).cp.lastPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
                 Try
-                    pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
                 Catch ex As Exception
-                    pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 1
-                    If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                        pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+                    If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
                     End If
                 End Try
             Else
-                pageList(TabControl.SelectedIndex).cp.needRePaintingQuotes = True
+                pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
             End If
         End If
 
@@ -176,130 +176,135 @@ Public Class Form1
 
     '+ quotes
     Private Sub PlusQuotesButton_Click(sender As Object, e As EventArgs) Handles PlusQuotesButton0.Click, PlusQuotesButton3.Click, PlusQuotesButton2.Click, PlusQuotesButton1.Click, PlusQuotesButton8.Click, PlusQuotesButton7.Click, PlusQuotesButton6.Click, PlusQuotesButton5.Click, LeftQuotesButton4.Click, PlusQuotesButton4.Click, PlusQuotesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyQuotes = False
-        pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes += 15
-        If (pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes > pageList(TabControl.SelectedIndex).cp.maxPointsOnScreenQuotes) Then
-            pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes = pageList(TabControl.SelectedIndex).cp.maxPointsOnScreenQuotes
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+        pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes += 15
+        pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 16
+        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingQuotes = False
-        If (pageList(TabControl.SelectedIndex).cp.lastPointQuotes < pageList(TabControl.SelectedIndex).cp.pointsQuotes.Count - 1) Then
+        If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes = pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenQuotes
+        End If
+        pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
+        If (pageList(Tabs.SelectedIndex).cp.lastPointQuotes < pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingQuotes(QuotesPctBox0, TimesQuotesPctBox0, PricesQuotesPctBox0)
+                pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
             Catch ex As Exception
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 1
-                If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+                If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
                 End If
             End Try
         Else
-            pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 7
-            If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
-            End If
+            ' pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 7
+            'If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
+            '    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+            'End If
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
-            Catch ex As Exception
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 1
-                If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+                If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
                 End If
+                pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+            Catch ex As Exception
+
             End Try
         End If
     End Sub
 
     '- quotes
     Private Sub MinusQuotesButton_Click(sender As Object, e As EventArgs) Handles MinusQuotesButton0.Click, LeftQuotesButton3.Click, MinusQuotesButton3.Click, MinusQuotesButton2.Click, MinusQuotesButton1.Click, MinusQuotesButton8.Click, MinusQuotesButton7.Click, MinusQuotesButton6.Click, MinusQuotesButton5.Click, MinusQuotesButton4.Click, MinusQuotesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineQuotes = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyQuotes = False
-        pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes -= 15
-        If (pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes < pageList(TabControl.SelectedIndex).cp.minPointsOnScreenQuotes) Then
-            pageList(TabControl.SelectedIndex).cp.pointsOnScreenQuotes = pageList(TabControl.SelectedIndex).cp.minPointsOnScreenQuotes
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+        pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes -= 15
+        If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes < pageList(Tabs.SelectedIndex).cp.minPointsOnScreenQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes = pageList(Tabs.SelectedIndex).cp.minPointsOnScreenQuotes
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingQuotes = False
+        pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
+            pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
         Catch ex As Exception
-            pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 1
-            If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+            If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
             End If
         End Try
     End Sub
 
     'left trades
     Private Sub LeftTradesButton_Click(sender As Object, e As EventArgs) Handles LeftTradesButton0.Click, LeftTradesButton3.Click, LeftTradesButton1.Click, LeftTradesButton8.Click, LeftTradesButton6.Click, LeftTradesButton5.Click, LeftTradesButton4.Click, LeftTradesButton2.Click, LeftTradesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineTrades = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = False
-        pageList(TabControl.SelectedIndex).cp.currentPointTrades = pageList(TabControl.SelectedIndex).cp.currentPointTrades - 10
-        If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-            pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+        pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
+        pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.currentPointTrades - 10
+        If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
+        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+            pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
         Catch ex As Exception
-            pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
-            If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 1
+            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
             End If
         End Try
     End Sub
 
     'right trades
     Private Sub RightTradesButton_Click(sender As Object, e As EventArgs) Handles RightButtonTrades0.Click, RightButtonTrades3.Click, RightButtonTrades1.Click, RightButtonTrades8.Click, RightButtonTrades6.Click, RightButtonTrades5.Click, RightButtonTrades4.Click, RightButtonTrades2.Click, RightButtonTrades9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineTrades = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = False
-        If (pageList(TabControl.SelectedIndex).cp.pointsTrades.Count > pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades) Then
-            pageList(TabControl.SelectedIndex).cp.currentPointTrades = pageList(TabControl.SelectedIndex).cp.currentPointTrades + 10
-            If (pageList(TabControl.SelectedIndex).cp.currentPointTrades + pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades > pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades
+        pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
+        If (pageList(Tabs.SelectedIndex).cp.pointsTrades.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.currentPointTrades + 10
+            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades
             End If
 
-            If (Not pageList(TabControl.SelectedIndex).cp.lastPointTrades = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1) Then
+            If (Not pageList(Tabs.SelectedIndex).cp.lastPointTrades = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1) Then
                 Try
-                    pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 Catch ex As Exception
-                    pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
-                    If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                        pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+                    pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 1
+                    If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                        pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                     End If
                 End Try
             Else
-                pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = True
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
             End If
         End If
     End Sub
 
     '+ trades
     Private Sub PlusTradesButton_Click(sender As Object, e As EventArgs) Handles PlusTradesButton0.Click, PlusTradesButton1.Click, PlusTradesButton8.Click, PlusTradesButton7.Click, PlusTradesButton6.Click, PlusTradesButton5.Click, PlusTradesButton4.Click, PlusTradesButton3.Click, PlusTradesButton2.Click, PlusTradesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineTrades = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = False
-        pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades += 15
-        If (pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades > pageList(TabControl.SelectedIndex).cp.maxPointsOnScreenTrades) Then
-            pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades = pageList(TabControl.SelectedIndex).cp.maxPointsOnScreenTrades
+        pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
+        pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades += 15
+        If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades > pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTrades) Then
+            pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades = pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTrades
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
-        If (pageList(TabControl.SelectedIndex).cp.lastPointTrades < pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1) Then
+        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+        If (pageList(Tabs.SelectedIndex).cp.lastPointTrades < pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1) Then
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
             Catch ex As Exception
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
-                If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 1
+                If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                 End If
             End Try
         Else
-            pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 7
-            If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 7
+            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
             End If
             Try
-                pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
             Catch ex As Exception
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
-                If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 1
+                If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                 End If
             End Try
         End If
@@ -307,19 +312,19 @@ Public Class Form1
 
     '- trades
     Private Sub MinusTradesButton_Click(sender As Object, e As EventArgs) Handles MinusTradesButton0.Click, MinusTradesButton1.Click, MinusTradesButton8.Click, MinusTradesButton7.Click, MinusTradesButton6.Click, MinusTradesButton5.Click, MinusTradesButton4.Click, MinusTradesButton3.Click, MinusTradesButton2.Click, MinusTradesButton9.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineTrades = False
-        pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = False
-        pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades -= 15
-        If (pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades < pageList(TabControl.SelectedIndex).cp.minPointsOnScreenTrades) Then
-            pageList(TabControl.SelectedIndex).cp.pointsOnScreenTrades = pageList(TabControl.SelectedIndex).cp.minPointsOnScreenTrades
+        pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
+        pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades -= 15
+        If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades < pageList(Tabs.SelectedIndex).cp.minPointsOnScreenTrades) Then
+            pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades = pageList(Tabs.SelectedIndex).cp.minPointsOnScreenTrades
         End If
-        pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
+        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
         Try
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+            pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
         Catch ex As Exception
-            pageList(TabControl.SelectedIndex).cp.currentPointTrades -= 1
-            If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades -= 1
+            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
             End If
         End Try
     End Sub
@@ -327,22 +332,22 @@ Public Class Form1
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove, TradesPctBox9.MouseMove, TradesPctBox8.MouseMove, TradesPctBox7.MouseMove, TradesPctBox6.MouseMove, TradesPctBox5.MouseMove, TradesPctBox4.MouseMove, TradesPctBox3.MouseMove
         If (Not pageList Is Nothing) Then
             Try
-                Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeTrades - (e.Y / TradesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeTrades
-                'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades - pageList(TabControl.SelectedIndex).cp.minPriceTrades * 0.0025) + proportion, "0.00")
-                PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades) + proportion, "0.00")
-                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalTrades))
+                Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / TradesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
+                PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.minPriceTrades - pageList(Tabs.SelectedIndex).cp.minPriceTrades * 0.0001) + proportion, "0.00")
+                'PriceLabel0.Text = Format((pageList(TabControl.SelectedIndex).cp.minPriceTrades) + proportion, "0.00")
+                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
                 If (indexOfPoint < 0) Then
                     indexOfPoint = 0
                 End If
-                If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
-                    indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1
-                    TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(indexOfPoint).time.ToLongTimeString
+                If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                    indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                    TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).time.ToLongTimeString
                 Else
-                    If (pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
-                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.lastPointTrades).time.ToLongTimeString
+                    If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                        TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).time.ToLongTimeString
 
                     Else
-                        TimeLabel0.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
+                        TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
                     End If
                 End If
             Catch ex As Exception
@@ -352,23 +357,23 @@ Public Class Form1
     End Sub
 
     Private Sub DrawLineTrades_Click(sender As Object, e As EventArgs) Handles DrawLineTrades0.Click
-        pageList(TabControl.SelectedIndex).cp.needDrawLineTrades = True
-        pageList(TabControl.SelectedIndex).cp.needRePaintingTrades = False
+        pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = True
+        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
     End Sub
 
     Private Sub TradesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseClick, TradesPctBox9.MouseClick, TradesPctBox8.MouseClick, TradesPctBox7.MouseClick, TradesPctBox6.MouseClick, TradesPctBox5.MouseClick, TradesPctBox4.MouseClick, TradesPctBox2.MouseClick, TradesPctBox1.MouseMove, TradesPctBox1.MouseClick
-        If (pageList(TabControl.SelectedIndex).cp.needDrawLineTrades And Not pageList(TabControl.SelectedIndex).cp.isDrawingStartedTrades) Then
-            pageList(TabControl.SelectedIndex).cp.point1Trades.X = e.X
-            pageList(TabControl.SelectedIndex).cp.point1Trades.Y = e.Y
-            pageList(TabControl.SelectedIndex).cp.isDrawingStartedTrades = True
+        If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
+            pageList(Tabs.SelectedIndex).cp.point1Trades.X = e.X
+            pageList(Tabs.SelectedIndex).cp.point1Trades.Y = e.Y
+            pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = True
             Exit Sub
         End If
-        If (pageList(TabControl.SelectedIndex).cp.needDrawLineTrades And pageList(TabControl.SelectedIndex).cp.isDrawingStartedTrades) Then
-            pageList(TabControl.SelectedIndex).cp.point2Trades.X = e.X
-            pageList(TabControl.SelectedIndex).cp.point2Trades.Y = e.Y
-            pageList(TabControl.SelectedIndex).cp.isDrawingStartedTrades = False
-            pageList(TabControl.SelectedIndex).cp.isLineReadyTrades = True
-            pageList(TabControl.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+        If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
+            pageList(Tabs.SelectedIndex).cp.point2Trades.X = e.X
+            pageList(Tabs.SelectedIndex).cp.point2Trades.Y = e.Y
+            pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = False
+            pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = True
+            pageList(Tabs.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
             Exit Sub
         End If
     End Sub
@@ -382,22 +387,22 @@ Public Class Form1
 
     End Sub
 
-    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl.SelectedIndexChanged
-        If (pageList(TabControl.SelectedIndex).cp.isSubscribed) Then
+    Private Sub TabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Tabs.SelectedIndexChanged
+        If (pageList(Tabs.SelectedIndex).cp.isSubscribed) Then
             Try
-                If (pageList(TabControl.SelectedIndex).Chart.SelectedIndex = 0) Then
-                    pageList(TabControl.SelectedIndex).cp.paintingQuotes(pageList(TabControl.SelectedIndex).QuotesPctBox, pageList(TabControl.SelectedIndex).TimesQuotesPctBox, pageList(TabControl.SelectedIndex).PricesQuotesPctBox)
+                If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 0) Then
+                    pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
                 Else
-                    pageList(TabControl.SelectedIndex).cp.paintingTrades(pageList(TabControl.SelectedIndex).TradesPctBox, pageList(TabControl.SelectedIndex).TimesTradesPctBox, pageList(TabControl.SelectedIndex).PricesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesTradesPctBox, pageList(TabControl.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 End If
             Catch ex As Exception
-                pageList(TabControl.SelectedIndex).cp.currentPointQuotes = -1
-                pageList(TabControl.SelectedIndex).cp.currentPointTrades = -1
-                If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = -1
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = -1
+                If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
                 End If
-                If (pageList(TabControl.SelectedIndex).cp.currentPointTrades < 0) Then
-                    pageList(TabControl.SelectedIndex).cp.currentPointTrades = 0
+                If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                 End If
             End Try
         End If
@@ -407,22 +412,22 @@ Public Class Form1
     Private Sub VolumesTradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles VolumesTradesPctBox0.MouseMove, VolumesTradesPctBox9.MouseMove, VolumesTradesPctBox8.MouseMove, VolumesTradesPctBox7.MouseMove, VolumesTradesPctBox6.MouseMove, VolumesTradesPctBox5.MouseMove, VolumesTradesPctBox4.MouseMove, VolumesTradesPctBox3.MouseMove, VolumesTradesPctBox2.MouseMove, VolumesTradesPctBox1.MouseMove
         If (Not pageList Is Nothing) Then
             Try
-                Dim proportion As Double = pageList(TabControl.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / TradesPctBox0.Height) * pageList(TabControl.SelectedIndex).cp.yRangeVolumesTrades
+                Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / TradesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades
                 VolumeLabel.Text = Format(proportion, "0.00")
 
-                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(TabControl.SelectedIndex).cp.intervalTrades))
+                Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
                 If (indexOfPoint < 0) Then
                     indexOfPoint = 0
                 End If
-                If (indexOfPoint >= pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
-                    indexOfPoint = pageList(TabControl.SelectedIndex).cp.pointsTrades.Count - 1
-                    CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
+                If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                    indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                    CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
                 Else
-                    If (pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(TabControl.SelectedIndex).cp.pointsTrades.Count) Then
-                        CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.lastPointTrades).tradeVolume
+                    If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                        CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).tradeVolume
 
                     Else
-                        CurVolumeLabel.Text = pageList(TabControl.SelectedIndex).cp.pointsTrades(pageList(TabControl.SelectedIndex).cp.currentPointTrades + indexOfPoint).tradeVolume
+                        CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).tradeVolume
                     End If
                 End If
             Catch ex As Exception

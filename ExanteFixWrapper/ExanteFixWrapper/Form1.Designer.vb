@@ -230,13 +230,17 @@ Partial Class Form1
         Me.TimeLabel0 = New System.Windows.Forms.Label()
         Me.PriceLabel0 = New System.Windows.Forms.Label()
         Me.SubscribreButton0 = New System.Windows.Forms.Button()
-        Me.TabControl = New System.Windows.Forms.TabControl()
+        Me.Tabs = New System.Windows.Forms.TabControl()
         Me.VolumeLabel = New System.Windows.Forms.Label()
         Me.CurVolumeLabel = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.AskPriceLabel = New System.Windows.Forms.Label()
+        Me.BidPriceLabel = New System.Windows.Forms.Label()
+        Me.TradeVolumeLabel = New System.Windows.Forms.Label()
+        Me.TradePriceLabel = New System.Windows.Forms.Label()
         Me.TabPage9.SuspendLayout()
         Me.Charts9.SuspendLayout()
         Me.QuotesTab9.SuspendLayout()
@@ -357,7 +361,7 @@ Partial Class Form1
         CType(Me.PricesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl.SuspendLayout()
+        Me.Tabs.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -2365,23 +2369,23 @@ Partial Class Form1
         Me.SubscribreButton0.Text = "Подписаться"
         Me.SubscribreButton0.UseVisualStyleBackColor = True
         '
-        'TabControl
+        'Tabs
         '
-        Me.TabControl.Controls.Add(Me.TabPage0)
-        Me.TabControl.Controls.Add(Me.TabPage1)
-        Me.TabControl.Controls.Add(Me.TabPage2)
-        Me.TabControl.Controls.Add(Me.TabPage3)
-        Me.TabControl.Controls.Add(Me.TabPage4)
-        Me.TabControl.Controls.Add(Me.TabPage5)
-        Me.TabControl.Controls.Add(Me.TabPage6)
-        Me.TabControl.Controls.Add(Me.TabPage7)
-        Me.TabControl.Controls.Add(Me.TabPage8)
-        Me.TabControl.Controls.Add(Me.TabPage9)
-        Me.TabControl.Location = New System.Drawing.Point(12, 60)
-        Me.TabControl.Name = "TabControl"
-        Me.TabControl.SelectedIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(1717, 874)
-        Me.TabControl.TabIndex = 31
+        Me.Tabs.Controls.Add(Me.TabPage0)
+        Me.Tabs.Controls.Add(Me.TabPage1)
+        Me.Tabs.Controls.Add(Me.TabPage2)
+        Me.Tabs.Controls.Add(Me.TabPage3)
+        Me.Tabs.Controls.Add(Me.TabPage4)
+        Me.Tabs.Controls.Add(Me.TabPage5)
+        Me.Tabs.Controls.Add(Me.TabPage6)
+        Me.Tabs.Controls.Add(Me.TabPage7)
+        Me.Tabs.Controls.Add(Me.TabPage8)
+        Me.Tabs.Controls.Add(Me.TabPage9)
+        Me.Tabs.Location = New System.Drawing.Point(12, 60)
+        Me.Tabs.Name = "Tabs"
+        Me.Tabs.SelectedIndex = 0
+        Me.Tabs.Size = New System.Drawing.Size(1717, 874)
+        Me.Tabs.TabIndex = 31
         '
         'VolumeLabel
         '
@@ -2437,11 +2441,55 @@ Partial Class Form1
         Me.Label5.TabIndex = 35
         Me.Label5.Text = "Price"
         '
+        'AskPriceLabel
+        '
+        Me.AskPriceLabel.AutoSize = True
+        Me.AskPriceLabel.ForeColor = System.Drawing.Color.Red
+        Me.AskPriceLabel.Location = New System.Drawing.Point(1232, 40)
+        Me.AskPriceLabel.Name = "AskPriceLabel"
+        Me.AskPriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.AskPriceLabel.TabIndex = 39
+        Me.AskPriceLabel.Text = "-"
+        '
+        'BidPriceLabel
+        '
+        Me.BidPriceLabel.AutoSize = True
+        Me.BidPriceLabel.ForeColor = System.Drawing.Color.Blue
+        Me.BidPriceLabel.Location = New System.Drawing.Point(1341, 40)
+        Me.BidPriceLabel.Name = "BidPriceLabel"
+        Me.BidPriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.BidPriceLabel.TabIndex = 40
+        Me.BidPriceLabel.Text = "-"
+        '
+        'TradeVolumeLabel
+        '
+        Me.TradeVolumeLabel.AutoSize = True
+        Me.TradeVolumeLabel.ForeColor = System.Drawing.Color.Green
+        Me.TradeVolumeLabel.Location = New System.Drawing.Point(1541, 40)
+        Me.TradeVolumeLabel.Name = "TradeVolumeLabel"
+        Me.TradeVolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.TradeVolumeLabel.TabIndex = 42
+        Me.TradeVolumeLabel.Text = "-"
+        '
+        'TradePriceLabel
+        '
+        Me.TradePriceLabel.AutoSize = True
+        Me.TradePriceLabel.ForeColor = System.Drawing.Color.Red
+        Me.TradePriceLabel.Location = New System.Drawing.Point(1448, 40)
+        Me.TradePriceLabel.Name = "TradePriceLabel"
+        Me.TradePriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.TradePriceLabel.TabIndex = 41
+        Me.TradePriceLabel.Text = "-"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1732, 1026)
+        Me.ClientSize = New System.Drawing.Size(1732, 915)
+        Me.Controls.Add(Me.TradeVolumeLabel)
+        Me.Controls.Add(Me.BidPriceLabel)
+        Me.Controls.Add(Me.AskPriceLabel)
+        Me.Controls.Add(Me.TradePriceLabel)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
@@ -2452,7 +2500,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TimeLabel0)
         Me.Controls.Add(Me.DrawLineQuotes0)
         Me.Controls.Add(Me.PriceLabel0)
-        Me.Controls.Add(Me.TabControl)
+        Me.Controls.Add(Me.Tabs)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ExanteIDTextBox0)
@@ -2580,7 +2628,7 @@ Partial Class Form1
         CType(Me.PricesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl.ResumeLayout(False)
+        Me.Tabs.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2773,7 +2821,7 @@ Partial Class Form1
     Friend WithEvents TimeLabel0 As Label
     Friend WithEvents PriceLabel0 As Label
     Friend WithEvents SubscribreButton0 As Button
-    Friend WithEvents TabControl As TabControl
+    Friend WithEvents Tabs As TabControl
     Friend WithEvents VolumesVolumesTradesPctBox0 As PictureBox
     Friend WithEvents VolumesTradesPctBox0 As PictureBox
     Friend WithEvents VolumesVolumesTradesPctBox9 As PictureBox
@@ -2800,4 +2848,8 @@ Partial Class Form1
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents AskPriceLabel As Label
+    Friend WithEvents BidPriceLabel As Label
+    Friend WithEvents TradeVolumeLabel As Label
+    Friend WithEvents TradePriceLabel As Label
 End Class
