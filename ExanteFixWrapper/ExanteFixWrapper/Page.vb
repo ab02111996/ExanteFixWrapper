@@ -1,4 +1,8 @@
-﻿Public Class Page
+﻿Imports System.Timers
+Imports System.Threading.Tasks
+
+Public Class Page
+    Public bufferTrades As Buffer
     Public subscribeInfo As SubscribeInfo
     Public cp As ChartPainting
     Public QuotesPctBox As PictureBox
@@ -49,6 +53,7 @@
         Me.RightTradesButton = RightTradesButton
         Me.PlusTradesButton = PlusTradesButton
         Me.MinusTradesButton = MinusTradesButton
+        Me.bufferTrades = New Buffer(5000, False, "D:\Bases")
 
     End Sub
 
@@ -74,11 +79,13 @@
             End If
 
             Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp))
-            Me.QuotesPctBox.Invoke(Sub()
-                                       If (Not Me.cp.isDrawingStartedQuotes) Then
-                                           Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
-                                       End If
-                                   End Sub)
+            If QuotesPctBox.IsHandleCreated Then
+                Me.QuotesPctBox.Invoke(Sub()
+                                           If (Not Me.cp.isDrawingStartedQuotes) Then
+                                               Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                                           End If
+                                       End Sub)
+            End If
         Else
             'сделки
             If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
@@ -88,11 +95,106 @@
             If (quotesInfo.TradePrice < cp.minPriceTrades) Then
                 cp.minPriceTrades = quotesInfo.TradePrice
             End If
-
+            bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
-            Me.TradesPctBox.Invoke(Sub()
-                                       Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
-                                   End Sub)
+            If TradesPctBox.IsHandleCreated Then
+                Me.TradesPctBox.Invoke(Sub()
+                                           Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+                                       End Sub)
+            End If
+
         End If
     End Sub
+End Class
+
+Public Class Buffer
+    Public startTimeFrame As DateTime
+    Public endTimeFrame As DateTime
+    Public exanteID As String
+    Public openPrice As Double
+    Public highPrice As Double
+    Public lowPrice As Double
+    Public closePrice As Double
+    Public volumeSell As Double
+    Public volumeBuy As Double
+    Public countSell As Integer
+    Public countBuy As Integer
+    Public priceSell As Double
+    Public priceBuy As Double
+    Private isQuotes As Boolean
+    Private bufferIsNotEmpty As Boolean
+    Private quotesInfos As List(Of QuotesInfo)
+    Private timer As Timer
+    Private dbWriter As DataBaseWriter
+    Private Sub InitBuffer()
+        bufferIsNotEmpty = False
+        openPrice = 0
+        highPrice = 0
+        lowPrice = 0
+        closePrice = 0
+        volumeSell = 0
+        volumeBuy = 0
+        countSell = 0
+        countBuy = 0
+        priceSell = 0
+        priceBuy = 0
+        quotesInfos = Nothing
+    End Sub
+    Public Sub New(timeframe As Double, isquotes As Boolean, dbPath As String)
+        Me.timer = New Timer(timeframe)
+        Me.isQuotes = isquotes
+        Me.dbWriter = New DataBaseWriter()
+        InitBuffer()
+        dbWriter.SetDBPath(dbPath)
+        dbWriter.OpenConnection()
+    End Sub
+    Public Sub StartWritingData()
+        Me.startTimeFrame = DateTime.Now
+        Me.timer.Start()
+        AddHandler Me.timer.Elapsed, AddressOf Me.Clear
+    End Sub
+    Public Sub Clear(source As Object, e As ElapsedEventArgs)
+        Me.endTimeFrame = DateTime.Now
+        dbWriter.InsertBufferIntoDB(Me)
+        dbWriter.InsertBufferMetaDataIntoDB(Me)
+        InitBuffer()
+        Me.startTimeFrame = DateTime.Now
+    End Sub
+
+    Public Sub PutInBuffer(info As QuotesInfo)
+        If Not bufferIsNotEmpty Then
+            Me.quotesInfos = New List(Of QuotesInfo)
+            Me.exanteID = info.ExanteId
+            Me.openPrice = info.TradePrice
+            Me.highPrice = info.TradePrice
+            Me.lowPrice = info.TradePrice
+            Me.bufferIsNotEmpty = True
+        End If
+        quotesInfos.Add(info)
+        If Me.highPrice < info.TradePrice Then
+            Me.highPrice = info.TradePrice
+        End If
+        If Me.lowPrice > info.TradePrice Then
+            Me.lowPrice = info.TradePrice
+        End If
+        If info.Direction = QuotesInfo.Directions.Sell Then
+            Me.volumeSell += info.TradeVolume
+            Me.countSell += 1
+            Me.priceSell += info.TradePrice * info.TradeVolume
+        Else
+            Me.volumeBuy += info.TradeVolume
+            Me.countBuy += 1
+            Me.priceBuy += info.TradePrice * info.TradeVolume
+        End If
+
+    End Sub
+    Public Function IsQuotesBuffer() As Boolean
+        Return Me.isQuotes
+    End Function
+    Public Function GetBufferMetaData() As List(Of QuotesInfo)
+        Return quotesInfos
+    End Function
+    Public Function IsNotEmpty() As Boolean
+        Return bufferIsNotEmpty
+    End Function
 End Class
