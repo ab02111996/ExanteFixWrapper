@@ -63,6 +63,7 @@ Public Class DataBaseWriter
             metaDataTable.Columns.Append("Milliseconds", ADOX.DataTypeEnum.adInteger)
             metaDataTable.Columns.Append("LocalTime", ADOX.DataTypeEnum.adDate)
             metaDataTable.Columns.Append("LocalTimeMilliseconds", ADOX.DataTypeEnum.adInteger)
+            metaDataTable.Columns.Append("Message", ADOX.DataTypeEnum.adVarWChar)
             metaDataTable.Columns.Append("Instrument", ADOX.DataTypeEnum.adVarWChar)
             metaDataTable.Columns.Append("Direction", ADOX.DataTypeEnum.adVarWChar)
             metaDataTable.Columns.Append("Price", ADOX.DataTypeEnum.adDouble)
@@ -138,12 +139,13 @@ Public Class DataBaseWriter
             If metaData IsNot Nothing Then
                 For Each qi As QuotesInfo In metaData
                     Dim sb As StringBuilder = New StringBuilder()
-                    sb.Append("INSERT INTO MetaDataTable([Time], [Milliseconds], [LocalTime], [LocalTimeMilliseconds], [Instrument], [Direction], [Price], [Volume]) VALUES")
+                    sb.Append("INSERT INTO MetaDataTable([Time], [Milliseconds], [LocalTime], [LocalTimeMilliseconds], [Message], [Instrument], [Direction], [Price], [Volume]) VALUES")
                     sb.Append("(")
                     sb.Append("'" + qi.TimeStamp + "',")
                     sb.Append(qi.TimeStamp.Millisecond.ToString() + ",")
                     sb.Append("'" + qi.LocalTimeStamp + "',")
                     sb.Append(qi.LocalTimeStamp.Millisecond.ToString() + ",")
+                    sb.Append("'" + qi.Message + "',")
                     sb.Append("'" + qi.ExanteId + "',")
                     sb.Append("'" + qi.Direction.ToString() + "',")
                     sb.Append(qi.TradePrice.ToString().Replace(",", ".") + ",")

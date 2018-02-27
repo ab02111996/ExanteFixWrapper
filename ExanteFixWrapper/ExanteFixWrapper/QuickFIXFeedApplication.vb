@@ -8,6 +8,7 @@ Public Class QuickFIXFeedApplication
     Public subscribeInfos As List(Of SubscribeInfo)
     Public sessionid As QuickFix.SessionID
     Private fixPassword As String
+    Private lastInfo As QuotesInfo
 
     Sub New(password As String)
         Me.fixPassword = password
@@ -23,10 +24,10 @@ Public Class QuickFIXFeedApplication
         Dim timeStampField As UtcTimeStampField = New UtcTimeStampField(52, True)
         Dim marketSnapshotDataMessage As MarketDataSnapshotFullRefresh = CType(message, MarketDataSnapshotFullRefresh)
         marketSnapshotDataMessage.getHeader().getField(msgType)
-        marketSnapshotDataMessage.getHeader().getField(timeStampField)
         Dim localTimeStamp As DateTime = timeStampField.getValue().ToLocalTime()
         If msgType.getValue() = msgType.MarketDataSnapshotFullRefresh Then
             Try
+                marketSnapshotDataMessage.getHeader().getField(timeStampField)
                 Dim requestId As String = marketSnapshotDataMessage.getMDReqID().ToString()
                 Dim noMDEntries As NoMDEntries = marketSnapshotDataMessage.getNoMDEntries()
                 Dim mdEntriesGroup As QuickFix44.MarketDataSnapshotFullRefresh.NoMDEntries = New QuickFix44.MarketDataSnapshotFullRefresh.NoMDEntries()
@@ -34,6 +35,7 @@ Public Class QuickFIXFeedApplication
                 Dim mdEntryPx As MDEntryPx = New MDEntryPx()
                 Dim mDEntrySize As MDEntrySize = New MDEntrySize()
                 Dim quotesInfo As QuotesInfo = New QuotesInfo()
+                quotesInfo.TimeStamp = localTimeStamp
                 For index As UInteger = 1 To noMDEntries.getValue()
                     message.getGroup(index, mdEntriesGroup)
                     mdEntriesGroup.get(mdEntryType)
@@ -47,14 +49,37 @@ Public Class QuickFIXFeedApplication
                             quotesInfo.AskPrice = mdEntryPx.getValue()
                             quotesInfo.AskVolume = mDEntrySize.getValue()
                         Case mdEntryType.TRADE
+                            Dim dateField As MDEntryDate = New MDEntryDate()
+                            mdEntriesGroup.get(dateField)
+                            Dim timeField As DateTime = mdEntriesGroup.getField(273)
+                            quotesInfo.TimeStamp = New DateTime(dateField.getValue().Ticks + timeField.Ticks)
                             quotesInfo.TradePrice = mdEntryPx.getValue()
                             quotesInfo.TradeVolume = mDEntrySize.getValue()
+                            quotesInfo.Message = message.ToString()
+                            If lastInfo Is Nothing Then
+                                quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Undefined
+                            Else
+                                If quotesInfo.TradePrice > lastInfo.TradePrice Then
+                                    quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Buy
+                                ElseIf quotesInfo.TradePrice < lastInfo.TradePrice Then
+                                    quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Sell
+                                Else
+                                    If lastInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Buy Then
+                                        quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Buy
+                                    ElseIf lastInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Sell Then
+                                        quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Sell
+                                    Else
+                                        quotesInfo.Direction = ExanteFixWrapper.QuotesInfo.Directions.Undefined
+                                    End If
+                                End If
+                            End If
+                            lastInfo = quotesInfo
                         Case Else
                     End Select
                 Next
                 For Each info As SubscribeInfo In subscribeInfos
                     If info.Guid.ToString() = requestId Then
-                        quotesInfo.TimeStamp = localTimeStamp
+                        quotesInfo.LocalTimeStamp = DateTime.Now
                         info.UpdateQuotesCallback.Invoke(quotesInfo)
                     End If
                 Next

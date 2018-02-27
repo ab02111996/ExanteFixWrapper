@@ -2,8 +2,9 @@
 Imports System.Threading.Tasks
 
 Public Class Page
-   Public bufferTrades As Buffer
-    Public subscribeInfo As SubscribeInfo    Public cp As ChartPainting
+    Public bufferTrades As Buffer
+    Public subscribeInfo As SubscribeInfo
+    Public cp As ChartPainting
     Public QuotesPctBox As PictureBox
     Public PricesQuotesPctBox As PictureBox
     Public TimesQuotesPctBox As PictureBox
@@ -63,6 +64,7 @@ Public Class Page
     End Sub
 
     Public Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
+
         Dim currentMaxPriceQuotes As Double
         Dim currentMinPriceQuotes As Double
         If (quotesInfo.AskPrice IsNot Nothing And quotesInfo.BidPrice IsNot Nothing) Then
@@ -83,18 +85,22 @@ Public Class Page
                 Me.cp.minPriceQuotes = currentMinPriceQuotes
             End If
 
-            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, DateTime.Now))
-       If QuotesPctBox.IsHandleCreated Then
-              Me.QuotesPctBox.Invoke(Sub()
-                                       If (Not Me.cp.isDrawingStartedQuotes) Then
-                                           Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
-                                           Dim selInd = Form1.Tabs.SelectedIndex
-                                           Dim c = Form1.pageList(selInd).cp.pointsQuotes.Count
-                                           Form1.AskPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).askPrice
-                                           Form1.BidPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).bidPrice
-                                       End If
-                                   End Sub)       End If        Else
+            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp))
+            If QuotesPctBox.IsHandleCreated Then
+                Me.QuotesPctBox.Invoke(Sub()
+                                           If (Not Me.cp.isDrawingStartedQuotes) Then
+                                               Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                                               Dim selInd = Form1.Tabs.SelectedIndex
+                                               Dim c = Form1.pageList(selInd).cp.pointsQuotes.Count
+                                               Form1.AskPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).askPrice
+                                               Form1.BidPriceLabel.Text = Form1.pageList(selInd).cp.pointsQuotes(c - 1).bidPrice
+                                           End If
+                                       End Sub)
+            End If
+        Else
             'сделки
+            Console.WriteLine(quotesInfo.TimeStamp)
+
             If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
                 cp.maxPriceTrades = quotesInfo.TradePrice
             End If
@@ -106,11 +112,11 @@ Public Class Page
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
             If TradesPctBox.IsHandleCreated Then
                 Me.TradesPctBox.Invoke(Sub()
-                                           Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox)
+                                           Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
                                        End Sub)
             End If
 
-If (quotesInfo.TradeVolume > cp.maxVolumeTrades) Then
+            If (quotesInfo.TradeVolume > cp.maxVolumeTrades) Then
                 cp.maxVolumeTrades = quotesInfo.TradeVolume
             End If
 
@@ -121,7 +127,8 @@ If (quotesInfo.TradeVolume > cp.maxVolumeTrades) Then
                                        Dim c = Form1.pageList(selInd).cp.pointsTrades.Count
                                        Form1.TradePriceLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradePrice
                                        Form1.TradeVolumeLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradeVolume
-                                   End Sub)        End If
+                                   End Sub)
+        End If
     End Sub
 End Class
 
