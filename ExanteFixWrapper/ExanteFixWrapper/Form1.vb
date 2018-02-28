@@ -64,6 +64,7 @@ Public Class Form1
         Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
         Dim subscribes = feedReciever.GetSubscribeInfos()
         feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
+        pageList(Tabs.SelectedIndex).bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
         pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
     End Sub
 
