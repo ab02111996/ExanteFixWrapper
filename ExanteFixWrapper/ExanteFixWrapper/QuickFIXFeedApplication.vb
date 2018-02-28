@@ -24,7 +24,7 @@ Public Class QuickFIXFeedApplication
         Dim timeStampField As UtcTimeStampField = New UtcTimeStampField(52, True)
         Dim marketSnapshotDataMessage As MarketDataSnapshotFullRefresh = CType(message, MarketDataSnapshotFullRefresh)
         marketSnapshotDataMessage.getHeader().getField(msgType)
-        Dim localTimeStamp As DateTime = timeStampField.getValue().ToLocalTime()
+        Dim localTimeStamp As DateTime = DateTime.Now
         If msgType.getValue() = msgType.MarketDataSnapshotFullRefresh Then
             Try
                 marketSnapshotDataMessage.getHeader().getField(timeStampField)
@@ -36,6 +36,7 @@ Public Class QuickFIXFeedApplication
                 Dim mDEntrySize As MDEntrySize = New MDEntrySize()
                 Dim quotesInfo As QuotesInfo = New QuotesInfo()
                 quotesInfo.TimeStamp = localTimeStamp
+                quotesInfo.ExanteId = marketSnapshotDataMessage.getField(55)
                 For index As UInteger = 1 To noMDEntries.getValue()
                     message.getGroup(index, mdEntriesGroup)
                     mdEntriesGroup.get(mdEntryType)
@@ -49,10 +50,10 @@ Public Class QuickFIXFeedApplication
                             quotesInfo.AskPrice = mdEntryPx.getValue()
                             quotesInfo.AskVolume = mDEntrySize.getValue()
                         Case mdEntryType.TRADE
-                            Dim dateField As MDEntryDate = New MDEntryDate()
-                            mdEntriesGroup.get(dateField)
-                            Dim timeField As DateTime = mdEntriesGroup.getField(273)
-                            quotesInfo.TimeStamp = New DateTime(dateField.getValue().Ticks + timeField.Ticks)
+                            'Dim dateField As MDEntryDate = New MDEntryDate()
+                            'mdEntriesGroup.get(dateField)
+                            'Dim timeField As DateTime = mdEntriesGroup.getField(273)
+                            'quotesInfo.TimeStamp = New DateTime(dateField.getValue().Ticks + timeField.Ticks)
                             quotesInfo.TradePrice = mdEntryPx.getValue()
                             quotesInfo.TradeVolume = mDEntrySize.getValue()
                             quotesInfo.Message = message.ToString()

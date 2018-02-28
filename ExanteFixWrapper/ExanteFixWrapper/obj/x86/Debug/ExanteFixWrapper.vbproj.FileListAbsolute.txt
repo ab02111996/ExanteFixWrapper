@@ -54,3 +54,6 @@ D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\E
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1.resources
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Resources.resources
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.GenerateResource.Cache
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADODB.dll
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADOX.dll
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.ResolveComReference.cache
