@@ -60,11 +60,16 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
-        pageList(Tabs.SelectedIndex).cp.isSubscribed = True
-        Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
-        Dim subscribes = feedReciever.GetSubscribeInfos()
-        feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
-        pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
+        Try
+            pageList(Tabs.SelectedIndex).cp.isSubscribed = True
+            Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
+            Dim subscribes = feedReciever.GetSubscribeInfos()
+            feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
+            pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
+        Catch ex As Exception
+            MsgBox("Нет подключения")
+        End Try
+
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -114,19 +119,23 @@ Public Class Form1
     End Sub
 
     Private Sub QuotesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseClick, TradesPctBox3.MouseClick, QuotesPctBox9.MouseClick, QuotesPctBox8.MouseClick, QuotesPctBox7.MouseClick, QuotesPctBox6.MouseClick, QuotesPctBox5.MouseClick, QuotesPctBox4.MouseClick, QuotesPctBox3.MouseClick, QuotesPctBox2.MouseClick, QuotesPctBox1.MouseClick
-        If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
-            pageList(Tabs.SelectedIndex).cp.point1Quotes.X = e.X
-            pageList(Tabs.SelectedIndex).cp.point1Quotes.Y = e.Y
-            pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = True
-            Exit Sub
-        End If
-        If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
-            pageList(Tabs.SelectedIndex).cp.point2Quotes.X = e.X
-            pageList(Tabs.SelectedIndex).cp.point2Quotes.Y = e.Y
-            pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = False
-            pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = True
-            pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
-            Exit Sub
+        If (pageList IsNot Nothing) Then
+            If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
+                    pageList(Tabs.SelectedIndex).cp.point1Quotes.X = e.X
+                    pageList(Tabs.SelectedIndex).cp.point1Quotes.Y = e.Y
+                    pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = True
+                    Exit Sub
+                End If
+                If (pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes And pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes) Then
+                    pageList(Tabs.SelectedIndex).cp.point2Quotes.X = e.X
+                    pageList(Tabs.SelectedIndex).cp.point2Quotes.Y = e.Y
+                    pageList(Tabs.SelectedIndex).cp.isDrawingStartedQuotes = False
+                    pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = True
+                    pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+                    Exit Sub
+                End If
+            End If
         End If
     End Sub
 
@@ -198,10 +207,6 @@ Public Class Form1
                 End If
             End Try
         Else
-            ' pageList(TabControl.SelectedIndex).cp.currentPointQuotes -= 7
-            'If (pageList(TabControl.SelectedIndex).cp.currentPointQuotes < 0) Then
-            '    pageList(TabControl.SelectedIndex).cp.currentPointQuotes = 0
-            'End If
             Try
                 pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
                 If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
@@ -346,12 +351,17 @@ Public Class Form1
                 End If
                 If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
                     indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                    If (indexOfPoint < 0) Then
+                        indexOfPoint = 0
+                    End If
+                    CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
                     TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).time.ToLongTimeString
                 Else
                     If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                        CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
                         TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).time.ToLongTimeString
-
                     Else
+                        CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
                         TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
                     End If
                 End If
@@ -366,19 +376,23 @@ Public Class Form1
     End Sub
 
     Private Sub TradesPctBox_MouseClick(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseClick, TradesPctBox9.MouseClick, TradesPctBox8.MouseClick, TradesPctBox7.MouseClick, TradesPctBox6.MouseClick, TradesPctBox5.MouseClick, TradesPctBox4.MouseClick, TradesPctBox2.MouseClick, TradesPctBox1.MouseMove, TradesPctBox1.MouseClick
-        If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
-            pageList(Tabs.SelectedIndex).cp.point1Trades.X = e.X
-            pageList(Tabs.SelectedIndex).cp.point1Trades.Y = e.Y
-            pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = True
-            Exit Sub
-        End If
-        If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
-            pageList(Tabs.SelectedIndex).cp.point2Trades.X = e.X
-            pageList(Tabs.SelectedIndex).cp.point2Trades.Y = e.Y
-            pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = False
-            pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = True
-            pageList(Tabs.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
-            Exit Sub
+        If (pageList IsNot Nothing) Then
+            If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And Not pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
+                    pageList(Tabs.SelectedIndex).cp.point1Trades.X = e.X
+                    pageList(Tabs.SelectedIndex).cp.point1Trades.Y = e.Y
+                    pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = True
+                    Exit Sub
+                End If
+                If (pageList(Tabs.SelectedIndex).cp.needDrawLineTrades And pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades) Then
+                    pageList(Tabs.SelectedIndex).cp.point2Trades.X = e.X
+                    pageList(Tabs.SelectedIndex).cp.point2Trades.Y = e.Y
+                    pageList(Tabs.SelectedIndex).cp.isDrawingStartedTrades = False
+                    pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = True
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(TradesPctBox0, TimesTradesPctBox0, PricesTradesPctBox0, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    Exit Sub
+                End If
+            End If
         End If
     End Sub
 
@@ -396,20 +410,15 @@ Public Class Form1
             If (pageList.Count > 0) Then
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed) Then
                     Try
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
                         If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 0) Then
                             pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
                         Else
                             pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                         End If
                     Catch ex As Exception
-                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes = -1
-                        pageList(Tabs.SelectedIndex).cp.currentPointTrades = -1
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
-                            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
-                        End If
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0) Then
-                            pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
-                        End If
+
                     End Try
                 End If
             End If
