@@ -65,12 +65,11 @@ Public Class Form1
             Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
             Dim subscribes = feedReciever.GetSubscribeInfos()
             feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
+            pageList(Tabs.SelectedIndex).bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
             pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
         Catch ex As Exception
             MsgBox("Нет подключения")
-        End Try
-
-    End Sub
+        End Try    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DoubleBuffered = True

@@ -14,8 +14,8 @@ Public Class DataBaseWriter
     Sub New()
         '"Jet OLEDB:Engine Type=5"
     End Sub
-    Private Sub CreateDBFile()
-        currentFileName = DateTime.Now.Ticks.ToString() + ".accdb"
+    Private Sub CreateDBFile(instrumentName As String)
+        currentFileName = instrumentName.Replace("/", "_") + "_" + DateTime.Now.Ticks.ToString() + ".accdb"
         currentFileCreationDate = DateTime.Now
         connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
                     "Data Source=" + dbPath + "\" + currentFileName + ";"
@@ -81,8 +81,8 @@ Public Class DataBaseWriter
     Sub SetDBPath(path As String)
         Me.dbPath = path
     End Sub
-    Sub OpenConnection()
-        Dim files = Directory.GetFiles(dbPath, "*.accdb")
+    Sub OpenConnection(instrumentName As String)
+        Dim files = Directory.GetFiles(dbPath, instrumentName.Replace("/", "_" + "_") + "_*.accdb")
         currentFileCreationDate = New DateTime(0)
         For Each item As String In files
             If Directory.GetCreationTime(item) > currentFileCreationDate Then
@@ -92,7 +92,7 @@ Public Class DataBaseWriter
             End If
         Next
         If (DateTime.Now - currentFileCreationDate).Days > 7 Then
-            Me.CreateDBFile()
+            Me.CreateDBFile(instrumentName)
         Else
             connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
                    "Data Source=" + dbPath + "\" + currentFileName + ";"
@@ -102,38 +102,38 @@ Public Class DataBaseWriter
     End Sub
     Sub InsertBufferIntoDB(buffer As Buffer)
         If (DateTime.Now - currentFileCreationDate).Days > 7 Then
-            Me.OpenConnection()
+            Me.OpenConnection(buffer.exanteID)
         Else
-            Dim metaData = buffer.GetBufferMetaData()
-            If metaData IsNot Nothing Then
-                Dim sb = New StringBuilder()
-                sb.Append("INSERT INTO FiveSecondsDataTable([StartTime], [StartTimeMilliseconds], [EndTime], [EndTimeMilliseconds], " +
-                          "[Instrument], [Open], [High], [Low], [Close], [VolumeSell], [VolumeBuy], [CountSell], [CountBuy], [PriceSell], " +
-                          "[PriceBuy]) VALUES")
-                sb.Append("(")
-                sb.Append("'" + buffer.startTimeFrame + "',")
-                sb.Append(buffer.startTimeFrame.Millisecond.ToString() + ",")
-                sb.Append("'" + buffer.endTimeFrame + "',")
-                sb.Append(buffer.endTimeFrame.Millisecond.ToString() + ",")
-                sb.Append("'" + buffer.exanteID + "',")
-                sb.Append(buffer.openPrice.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.highPrice.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.lowPrice.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.closePrice.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.volumeSell.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.volumeBuy.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.countSell.ToString() + ",")
-                sb.Append(buffer.countBuy.ToString() + ",")
-                sb.Append(buffer.priceSell.ToString().Replace(",", ".") + ",")
-                sb.Append(buffer.priceBuy.ToString().Replace(",", "."))
-                sb.Append(");")
-                currentConnection.Execute(sb.ToString())
-            End If
+            'Dim metaData = buffer.GetBufferMetaData()
+            'If metaData IsNot Nothing Then
+            Dim sb = New StringBuilder()
+            sb.Append("INSERT INTO FiveSecondsDataTable([StartTime], [StartTimeMilliseconds], [EndTime], [EndTimeMilliseconds], " +
+                      "[Instrument], [Open], [High], [Low], [Close], [VolumeSell], [VolumeBuy], [CountSell], [CountBuy], [PriceSell], " +
+                      "[PriceBuy]) VALUES")
+            sb.Append("(")
+            sb.Append("'" + buffer.startTimeFrame + "',")
+            sb.Append(buffer.startTimeFrame.Millisecond.ToString() + ",")
+            sb.Append("'" + buffer.endTimeFrame + "',")
+            sb.Append(buffer.endTimeFrame.Millisecond.ToString() + ",")
+            sb.Append("'" + buffer.exanteID + "',")
+            sb.Append(buffer.openPrice.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.highPrice.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.lowPrice.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.closePrice.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.volumeSell.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.volumeBuy.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.countSell.ToString() + ",")
+            sb.Append(buffer.countBuy.ToString() + ",")
+            sb.Append(buffer.priceSell.ToString().Replace(",", ".") + ",")
+            sb.Append(buffer.priceBuy.ToString().Replace(",", "."))
+            sb.Append(");")
+            currentConnection.Execute(sb.ToString())
+            'End If
         End If
     End Sub
     Sub InsertBufferMetaDataIntoDB(buffer As Buffer)
         If (DateTime.Now - currentFileCreationDate).Days > 7 Then
-            Me.OpenConnection()
+            Me.OpenConnection(buffer.exanteID)
         Else
             Dim metaData = buffer.GetBufferMetaData()
             If metaData IsNot Nothing Then

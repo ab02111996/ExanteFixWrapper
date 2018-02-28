@@ -65,7 +65,6 @@ Public Class Page
     End Sub
 
     Public Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
-        bufferTrades.StartWritingData()
         Dim currentMaxPriceQuotes As Double
         Dim currentMinPriceQuotes As Double
         If (quotesInfo.AskPrice IsNot Nothing And quotesInfo.BidPrice IsNot Nothing) Then
@@ -139,6 +138,7 @@ Public Class Buffer
     Public highPrice As Double
     Public lowPrice As Double
     Public closePrice As Double
+    Public lastClosePrice As Double
     Public volumeSell As Double
     Public volumeBuy As Double
     Public countSell As Integer
@@ -170,17 +170,27 @@ Public Class Buffer
         Me.dbWriter = New DataBaseWriter()
         InitBuffer()
         dbWriter.SetDBPath(dbPath)
-        dbWriter.OpenConnection()
+
     End Sub
-    Public Sub StartWritingData()
+    Public Sub StartWritingData(exanteID As String)
         If Not timer.Enabled Then
+            Me.exanteID = exanteID
+            dbWriter.OpenConnection(Me.exanteID)
             Me.startTimeFrame = DateTime.Now
             Me.timer.Start()
             AddHandler Me.timer.Elapsed, AddressOf Me.Clear
+            Me.lastClosePrice = 0
         End If
     End Sub
     Public Sub Clear(source As Object, e As ElapsedEventArgs)
         Me.endTimeFrame = DateTime.Now
+        If Me.openPrice = 0 And Me.closePrice = 0 Then
+            Me.openPrice = Me.lastClosePrice
+            Me.closePrice = Me.lastClosePrice
+            Me.highPrice = Me.lastClosePrice
+            Me.lowPrice = Me.lastClosePrice
+        End If
+        Me.lastClosePrice = Me.closePrice
         dbWriter.InsertBufferIntoDB(Me)
         dbWriter.InsertBufferMetaDataIntoDB(Me)
         InitBuffer()
@@ -212,7 +222,7 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
-
+        Me.closePrice = info.TradePrice
     End Sub
     Public Function IsQuotesBuffer() As Boolean
         Return Me.isQuotes
