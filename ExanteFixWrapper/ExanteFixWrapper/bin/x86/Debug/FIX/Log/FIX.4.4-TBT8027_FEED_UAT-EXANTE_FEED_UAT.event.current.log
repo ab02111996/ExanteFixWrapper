@@ -5232,3 +5232,44 @@
 20180228-13:12:48.881 : Initiated logout request
 20180228-13:12:49.015 : Received logout response
 20180228-13:12:49.015 : Disconnecting
+20180228-13:17:51.147 : Created session
+20180228-13:17:51.164 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:17:51.532 : Initiated logon request
+20180228-13:17:51.955 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180228-13:17:51.956 : Received logon response
+20180228-13:21:56.412 : Initiated logout request
+20180228-13:21:56.549 : Received logout response
+20180228-13:21:56.549 : Disconnecting
+20180228-13:22:05.692 : Created session
+20180228-13:22:05.710 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:22:05.897 : Initiated logon request
+20180228-13:22:06.329 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180228-13:22:06.330 : Received logon response
+20180228-13:23:30.277 : Initiated logout request
+20180228-13:23:30.417 : Received logout response
+20180228-13:23:30.417 : Disconnecting
+20180228-13:24:44.674 : Created session
+20180228-13:24:44.690 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:24:44.857 : Initiated logon request
+20180228-13:24:45.287 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180228-13:24:45.288 : Received logon response
+20180228-13:25:31.472 : Initiated logout request
+20180228-13:25:31.611 : Received logout response
+20180228-13:25:31.611 : Disconnecting
+20180228-13:28:08.015 : Created session
+20180228-13:28:08.031 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:28:08.206 : Initiated logon request
+20180228-13:28:08.339 : Socket Error: Connection reset by peer.
+20180228-13:28:08.339 : Disconnecting
+20180228-13:28:09.030 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:28:09.164 : Initiated logon request
+20180228-13:28:09.294 : Socket Error: Connection reset by peer.
+20180228-13:28:09.294 : Disconnecting
+20180228-13:28:39.182 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:28:39.332 : Initiated logon request
+20180228-13:28:39.464 : Socket Error: Connection reset by peer.
+20180228-13:28:39.464 : Disconnecting
+20180228-13:29:09.351 : Connecting to fixuat2.exante.eu on port 8100
+20180228-13:29:09.487 : Initiated logon request
+20180228-13:29:09.635 : Socket Error: Connection reset by peer.
+20180228-13:29:09.635 : Disconnecting
