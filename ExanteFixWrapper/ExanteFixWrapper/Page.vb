@@ -58,7 +58,9 @@ Public Class Page
         Me.RightTradesButton = RightTradesButton
         Me.PlusTradesButton = PlusTradesButton
         Me.MinusTradesButton = MinusTradesButton
+        'AddHandler LeftQuotesButton.Click 
         Me.bufferTrades = New Buffer(5000, False, "D:\Bases")
+        AddHandler Me.bufferTrades.BufferClearing, AddressOf Add5SecondsPoint
         Me.Chart = Chart
         Me.VolumesTradesPctBox = VolumesTradesPctBox
         Me.VolumesVolumesTradesPctBox = VolumesVolumesTradesPctBox
@@ -99,9 +101,10 @@ Public Class Page
                                            End If
                                        End Sub)
             End If
+            bufferTrades.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
         Else
             'сделки
-            Console.WriteLine(quotesInfo.TimeStamp.ToString() + quotesInfo.TimeStamp.Millisecond.ToString() + " " + quotesInfo.TradePrice.ToString() + " " + quotesInfo.TradeVolume.ToString())
+            'Console.WriteLine(quotesInfo.TimeStamp.ToString() + quotesInfo.TimeStamp.Millisecond.ToString() + " " + quotesInfo.TradePrice.ToString() + " " + quotesInfo.TradeVolume.ToString())
 
             If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
                 cp.maxPriceTrades = quotesInfo.TradePrice
@@ -115,9 +118,12 @@ Public Class Page
             End If
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
+
             If TradesPctBox.IsHandleCreated Then
                 Me.TradesPctBox.Invoke(Sub()
-                                           Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+                                           If (Form1.TicksOrSeconds.SelectedItem = "Тики") Then
+                                               Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+                                           End If
                                            Dim selInd = Form1.Tabs.SelectedIndex
                                            Dim c = Form1.pageList(selInd).cp.pointsTrades.Count
                                            If (selInd = Me.TabId) Then
@@ -127,7 +133,31 @@ Public Class Page
                                        End Sub)
             End If
         End If
+
+
     End Sub
+    Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
+        cp.pointsTrades5sec.Add(New PointTrades5sec(sender))
+        Dim buffer = CType(sender, Buffer)
+        If (Buffer.closePrice > cp.maxPriceTrades5sec) Then
+            cp.maxPriceTrades5sec = Buffer.closePrice
+        End If
+
+        If (buffer.closePrice < cp.minPriceTrades5sec) Then
+            cp.minPriceTrades5sec = buffer.closePrice
+        End If
+        If ((buffer.volumeBuy + buffer.volumeSell) > cp.maxVolumeTrades5sec) Then
+            cp.maxVolumeTrades5sec = buffer.volumeBuy + buffer.volumeSell
+        End If
+        Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (buffer.volumeBuy + buffer.volumeSell).ToString)
+
+        Me.TradesPctBox.Invoke(Sub()
+                                   If (Form1.TicksOrSeconds.SelectedItem = "5 секунд") Then
+                                       Me.cp.paintingTrades5sec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+                                   End If
+                               End Sub)
+    End Sub
+
 End Class
 
 Public Class Buffer
@@ -139,6 +169,7 @@ Public Class Buffer
     Public lowPrice As Double
     Public closePrice As Double
     Public lastClosePrice As Double
+    Public midAskBid As Double
     Public volumeSell As Double
     Public volumeBuy As Double
     Public countSell As Integer
@@ -150,6 +181,28 @@ Public Class Buffer
     Private quotesInfos As List(Of QuotesInfo)
     Private timer As Timer
     Private dbWriter As DataBaseWriter
+    Private _handlers As List(Of EventHandler)
+    Public Custom Event BufferClearing As EventHandler
+        AddHandler(ByVal value As EventHandler)
+            _handlers.Add(value)
+        End AddHandler
+
+        RemoveHandler(ByVal value As EventHandler)
+            If _handlers.Contains(value) Then
+                _handlers.Remove(value)
+            End If
+        End RemoveHandler
+
+        RaiseEvent(ByVal sender As Object, ByVal e As System.EventArgs)
+            For Each handler As EventHandler In _handlers
+                Try
+                    handler.Invoke(sender, e)
+                Catch ex As Exception
+                    Debug.WriteLine("Exception while invoking event handler: " & ex.ToString())
+                End Try
+            Next
+        End RaiseEvent
+    End Event
     Private Sub InitBuffer()
         bufferIsNotEmpty = False
         openPrice = 0
@@ -168,6 +221,7 @@ Public Class Buffer
         Me.timer = New Timer(timeframe)
         Me.isQuotes = isquotes
         Me.dbWriter = New DataBaseWriter()
+        _handlers = New List(Of EventHandler)
         InitBuffer()
         dbWriter.SetDBPath(dbPath)
 
@@ -185,14 +239,24 @@ Public Class Buffer
     Public Sub Clear(source As Object, e As ElapsedEventArgs)
         Me.endTimeFrame = DateTime.Now
         If Me.openPrice = 0 And Me.closePrice = 0 Then
-            Me.openPrice = Me.lastClosePrice
-            Me.closePrice = Me.lastClosePrice
-            Me.highPrice = Me.lastClosePrice
-            Me.lowPrice = Me.lastClosePrice
+            If Me.lastClosePrice = 0 Then
+                Me.openPrice = Me.midAskBid
+                Me.closePrice = Me.midAskBid
+                Me.highPrice = Me.midAskBid
+                Me.lowPrice = Me.midAskBid
+            Else
+                Me.openPrice = Me.lastClosePrice
+                Me.closePrice = Me.lastClosePrice
+                Me.highPrice = Me.lastClosePrice
+                Me.lowPrice = Me.lastClosePrice
+            End If
         End If
         Me.lastClosePrice = Me.closePrice
-        dbWriter.InsertBufferIntoDB(Me)
-        dbWriter.InsertBufferMetaDataIntoDB(Me)
+        If Not Me.midAskBid = 0 Then
+            RaiseEvent BufferClearing(Me, New EventArgs)
+            dbWriter.InsertBufferIntoDB(Me)
+            dbWriter.InsertBufferMetaDataIntoDB(Me)
+        End If
         InitBuffer()
         Me.startTimeFrame = DateTime.Now
     End Sub
@@ -223,6 +287,8 @@ Public Class Buffer
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
         Me.closePrice = info.TradePrice
+
+
     End Sub
     Public Function IsQuotesBuffer() As Boolean
         Return Me.isQuotes
