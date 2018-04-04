@@ -237,7 +237,7 @@ Public Class Buffer
         End If
     End Sub
     Public Sub Clear(source As Object, e As ElapsedEventArgs)
-        Me.endTimeFrame = DateTime.Now
+        Me.endTimeFrame = Me.startTimeFrame.AddSeconds(5)
         If Me.openPrice = 0 And Me.closePrice = 0 Then
             If Me.lastClosePrice = 0 Then
                 Me.openPrice = Me.midAskBid
@@ -258,7 +258,7 @@ Public Class Buffer
             dbWriter.InsertBufferMetaDataIntoDB(Me)
         End If
         InitBuffer()
-        Me.startTimeFrame = DateTime.Now
+        Me.startTimeFrame = Me.endTimeFrame
     End Sub
 
     Public Sub PutInBuffer(info As QuotesInfo)

@@ -466,7 +466,6 @@ Partial Class Form1
         Me.TicksOrSeconds.Location = New System.Drawing.Point(290, 47)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
         Me.TicksOrSeconds.Size = New System.Drawing.Size(291, 24)
-        Me.TicksOrSeconds.Sorted = True
         Me.TicksOrSeconds.TabIndex = 44
         '
         'TypeOfGraphic
