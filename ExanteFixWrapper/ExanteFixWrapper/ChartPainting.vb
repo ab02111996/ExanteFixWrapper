@@ -48,22 +48,6 @@ Public Class ChartPainting
     Public maxVolumeTrades5sec As Double
     Public highBorderVolumesTrades5sec As Double
     Public yRangeVolumesTrades5sec As Double
-    'сделки - 5 секунд (японские свечи)
-    Public pointsOnScreenTrades5secCandles As Integer
-    Public minPriceTrades5secCandles As Double
-    Public maxPriceTrades5secCandles As Double
-    Public intervalTrades5secCandles As Double
-    Public currentPointTrades5secCandles As Integer
-    Public lastPointTrades5secCandles As Integer
-    Public yRangeTrades5secCandles As Double
-    Public needRePaintingTrades5secCandles As Boolean
-    Public lowBorderTrades5secCandles As Double
-    Public highBorderTrades5secCandles As Double
-    Public maxPointsOnScreenTrades5secCandles As Integer
-    Public minPointsOnScreenTrades5secCandles As Integer
-    Public maxVolumeTrades5secCandles As Double
-    Public highBorderVolumesTrades5secCandles As Double
-    Public yRangeVolumesTrades5secCandles As Double
     'рисование линии - котировки
     Public needDrawLineQuotes As Boolean
     Public point1Quotes As PointF
@@ -109,16 +93,6 @@ Public Class ChartPainting
         Me.maxPointsOnScreenTrades5sec = 400
         Me.minPointsOnScreenTrades5sec = 10
         Me.maxVolumeTrades5sec = 0
-        'сделки - 5 секунд
-        'Me.pointsTrades5secCandles = New List(Of PointTrades5secCandles)
-        Me.pointsOnScreenTrades5secCandles = 20
-        Me.minPriceTrades5secCandles = 999999999
-        Me.maxPriceTrades5secCandles = 0
-        Me.currentPointTrades5secCandles = 0
-        Me.needRePaintingTrades5secCandles = True
-        Me.maxPointsOnScreenTrades5secCandles = 400
-        Me.minPointsOnScreenTrades5secCandles = 10
-        Me.maxVolumeTrades5secCandles = 0
         'рисование линий
         Me.needDrawLineQuotes = False
         Me.isDrawingStartedQuotes = False
@@ -150,20 +124,15 @@ Public Class ChartPainting
         G_Quotes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
         Dim G_Times = TimesQuotesPctBox.CreateGraphics
         G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
-        Dim brush As New SolidBrush(Color.Black)
-        Dim redBrush As New SolidBrush(Color.Red)
-        Dim blueBrush As New SolidBrush(Color.Blue)
-
-        Dim font As New Font("Arial", 8, FontStyle.Regular)
-
         Dim G_Prices As Graphics = PricesQuotesPctBox.CreateGraphics
         G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim btm As New Bitmap(QuotesPctBox.Width, QuotesPctBox.Height)
         Dim G_btm = Graphics.FromImage(btm)
         G_btm.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
+        Dim brush As New SolidBrush(Color.Black)
+        Dim redBrush As New SolidBrush(Color.Red)
+        Dim blueBrush As New SolidBrush(Color.Blue)
+        Dim font As New Font("Arial", 8, FontStyle.Regular)
         Dim P_RedLine As New Pen(Color.Red, 1)
         Dim P_BlueLine As New Pen(Color.Blue, 1)
         Dim P_GrayLine As New Pen(Color.Gray, 1)
@@ -311,35 +280,27 @@ Public Class ChartPainting
 
         Dim G_Trades As Graphics = TradesPctBox.CreateGraphics
         G_Trades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_Times = TimesTradesPctBox.CreateGraphics
         G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
-        Dim brush As New SolidBrush(Color.Black)
-
-        Dim font As New Font("Arial", 8, FontStyle.Regular)
-
         Dim G_Prices As Graphics = PricesTradesPctBox.CreateGraphics
         G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_Volumes As Graphics = VolumesTradesPctBox.CreateGraphics
         G_Volumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_VolumesVolumes = VolumesVolumesTradesPctBox.CreateGraphics
         G_VolumesVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim btmTrades As New Bitmap(TradesPctBox.Width, TradesPctBox.Height)
         Dim G_btmTrades = Graphics.FromImage(btmTrades)
         G_btmTrades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim btmVolumes As New Bitmap(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height)
         Dim G_btmVolumes = Graphics.FromImage(btmVolumes)
         G_btmVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
+        Dim brush As New SolidBrush(Color.Black)
+        Dim font As New Font("Arial", 8, FontStyle.Regular)
         Dim P_RedLine As New Pen(Color.Red, 1)
         Dim P_BlueLine As New Pen(Color.Blue, 1)
         Dim P_GrayLine As New Pen(Color.Gray, 0.3)
         Dim GreenBrush As New SolidBrush(Color.Green)
+
         If (Me.pointsTrades.Count > 1) Then
 
             TimesTradesPctBox.Refresh()
@@ -486,35 +447,27 @@ Public Class ChartPainting
 
         Dim G_Trades As Graphics = TradesPctBox.CreateGraphics
         G_Trades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_Times = TimesTradesPctBox.CreateGraphics
         G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
-        Dim brush As New SolidBrush(Color.Black)
-
-        Dim font As New Font("Arial", 8, FontStyle.Regular)
-
         Dim G_Prices As Graphics = PricesTradesPctBox.CreateGraphics
         G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_Volumes As Graphics = VolumesTradesPctBox.CreateGraphics
         G_Volumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim G_VolumesVolumes = VolumesVolumesTradesPctBox.CreateGraphics
         G_VolumesVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim btmTrades As New Bitmap(TradesPctBox.Width, TradesPctBox.Height)
         Dim G_btmTrades = Graphics.FromImage(btmTrades)
         G_btmTrades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
         Dim btmVolumes As New Bitmap(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height)
         Dim G_btmVolumes = Graphics.FromImage(btmVolumes)
         G_btmVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-
+        Dim brush As New SolidBrush(Color.Black)
+        Dim font As New Font("Arial", 8, FontStyle.Regular)
         Dim P_RedLine As New Pen(Color.Red, 1)
         Dim P_BlueLine As New Pen(Color.Blue, 1)
         Dim P_GrayLine As New Pen(Color.Gray, 0.3)
         Dim GreenBrush As New SolidBrush(Color.Green)
+
         If (Me.pointsTrades.Count > 1) Then
 
             TimesTradesPctBox.Refresh()
@@ -736,11 +689,9 @@ Public Class ChartPainting
                         G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
                     Else
                         If (Me.pointsTrades5sec(index - 1).closePrice < Me.pointsTrades5sec(index).closePrice) Then
-                            'Console.WriteLine("Red" + " " + index.ToString)
                             G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
                             G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
                         Else
-                            'Console.WriteLine("Blue" + " " + index.ToString)
                             G_btmTrades.FillRectangle(Brushes.Blue, rectangleForCandle)
                             G_btmTrades.DrawLine(P_BlueLine, p1Trades, p2Trades)
                         End If

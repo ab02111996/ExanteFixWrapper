@@ -429,7 +429,7 @@ Public Class Form1
         If (Me.TicksOrSeconds.SelectedItem = "Тики") Then
             If (pageList.Count > 0) Then
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0) Then
-                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / TradesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
+                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
                     If (indexOfPoint < 0) Then
@@ -453,7 +453,7 @@ Public Class Form1
         Else
             If (pageList.Count > 0) Then
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades5sec = 0) Then
-                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec - (e.Y / TradesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec
+                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades5sec) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades5sec))
                     If (indexOfPoint < 0) Then
@@ -535,32 +535,62 @@ Public Class Form1
     End Sub
 
     Private Sub VolumesTradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles VolumesTradesPctBox0.MouseMove
-        If (pageList.Count > 0) Then
-            If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0) Then
-                Try
-                    Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / TradesPctBox0.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades
-                    VolumeLabel.Text = Format(proportion, "0.00")
+        If (TicksOrSeconds.SelectedItem = "Тики") Then
+            If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0) Then
+                    Try
+                        Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / pageList(Tabs.SelectedIndex).VolumesTradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades
+                        VolumeLabel.Text = Format(proportion, "0.00")
 
-                    Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
-                    If (indexOfPoint < 0) Then
-                        indexOfPoint = 0
-                    End If
-                    If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
-                        indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
-                        CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
-                    Else
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
-                            CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).tradeVolume
-
-                        Else
-                            CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).tradeVolume
+                        Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
+                        If (indexOfPoint < 0) Then
+                            indexOfPoint = 0
                         End If
-                    End If
-                Catch ex As Exception
+                        If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                            indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                            CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).tradeVolume
+                        Else
+                            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).tradeVolume
 
-                End Try
+                            Else
+                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).tradeVolume
+                            End If
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+                End If
+            End If
+        Else
+            If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades5sec = 0) Then
+                    Try
+                        Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades5sec - (e.Y / pageList(Tabs.SelectedIndex).VolumesTradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades5sec
+                        VolumeLabel.Text = Format(proportion, "0.00")
+
+                        Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades5sec))
+                        If (indexOfPoint < 0) Then
+                            indexOfPoint = 0
+                        End If
+                        If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
+                            indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                            CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeSell
+                        Else
+                            If (pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
+                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.lastPointTrades5sec).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.lastPointTrades5sec).volumeSell
+
+                            Else
+                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec + indexOfPoint).volumeSell + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec + indexOfPoint).volumeBuy
+                            End If
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+                End If
             End If
         End If
+
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
