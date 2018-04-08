@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="ChartPainting.vb" />
+    <Compile Include="DataBaseReader.vb" />
     <Compile Include="DataBaseWriter.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>

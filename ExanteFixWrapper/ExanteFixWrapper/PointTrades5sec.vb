@@ -6,7 +6,9 @@
     Public volumeSell As Double
     Public volumeBuy As Double
     Public time As DateTime
+    Public Sub New()
 
+    End Sub
     Public Sub New(buffer As Buffer)
         openPrice = buffer.openPrice
         closePrice = buffer.closePrice
