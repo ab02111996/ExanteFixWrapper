@@ -57,3 +57,5 @@ D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\E
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADODB.dll
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADOX.dll
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.ResolveComReference.cache
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.CoreCompileInputs.cache
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.CopyComplete
