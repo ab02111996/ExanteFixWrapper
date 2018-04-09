@@ -6635,3 +6635,17 @@
 20180409-10:11:10.022 : Initiated logout request
 20180409-10:11:10.255 : Received logout response
 20180409-10:11:10.255 : Disconnecting
+20180409-10:13:48.074 : Created session
+20180409-10:13:48.109 : Connecting to fixuat2.exante.eu on port 8100
+20180409-10:13:48.292 : Initiated logon request
+20180409-10:13:48.732 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180409-10:13:48.733 : Received logon response
+20180409-10:17:28.544 : Timed out waiting for heartbeat
+20180409-10:17:28.545 : Disconnecting
+20180409-10:17:29.567 : Connecting to fixuat2.exante.eu on port 8100
+20180409-10:17:29.707 : Initiated logon request
+20180409-10:17:30.144 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180409-10:17:30.144 : Received logon response
+20180409-10:17:38.711 : Initiated logout request
+20180409-10:17:38.853 : Received logout response
+20180409-10:17:38.853 : Disconnecting

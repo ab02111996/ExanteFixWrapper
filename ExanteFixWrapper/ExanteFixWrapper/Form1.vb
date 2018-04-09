@@ -64,10 +64,10 @@ Public Class Form1
         If (Not isOnline) Then
             Label1.Dispose()
             Button1.Dispose()
-            PriceLabel0.Dispose()
-            TimeLabel0.Dispose()
-            VolumeLabel.Dispose()
-            CurVolumeLabel.Dispose()
+            AskPriceLabel.Dispose()
+            BidPriceLabel.Dispose()
+            TradePriceLabel.Dispose()
+            TradeVolumeLabel.Dispose()
             SubscribreButton0.Text = "Загрузить"
         End If
         DoubleBuffered = True
@@ -609,8 +609,8 @@ Public Class Form1
                         If (indexOfPoint < 0) Then
                             indexOfPoint = 0
                         End If
-                        If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
-                            indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
+                        If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
+                            indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1
                             CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeSell
                         Else
                             If (pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
