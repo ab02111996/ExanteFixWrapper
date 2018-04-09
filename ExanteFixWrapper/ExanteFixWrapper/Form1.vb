@@ -131,27 +131,34 @@ Public Class Form1
 
     'rigth quotes
     Private Sub RightQuotesButton_Click(sender As Object, e As EventArgs) Handles RightQuotesButton0.Click
-        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
-        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
-        If (pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes) Then
-            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes + 10
-            If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
-                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes
-            End If
+        Try
+            pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+            pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+            If (pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes + 10
+                If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes
+                End If
 
-            If (Not pageList(Tabs.SelectedIndex).cp.lastPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
-                Try
-                    pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
-                Catch ex As Exception
-                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
-                    If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
-                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
-                    End If
-                End Try
-            Else
-                pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
+                If (Not pageList(Tabs.SelectedIndex).cp.lastPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
+                    Try
+                        pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+                    Catch ex As Exception
+                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+                        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
+                        End If
+                    End Try
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
+                End If
             End If
-        End If
+        Catch ex As Exception
+            'pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
+            'pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 2
+            'pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
+        End Try
+
 
     End Sub
 
@@ -428,7 +435,7 @@ Public Class Form1
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove
         If (Me.TicksOrSeconds.SelectedItem = "Тики") Then
             If (pageList.Count > 0) Then
-                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0 And Not pageList(Tabs.SelectedIndex).cp.pointsTrades.Count = 0) Then
                     Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
@@ -452,7 +459,7 @@ Public Class Form1
             End If
         Else
             If (pageList.Count > 0) Then
-                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades5sec = 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades5sec = 0 And Not pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count = 0) Then
                     Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades5sec
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades5sec) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades5sec))
@@ -524,7 +531,12 @@ Public Class Form1
                         If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 0) Then
                             pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
                         Else
-                            pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                            If (TicksOrSeconds.SelectedItem = "Тики") Then
+                                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                            Else
+                                pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                            End If
+
                         End If
                     Catch ex As Exception
 
@@ -826,6 +838,7 @@ Public Class Form1
         AddHandler TradesPctBox.MouseMove, AddressOf Me.TradesPctBox_MouseMove
         AddHandler QuotesPctBox.MouseMove, AddressOf Me.QuotesPctBox_MouseMove
         AddHandler VolumesTradesPctBox.MouseMove, AddressOf Me.VolumesTradesPctBox_MouseMove
+        AddHandler Charts.SelectedIndexChanged, AddressOf Me.Charts0_SelectedIndexChanged
 
         Dim newPage = New Page(New ChartPainting, QuotesPctBox, PricesQuotesPctBox, TimesQuotesPctBox, TradesPctBox, PricesTradesPctBox, TimesTradesPctBox,
                LeftQuotesButton, RightQuotesButton, PlusQuotesButton, MinusQuotesButton, LeftTradesButton, RightTradesButton, PlusTradesButton, MinusTradesButton, Charts, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
@@ -857,6 +870,36 @@ Public Class Form1
     Private Sub TypeOfGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfGraphic.SelectedIndexChanged
         If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
             If (TicksOrSeconds.SelectedItem = "5 секунд") Then
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False) Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = True
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Charts0_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Charts0.SelectedIndexChanged
+        If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 0) Then
+            If (pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False) Then
+                pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+            Else
+                pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
+                pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+                pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
+            End If
+        Else
+            If (TicksOrSeconds.SelectedItem = "Тики") Then
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+                End If
+            Else
                 If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False) Then
                     pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 Else

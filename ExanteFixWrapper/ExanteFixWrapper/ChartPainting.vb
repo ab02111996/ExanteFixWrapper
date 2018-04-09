@@ -105,159 +105,170 @@ Public Class ChartPainting
     End Sub
 
     Public Sub paintingQuotes(QuotesPctBox As PictureBox, TimesQuotesPctBox As PictureBox, PricesQuotesPctBox As PictureBox)
-
-        If (needRePaintingQuotes) Then
-            If (Me.pointsQuotes.Count > Me.pointsOnScreenQuotes) Then
-                currentPointQuotes += 1
+        Try
+            If (needRePaintingQuotes) Then
+                If (Me.pointsQuotes.Count > Me.pointsOnScreenQuotes) Then
+                    currentPointQuotes += 1
+                End If
             End If
-        End If
 
-        If (Me.pointsQuotes.Count < pointsOnScreenQuotes) Then
-            lastPointQuotes = Me.pointsQuotes.Count - 1
-        Else
-            lastPointQuotes = currentPointQuotes + pointsOnScreenQuotes - 1
-        End If
+            If (Me.pointsQuotes.Count < pointsOnScreenQuotes) Then
+                lastPointQuotes = Me.pointsQuotes.Count - 1
+            Else
+                lastPointQuotes = currentPointQuotes + pointsOnScreenQuotes - 1
+            End If
 
-        intervalQuotes = QuotesPctBox.Width / pointsOnScreenQuotes
+            intervalQuotes = QuotesPctBox.Width / pointsOnScreenQuotes
 
-        Dim G_Quotes As Graphics = QuotesPctBox.CreateGraphics
-        G_Quotes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        Dim G_Times = TimesQuotesPctBox.CreateGraphics
-        G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        Dim G_Prices As Graphics = PricesQuotesPctBox.CreateGraphics
-        G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        Dim btm As New Bitmap(QuotesPctBox.Width, QuotesPctBox.Height)
-        Dim G_btm = Graphics.FromImage(btm)
-        G_btm.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        Dim brush As New SolidBrush(Color.Black)
-        Dim redBrush As New SolidBrush(Color.Red)
-        Dim blueBrush As New SolidBrush(Color.Blue)
-        Dim font As New Font("Arial", 8, FontStyle.Regular)
-        Dim P_RedLine As New Pen(Color.Red, 1)
-        Dim P_BlueLine As New Pen(Color.Blue, 1)
-        Dim P_GrayLine As New Pen(Color.Gray, 1)
-        If (Me.pointsQuotes.Count > 1) Then
+            Dim G_Quotes As Graphics = QuotesPctBox.CreateGraphics
+            G_Quotes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            Dim G_Times = TimesQuotesPctBox.CreateGraphics
+            G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            Dim G_Prices As Graphics = PricesQuotesPctBox.CreateGraphics
+            G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            Dim btm As New Bitmap(QuotesPctBox.Width, QuotesPctBox.Height)
+            Dim G_btm = Graphics.FromImage(btm)
+            G_btm.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            Dim brush As New SolidBrush(Color.Black)
+            Dim redBrush As New SolidBrush(Color.Red)
+            Dim blueBrush As New SolidBrush(Color.Blue)
+            Dim font As New Font("Arial", 8, FontStyle.Regular)
+            Dim P_RedLine As New Pen(Color.Red, 1)
+            Dim P_BlueLine As New Pen(Color.Blue, 1)
+            Dim P_GrayLine As New Pen(Color.Gray, 1)
+            If (Me.pointsQuotes.Count > 1) Then
 
-            TimesQuotesPctBox.Refresh()
-            PricesQuotesPctBox.Refresh()
+                TimesQuotesPctBox.Refresh()
+                PricesQuotesPctBox.Refresh()
 
-            For index = Me.currentPointQuotes To Me.lastPointQuotes - 1
-                If (index = Me.currentPointQuotes) Then
-                    If (Me.pointsQuotes(index).askPrice > Me.pointsQuotes(index).bidPrice) Then
-                        highBorderQuotes = Me.pointsQuotes(index).askPrice
-                        lowBorderQuotes = Me.pointsQuotes(index).bidPrice
+                For index = Me.currentPointQuotes To Me.lastPointQuotes - 1
+                    If (index = Me.currentPointQuotes) Then
+                        If (Me.pointsQuotes(index).askPrice > Me.pointsQuotes(index).bidPrice) Then
+                            highBorderQuotes = Me.pointsQuotes(index).askPrice
+                            lowBorderQuotes = Me.pointsQuotes(index).bidPrice
+                        Else
+                            highBorderQuotes = Me.pointsQuotes(index).bidPrice
+                            lowBorderQuotes = Me.pointsQuotes(index).askPrice
+                        End If
                     Else
-                        highBorderQuotes = Me.pointsQuotes(index).bidPrice
-                        lowBorderQuotes = Me.pointsQuotes(index).askPrice
-                    End If
-                Else
-                    If (Me.pointsQuotes(index).askPrice > highBorderQuotes) Then
-                        highBorderQuotes = Me.pointsQuotes(index).askPrice
-                    End If
-                    If (Me.pointsQuotes(index).bidPrice > highBorderQuotes) Then
-                        highBorderQuotes = Me.pointsQuotes(index).bidPrice
-                    End If
-
-                    If (Me.pointsQuotes(index).askPrice < lowBorderQuotes) Then
-                        lowBorderQuotes = Me.pointsQuotes(index).askPrice
-                    End If
-                    If (Me.pointsQuotes(index).bidPrice < lowBorderQuotes) Then
-                        lowBorderQuotes = Me.pointsQuotes(index).bidPrice
-                    End If
-                End If
-            Next
-
-            highBorderQuotes += highBorderQuotes * 0.0001
-            lowBorderQuotes -= lowBorderQuotes * 0.0001
-            yRangeQuotes = highBorderQuotes - lowBorderQuotes
-
-            For index = Me.currentPointQuotes To Me.lastPointQuotes - 1
-                If (Me.pointsQuotes.Count > 1 And Me.yRangeQuotes = 0) Then
-                    Exit Sub
-                End If
-                Dim procentsAsk1 As Double = ((Me.pointsQuotes(index).askPrice - lowBorderQuotes) / yRangeQuotes)
-                Dim procentsAsk2 As Double = ((Me.pointsQuotes(index + 1).askPrice - lowBorderQuotes) / yRangeQuotes)
-                Dim procentsBid1 As Double = ((Me.pointsQuotes(index).bidPrice - lowBorderQuotes) / yRangeQuotes)
-                Dim procentsBid2 As Double = ((Me.pointsQuotes(index + 1).bidPrice - lowBorderQuotes) / yRangeQuotes)
-                Dim p1Ask As Drawing.PointF
-                Dim p2Ask As Drawing.PointF
-                Dim p1Bid As Drawing.PointF
-                Dim p2Bid As Drawing.PointF
-                p1Ask.X = (index - Me.currentPointQuotes) * Me.intervalQuotes
-                p1Ask.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsAsk1
-                p2Ask.X = (index + 1 - Me.currentPointQuotes) * Me.intervalQuotes
-                p2Ask.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsAsk2
-                p1Bid.X = (index - Me.currentPointQuotes) * Me.intervalQuotes
-                p1Bid.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsBid1
-                p2Bid.X = (index + 1 - Me.currentPointQuotes) * Me.intervalQuotes
-                p2Bid.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsBid2
-
-                If (index = Me.currentPointQuotes) Then
-                    Dim p1 As Drawing.PointF = New PointF(0.0, QuotesPctBox.Height / 2)
-                    Dim p2 As Drawing.PointF = New PointF(QuotesPctBox.Width * 1.0, QuotesPctBox.Height / 2)
-                    G_btm.DrawLine(P_GrayLine, p1, p2)
-                    p1 = New PointF(0.0, QuotesPctBox.Height * 0.25)
-                    p2 = New PointF(QuotesPctBox.Width, QuotesPctBox.Height * 0.25)
-                    G_btm.DrawLine(P_GrayLine, p1, p2)
-                    p1 = New PointF(0.0, QuotesPctBox.Height * 0.75)
-                    p2 = New PointF(QuotesPctBox.Width, QuotesPctBox.Height * 0.75)
-                    G_btm.DrawLine(P_GrayLine, p1, p2)
-                End If
-
-                G_btm.DrawLine(P_RedLine, p1Ask, p2Ask)
-                G_btm.DrawLine(P_BlueLine, p1Bid, p2Bid)
-
-                If (Me.pointsOnScreenQuotes <= 20) Then
-                    G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                    G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
-                Else
-                    If (Me.pointsOnScreenQuotes > 20 And Me.pointsOnScreenQuotes <= 45) Then
-                        If (index Mod 2 = 0) Then
-                            G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                            G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                        If (Me.pointsQuotes(index).askPrice > highBorderQuotes) Then
+                            highBorderQuotes = Me.pointsQuotes(index).askPrice
                         End If
-                    ElseIf (Me.pointsOnScreenQuotes > 45 And Me.pointsOnScreenQuotes <= 100) Then
-                        If (index Mod 5 = 0) Then
-                            G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                            G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                        If (Me.pointsQuotes(index).bidPrice > highBorderQuotes) Then
+                            highBorderQuotes = Me.pointsQuotes(index).bidPrice
                         End If
-                    ElseIf (Me.pointsOnScreenQuotes > 100 And Me.pointsOnScreenQuotes <= 200) Then
-                        If (index Mod 20 = 0) Then
-                            G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                            G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+
+                        If (Me.pointsQuotes(index).askPrice < lowBorderQuotes) Then
+                            lowBorderQuotes = Me.pointsQuotes(index).askPrice
                         End If
-                    ElseIf (Me.pointsOnScreenQuotes > 200 And Me.pointsOnScreenQuotes <= 300) Then
-                        If (index Mod 40 = 0) Then
-                            G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                            G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
-                        End If
-                    ElseIf (Me.pointsOnScreenQuotes > 300 And Me.pointsOnScreenQuotes <= 400) Then
-                        If (index Mod 75 = 0) Then
-                            G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
-                            G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                        If (Me.pointsQuotes(index).bidPrice < lowBorderQuotes) Then
+                            lowBorderQuotes = Me.pointsQuotes(index).bidPrice
                         End If
                     End If
+                Next
 
-                End If
+                highBorderQuotes += highBorderQuotes * 0.0001
+                lowBorderQuotes -= lowBorderQuotes * 0.0001
+                yRangeQuotes = highBorderQuotes - lowBorderQuotes
 
-                If (index = Me.lastPointQuotes - 1) Then
-                    G_Prices.DrawString(Format(lowBorderQuotes, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height - 12)
-                    G_Prices.DrawString(Format(highBorderQuotes, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, 7)
-                    G_Prices.DrawString(Format((lowBorderQuotes + highBorderQuotes) / 2, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height / 2)
-                    G_Prices.DrawString(Format(lowBorderQuotes + yRangeQuotes * 0.25, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height * 0.75)
-                    G_Prices.DrawString(Format(lowBorderQuotes + yRangeQuotes * 0.75, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height * 0.25)
-                End If
-            Next
+                For index = Me.currentPointQuotes To Me.lastPointQuotes - 1
+                    If (Me.pointsQuotes.Count > 1 And Me.yRangeQuotes = 0) Then
+                        Exit Sub
+                    End If
+                    Dim procentsAsk1 As Double = ((Me.pointsQuotes(index).askPrice - lowBorderQuotes) / yRangeQuotes)
+                    Dim procentsAsk2 As Double = ((Me.pointsQuotes(index + 1).askPrice - lowBorderQuotes) / yRangeQuotes)
+                    Dim procentsBid1 As Double = ((Me.pointsQuotes(index).bidPrice - lowBorderQuotes) / yRangeQuotes)
+                    Dim procentsBid2 As Double = ((Me.pointsQuotes(index + 1).bidPrice - lowBorderQuotes) / yRangeQuotes)
+                    Dim p1Ask As Drawing.PointF
+                    Dim p2Ask As Drawing.PointF
+                    Dim p1Bid As Drawing.PointF
+                    Dim p2Bid As Drawing.PointF
+                    p1Ask.X = (index - Me.currentPointQuotes) * Me.intervalQuotes
+                    p1Ask.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsAsk1
+                    p2Ask.X = (index + 1 - Me.currentPointQuotes) * Me.intervalQuotes
+                    p2Ask.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsAsk2
+                    p1Bid.X = (index - Me.currentPointQuotes) * Me.intervalQuotes
+                    p1Bid.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsBid1
+                    p2Bid.X = (index + 1 - Me.currentPointQuotes) * Me.intervalQuotes
+                    p2Bid.Y = QuotesPctBox.Height - QuotesPctBox.Height * procentsBid2
 
-            QuotesPctBox.Refresh()
-            QuotesPctBox.Image = btm
+                    If (index = Me.currentPointQuotes) Then
+                        Dim p1 As Drawing.PointF = New PointF(0.0, QuotesPctBox.Height / 2)
+                        Dim p2 As Drawing.PointF = New PointF(QuotesPctBox.Width * 1.0, QuotesPctBox.Height / 2)
+                        G_btm.DrawLine(P_GrayLine, p1, p2)
+                        p1 = New PointF(0.0, QuotesPctBox.Height * 0.25)
+                        p2 = New PointF(QuotesPctBox.Width, QuotesPctBox.Height * 0.25)
+                        G_btm.DrawLine(P_GrayLine, p1, p2)
+                        p1 = New PointF(0.0, QuotesPctBox.Height * 0.75)
+                        p2 = New PointF(QuotesPctBox.Width, QuotesPctBox.Height * 0.75)
+                        G_btm.DrawLine(P_GrayLine, p1, p2)
+                    End If
 
-        End If
+                    G_btm.DrawLine(P_RedLine, p1Ask, p2Ask)
+                    G_btm.DrawLine(P_BlueLine, p1Bid, p2Bid)
 
-        If (Me.isLineReadyQuotes) Then
-            Dim P_BlackLine As New Pen(Color.Black, 1)
-            G_btm.DrawLine(P_BlackLine, Me.point1Quotes, Me.point2Quotes)
-        End If
+                    If (Me.pointsOnScreenQuotes <= 20) Then
+                        G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                        G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                    Else
+                        If (Me.pointsOnScreenQuotes > 20 And Me.pointsOnScreenQuotes <= 45) Then
+                            If (index Mod 2 = 0) Then
+                                G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                                G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                            End If
+                        ElseIf (Me.pointsOnScreenQuotes > 45 And Me.pointsOnScreenQuotes <= 100) Then
+                            If (index Mod 5 = 0) Then
+                                G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                                G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                            End If
+                        ElseIf (Me.pointsOnScreenQuotes > 100 And Me.pointsOnScreenQuotes <= 200) Then
+                            If (index Mod 20 = 0) Then
+                                G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                                G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                            End If
+                        ElseIf (Me.pointsOnScreenQuotes > 200 And Me.pointsOnScreenQuotes <= 300) Then
+                            If (index Mod 40 = 0) Then
+                                G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                                G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                            End If
+                        ElseIf (Me.pointsOnScreenQuotes > 300 And Me.pointsOnScreenQuotes <= 400) Then
+                            If (index Mod 75 = 0) Then
+                                G_btm.DrawLine(P_GrayLine, p1Ask.X, 0, p1Ask.X, QuotesPctBox.Height)
+                                G_Times.DrawString(Me.pointsQuotes(index).time.ToLongTimeString, font, brush, p1Ask.X, TimesQuotesPctBox.Height / 2)
+                            End If
+                        End If
+
+                    End If
+
+                    If (index = Me.lastPointQuotes - 1) Then
+                        G_Prices.DrawString(Format(lowBorderQuotes, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height - 12)
+                        G_Prices.DrawString(Format(highBorderQuotes, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, 7)
+                        G_Prices.DrawString(Format((lowBorderQuotes + highBorderQuotes) / 2, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height / 2)
+                        G_Prices.DrawString(Format(lowBorderQuotes + yRangeQuotes * 0.25, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height * 0.75)
+                        G_Prices.DrawString(Format(lowBorderQuotes + yRangeQuotes * 0.75, "0.00"), font, brush, PricesQuotesPctBox.Width / 2 - 15, PricesQuotesPctBox.Height * 0.25)
+                    End If
+                Next
+
+                QuotesPctBox.Refresh()
+                QuotesPctBox.Image = btm
+
+            End If
+
+            If (Me.isLineReadyQuotes) Then
+                Dim P_BlackLine As New Pen(Color.Black, 1)
+                G_btm.DrawLine(P_BlackLine, Me.point1Quotes, Me.point2Quotes)
+            End If
+        Catch ex As Exception
+            Me.currentPointQuotes -= 1
+            If (Me.needRePaintingQuotes = False) Then
+                Me.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+            Else
+                Me.needRePaintingQuotes = False
+                Me.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
+                Me.needRePaintingQuotes = True
+            End If
+        End Try
+
 
 
     End Sub
