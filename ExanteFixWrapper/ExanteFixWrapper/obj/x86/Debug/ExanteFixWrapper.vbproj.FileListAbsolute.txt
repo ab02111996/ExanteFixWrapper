@@ -59,3 +59,4 @@ D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\I
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.ResolveComReference.cache
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.CoreCompileInputs.cache
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.CopyComplete
+D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.FirstForm.resources

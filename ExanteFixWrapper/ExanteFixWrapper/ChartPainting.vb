@@ -93,6 +93,9 @@ Public Class ChartPainting
         Me.maxPointsOnScreenTrades5sec = 400
         Me.minPointsOnScreenTrades5sec = 10
         Me.maxVolumeTrades5sec = 0
+        If (Not Form1.isOnline) Then
+            Me.currentPointTrades5sec = 0
+        End If
         'рисование линий
         Me.needDrawLineQuotes = False
         Me.isDrawingStartedQuotes = False
@@ -442,6 +445,7 @@ Public Class ChartPainting
     End Sub
 
     Public Sub paintingTrades5sec(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox)
+        needRePaintingTrades5sec = False
         If (needRePaintingTrades5sec) Then
             If (Me.pointsTrades5sec.Count > Me.pointsOnScreenTrades5sec) Then
                 currentPointTrades5sec += 1
@@ -479,7 +483,7 @@ Public Class ChartPainting
         Dim P_GrayLine As New Pen(Color.Gray, 0.3)
         Dim GreenBrush As New SolidBrush(Color.Green)
 
-        If (Me.pointsTrades.Count > 1) Then
+        If (Me.pointsTrades5sec.Count > 1) Then
 
             TimesTradesPctBox.Refresh()
             PricesTradesPctBox.Refresh()
@@ -754,13 +758,13 @@ Public Class ChartPainting
                     End If
 
                     If (index = Me.lastPointTrades5sec - 1) Then
-                            G_Prices.DrawString(Format(lowBorderTrades5sec, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height - 12)
-                            G_Prices.DrawString(Format(highBorderTrades5sec, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, 7)
-                            G_Prices.DrawString(Format((lowBorderTrades5sec + highBorderTrades5sec) / 2, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height / 2)
-                            G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.25, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.75)
-                            G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
-                            G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades5sec, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
-                        End If
+                        G_Prices.DrawString(Format(lowBorderTrades5sec, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height - 12)
+                        G_Prices.DrawString(Format(highBorderTrades5sec, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, 7)
+                        G_Prices.DrawString(Format((lowBorderTrades5sec + highBorderTrades5sec) / 2, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height / 2)
+                        G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.25, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.75)
+                        G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
+                        G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades5sec, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
+                    End If
                 Next
 
             End If

@@ -10,7 +10,7 @@ Public Class DataBaseReader
     Public Sub New(dbPath As String)
         Me.dbPath = dbPath
     End Sub
-    Public Function GetListOfTrades5secPoints(instrumentName As String) As List(Of PointTrades5sec)
+    Public Function GetListOfTrades5secPoints(instrumentName As String) As Tuple(Of List(Of PointTrades5sec), Double)
         Dim files = Directory.GetFiles(dbPath, instrumentName.Replace("/", "_" + "_") + "_*.accdb")
         Dim lastFileCreationDate = New DateTime(0)
         For Each item As String In files
@@ -27,8 +27,9 @@ Public Class DataBaseReader
         recordSet.ActiveConnection = currentConnection
         recordSet.Open("FiveSecondsDataTable")
         Dim list5sec = New List(Of PointTrades5sec)
-        Dim point As New PointTrades5sec
+        Dim maxVolume As Double = -1
         While Not recordSet.EOF
+            Dim point As New PointTrades5sec
             point.time = recordSet.Fields.Item(3).Value
             point.time.AddMilliseconds(recordSet.Fields.Item(4).Value)
             point.openPrice = recordSet.Fields.Item(6).Value
@@ -37,10 +38,13 @@ Public Class DataBaseReader
             point.lowPrice = recordSet.Fields.Item(8).Value
             point.volumeSell = recordSet.Fields.Item(10).Value
             point.volumeBuy = recordSet.Fields.Item(11).Value
+            If ((point.volumeBuy + point.volumeSell) > maxVolume) Then
+                maxVolume = point.volumeBuy + point.volumeSell
+            End If
             list5sec.Add(point)
             recordSet.MoveNext()
         End While
-
-        Return list5sec
+        Dim tuple As New Tuple(Of List(Of PointTrades5sec), Double)(list5sec, maxVolume)
+        Return tuple
     End Function
 End Class

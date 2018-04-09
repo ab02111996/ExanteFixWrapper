@@ -4,6 +4,7 @@ Public Class Form1
     Dim fixConfigPath As String = "FIX\fix_vendor.ini"
     Dim feedReciever As QuoteFixReciever
     Public pageList As List(Of Page) = New List(Of Page)
+    Public isOnline As Boolean
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -28,24 +29,52 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
-        Try
-            pageList(Tabs.SelectedIndex).cp.isSubscribed = True
-            Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
-            Dim subscribes = feedReciever.GetSubscribeInfos()
-            feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
-            pageList(Tabs.SelectedIndex).bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
-            pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
-        Catch ex As Exception
-            MsgBox("Нет подключения")
-        End Try
+        If (isOnline) Then
+            Try
+                pageList(Tabs.SelectedIndex).cp.isSubscribed = True
+                Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
+                Dim subscribes = feedReciever.GetSubscribeInfos()
+                feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
+                pageList(Tabs.SelectedIndex).bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
+                pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
+            Catch ex As Exception
+                MsgBox("Нет подключения")
+            End Try
+        Else
+            Try
+                Dim dbReader As New DataBaseReader("D:\Bases")
+                Dim tuple = dbReader.GetListOfTrades5secPoints(ExanteIDTextBox0.Text)
+                pageList(Tabs.SelectedIndex).cp.maxVolumeTrades5sec = tuple.Item2
+                pageList(Tabs.SelectedIndex).cp.isSubscribed = True
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec = 0
+                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = Tuple.Item1
+                pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
+
+            Catch ex As Exception
+                MsgBox("Ошибка")
+            End Try
+
+        End If
+
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If (Not isOnline) Then
+            Label1.Dispose()
+            Button1.Dispose()
+            PriceLabel0.Dispose()
+            TimeLabel0.Dispose()
+            VolumeLabel.Dispose()
+            CurVolumeLabel.Dispose()
+            SubscribreButton0.Text = "Загрузить"
+        End If
         DoubleBuffered = True
         Dim newPage = New Page(New ChartPainting, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
                 LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0)
         pageList.Add(newPage)
-        TicksOrSeconds.SelectedItem = "Тики"
+        TicksOrSeconds.SelectedItem = "5 секунд"
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -131,33 +160,28 @@ Public Class Form1
 
     'rigth quotes
     Private Sub RightQuotesButton_Click(sender As Object, e As EventArgs) Handles RightQuotesButton0.Click
-        Try
-            pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
-            pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
-            If (pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes) Then
-                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes + 10
-                If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
-                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes
-                End If
-
-                If (Not pageList(Tabs.SelectedIndex).cp.lastPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
-                    Try
-                        pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
-                    Catch ex As Exception
-                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
-                            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
-                        End If
-                    End Try
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
-                End If
+        pageList(Tabs.SelectedIndex).cp.needDrawLineQuotes = False
+        pageList(Tabs.SelectedIndex).cp.isLineReadyQuotes = False
+        If (pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes) Then
+            pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.currentPointQuotes + 10
+            If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes + pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes > pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count) Then
+                pageList(Tabs.SelectedIndex).cp.currentPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenQuotes
             End If
-        Catch ex As Exception
-            'pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = False
-            'pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 2
-            'pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
-        End Try
+
+            If (Not pageList(Tabs.SelectedIndex).cp.lastPointQuotes = pageList(Tabs.SelectedIndex).cp.pointsQuotes.Count - 1) Then
+                Try
+                    pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
+                Catch ex As Exception
+                    pageList(Tabs.SelectedIndex).cp.currentPointQuotes -= 1
+                    If (pageList(Tabs.SelectedIndex).cp.currentPointQuotes < 0) Then
+                        pageList(Tabs.SelectedIndex).cp.currentPointQuotes = 0
+                    End If
+                End Try
+            Else
+                pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
+            End If
+        End If
+
 
 
     End Sub
