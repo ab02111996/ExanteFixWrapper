@@ -44,18 +44,16 @@ Partial Class FirstForm
         Me.OnlineRB.Name = "OnlineRB"
         Me.OnlineRB.Size = New System.Drawing.Size(70, 21)
         Me.OnlineRB.TabIndex = 1
-        Me.OnlineRB.TabStop = True
         Me.OnlineRB.Text = "Online"
         Me.OnlineRB.UseVisualStyleBackColor = True
         '
         'OfflaneRB
         '
         Me.OfflaneRB.AutoSize = True
-        Me.OfflaneRB.Location = New System.Drawing.Point(162, 54)
+        Me.OfflaneRB.Location = New System.Drawing.Point(172, 54)
         Me.OfflaneRB.Name = "OfflaneRB"
         Me.OfflaneRB.Size = New System.Drawing.Size(70, 21)
         Me.OfflaneRB.TabIndex = 2
-        Me.OfflaneRB.TabStop = True
         Me.OfflaneRB.Text = "Offline"
         Me.OfflaneRB.UseVisualStyleBackColor = True
         '

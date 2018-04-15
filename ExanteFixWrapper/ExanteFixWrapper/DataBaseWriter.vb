@@ -137,7 +137,7 @@ Public Class DataBaseWriter
         Else
             Dim metaData = buffer.GetBufferMetaData()
             If metaData IsNot Nothing Then
-                For Each qi As QuotesInfo In metaData
+                For Each qi As QuotesInfo In metaData.ToArray()
                     Dim sb As StringBuilder = New StringBuilder()
                     sb.Append("INSERT INTO MetaDataTable([Time], [Milliseconds], [LocalTime], [LocalTimeMilliseconds], [Message], [Instrument], [Direction], [Price], [Volume]) VALUES")
                     sb.Append("(")
