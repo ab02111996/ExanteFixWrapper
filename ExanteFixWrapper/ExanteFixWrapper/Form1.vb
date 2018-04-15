@@ -48,7 +48,7 @@ Public Class Form1
                 pageList(Tabs.SelectedIndex).cp.isSubscribed = True
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False
                 pageList(Tabs.SelectedIndex).cp.currentPointTrades5sec = 0
-                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = Tuple.Item1
+                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = tuple.Item1
                 pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
 
@@ -71,10 +71,14 @@ Public Class Form1
             SubscribreButton0.Text = "Загрузить"
         End If
         DoubleBuffered = True
-        Dim newPage = New Page(New ChartPainting, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
+        Dim newPage = New Page(New ChartPainting(Me), QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
                 LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0)
         pageList.Add(newPage)
         TicksOrSeconds.SelectedItem = "5 секунд"
+        BuyAndSell.Checked = True
+        AddHandler Me.Buy.CheckedChanged, AddressOf RadiobuttonOnChange
+        AddHandler Me.Sell.CheckedChanged, AddressOf RadiobuttonOnChange
+        AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -864,7 +868,7 @@ Public Class Form1
         AddHandler VolumesTradesPctBox.MouseMove, AddressOf Me.VolumesTradesPctBox_MouseMove
         AddHandler Charts.SelectedIndexChanged, AddressOf Me.Charts0_SelectedIndexChanged
 
-        Dim newPage = New Page(New ChartPainting, QuotesPctBox, PricesQuotesPctBox, TimesQuotesPctBox, TradesPctBox, PricesTradesPctBox, TimesTradesPctBox,
+        Dim newPage = New Page(New ChartPainting(Me), QuotesPctBox, PricesQuotesPctBox, TimesQuotesPctBox, TradesPctBox, PricesTradesPctBox, TimesTradesPctBox,
                LeftQuotesButton, RightQuotesButton, PlusQuotesButton, MinusQuotesButton, LeftTradesButton, RightTradesButton, PlusTradesButton, MinusTradesButton, Charts, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
         pageList.Add(newPage)
     End Sub
@@ -933,5 +937,18 @@ Public Class Form1
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim cloneForm As Form1Clone = New Form1Clone(Me.feedReciever)
+        'cloneForm.ExanteIDTextBox0.Text = Me.ExanteIDTextBox0.Text
+        cloneForm.Show()
+        pageList(Tabs.SelectedIndex).listOfClonedForms = New List(Of Form1Clone)
+        pageList(Tabs.SelectedIndex).listOfClonedForms.Add(cloneForm)
+    End Sub
+
+    Private Sub RadiobuttonOnChange(sender As System.Object, e As System.EventArgs)
+        Dim rb = CType(sender, RadioButton)
+        TypeOfGraphic_SelectedIndexChanged(sender, e)
     End Sub
 End Class

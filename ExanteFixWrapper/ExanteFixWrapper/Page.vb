@@ -23,6 +23,7 @@ Public Class Page
     Public VolumesTradesPctBox As PictureBox
     Public VolumesVolumesTradesPctBox As PictureBox
     Public TabId As Integer
+    Public listOfClonedForms As List(Of Form1Clone)
 
     Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
@@ -87,7 +88,10 @@ Public Class Page
                 Me.cp.minPriceQuotes = currentMinPriceQuotes
             End If
 
-            Me.cp.pointsQuotes.Add(New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp))
+            Dim pq As New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp)
+
+
+            Me.cp.pointsQuotes.Add(pq)
             If QuotesPctBox.IsHandleCreated Then
                 Me.QuotesPctBox.Invoke(Sub()
                                            If (Not Me.cp.isDrawingStartedQuotes) Then
@@ -119,9 +123,16 @@ Public Class Page
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
+            Dim ticksOrSeconds As ComboBox
+            If (cp.isCloned) Then
+                ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds
+            Else
+                ticksOrSeconds = CType(cp.usedForm, Form1).TicksOrSeconds
+            End If
+
             If TradesPctBox.IsHandleCreated Then
                 Me.TradesPctBox.Invoke(Sub()
-                                           If (Form1.TicksOrSeconds.SelectedItem = "Тики") Then
+                                           If (ticksOrSeconds.SelectedItem = "Тики") Then
                                                Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
                                            End If
                                            Dim selInd = Form1.Tabs.SelectedIndex
@@ -134,6 +145,11 @@ Public Class Page
             End If
         End If
 
+        If (Me.listOfClonedForms IsNot Nothing) Then
+            For Each clonedForm In listOfClonedForms
+                clonedForm.pageList(0).OnMarketDataUpdate(quotesInfo)
+            Next
+        End If
 
     End Sub
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
@@ -151,11 +167,24 @@ Public Class Page
         End If
         Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (buffer.volumeBuy + buffer.volumeSell).ToString)
 
+        Dim ticksOrSeconds As ComboBox
+        If (cp.isCloned) Then
+            ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds
+        Else
+            ticksOrSeconds = CType(cp.usedForm, Form1).TicksOrSeconds
+        End If
+
         Me.TradesPctBox.Invoke(Sub()
-                                   If (Form1.TicksOrSeconds.SelectedItem = "5 секунд") Then
+                                   If (ticksOrSeconds.SelectedItem = "5 секунд") Then
                                        Me.cp.paintingTrades5sec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
                                    End If
                                End Sub)
+
+        If (Me.listOfClonedForms IsNot Nothing) Then
+            For Each clonedForm In listOfClonedForms
+                clonedForm.pageList(0).Add5SecondsPoint(sender, e)
+            Next
+        End If
     End Sub
 
 End Class

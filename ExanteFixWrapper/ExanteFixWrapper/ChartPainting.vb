@@ -61,9 +61,11 @@ Public Class ChartPainting
     Public isDrawingStartedTrades As Boolean
     Public isLineReadyTrades As Boolean
 
+    Public isCloned As Boolean
+    Public usedForm As Form
     Public isSubscribed As Boolean
 
-    Public Sub New()
+    Public Sub New(usedForm As Form)
         'котировки - тики
         Me.pointsQuotes = New List(Of PointQuotes)
         Me.pointsOnScreenQuotes = 20
@@ -104,6 +106,8 @@ Public Class ChartPainting
         Me.isDrawingStartedTrades = False
         Me.isLineReadyTrades = False
 
+        Me.isCloned = False
+        Me.usedForm = usedForm
         Me.isSubscribed = False
     End Sub
 
@@ -271,9 +275,6 @@ Public Class ChartPainting
                 Me.needRePaintingQuotes = True
             End If
         End Try
-
-
-
     End Sub
 
     Public Sub paintingTrades(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox)
@@ -379,6 +380,10 @@ Public Class ChartPainting
                         p1 = New PointF(0.0, TradesPctBox.Height * 0.75)
                         p2 = New PointF(TradesPctBox.Width, TradesPctBox.Height * 0.75)
                         G_btmTrades.DrawLine(P_GrayLine, p1, p2)
+
+                        p1 = New PointF(0.0, VolumesTradesPctBox.Height / 2)
+                        p2 = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
+                        G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
                     End If
 
                     If (Me.pointsTrades(index).tradePrice < Me.pointsTrades(index + 1).tradePrice) Then
@@ -387,18 +392,6 @@ Public Class ChartPainting
                     Else
                         G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
                         Form1.TradePriceLabel.ForeColor = Color.Red
-                    End If
-
-                    If (index = Me.currentPointQuotes) Then
-                        Dim p1 As Drawing.PointF = New PointF(0.0, VolumesTradesPctBox.Height / 2)
-                        Dim p2 As Drawing.PointF = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
-                        G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
-                        p1 = New PointF(0.0, VolumesTradesPctBox.Height * 0.25)
-                        p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height * 0.25)
-                        G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
-                        p1 = New PointF(0.0, VolumesTradesPctBox.Height * 0.75)
-                        p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height * 0.75)
-                        G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
                     End If
 
                     If (Me.pointsOnScreenTrades <= 20) Then
@@ -462,6 +455,9 @@ Public Class ChartPainting
             VolumesTradesPctBox.Refresh()
         Catch ex As Exception
             Me.currentPointTrades -= 1
+            If (Me.currentPointTrades < 0) Then
+                Me.currentPointTrades = 0
+            End If
             If (Me.needRePaintingTrades = False) Then
                 Me.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
             Else
@@ -536,7 +532,14 @@ Public Class ChartPainting
                     End If
                 Next
 
-                If (Form1.TypeOfGraphic.SelectedItem = "Линии") Then 'тип графика - линейный
+                Dim typeOfGraphic As ComboBox
+                If (isCloned) Then
+                    typeOfGraphic = CType(Me.usedForm, Form1Clone).TypeOfGraphic
+                Else
+                    typeOfGraphic = CType(Me.usedForm, Form1).TypeOfGraphic
+                End If
+
+                If (typeOfGraphic.SelectedItem = "Линии") Then 'тип графика - линейный
                     For index = Me.currentPointTrades5sec To Me.lastPointTrades5sec - 1
                         If (index = Me.currentPointTrades5sec) Then
                             highBorderTrades5sec = Me.pointsTrades5sec(index).closePrice
@@ -570,7 +573,25 @@ Public Class ChartPainting
 
                         highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
                         yRangeVolumesTrades5sec = highBorderVolumesTrades5sec
-                        Dim procentsRectangle As Double = (Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+                        Dim buy As Boolean = False
+                        Dim sell As Boolean = False
+                        If (isCloned) Then
+                            buy = CType(Me.usedForm, Form1Clone).Buy.Checked
+                            sell = CType(Me.usedForm, Form1Clone).Sell.Checked
+                        Else
+                            buy = CType(Me.usedForm, Form1).Buy.Checked
+                            sell = CType(Me.usedForm, Form1).Sell.Checked
+                        End If
+
+                        Dim procentsRectangle As Double
+
+                        If (Not buy And Not sell) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+                        ElseIf (buy) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeBuy) / yRangeVolumesTrades5sec
+                        ElseIf (sell) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+                        End If
                         Dim rectangle As RectangleF
                         rectangle.X = (index - Me.currentPointTrades5sec) * Me.intervalTrades5sec
                         rectangle.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsRectangle
@@ -588,6 +609,10 @@ Public Class ChartPainting
                             p1 = New PointF(0.0, TradesPctBox.Height * 0.75)
                             p2 = New PointF(TradesPctBox.Width, TradesPctBox.Height * 0.75)
                             G_btmTrades.DrawLine(P_GrayLine, p1, p2)
+
+                            p1 = New PointF(0.0, VolumesTradesPctBox.Height / 2)
+                            p2 = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
+                            G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
                         End If
 
                         If (Me.pointsTrades5sec(index).closePrice < Me.pointsTrades5sec(index + 1).closePrice) Then
@@ -706,7 +731,27 @@ Public Class ChartPainting
 
                         highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
                         yRangeVolumesTrades5sec = highBorderVolumesTrades5sec
-                        Dim procentsRectangle As Double = (Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+
+                        Dim buy As Boolean = False
+                        Dim sell As Boolean = False
+                        If (isCloned) Then
+                            buy = CType(Me.usedForm, Form1Clone).Buy.Checked
+                            sell = CType(Me.usedForm, Form1Clone).Sell.Checked
+                        Else
+                            buy = CType(Me.usedForm, Form1).Buy.Checked
+                            sell = CType(Me.usedForm, Form1).Sell.Checked
+                        End If
+
+                        Dim procentsRectangle As Double
+
+                        If (Not buy And Not sell) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+                        ElseIf (buy) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeBuy) / yRangeVolumesTrades5sec
+                        ElseIf (sell) Then
+                            procentsRectangle = (Me.pointsTrades5sec(index).volumeSell) / yRangeVolumesTrades5sec
+                        End If
+
                         Dim rectangle As RectangleF
                         rectangle.X = (index - Me.currentPointTrades5sec) * Me.intervalTrades5sec
                         rectangle.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsRectangle
@@ -724,6 +769,10 @@ Public Class ChartPainting
                             p1 = New PointF(0.0, TradesPctBox.Height * 0.75)
                             p2 = New PointF(TradesPctBox.Width, TradesPctBox.Height * 0.75)
                             G_btmTrades.DrawLine(P_GrayLine, p1, p2)
+
+                            p1 = New PointF(0.0, VolumesTradesPctBox.Height / 2)
+                            p2 = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
+                            G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
                         End If
 
                         Dim rectangleForCandle As RectangleF
@@ -818,6 +867,7 @@ Public Class ChartPainting
                             G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.25, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.75)
                             G_Prices.DrawString(Format(lowBorderTrades5sec + yRangeTrades5sec * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
                             G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades5sec, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
+                            G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades5sec / 2, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
                         End If
                     Next
 
@@ -836,6 +886,9 @@ Public Class ChartPainting
 
         Catch ex As Exception
             Me.currentPointTrades5sec -= 1
+            If (currentPointTrades5sec < 0) Then
+                currentPointTrades5sec = 0
+            End If
             If (Me.needRePaintingTrades5sec = False) Then
                 Me.paintingTrades5sec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
             Else
