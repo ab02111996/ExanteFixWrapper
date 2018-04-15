@@ -153,6 +153,12 @@
     <Compile Include="QuoteFixReciever.vb" />
     <Compile Include="QuotesInfo.vb" />
     <Compile Include="SubscribeInfo.vb" />
+    <Compile Include="Form1Clone.Designer.vb">
+      <DependentUpon>Form1Clone.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1Clone.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FirstForm.resx">
@@ -166,6 +172,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1Clone.resx">
+      <DependentUpon>Form1Clone.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
