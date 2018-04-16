@@ -32,10 +32,11 @@ Public Class Form1Clone
         AddHandler Me.Buy.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.Sell.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
+        TypeOfGraphic.SelectedItem = "Японские свечи"
         Try
             pageList(Tabs.SelectedIndex).cp.isSubscribed = True
-            Tabs.TabPages(Tabs.SelectedIndex).Text = Form1.ExanteIDTextBox0.Text
-
+            Tabs.TabPages(Tabs.SelectedIndex).Text = Form1.Tabs.TabPages(Tabs.SelectedIndex).Text
+            Me.Text = Form1.Tabs.TabPages(Tabs.SelectedIndex).Text
         Catch ex As Exception
             MsgBox("Нет подключения")
         End Try

@@ -68,29 +68,9 @@ Public Class Page
     End Sub
 
     Public Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
-        Dim currentMaxPriceQuotes As Double
-        Dim currentMinPriceQuotes As Double
         If (quotesInfo.AskPrice IsNot Nothing And quotesInfo.BidPrice IsNot Nothing) Then
             'котировки
-            If (quotesInfo.AskPrice > quotesInfo.BidPrice) Then
-                currentMaxPriceQuotes = quotesInfo.AskPrice
-                currentMinPriceQuotes = quotesInfo.BidPrice
-            Else
-                currentMaxPriceQuotes = quotesInfo.BidPrice
-                currentMinPriceQuotes = quotesInfo.AskPrice
-            End If
-
-            If (currentMaxPriceQuotes > Me.cp.maxPriceQuotes) Then
-                cp.maxPriceQuotes = currentMaxPriceQuotes
-            End If
-
-            If (currentMinPriceQuotes < cp.minPriceQuotes) Then
-                Me.cp.minPriceQuotes = currentMinPriceQuotes
-            End If
-
             Dim pq As New PointQuotes(quotesInfo.AskPrice, quotesInfo.AskVolume, quotesInfo.BidPrice, quotesInfo.BidVolume, quotesInfo.TimeStamp)
-
-
             Me.cp.pointsQuotes.Add(pq)
             If QuotesPctBox.IsHandleCreated Then
                 Me.QuotesPctBox.Invoke(Sub()
@@ -108,18 +88,6 @@ Public Class Page
             bufferTrades.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
         Else
             'сделки
-            'Console.WriteLine(quotesInfo.TimeStamp.ToString() + quotesInfo.TimeStamp.Millisecond.ToString() + " " + quotesInfo.TradePrice.ToString() + " " + quotesInfo.TradeVolume.ToString())
-
-            If (quotesInfo.TradePrice > cp.maxPriceTrades) Then
-                cp.maxPriceTrades = quotesInfo.TradePrice
-            End If
-
-            If (quotesInfo.TradePrice < cp.minPriceTrades) Then
-                cp.minPriceTrades = quotesInfo.TradePrice
-            End If
-            If (quotesInfo.TradeVolume > cp.maxVolumeTrades) Then
-                cp.maxVolumeTrades = quotesInfo.TradeVolume
-            End If
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
@@ -155,13 +123,6 @@ Public Class Page
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
         cp.pointsTrades5sec.Add(New PointTrades5sec(sender))
         Dim buffer = CType(sender, Buffer)
-        If (Buffer.closePrice > cp.maxPriceTrades5sec) Then
-            cp.maxPriceTrades5sec = Buffer.closePrice
-        End If
-
-        If (buffer.closePrice < cp.minPriceTrades5sec) Then
-            cp.minPriceTrades5sec = buffer.closePrice
-        End If
         If ((buffer.volumeBuy + buffer.volumeSell) > cp.maxVolumeTrades5sec) Then
             cp.maxVolumeTrades5sec = buffer.volumeBuy + buffer.volumeSell
         End If

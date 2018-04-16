@@ -445,7 +445,7 @@ Partial Class Form1Clone
         'TypeOfGraphic
         '
         Me.TypeOfGraphic.FormattingEnabled = True
-        Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи"})
+        Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
         Me.TypeOfGraphic.Location = New System.Drawing.Point(601, 10)
         Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
@@ -510,7 +510,7 @@ Partial Class Form1Clone
         Me.Controls.Add(Me.DrawLineQuotes0)
         Me.Controls.Add(Me.PriceLabel0)
         Me.Controls.Add(Me.Tabs)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1Clone"
         Me.Text = "A&K Trader 1.0"
         Me.TabPage0.ResumeLayout(False)

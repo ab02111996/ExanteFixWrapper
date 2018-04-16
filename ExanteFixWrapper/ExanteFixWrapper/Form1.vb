@@ -79,6 +79,7 @@ Public Class Form1
         AddHandler Me.Buy.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.Sell.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
+        TypeOfGraphic.SelectedItem = "Японские свечи"
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -876,6 +877,7 @@ Public Class Form1
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TicksOrSeconds.SelectedIndexChanged
         If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
             If (TicksOrSeconds.SelectedItem = "Тики") Then
+                TypeOfGraphic.Hide()
                 If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
                     pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 Else
@@ -884,6 +886,7 @@ Public Class Form1
                     pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
                 End If
             Else
+                TypeOfGraphic.Show()
                 If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades5sec = False) Then
                     pageList(Tabs.SelectedIndex).cp.paintingTrades5sec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
                 Else

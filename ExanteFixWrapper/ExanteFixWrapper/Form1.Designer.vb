@@ -128,7 +128,7 @@ Partial Class Form1
         Me.ExanteIDTextBox0.Location = New System.Drawing.Point(291, 12)
         Me.ExanteIDTextBox0.Margin = New System.Windows.Forms.Padding(4)
         Me.ExanteIDTextBox0.Name = "ExanteIDTextBox0"
-        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(291, 22)
+        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(335, 22)
         Me.ExanteIDTextBox0.TabIndex = 2
         Me.ExanteIDTextBox0.Text = "BTC.EXANTE"
         '
@@ -152,7 +152,7 @@ Partial Class Form1
         '
         'SubscribreButton0
         '
-        Me.SubscribreButton0.Location = New System.Drawing.Point(590, 9)
+        Me.SubscribreButton0.Location = New System.Drawing.Point(638, 9)
         Me.SubscribreButton0.Margin = New System.Windows.Forms.Padding(4)
         Me.SubscribreButton0.Name = "SubscribreButton0"
         Me.SubscribreButton0.Size = New System.Drawing.Size(179, 28)
@@ -259,7 +259,7 @@ Partial Class Form1
         Me.Button2.Location = New System.Drawing.Point(23, 47)
         Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(161, 26)
+        Me.Button2.Size = New System.Drawing.Size(241, 26)
         Me.Button2.TabIndex = 43
         Me.Button2.Text = "Добавить вкладку"
         Me.Button2.UseVisualStyleBackColor = True
@@ -494,14 +494,14 @@ Partial Class Form1
         Me.TicksOrSeconds.Location = New System.Drawing.Point(291, 47)
         Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
-        Me.TicksOrSeconds.Size = New System.Drawing.Size(291, 24)
+        Me.TicksOrSeconds.Size = New System.Drawing.Size(335, 24)
         Me.TicksOrSeconds.TabIndex = 44
         '
         'TypeOfGraphic
         '
         Me.TypeOfGraphic.FormattingEnabled = True
-        Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи"})
-        Me.TypeOfGraphic.Location = New System.Drawing.Point(590, 46)
+        Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
+        Me.TypeOfGraphic.Location = New System.Drawing.Point(638, 46)
         Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
         Me.TypeOfGraphic.Size = New System.Drawing.Size(179, 24)
@@ -512,7 +512,7 @@ Partial Class Form1
         Me.Button3.Location = New System.Drawing.Point(23, 77)
         Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(161, 26)
+        Me.Button3.Size = New System.Drawing.Size(241, 26)
         Me.Button3.TabIndex = 46
         Me.Button3.Text = "Добавить окно"
         Me.Button3.UseVisualStyleBackColor = True

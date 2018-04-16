@@ -1,25 +1,23 @@
 ﻿Imports ExanteFixWrapper.Form1
+'данный класс реализует логику отрисовки графиков
+'класс содержит три метода - отрисовка котировок и отрисовка сделок для тикового и пятисекундного графика
 Public Class ChartPainting
-    Public pointsQuotes As List(Of PointQuotes)
-    Public pointsTrades As List(Of PointTrades)
-    Public pointsTrades5sec As List(Of PointTrades5sec)
+    Public pointsQuotes As List(Of PointQuotes) 'список котировок
+    Public pointsTrades As List(Of PointTrades) 'список сделок
+    Public pointsTrades5sec As List(Of PointTrades5sec) 'список сделок для 5-секундного графика
     'котировки - тики
-    Public pointsOnScreenQuotes As Integer
-    Public minPriceQuotes As Double
-    Public maxPriceQuotes As Double
-    Public intervalQuotes As Double
-    Public currentPointQuotes As Integer
-    Public lastPointQuotes As Integer
-    Public yRangeQuotes As Double
-    Public needRePaintingQuotes As Boolean
-    Public lowBorderQuotes As Double
-    Public highBorderQuotes As Double
-    Public maxPointsOnScreenQuotes As Integer
-    Public minPointsOnScreenQuotes As Integer
+    Public pointsOnScreenQuotes As Integer 'количество точек на экране
+    Public intervalQuotes As Double 'интервал, приходящийся на одну точку графика в пикселях (по оси Х)
+    Public currentPointQuotes As Integer 'первая точка графика на экране
+    Public lastPointQuotes As Integer 'последняя точка графика на экране
+    Public yRangeQuotes As Double 'интервал, приходящйся на ось Y в пикселях
+    Public needRePaintingQuotes As Boolean 'нужно ли обновлять график (если да, то при каждом тике currentPointQuotes увеличивается на 1, график сдвигается вправо)
+    Public lowBorderQuotes As Double 'нижняя граница в денежных единицах
+    Public highBorderQuotes As Double 'верхняя граница в денежных единицах
+    Public maxPointsOnScreenQuotes As Integer 'максимальное количество точек на экране
+    Public minPointsOnScreenQuotes As Integer 'минимальное количество точек на экране
     'сделки - тики
     Public pointsOnScreenTrades As Integer
-    Public minPriceTrades As Double
-    Public maxPriceTrades As Double
     Public intervalTrades As Double
     Public currentPointTrades As Integer
     Public lastPointTrades As Integer
@@ -34,8 +32,6 @@ Public Class ChartPainting
     Public yRangeVolumesTrades As Double
     'сделки - 5 секунд (линии)
     Public pointsOnScreenTrades5sec As Integer
-    Public minPriceTrades5sec As Double
-    Public maxPriceTrades5sec As Double
     Public intervalTrades5sec As Double
     Public currentPointTrades5sec As Integer
     Public lastPointTrades5sec As Integer
@@ -69,8 +65,6 @@ Public Class ChartPainting
         'котировки - тики
         Me.pointsQuotes = New List(Of PointQuotes)
         Me.pointsOnScreenQuotes = 20
-        Me.minPriceQuotes = 999999999
-        Me.maxPriceQuotes = 0
         Me.currentPointQuotes = 0
         Me.needRePaintingQuotes = True
         Me.maxPointsOnScreenQuotes = 400
@@ -78,8 +72,6 @@ Public Class ChartPainting
         'сделки - тики
         Me.pointsTrades = New List(Of PointTrades)
         Me.pointsOnScreenTrades = 20
-        Me.minPriceTrades = 999999999
-        Me.maxPriceTrades = 0
         Me.currentPointTrades = 0
         Me.needRePaintingTrades = True
         Me.maxPointsOnScreenTrades = 400
@@ -88,8 +80,6 @@ Public Class ChartPainting
         'сделки - 5 секунд
         Me.pointsTrades5sec = New List(Of PointTrades5sec)
         Me.pointsOnScreenTrades5sec = 20
-        Me.minPriceTrades5sec = 999999999
-        Me.maxPriceTrades5sec = 0
         Me.currentPointTrades5sec = 0
         Me.needRePaintingTrades5sec = True
         Me.maxPointsOnScreenTrades5sec = 400
@@ -317,7 +307,6 @@ Public Class ChartPainting
             Dim GreenBrush As New SolidBrush(Color.Green)
 
             If (Me.pointsTrades.Count > 1) Then
-
                 TimesTradesPctBox.Refresh()
                 PricesTradesPctBox.Refresh()
                 VolumesVolumesTradesPctBox.Refresh()
@@ -338,8 +327,6 @@ Public Class ChartPainting
                             highBorderVolumesTrades = Me.pointsTrades(index).tradeVolume
                         End If
                     End If
-
-
                 Next
 
                 highBorderTrades += highBorderTrades * 0.0001
@@ -434,11 +421,11 @@ Public Class ChartPainting
                     End If
 
                     If (index = Me.lastPointTrades - 1) Then
+                        G_Prices.DrawString(Format(lowBorderTrades + yRangeTrades * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
                         G_Prices.DrawString(Format(lowBorderTrades, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height - 12)
                         G_Prices.DrawString(Format(highBorderTrades, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, 7)
                         G_Prices.DrawString(Format((lowBorderTrades + highBorderTrades) / 2, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height / 2)
                         G_Prices.DrawString(Format(lowBorderTrades + yRangeTrades * 0.25, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.75)
-                        G_Prices.DrawString(Format(lowBorderTrades + yRangeTrades * 0.75, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height * 0.25)
                         G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
                         G_VolumesVolumes.DrawString(Format(highBorderVolumesTrades / 2, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
                     End If
@@ -513,7 +500,6 @@ Public Class ChartPainting
             Dim GreenBrush As New SolidBrush(Color.Green)
 
             If (Me.pointsTrades5sec.Count > 1) Then
-
                 TimesTradesPctBox.Refresh()
                 PricesTradesPctBox.Refresh()
                 VolumesVolumesTradesPctBox.Refresh()
@@ -522,12 +508,16 @@ Public Class ChartPainting
                     If (index = Me.currentPointTrades5sec) Then
                         highBorderTrades5sec = Me.pointsTrades5sec(index).closePrice
                         lowBorderTrades5sec = Me.pointsTrades5sec(index).closePrice
+                        highBorderVolumesTrades5sec = Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell
                     Else
                         If (Me.pointsTrades5sec(index).closePrice > highBorderTrades5sec) Then
                             highBorderTrades5sec = Me.pointsTrades5sec(index).closePrice
                         End If
                         If (Me.pointsTrades5sec(index).closePrice < lowBorderTrades5sec) Then
                             lowBorderTrades5sec = Me.pointsTrades5sec(index).closePrice
+                        End If
+                        If (Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell > highBorderVolumesTrades5sec) Then
+                            highBorderVolumesTrades5sec = Me.pointsTrades5sec(index).volumeBuy + Me.pointsTrades5sec(index).volumeSell
                         End If
                     End If
                 Next
@@ -571,7 +561,7 @@ Public Class ChartPainting
                         p2Trades.X = (index + 1 - Me.currentPointTrades5sec) * Me.intervalTrades5sec
                         p2Trades.Y = TradesPctBox.Height - TradesPctBox.Height * procents2
 
-                        highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
+                        'highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
                         yRangeVolumesTrades5sec = highBorderVolumesTrades5sec
                         Dim buy As Boolean = False
                         Dim sell As Boolean = False
@@ -729,7 +719,7 @@ Public Class ChartPainting
                         p4Trades.X = p3Trades.X
                         p4Trades.Y = TradesPctBox.Height - TradesPctBox.Height * procents4
 
-                        highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
+                        'highBorderVolumesTrades5sec = Me.maxVolumeTrades5sec '+ Me.maxVolumeTrades * 0.025
                         yRangeVolumesTrades5sec = highBorderVolumesTrades5sec
 
                         Dim buy As Boolean = False
@@ -775,36 +765,53 @@ Public Class ChartPainting
                             G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
                         End If
 
-                        Dim rectangleForCandle As RectangleF
-                        If (p3Trades.Y > p4Trades.Y) Then
-                            rectangleForCandle.X = p4Trades.X
-                            rectangleForCandle.Y = p4Trades.Y
-                            rectangleForCandle.Width = Me.intervalTrades5sec - 1
-                            rectangleForCandle.Height = p3Trades.Y - p4Trades.Y
-                            If (p3Trades.Y - p4Trades.Y < 2) Then
-                                rectangleForCandle.Height = 2
-                            End If
-                        Else
-                            rectangleForCandle.X = p3Trades.X
-                            rectangleForCandle.Y = p3Trades.Y
-                            rectangleForCandle.Width = Me.intervalTrades5sec - 1
-                            rectangleForCandle.Height = p4Trades.Y - p3Trades.Y
-                            If (p4Trades.Y - p3Trades.Y < 2) Then
-                                rectangleForCandle.Height = 2
-                            End If
-                        End If
-
-
-                        If (index = 0) Then
-                            G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
-                            G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
-                        Else
-                            If (Me.pointsTrades5sec(index - 1).closePrice < Me.pointsTrades5sec(index).closePrice) Then
-                                G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
-                                G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
+                        If (typeOfGraphic.SelectedItem = "Японские свечи") Then
+                            Dim rectangleForCandle As RectangleF
+                            If (p3Trades.Y > p4Trades.Y) Then
+                                rectangleForCandle.X = p4Trades.X
+                                rectangleForCandle.Y = p4Trades.Y
+                                rectangleForCandle.Width = Me.intervalTrades5sec - 1
+                                rectangleForCandle.Height = p3Trades.Y - p4Trades.Y
+                                If (p3Trades.Y - p4Trades.Y < 2) Then
+                                    rectangleForCandle.Height = 2
+                                End If
                             Else
-                                G_btmTrades.FillRectangle(Brushes.Blue, rectangleForCandle)
-                                G_btmTrades.DrawLine(P_BlueLine, p1Trades, p2Trades)
+                                rectangleForCandle.X = p3Trades.X
+                                rectangleForCandle.Y = p3Trades.Y
+                                rectangleForCandle.Width = Me.intervalTrades5sec - 1
+                                rectangleForCandle.Height = p4Trades.Y - p3Trades.Y
+                                If (p4Trades.Y - p3Trades.Y < 2) Then
+                                    rectangleForCandle.Height = 2
+                                End If
+                            End If
+
+                            If (index = 0) Then
+                                G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
+                                G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
+                            Else
+                                If (Me.pointsTrades5sec(index - 1).closePrice < Me.pointsTrades5sec(index).closePrice) Then
+                                    G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
+                                    G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
+                                Else
+                                    G_btmTrades.FillRectangle(Brushes.Blue, rectangleForCandle)
+                                    G_btmTrades.DrawLine(P_BlueLine, p1Trades, p2Trades)
+                                End If
+                            End If
+                        Else
+                            If (index = 0) Then
+                                G_btmTrades.DrawLine(New Pen(Color.Red, 2), p3Trades, New PointF(p3Trades.X + intervalTrades5sec / 2, p3Trades.Y))
+                                G_btmTrades.DrawLine(New Pen(Color.Red, 2), New PointF(p4Trades.X + intervalTrades5sec / 2, p4Trades.Y), New PointF(p4Trades.X + intervalTrades5sec, p4Trades.Y))
+                                G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
+                            Else
+                                If (Me.pointsTrades5sec(index - 1).closePrice < Me.pointsTrades5sec(index).closePrice) Then
+                                    G_btmTrades.DrawLine(New Pen(Color.Red, 2), p3Trades, New PointF(p3Trades.X + intervalTrades5sec / 2, p3Trades.Y))
+                                    G_btmTrades.DrawLine(New Pen(Color.Red, 2), New PointF(p4Trades.X + intervalTrades5sec / 2, p4Trades.Y), New PointF(p4Trades.X + intervalTrades5sec, p4Trades.Y))
+                                    G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
+                                Else
+                                    G_btmTrades.DrawLine(New Pen(Color.Blue, 2), p3Trades, New PointF(p3Trades.X + intervalTrades5sec / 2, p3Trades.Y))
+                                    G_btmTrades.DrawLine(New Pen(Color.Blue, 2), New PointF(p4Trades.X + intervalTrades5sec / 2, p4Trades.Y), New PointF(p4Trades.X + intervalTrades5sec, p4Trades.Y))
+                                    G_btmTrades.DrawLine(New Pen(Color.Blue, 2), p1Trades, p2Trades)
+                                End If
                             End If
                         End If
 
