@@ -5,6 +5,7 @@
     Public BidVolume As Double?
     Public TradePrice As Double?
     Public TradeVolume As Double?
+    Public MovingAverage As Double?
     Public TimeStamp As DateTime
     Public LocalTimeStamp As DateTime
     Public ExanteId As String
