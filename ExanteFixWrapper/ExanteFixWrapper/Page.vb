@@ -290,6 +290,7 @@ Public Class Buffer
     Private timer As Timer
     Private dbWriter As DataBaseWriter
     Private _handlers As List(Of EventHandler)
+    Private movingAvg As MovingAverage
     Public Custom Event BufferClearing As EventHandler
         AddHandler(ByVal value As EventHandler)
             _handlers.Add(value)
@@ -333,7 +334,7 @@ Public Class Buffer
         _handlers = New List(Of EventHandler)
         InitBuffer()
         dbWriter.SetDBPath(dbPath)
-
+        movingAvg = New MovingAverage(5)
     End Sub
     Public Sub StartWritingData(exanteID As String)
         If Not timer.Enabled Then
@@ -353,15 +354,18 @@ Public Class Buffer
                 Me.closePrice = Me.midAskBid
                 Me.highPrice = Me.midAskBid
                 Me.lowPrice = Me.midAskBid
+                Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             Else
                 Me.openPrice = Me.lastClosePrice
                 Me.closePrice = Me.lastClosePrice
                 Me.highPrice = Me.lastClosePrice
                 Me.lowPrice = Me.lastClosePrice
+                Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             End If
         End If
         Me.lastClosePrice = Me.closePrice
         If Not Me.midAskBid = 0 Then
+            Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             RaiseEvent BufferClearing(Me, New EventArgs)
             dbWriter.InsertBufferIntoDB(Me)
             dbWriter.InsertBufferMetaDataIntoDB(Me)
@@ -395,7 +399,6 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
-        Me.movingAverage = info.MovingAverage
         Me.closePrice = info.TradePrice
     End Sub
     Public Function IsQuotesBuffer() As Boolean
