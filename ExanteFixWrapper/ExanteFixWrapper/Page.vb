@@ -24,6 +24,7 @@ Public Class Page
     Public VolumesVolumesTradesPctBox As PictureBox
     Public TabId As Integer
     Public listOfClonedForms As List(Of Form1Clone)
+    Private movingAvg As MovingAverage
     Private counter15sec As Integer
     Private counter30sec As Integer
     Private counter60sec As Integer
@@ -45,7 +46,8 @@ Public Class Page
                    MinusTradesButton As Button,
                    Chart As TabControl,
                    VolumesTradesPctBox As PictureBox,
-                   VolumesVolumesTradesPctBox As PictureBox)
+                   VolumesVolumesTradesPctBox As PictureBox,
+                   MovingAverage As MovingAverage)
 
         Me.cp = cp
         Me.QuotesPctBox = QuotesPctBox
@@ -62,6 +64,7 @@ Public Class Page
         Me.RightTradesButton = RightTradesButton
         Me.PlusTradesButton = PlusTradesButton
         Me.MinusTradesButton = MinusTradesButton
+        Me.movingAvg = MovingAverage
         'AddHandler LeftQuotesButton.Click 
         Me.bufferTrades = New Buffer(5000, False, "D:\Bases")
         AddHandler Me.bufferTrades.BufferClearing, AddressOf Add5SecondsPoint
@@ -94,6 +97,8 @@ Public Class Page
             bufferTrades.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
         Else
             'сделки
+            quotesInfo.MovingAverage = movingAvg.Calculate(quotesInfo.TradePrice)
+            Console.WriteLine(quotesInfo.MovingAverage)
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
@@ -236,6 +241,7 @@ Public Class Buffer
     Public countBuy As Integer
     Public priceSell As Double
     Public priceBuy As Double
+    Public movingAverage As Double
     Private isQuotes As Boolean
     Private bufferIsNotEmpty As Boolean
     Private quotesInfos As List(Of QuotesInfo)
@@ -275,6 +281,7 @@ Public Class Buffer
         countBuy = 0
         priceSell = 0
         priceBuy = 0
+        movingAverage = 0
         quotesInfos = Nothing
     End Sub
     Public Sub New(timeframe As Double, isquotes As Boolean, dbPath As String)
@@ -346,6 +353,7 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
+        Me.movingAverage += info.MovingAverage
         Me.closePrice = info.TradePrice
 
 
