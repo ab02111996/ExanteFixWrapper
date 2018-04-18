@@ -98,7 +98,11 @@ Public Class Page
         Else
             'сделки
             quotesInfo.MovingAverage = movingAvg.Calculate(quotesInfo.TradePrice)
-            Console.WriteLine(quotesInfo.MovingAverage)
+            Dim pointAvg As New PointTrades
+            pointAvg.time = quotesInfo.TimeStamp
+            pointAvg.tradePrice = quotesInfo.MovingAverage
+            pointAvg.tradeVolume = 0
+            cp.pointsAverage.Add(pointAvg)
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
@@ -132,8 +136,37 @@ Public Class Page
 
     End Sub
 
-    Public Sub AddNSecondsPoint(counterNsec As Integer)
-        Dim count As Integer = cp.pointsTrades5sec.Count
+    Public Sub AddNSecondsPointOffline(pointsTrades5sec As List(Of PointTradesNsec))
+        Dim counter15sec As Integer = 0
+        Dim counter30sec As Integer = 0
+        Dim counter60sec As Integer = 0
+        For index = 0 To pointsTrades5sec.Count - 1
+            counter15sec += 1
+            counter30sec += 1
+            counter60sec += 1
+            If counter15sec = 3 Then
+                AddNSecondsPoint(counter15sec, index)
+                counter15sec = 0
+            End If
+            If counter30sec = 6 Then
+                AddNSecondsPoint(counter30sec, index)
+                counter30sec = 0
+            End If
+            If counter60sec = 12 Then
+                AddNSecondsPoint(counter60sec, index)
+                counter60sec = 0
+            End If
+        Next
+    End Sub
+
+    Public Sub AddNSecondsPoint(counterNsec As Integer, _index As Integer)
+        Dim count As Integer
+        If (CType(cp.usedForm, Form1).isOnline) Then
+            count = cp.pointsTrades5sec.Count
+        Else
+            count = _index + 1
+        End If
+
         Dim point As New PointTradesNsec
         point.time = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).time
         point.openPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).openPrice
@@ -162,37 +195,46 @@ Public Class Page
         point.volumeBuy = volumeBuy
         point.volumeSell = volumeSell
         Console.WriteLine(counterNsec.ToString + " " + point.time.ToString + " " + point.highPrice.ToString + " " + point.openPrice.ToString + " " + point.closePrice.ToString + " " + point.lowPrice.ToString + " " + (point.volumeBuy + point.volumeSell).ToString)
+        Dim pointAvg As New PointTradesNsec
+        pointAvg.closePrice = cp.pointsAverage5sec((count - 1) - (counterNsec - 1)).closePrice
+        pointAvg.time = cp.pointsAverage5sec((count - 1) - (counterNsec - 1)).time
         If (counterNsec = 3) Then
             cp.pointsTrades15sec.Add(point)
+            cp.pointsAverage15sec.Add(pointAvg)
         ElseIf (counterNsec = 6) Then
             cp.pointsTrades30sec.Add(point)
+            cp.pointsAverage30sec.Add(pointAvg)
         ElseIf (counterNsec = 12) Then
             cp.pointsTrades60sec.Add(point)
+            cp.pointsAverage60sec.Add(pointAvg)
         End If
 
     End Sub
 
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
+        Dim buffer = CType(sender, Buffer)
         cp.pointsTrades5sec.Add(New PointTradesNsec(sender))
+        Dim pointAvg As New PointTradesNsec
+        pointAvg.closePrice = buffer.movingAverage
+        'pointAvg.time = buffer.endTimeFrame
+        cp.pointsAverage5sec.Add(pointAvg)
         counter15sec += 1
         counter30sec += 1
         counter60sec += 1
-        Dim buffer = CType(sender, Buffer)
-        Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (buffer.volumeBuy + buffer.volumeSell).ToString)
+
+        Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (Buffer.volumeBuy + Buffer.volumeSell).ToString)
         If counter15sec = 3 Then
-            AddNSecondsPoint(counter15sec)
+            AddNSecondsPoint(counter15sec, Nothing)
             counter15sec = 0
         End If
         If counter30sec = 6 Then
-            AddNSecondsPoint(counter30sec)
+            AddNSecondsPoint(counter30sec, Nothing)
             counter30sec = 0
         End If
         If counter60sec = 12 Then
-            AddNSecondsPoint(counter60sec)
+            AddNSecondsPoint(counter60sec, Nothing)
             counter60sec = 0
         End If
-
-
 
         Dim ticksOrSeconds As ComboBox
         If (cp.isCloned) Then
@@ -353,10 +395,8 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
-        Me.movingAverage += info.MovingAverage
+        Me.movingAverage = info.MovingAverage
         Me.closePrice = info.TradePrice
-
-
     End Sub
     Public Function IsQuotesBuffer() As Boolean
         Return Me.isQuotes

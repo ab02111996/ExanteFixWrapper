@@ -68,6 +68,7 @@ Partial Class Form1
         Me.Buy = New System.Windows.Forms.RadioButton()
         Me.Sell = New System.Windows.Forms.RadioButton()
         Me.BuyAndSell = New System.Windows.Forms.RadioButton()
+        Me.AveregeButton = New System.Windows.Forms.Button()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -155,7 +156,7 @@ Partial Class Form1
         Me.SubscribreButton0.Location = New System.Drawing.Point(638, 9)
         Me.SubscribreButton0.Margin = New System.Windows.Forms.Padding(4)
         Me.SubscribreButton0.Name = "SubscribreButton0"
-        Me.SubscribreButton0.Size = New System.Drawing.Size(179, 28)
+        Me.SubscribreButton0.Size = New System.Drawing.Size(219, 28)
         Me.SubscribreButton0.TabIndex = 11
         Me.SubscribreButton0.Text = "Подписаться"
         Me.SubscribreButton0.UseVisualStyleBackColor = True
@@ -504,7 +505,7 @@ Partial Class Form1
         Me.TypeOfGraphic.Location = New System.Drawing.Point(638, 46)
         Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
-        Me.TypeOfGraphic.Size = New System.Drawing.Size(179, 24)
+        Me.TypeOfGraphic.Size = New System.Drawing.Size(219, 24)
         Me.TypeOfGraphic.TabIndex = 45
         '
         'Button3
@@ -550,11 +551,21 @@ Partial Class Form1
         Me.BuyAndSell.Text = "Покупка+Продажа"
         Me.BuyAndSell.UseVisualStyleBackColor = True
         '
+        'AveregeButton
+        '
+        Me.AveregeButton.Location = New System.Drawing.Point(638, 75)
+        Me.AveregeButton.Name = "AveregeButton"
+        Me.AveregeButton.Size = New System.Drawing.Size(219, 28)
+        Me.AveregeButton.TabIndex = 50
+        Me.AveregeButton.Text = "Показать сглаживающую"
+        Me.AveregeButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1740, 1017)
+        Me.Controls.Add(Me.AveregeButton)
         Me.Controls.Add(Me.BuyAndSell)
         Me.Controls.Add(Me.Sell)
         Me.Controls.Add(Me.Buy)
@@ -647,4 +658,5 @@ Partial Class Form1
     Friend WithEvents Buy As RadioButton
     Friend WithEvents Sell As RadioButton
     Friend WithEvents BuyAndSell As RadioButton
+    Friend WithEvents AveregeButton As Button
 End Class

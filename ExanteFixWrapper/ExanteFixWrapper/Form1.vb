@@ -62,6 +62,7 @@ Public Class Form1
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
                 pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
                 pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = tuple.Item1
+                pageList(Tabs.SelectedIndex).AddNSecondsPointOffline(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
                 CaseN_AndDraw()
                 pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
 
@@ -93,6 +94,7 @@ Public Class Form1
         AddHandler Me.Sell.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
         TypeOfGraphic.SelectedItem = "Японские свечи"
+        pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = False
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -277,7 +279,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                     End If
                 End Try
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec - 10
@@ -293,12 +295,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
                     End If
                 End Try
-            Case Else
-
         End Select
-
-
-
     End Sub
 
     'right trades
@@ -326,7 +323,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
                     End If
                 End If
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 If (pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec) Then
@@ -348,10 +345,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
                     End If
                 End If
-            Case Else
-
         End Select
-
     End Sub
 
     '+ trades
@@ -392,7 +386,7 @@ Public Class Form1
                         End If
                     End Try
                 End If
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec += 15
@@ -427,8 +421,6 @@ Public Class Form1
                         End If
                     End Try
                 End If
-            Case Else
-
         End Select
 
     End Sub
@@ -452,7 +444,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                     End If
                 End Try
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec -= 15
@@ -468,10 +460,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
                     End If
                 End Try
-            Case Else
-
         End Select
-
     End Sub
 
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove
@@ -954,5 +943,45 @@ Public Class Form1
     Private Sub RadiobuttonOnChange(sender As System.Object, e As System.EventArgs)
         Dim rb = CType(sender, RadioButton)
         TypeOfGraphic_SelectedIndexChanged(sender, e)
+    End Sub
+
+    Private Sub AveregeButton_Click(sender As Object, e As EventArgs) Handles AveregeButton.Click
+        pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = Not pageList(Tabs.SelectedIndex).cp.isNeedShowAvg
+        If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
+            If (TicksOrSeconds.SelectedItem = "Тики") Then
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades) Then
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+                Else
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                End If
+            Else
+                Dim N As Integer
+                Select Case TicksOrSeconds.SelectedItem
+                    Case "5 секунд"
+                        N = 5
+                    Case "15 секунд"
+                        N = 15
+                    Case "30 секунд"
+                        N = 30
+                    Case "60 секунд"
+                        N = 60
+                End Select
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec) Then
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, N)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+                Else
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, N)
+                End If
+            End If
+
+        End If
+        If pageList(Tabs.SelectedIndex).cp.isNeedShowAvg Then
+            AveregeButton.Text = "Скрыть сглаживающую"
+        Else
+            AveregeButton.Text = "Показать сглаживающую"
+        End If
     End Sub
 End Class
