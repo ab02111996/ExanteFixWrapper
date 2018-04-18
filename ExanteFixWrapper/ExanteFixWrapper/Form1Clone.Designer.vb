@@ -435,7 +435,7 @@ Partial Class Form1Clone
         'TicksOrSeconds
         '
         Me.TicksOrSeconds.FormattingEnabled = True
-        Me.TicksOrSeconds.Items.AddRange(New Object() {"5 секунд", "Тики"})
+        Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "15 секунд", "30 секунд", "60 секунд"})
         Me.TicksOrSeconds.Location = New System.Drawing.Point(289, 11)
         Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"

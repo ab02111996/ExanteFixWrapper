@@ -24,6 +24,9 @@ Public Class Page
     Public VolumesVolumesTradesPctBox As PictureBox
     Public TabId As Integer
     Public listOfClonedForms As List(Of Form1Clone)
+    Private counter15sec As Integer
+    Private counter30sec As Integer
+    Private counter60sec As Integer
 
     Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
@@ -65,6 +68,9 @@ Public Class Page
         Me.Chart = Chart
         Me.VolumesTradesPctBox = VolumesTradesPctBox
         Me.VolumesVolumesTradesPctBox = VolumesVolumesTradesPctBox
+        Me.counter15sec = 0
+        Me.counter30sec = 0
+        Me.counter60sec = 0
     End Sub
 
     Public Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
@@ -120,13 +126,68 @@ Public Class Page
         End If
 
     End Sub
-    Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
-        cp.pointsTrades5sec.Add(New PointTrades5sec(sender))
-        Dim buffer = CType(sender, Buffer)
-        If ((buffer.volumeBuy + buffer.volumeSell) > cp.maxVolumeTrades5sec) Then
-            cp.maxVolumeTrades5sec = buffer.volumeBuy + buffer.volumeSell
+
+    Public Sub AddNSecondsPoint(counterNsec As Integer)
+        Dim count As Integer = cp.pointsTrades5sec.Count
+        Dim point As New PointTradesNsec
+        point.time = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).time
+        point.openPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).openPrice
+        point.closePrice = cp.pointsTrades5sec(count - 1).closePrice
+        Dim highPrice As Double
+        Dim lowPrice As Double
+        Dim volumeBuy As Double = 0
+        Dim volumeSell As Double = 0
+        For index = (count - 1) - (counterNsec - 1) To (count - 1)
+            volumeBuy += cp.pointsTrades5sec(index).volumeBuy
+            volumeSell += cp.pointsTrades5sec(index).volumeSell
+            If index = ((count - 1) - (counterNsec - 1)) Then
+                highPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).highPrice
+                lowPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).lowPrice
+            Else
+                If cp.pointsTrades5sec(index).highPrice > highPrice Then
+                    highPrice = cp.pointsTrades5sec(index).highPrice
+                End If
+                If cp.pointsTrades5sec(index).lowPrice < lowPrice Then
+                    lowPrice = cp.pointsTrades5sec(index).lowPrice
+                End If
+            End If
+        Next
+        point.highPrice = highPrice
+        point.lowPrice = lowPrice
+        point.volumeBuy = volumeBuy
+        point.volumeSell = volumeSell
+        Console.WriteLine(counterNsec.ToString + " " + point.time.ToString + " " + point.highPrice.ToString + " " + point.openPrice.ToString + " " + point.closePrice.ToString + " " + point.lowPrice.ToString + " " + (point.volumeBuy + point.volumeSell).ToString)
+        If (counterNsec = 3) Then
+            cp.pointsTrades15sec.Add(point)
+        ElseIf (counterNsec = 6) Then
+            cp.pointsTrades30sec.Add(point)
+        ElseIf (counterNsec = 12) Then
+            cp.pointsTrades60sec.Add(point)
         End If
+
+    End Sub
+
+    Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
+        cp.pointsTrades5sec.Add(New PointTradesNsec(sender))
+        counter15sec += 1
+        counter30sec += 1
+        counter60sec += 1
+        Dim buffer = CType(sender, Buffer)
         Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (buffer.volumeBuy + buffer.volumeSell).ToString)
+        If counter15sec = 3 Then
+            AddNSecondsPoint(counter15sec)
+            counter15sec = 0
+        End If
+        If counter30sec = 6 Then
+            AddNSecondsPoint(counter30sec)
+            counter30sec = 0
+        End If
+        If counter60sec = 12 Then
+            AddNSecondsPoint(counter60sec)
+            counter60sec = 0
+        End If
+
+
 
         Dim ticksOrSeconds As ComboBox
         If (cp.isCloned) Then
@@ -136,8 +197,17 @@ Public Class Page
         End If
 
         Me.TradesPctBox.Invoke(Sub()
-                                   If (ticksOrSeconds.SelectedItem = "5 секунд") Then
-                                       Me.cp.paintingTrades5sec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+                                   If (Not ticksOrSeconds.SelectedItem = "Тики") Then
+                                       Select Case ticksOrSeconds.SelectedItem
+                                           Case "5 секунд"
+                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 5)
+                                           Case "15 секунд"
+                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                           Case "30 секунд"
+                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
+                                           Case "60 секунд"
+                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                       End Select
                                    End If
                                End Sub)
 

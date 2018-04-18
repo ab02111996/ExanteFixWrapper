@@ -148,7 +148,7 @@
     <Compile Include="Page.vb" />
     <Compile Include="PointQuotes.vb" />
     <Compile Include="PointTrades.vb" />
-    <Compile Include="PointTrades5sec.vb" />
+    <Compile Include="PointTradesNsec.vb" />
     <Compile Include="QuickFIXFeedApplication.vb" />
     <Compile Include="QuoteFixReciever.vb" />
     <Compile Include="QuotesInfo.vb" />
