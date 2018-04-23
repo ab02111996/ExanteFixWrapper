@@ -7,6 +7,7 @@
     End Sub
     Public Function Calculate(currentValue As Double) As Double
         Dim sum As Double = 0.0
+        'При первом использовании инициализируем список предыдущих значений текущим
         If windowPoints Is Nothing Then
             windowPoints = New List(Of Double)
             For i = 0 To windowSize - 1
@@ -14,6 +15,7 @@
             Next
             sum = currentValue * windowSize
         Else
+            'Далее все предыдущие значения сдвигаются в конец, а в начало списка добавляется текущее значение
             For i = 0 To windowSize - 1
                 If i < (windowSize - 1) Then
                     windowPoints(i) = windowPoints(i + 1)

@@ -65,10 +65,12 @@ Partial Class Form1
         Me.TicksOrSeconds = New System.Windows.Forms.ComboBox()
         Me.TypeOfGraphic = New System.Windows.Forms.ComboBox()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Buy = New System.Windows.Forms.RadioButton()
-        Me.Sell = New System.Windows.Forms.RadioButton()
         Me.BuyAndSell = New System.Windows.Forms.RadioButton()
-        Me.AveregeButton = New System.Windows.Forms.Button()
+        Me.BuyPlusSell = New System.Windows.Forms.RadioButton()
+        Me.Original = New System.Windows.Forms.CheckBox()
+        Me.Average = New System.Windows.Forms.CheckBox()
+        Me.WindowSizeTextBox = New System.Windows.Forms.TextBox()
+        Me.WindowSizeBtn = New System.Windows.Forms.Button()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -106,7 +108,7 @@ Partial Class Form1
         '
         'DrawLineTrades0
         '
-        Me.DrawLineTrades0.Location = New System.Drawing.Point(1440, 7)
+        Me.DrawLineTrades0.Location = New System.Drawing.Point(1502, 8)
         Me.DrawLineTrades0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DrawLineTrades0.Name = "DrawLineTrades0"
         Me.DrawLineTrades0.Size = New System.Drawing.Size(212, 30)
@@ -116,7 +118,7 @@ Partial Class Form1
         '
         'DrawLineQuotes0
         '
-        Me.DrawLineQuotes0.Location = New System.Drawing.Point(1221, 7)
+        Me.DrawLineQuotes0.Location = New System.Drawing.Point(1283, 8)
         Me.DrawLineQuotes0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DrawLineQuotes0.Name = "DrawLineQuotes0"
         Me.DrawLineQuotes0.Size = New System.Drawing.Size(212, 30)
@@ -126,17 +128,17 @@ Partial Class Form1
         '
         'ExanteIDTextBox0
         '
-        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(291, 12)
+        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(270, 11)
         Me.ExanteIDTextBox0.Margin = New System.Windows.Forms.Padding(4)
         Me.ExanteIDTextBox0.Name = "ExanteIDTextBox0"
-        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(335, 22)
+        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(376, 22)
         Me.ExanteIDTextBox0.TabIndex = 2
         Me.ExanteIDTextBox0.Text = "BTC.EXANTE"
         '
         'TimeLabel0
         '
         Me.TimeLabel0.AutoSize = True
-        Me.TimeLabel0.Location = New System.Drawing.Point(947, 31)
+        Me.TimeLabel0.Location = New System.Drawing.Point(971, 31)
         Me.TimeLabel0.Name = "TimeLabel0"
         Me.TimeLabel0.Size = New System.Drawing.Size(13, 17)
         Me.TimeLabel0.TabIndex = 25
@@ -145,7 +147,7 @@ Partial Class Form1
         'PriceLabel0
         '
         Me.PriceLabel0.AutoSize = True
-        Me.PriceLabel0.Location = New System.Drawing.Point(867, 31)
+        Me.PriceLabel0.Location = New System.Drawing.Point(893, 33)
         Me.PriceLabel0.Name = "PriceLabel0"
         Me.PriceLabel0.Size = New System.Drawing.Size(13, 17)
         Me.PriceLabel0.TabIndex = 24
@@ -153,7 +155,7 @@ Partial Class Form1
         '
         'SubscribreButton0
         '
-        Me.SubscribreButton0.Location = New System.Drawing.Point(638, 9)
+        Me.SubscribreButton0.Location = New System.Drawing.Point(654, 11)
         Me.SubscribreButton0.Margin = New System.Windows.Forms.Padding(4)
         Me.SubscribreButton0.Name = "SubscribreButton0"
         Me.SubscribreButton0.Size = New System.Drawing.Size(219, 28)
@@ -164,7 +166,7 @@ Partial Class Form1
         'VolumeLabel
         '
         Me.VolumeLabel.AutoSize = True
-        Me.VolumeLabel.Location = New System.Drawing.Point(1019, 31)
+        Me.VolumeLabel.Location = New System.Drawing.Point(1043, 31)
         Me.VolumeLabel.Name = "VolumeLabel"
         Me.VolumeLabel.Size = New System.Drawing.Size(13, 17)
         Me.VolumeLabel.TabIndex = 33
@@ -173,7 +175,7 @@ Partial Class Form1
         'CurVolumeLabel
         '
         Me.CurVolumeLabel.AutoSize = True
-        Me.CurVolumeLabel.Location = New System.Drawing.Point(1104, 31)
+        Me.CurVolumeLabel.Location = New System.Drawing.Point(1128, 31)
         Me.CurVolumeLabel.Name = "CurVolumeLabel"
         Me.CurVolumeLabel.Size = New System.Drawing.Size(13, 17)
         Me.CurVolumeLabel.TabIndex = 34
@@ -182,7 +184,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(1104, 6)
+        Me.Label2.Location = New System.Drawing.Point(1128, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 17)
         Me.Label2.TabIndex = 38
@@ -191,7 +193,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(1019, 6)
+        Me.Label3.Location = New System.Drawing.Point(1043, 6)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(55, 17)
         Me.Label3.TabIndex = 37
@@ -200,7 +202,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(947, 6)
+        Me.Label4.Location = New System.Drawing.Point(971, 6)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(39, 17)
         Me.Label4.TabIndex = 36
@@ -209,7 +211,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(867, 6)
+        Me.Label5.Location = New System.Drawing.Point(893, 8)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 17)
         Me.Label5.TabIndex = 35
@@ -219,7 +221,7 @@ Partial Class Form1
         '
         Me.AskPriceLabel.AutoSize = True
         Me.AskPriceLabel.ForeColor = System.Drawing.Color.Red
-        Me.AskPriceLabel.Location = New System.Drawing.Point(1232, 39)
+        Me.AskPriceLabel.Location = New System.Drawing.Point(1294, 40)
         Me.AskPriceLabel.Name = "AskPriceLabel"
         Me.AskPriceLabel.Size = New System.Drawing.Size(13, 17)
         Me.AskPriceLabel.TabIndex = 39
@@ -229,7 +231,7 @@ Partial Class Form1
         '
         Me.BidPriceLabel.AutoSize = True
         Me.BidPriceLabel.ForeColor = System.Drawing.Color.Blue
-        Me.BidPriceLabel.Location = New System.Drawing.Point(1341, 39)
+        Me.BidPriceLabel.Location = New System.Drawing.Point(1403, 40)
         Me.BidPriceLabel.Name = "BidPriceLabel"
         Me.BidPriceLabel.Size = New System.Drawing.Size(13, 17)
         Me.BidPriceLabel.TabIndex = 40
@@ -239,7 +241,7 @@ Partial Class Form1
         '
         Me.TradeVolumeLabel.AutoSize = True
         Me.TradeVolumeLabel.ForeColor = System.Drawing.Color.Green
-        Me.TradeVolumeLabel.Location = New System.Drawing.Point(1541, 39)
+        Me.TradeVolumeLabel.Location = New System.Drawing.Point(1603, 40)
         Me.TradeVolumeLabel.Name = "TradeVolumeLabel"
         Me.TradeVolumeLabel.Size = New System.Drawing.Size(13, 17)
         Me.TradeVolumeLabel.TabIndex = 42
@@ -249,7 +251,7 @@ Partial Class Form1
         '
         Me.TradePriceLabel.AutoSize = True
         Me.TradePriceLabel.ForeColor = System.Drawing.Color.Red
-        Me.TradePriceLabel.Location = New System.Drawing.Point(1448, 39)
+        Me.TradePriceLabel.Location = New System.Drawing.Point(1510, 40)
         Me.TradePriceLabel.Name = "TradePriceLabel"
         Me.TradePriceLabel.Size = New System.Drawing.Size(13, 17)
         Me.TradePriceLabel.TabIndex = 41
@@ -491,18 +493,18 @@ Partial Class Form1
         'TicksOrSeconds
         '
         Me.TicksOrSeconds.FormattingEnabled = True
-        Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "15 секунд", "30 секунд", "60 секунд"})
-        Me.TicksOrSeconds.Location = New System.Drawing.Point(291, 47)
+        Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "15 секунд", "30 секунд", "1 минута", "5 минут", "15 минут", "30 минут", "1 час"})
+        Me.TicksOrSeconds.Location = New System.Drawing.Point(270, 46)
         Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
-        Me.TicksOrSeconds.Size = New System.Drawing.Size(335, 24)
+        Me.TicksOrSeconds.Size = New System.Drawing.Size(376, 24)
         Me.TicksOrSeconds.TabIndex = 44
         '
         'TypeOfGraphic
         '
         Me.TypeOfGraphic.FormattingEnabled = True
         Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
-        Me.TypeOfGraphic.Location = New System.Drawing.Point(638, 46)
+        Me.TypeOfGraphic.Location = New System.Drawing.Point(654, 48)
         Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
         Me.TypeOfGraphic.Size = New System.Drawing.Size(219, 24)
@@ -518,57 +520,78 @@ Partial Class Form1
         Me.Button3.Text = "Добавить окно"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Buy
-        '
-        Me.Buy.AutoSize = True
-        Me.Buy.Location = New System.Drawing.Point(291, 80)
-        Me.Buy.Name = "Buy"
-        Me.Buy.Size = New System.Drawing.Size(84, 21)
-        Me.Buy.TabIndex = 47
-        Me.Buy.TabStop = True
-        Me.Buy.Text = "Покупка"
-        Me.Buy.UseVisualStyleBackColor = True
-        '
-        'Sell
-        '
-        Me.Sell.AutoSize = True
-        Me.Sell.Location = New System.Drawing.Point(381, 80)
-        Me.Sell.Name = "Sell"
-        Me.Sell.Size = New System.Drawing.Size(88, 21)
-        Me.Sell.TabIndex = 48
-        Me.Sell.TabStop = True
-        Me.Sell.Text = "Продажа"
-        Me.Sell.UseVisualStyleBackColor = True
-        '
         'BuyAndSell
         '
         Me.BuyAndSell.AutoSize = True
-        Me.BuyAndSell.Location = New System.Drawing.Point(475, 80)
+        Me.BuyAndSell.Location = New System.Drawing.Point(270, 79)
         Me.BuyAndSell.Name = "BuyAndSell"
-        Me.BuyAndSell.Size = New System.Drawing.Size(151, 21)
-        Me.BuyAndSell.TabIndex = 49
+        Me.BuyAndSell.Size = New System.Drawing.Size(219, 21)
+        Me.BuyAndSell.TabIndex = 47
         Me.BuyAndSell.TabStop = True
-        Me.BuyAndSell.Text = "Покупка+Продажа"
+        Me.BuyAndSell.Text = "Покупка / продажа отдельно"
         Me.BuyAndSell.UseVisualStyleBackColor = True
         '
-        'AveregeButton
+        'BuyPlusSell
         '
-        Me.AveregeButton.Location = New System.Drawing.Point(638, 75)
-        Me.AveregeButton.Name = "AveregeButton"
-        Me.AveregeButton.Size = New System.Drawing.Size(219, 28)
-        Me.AveregeButton.TabIndex = 50
-        Me.AveregeButton.Text = "Показать сглаживающую"
-        Me.AveregeButton.UseVisualStyleBackColor = True
+        Me.BuyPlusSell.AutoSize = True
+        Me.BuyPlusSell.Location = New System.Drawing.Point(495, 79)
+        Me.BuyPlusSell.Name = "BuyPlusSell"
+        Me.BuyPlusSell.Size = New System.Drawing.Size(151, 21)
+        Me.BuyPlusSell.TabIndex = 49
+        Me.BuyPlusSell.TabStop = True
+        Me.BuyPlusSell.Text = "Покупка+Продажа"
+        Me.BuyPlusSell.UseVisualStyleBackColor = True
+        '
+        'Original
+        '
+        Me.Original.AutoSize = True
+        Me.Original.Checked = True
+        Me.Original.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.Original.Location = New System.Drawing.Point(654, 81)
+        Me.Original.Name = "Original"
+        Me.Original.Size = New System.Drawing.Size(85, 21)
+        Me.Original.TabIndex = 50
+        Me.Original.Text = "Объемы"
+        Me.Original.UseVisualStyleBackColor = True
+        '
+        'Average
+        '
+        Me.Average.AutoSize = True
+        Me.Average.Location = New System.Drawing.Point(745, 82)
+        Me.Average.Name = "Average"
+        Me.Average.Size = New System.Drawing.Size(129, 21)
+        Me.Average.TabIndex = 51
+        Me.Average.Text = "Сглаживающая"
+        Me.Average.UseVisualStyleBackColor = True
+        '
+        'WindowSizeTextBox
+        '
+        Me.WindowSizeTextBox.Location = New System.Drawing.Point(896, 81)
+        Me.WindowSizeTextBox.Name = "WindowSizeTextBox"
+        Me.WindowSizeTextBox.Size = New System.Drawing.Size(37, 22)
+        Me.WindowSizeTextBox.TabIndex = 52
+        Me.WindowSizeTextBox.Text = "5"
+        '
+        'WindowSizeBtn
+        '
+        Me.WindowSizeBtn.Location = New System.Drawing.Point(939, 79)
+        Me.WindowSizeBtn.Name = "WindowSizeBtn"
+        Me.WindowSizeBtn.Size = New System.Drawing.Size(117, 27)
+        Me.WindowSizeBtn.TabIndex = 53
+        Me.WindowSizeBtn.Text = "Применить"
+        Me.WindowSizeBtn.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1740, 1017)
-        Me.Controls.Add(Me.AveregeButton)
+        Me.Controls.Add(Me.WindowSizeBtn)
+        Me.Controls.Add(Me.WindowSizeTextBox)
+        Me.Controls.Add(Me.Average)
+        Me.Controls.Add(Me.Original)
+        Me.Controls.Add(Me.BuyPlusSell)
         Me.Controls.Add(Me.BuyAndSell)
-        Me.Controls.Add(Me.Sell)
-        Me.Controls.Add(Me.Buy)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TypeOfGraphic)
         Me.Controls.Add(Me.TicksOrSeconds)
@@ -655,8 +678,10 @@ Partial Class Form1
     Friend WithEvents TicksOrSeconds As ComboBox
     Friend WithEvents TypeOfGraphic As ComboBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Buy As RadioButton
-    Friend WithEvents Sell As RadioButton
     Friend WithEvents BuyAndSell As RadioButton
-    Friend WithEvents AveregeButton As Button
+    Friend WithEvents BuyPlusSell As RadioButton
+    Friend WithEvents Original As CheckBox
+    Friend WithEvents Average As CheckBox
+    Friend WithEvents WindowSizeTextBox As TextBox
+    Friend WithEvents WindowSizeBtn As Button
 End Class

@@ -24,10 +24,16 @@ Public Class Page
     Public VolumesVolumesTradesPctBox As PictureBox
     Public TabId As Integer
     Public listOfClonedForms As List(Of Form1Clone)
-    Private movingAvg As MovingAverage
+    Private movingAvgBuy As MovingAverage
+    Private movingAvgSell As MovingAverage
+    Private movingAvgBuyPlusSell As MovingAverage
     Private counter15sec As Integer
     Private counter30sec As Integer
     Private counter60sec As Integer
+    Private counter300sec As Integer
+    Private counter900sec As Integer
+    Private counter1800sec As Integer
+    Private counter3600sec As Integer
 
     Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
@@ -47,7 +53,7 @@ Public Class Page
                    Chart As TabControl,
                    VolumesTradesPctBox As PictureBox,
                    VolumesVolumesTradesPctBox As PictureBox,
-                   MovingAverage As MovingAverage)
+                   MovingAverageWindow As Integer)
 
         Me.cp = cp
         Me.QuotesPctBox = QuotesPctBox
@@ -64,7 +70,9 @@ Public Class Page
         Me.RightTradesButton = RightTradesButton
         Me.PlusTradesButton = PlusTradesButton
         Me.MinusTradesButton = MinusTradesButton
-        Me.movingAvg = MovingAverage
+        Me.movingAvgBuy = New MovingAverage(MovingAverageWindow)
+        Me.movingAvgSell = New MovingAverage(MovingAverageWindow)
+        Me.movingAvgBuyPlusSell = New MovingAverage(MovingAverageWindow)
         'AddHandler LeftQuotesButton.Click 
         Me.bufferTrades = New Buffer(5000, False, "D:\Bases")
         AddHandler Me.bufferTrades.BufferClearing, AddressOf Add5SecondsPoint
@@ -74,6 +82,10 @@ Public Class Page
         Me.counter15sec = 0
         Me.counter30sec = 0
         Me.counter60sec = 0
+        Me.counter300sec = 0
+        Me.counter900sec = 0
+        Me.counter1800sec = 0
+        Me.counter3600sec = 0
     End Sub
 
     Public Sub OnMarketDataUpdate(quotesInfo As QuotesInfo)
@@ -97,12 +109,6 @@ Public Class Page
             bufferTrades.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
         Else
             'сделки
-            quotesInfo.MovingAverage = movingAvg.Calculate(quotesInfo.TradePrice)
-            Dim pointAvg As New PointTrades
-            pointAvg.time = quotesInfo.TimeStamp
-            pointAvg.tradePrice = quotesInfo.MovingAverage
-            pointAvg.tradeVolume = 0
-            cp.pointsAverage.Add(pointAvg)
             bufferTrades.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
@@ -140,10 +146,18 @@ Public Class Page
         Dim counter15sec As Integer = 0
         Dim counter30sec As Integer = 0
         Dim counter60sec As Integer = 0
+        Dim counter300sec As Integer = 0
+        Dim counter900sec As Integer = 0
+        Dim counter1800sec As Integer = 0
+        Dim counter3600sec As Integer = 0
         For index = 0 To pointsTrades5sec.Count - 1
             counter15sec += 1
             counter30sec += 1
             counter60sec += 1
+            counter300sec += 1
+            counter900sec += 1
+            counter1800sec += 1
+            counter3600sec += 1
             If counter15sec = 3 Then
                 AddNSecondsPoint(counter15sec, index)
                 counter15sec = 0
@@ -156,15 +170,39 @@ Public Class Page
                 AddNSecondsPoint(counter60sec, index)
                 counter60sec = 0
             End If
+            If counter300sec = 60 Then
+                AddNSecondsPoint(counter300sec, index)
+                counter300sec = 0
+            End If
+            If counter900sec = 180 Then
+                AddNSecondsPoint(counter900sec, index)
+                counter900sec = 0
+            End If
+            If counter1800sec = 360 Then
+                AddNSecondsPoint(counter1800sec, index)
+                counter1800sec = 0
+            End If
+            If counter3600sec = 720 Then
+                AddNSecondsPoint(counter3600sec, index)
+                counter1800sec = 0
+            End If
         Next
     End Sub
 
     Public Sub AddNSecondsPoint(counterNsec As Integer, _index As Integer)
         Dim count As Integer
-        If (CType(cp.usedForm, Form1).isOnline) Then
-            count = cp.pointsTrades5sec.Count
+        If (cp.isCloned) Then
+            If (CType(cp.usedForm, Form1Clone).isOnline) Then
+                count = cp.pointsTrades5sec.Count
+            Else
+                count = _index + 1
+            End If
         Else
-            count = _index + 1
+            If (CType(cp.usedForm, Form1).isOnline) Then
+                count = cp.pointsTrades5sec.Count
+            Else
+                count = _index + 1
+            End If
         End If
 
         Dim point As New PointTradesNsec
@@ -194,33 +232,42 @@ Public Class Page
         point.lowPrice = lowPrice
         point.volumeBuy = volumeBuy
         point.volumeSell = volumeSell
+        point.avgBuy = cp.pointsTrades5sec(count - 1).avgBuy
+        point.avgSell = cp.pointsTrades5sec(count - 1).avgSell
+        point.avgBuyPlusSell = cp.pointsTrades5sec(count - 1).avgBuyPlusSell
         Console.WriteLine(counterNsec.ToString + " " + point.time.ToString + " " + point.highPrice.ToString + " " + point.openPrice.ToString + " " + point.closePrice.ToString + " " + point.lowPrice.ToString + " " + (point.volumeBuy + point.volumeSell).ToString)
-        Dim pointAvg As New PointTradesNsec
-        pointAvg.closePrice = cp.pointsAverage5sec((count - 1) - (counterNsec - 1)).closePrice
-        pointAvg.time = cp.pointsAverage5sec((count - 1) - (counterNsec - 1)).time
         If (counterNsec = 3) Then
             cp.pointsTrades15sec.Add(point)
-            cp.pointsAverage15sec.Add(pointAvg)
         ElseIf (counterNsec = 6) Then
             cp.pointsTrades30sec.Add(point)
-            cp.pointsAverage30sec.Add(pointAvg)
         ElseIf (counterNsec = 12) Then
             cp.pointsTrades60sec.Add(point)
-            cp.pointsAverage60sec.Add(pointAvg)
+        ElseIf (counterNsec = 60) Then
+            cp.pointsTrades300sec.Add(point)
+        ElseIf (counterNsec = 180) Then
+            cp.pointsTrades900sec.Add(point)
+        ElseIf (counterNsec = 360) Then
+            cp.pointsTrades1800sec.Add(point)
+        ElseIf (counterNsec = 720) Then
+            cp.pointsTrades3600sec.Add(point)
         End If
-
     End Sub
 
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
         Dim buffer = CType(sender, Buffer)
-        cp.pointsTrades5sec.Add(New PointTradesNsec(sender))
-        Dim pointAvg As New PointTradesNsec
-        pointAvg.closePrice = buffer.movingAverage
-        'pointAvg.time = buffer.endTimeFrame
-        cp.pointsAverage5sec.Add(pointAvg)
+        Dim newPoint As New PointTradesNsec(sender)
+        newPoint.avgBuy = movingAvgBuy.Calculate(newPoint.volumeBuy)
+        newPoint.avgSell = movingAvgSell.Calculate(newPoint.volumeSell)
+        newPoint.avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(newPoint.volumeBuy + newPoint.volumeSell)
+        cp.pointsTrades5sec.Add(newPoint)
+
         counter15sec += 1
         counter30sec += 1
         counter60sec += 1
+        counter300sec += 1
+        counter900sec += 1
+        counter1800sec += 1
+        counter3600sec += 1
 
         Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (Buffer.volumeBuy + Buffer.volumeSell).ToString)
         If counter15sec = 3 Then
@@ -235,7 +282,22 @@ Public Class Page
             AddNSecondsPoint(counter60sec, Nothing)
             counter60sec = 0
         End If
-
+        If counter300sec = 60 Then
+            AddNSecondsPoint(counter300sec, Nothing)
+            counter300sec = 0
+        End If
+        If counter900sec = 180 Then
+            AddNSecondsPoint(counter900sec, Nothing)
+            counter900sec = 0
+        End If
+        If counter1800sec = 360 Then
+            AddNSecondsPoint(counter1800sec, Nothing)
+            counter1800sec = 0
+        End If
+        If counter3600sec = 720 Then
+            AddNSecondsPoint(counter3600sec, Nothing)
+            counter3600sec = 0
+        End If
         Dim ticksOrSeconds As ComboBox
         If (cp.isCloned) Then
             ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds
@@ -247,13 +309,21 @@ Public Class Page
                                    If (Not ticksOrSeconds.SelectedItem = "Тики") Then
                                        Select Case ticksOrSeconds.SelectedItem
                                            Case "5 секунд"
-                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 5)
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 5)
                                            Case "15 секунд"
-                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
                                            Case "30 секунд"
-                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
-                                           Case "60 секунд"
-                                               Me.cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
+                                           Case "1 минута"
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                           Case "5 минут"
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
+                                           Case "15 минут"
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
+                                           Case "30 минут"
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
+                                           Case "1 час"
+                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
                                        End Select
                                    End If
                                End Sub)
@@ -266,31 +336,30 @@ Public Class Page
     End Sub
 
 End Class
-
+'Класс накапливающий данные для определенного временного промежутка
 Public Class Buffer
-    Public startTimeFrame As DateTime
-    Public endTimeFrame As DateTime
-    Public exanteID As String
-    Public openPrice As Double
-    Public highPrice As Double
-    Public lowPrice As Double
-    Public closePrice As Double
-    Public lastClosePrice As Double
-    Public midAskBid As Double
-    Public volumeSell As Double
-    Public volumeBuy As Double
-    Public countSell As Integer
-    Public countBuy As Integer
-    Public priceSell As Double
-    Public priceBuy As Double
-    Public movingAverage As Double
-    Private isQuotes As Boolean
-    Private bufferIsNotEmpty As Boolean
-    Private quotesInfos As List(Of QuotesInfo)
-    Private timer As Timer
-    Private dbWriter As DataBaseWriter
-    Private _handlers As List(Of EventHandler)
-    Private movingAvg As MovingAverage
+    Public startTimeFrame As DateTime 'Время начала промежутка
+    Public endTimeFrame As DateTime 'Время конца промежутка
+    Public exanteID As String 'Название инструмента
+    Public openPrice As Double 'Открывающая цена
+    Public highPrice As Double 'Максимальная цена
+    Public lowPrice As Double 'Минимальная цена
+    Public closePrice As Double 'Закрывающая цена
+    Public lastClosePrice As Double 'Последняя закрывающая цена
+    Public midAskBid As Double 'Среднее значение цены на текущий момент
+    Public volumeSell As Double 'Объем продаж
+    Public volumeBuy As Double 'Объем покупок
+    Public countSell As Integer 'Кол-во продаж 
+    Public countBuy As Integer 'Кол-во покупок
+    Public priceSell As Double 'Общая цена продаж
+    Public priceBuy As Double 'Общая цена покупок
+    Private isQuotes As Boolean 'Является ли буфером для котировок
+    Private bufferIsNotEmpty As Boolean 'Буфер не пустой
+    Private quotesInfos As List(Of QuotesInfo) 'Список для накопления данных
+    Private timer As Timer 'Таймер для отмера временного промежутка
+    Private dbWriter As DataBaseWriter 'Объект класса для записи в БД
+    Private _handlers As List(Of EventHandler) 'Список обработчиков события очищения буфера
+    'Событие очищения буфера
     Public Custom Event BufferClearing As EventHandler
         AddHandler(ByVal value As EventHandler)
             _handlers.Add(value)
@@ -312,6 +381,7 @@ Public Class Buffer
             Next
         End RaiseEvent
     End Event
+    'Метод инициализации буфера
     Private Sub InitBuffer()
         bufferIsNotEmpty = False
         openPrice = 0
@@ -324,9 +394,9 @@ Public Class Buffer
         countBuy = 0
         priceSell = 0
         priceBuy = 0
-        movingAverage = 0
         quotesInfos = Nothing
     End Sub
+    'Конструктор буфера
     Public Sub New(timeframe As Double, isquotes As Boolean, dbPath As String)
         Me.timer = New Timer(timeframe)
         Me.isQuotes = isquotes
@@ -334,8 +404,8 @@ Public Class Buffer
         _handlers = New List(Of EventHandler)
         InitBuffer()
         dbWriter.SetDBPath(dbPath)
-        movingAvg = New MovingAverage(5)
     End Sub
+    'Начало записи данных в БД
     Public Sub StartWritingData(exanteID As String)
         If Not timer.Enabled Then
             Me.exanteID = exanteID
@@ -346,6 +416,7 @@ Public Class Buffer
             Me.lastClosePrice = 0
         End If
     End Sub
+    'Очищение буфера и запись накопленных данных в БД
     Public Sub Clear(source As Object, e As ElapsedEventArgs)
         Me.endTimeFrame = Me.startTimeFrame.AddSeconds(5)
         If Me.openPrice = 0 And Me.closePrice = 0 Then
@@ -354,18 +425,15 @@ Public Class Buffer
                 Me.closePrice = Me.midAskBid
                 Me.highPrice = Me.midAskBid
                 Me.lowPrice = Me.midAskBid
-                Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             Else
                 Me.openPrice = Me.lastClosePrice
                 Me.closePrice = Me.lastClosePrice
                 Me.highPrice = Me.lastClosePrice
                 Me.lowPrice = Me.lastClosePrice
-                Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             End If
         End If
         Me.lastClosePrice = Me.closePrice
         If Not Me.midAskBid = 0 Then
-            Me.movingAverage = movingAvg.Calculate(Me.closePrice)
             RaiseEvent BufferClearing(Me, New EventArgs)
             dbWriter.InsertBufferIntoDB(Me)
             dbWriter.InsertBufferMetaDataIntoDB(Me)
@@ -373,8 +441,9 @@ Public Class Buffer
         InitBuffer()
         Me.startTimeFrame = Me.endTimeFrame
     End Sub
-
+    'Метод помещающий данные в буфер
     Public Sub PutInBuffer(info As QuotesInfo)
+        'Если буфер пустой - запоминаем открывающую цену, инициализируем список с данными инициализируем максимальную и минимальную цену
         If Not bufferIsNotEmpty Then
             Me.quotesInfos = New List(Of QuotesInfo)
             Me.exanteID = info.ExanteId
@@ -383,13 +452,17 @@ Public Class Buffer
             Me.lowPrice = info.TradePrice
             Me.bufferIsNotEmpty = True
         End If
+        'Добавляем в список поступившие данные
         quotesInfos.Add(info)
+        'Если текущая цена больше, чем записанная ранее максимальная - заменяем ее на текущую
         If Me.highPrice < info.TradePrice Then
             Me.highPrice = info.TradePrice
         End If
+        'То же самое, но с минимальной ценой
         If Me.lowPrice > info.TradePrice Then
             Me.lowPrice = info.TradePrice
         End If
+        'Считаем количество сделок по направлениям, если направление сделки не было определено, то считаем ее как Buy
         If info.Direction = QuotesInfo.Directions.Sell Then
             Me.volumeSell += info.TradeVolume
             Me.countSell += 1
@@ -404,9 +477,11 @@ Public Class Buffer
     Public Function IsQuotesBuffer() As Boolean
         Return Me.isQuotes
     End Function
+    'Метод для получения тиковой информации
     Public Function GetBufferMetaData() As List(Of QuotesInfo)
         Return quotesInfos
     End Function
+    'Метод для определения пуст ли буфер
     Public Function IsNotEmpty() As Boolean
         Return bufferIsNotEmpty
     End Function

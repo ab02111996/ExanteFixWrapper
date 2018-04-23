@@ -6,6 +6,9 @@
     Public volumeSell As Double
     Public volumeBuy As Double
     Public time As DateTime
+    Public avgBuy As Double
+    Public avgSell As Double
+    Public avgBuyPlusSell As Double
     Public Sub New()
 
     End Sub
@@ -17,5 +20,8 @@
         volumeBuy = buffer.volumeBuy
         volumeSell = buffer.volumeSell
         time = buffer.endTimeFrame
+        avgBuy = Nothing
+        avgSell = Nothing
+        avgBuyPlusSell = Nothing
     End Sub
 End Class

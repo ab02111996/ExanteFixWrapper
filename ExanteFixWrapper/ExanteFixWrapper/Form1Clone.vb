@@ -5,6 +5,7 @@ Public Class Form1Clone
     Dim feedReciever As QuoteFixReciever
     Public pageList As List(Of Page) = New List(Of Page)
     Public isOnline As Boolean
+    Public movingAverageWindowSize As Integer
 
     Public Sub New(feedReciever As QuoteFixReciever)
 
@@ -27,29 +28,47 @@ Public Class Form1Clone
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 15)
             Case "30 секунд"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 30)
-            Case "60 секунд"
+            Case "1 минута"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 60)
+            Case "5 минут"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 300)
+            Case "15 минут"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 900)
+            Case "30 минут"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 1800)
+            Case "1 час"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 3600)
         End Select
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        movingAverageWindowSize = WindowSizeTextBox.Text
+        If (Not isOnline) Then
+            AskPriceLabel.Dispose()
+            BidPriceLabel.Dispose()
+            TradePriceLabel.Dispose()
+            TradeVolumeLabel.Dispose()
+        End If
         'ExanteIDTextBox0.Hide()
         DoubleBuffered = True
         Dim cp As New ChartPainting(Me)
         cp.isCloned = True
-        Dim newPage = New Page(cp, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
-                LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0, New MovingAverage(5))
-        pageList.Add(newPage)
+        If (Me.isOnline) Then
+            Dim newPage = New Page(cp, QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
+                    LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0, 5)
+            pageList.Add(newPage)
+        End If
+
         TicksOrSeconds.SelectedItem = "5 секунд"
-        BuyAndSell.Checked = True
-        AddHandler Me.Buy.CheckedChanged, AddressOf RadiobuttonOnChange
-        AddHandler Me.Sell.CheckedChanged, AddressOf RadiobuttonOnChange
+        BuyPlusSell.Checked = True
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
+
+        AddHandler Me.BuyPlusSell.CheckedChanged, AddressOf RadiobuttonOnChange
         TypeOfGraphic.SelectedItem = "Японские свечи"
         Try
             pageList(Tabs.SelectedIndex).cp.isSubscribed = True
-            Tabs.TabPages(Tabs.SelectedIndex).Text = Form1.Tabs.TabPages(Tabs.SelectedIndex).Text
-            Me.Text = Form1.Tabs.TabPages(Tabs.SelectedIndex).Text
+            Tabs.TabPages(Tabs.SelectedIndex).Text = Form1.Tabs.TabPages(Form1.Tabs.SelectedIndex).Text
+            Me.Text = Form1.Tabs.TabPages(Form1.Tabs.SelectedIndex).Text
         Catch ex As Exception
             MsgBox("Нет подключения")
         End Try
@@ -237,7 +256,7 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                     End If
                 End Try
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec - 10
@@ -253,8 +272,6 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
                     End If
                 End Try
-            Case Else
-
         End Select
     End Sub
 
@@ -283,7 +300,7 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
                     End If
                 End If
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 If (pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec) Then
@@ -305,10 +322,7 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
                     End If
                 End If
-            Case Else
-
         End Select
-
     End Sub
 
     '+ trades
@@ -349,7 +363,7 @@ Public Class Form1Clone
                         End If
                     End Try
                 End If
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec += 15
@@ -384,8 +398,6 @@ Public Class Form1Clone
                         End If
                     End Try
                 End If
-            Case Else
-
         End Select
 
     End Sub
@@ -409,7 +421,7 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
                     End If
                 End Try
-            Case "5 секунд"
+            Case Else
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
                 pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec -= 15
@@ -425,10 +437,7 @@ Public Class Form1Clone
                         pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
                     End If
                 End Try
-            Case Else
-
         End Select
-
     End Sub
 
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove
@@ -845,35 +854,25 @@ Public Class Form1Clone
         AddHandler Charts.SelectedIndexChanged, AddressOf Me.Charts0_SelectedIndexChanged
 
         Dim newPage = New Page(New ChartPainting(Me), QuotesPctBox, PricesQuotesPctBox, TimesQuotesPctBox, TradesPctBox, PricesTradesPctBox, TimesTradesPctBox,
-               LeftQuotesButton, RightQuotesButton, PlusQuotesButton, MinusQuotesButton, LeftTradesButton, RightTradesButton, PlusTradesButton, MinusTradesButton, Charts, VolumesTradesPctBox, VolumesVolumesTradesPctBox, New MovingAverage(5))
+               LeftQuotesButton, RightQuotesButton, PlusQuotesButton, MinusQuotesButton, LeftTradesButton, RightTradesButton, PlusTradesButton, MinusTradesButton, Charts, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 5)
         pageList.Add(newPage)
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TicksOrSeconds.SelectedIndexChanged
-        If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
-            If (TicksOrSeconds.SelectedItem = "Тики") Then
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
-                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
-                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
-                End If
-            Else
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
-                    CaseN_AndDraw()
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
-                    CaseN_AndDraw()
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
-                End If
-            End If
+    Private Sub TicksOrSeconds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TicksOrSeconds.SelectedIndexChanged
+        If (TicksOrSeconds.SelectedItem = "Тики") Then
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
+            pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+            pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+        Else
+            pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
+            pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+            CaseN_AndDraw()
         End If
     End Sub
 
     Private Sub TypeOfGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfGraphic.SelectedIndexChanged
         If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
-            If (TicksOrSeconds.SelectedItem = "5 секунд") Then
+            If (Not TicksOrSeconds.SelectedItem = "Тики") Then
                 If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
                     CaseN_AndDraw()
                 Else
@@ -917,5 +916,41 @@ Public Class Form1Clone
     Private Sub RadiobuttonOnChange(sender As System.Object, e As System.EventArgs)
         Dim rb = CType(sender, RadioButton)
         TypeOfGraphic_SelectedIndexChanged(sender, e)
+    End Sub
+
+    Private Sub Original_CheckedChanged(sender As Object, e As EventArgs) Handles Original.CheckedChanged
+        Try
+            TypeOfGraphic_SelectedIndexChanged(sender, e)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub Average_CheckedChanged(sender As Object, e As EventArgs) Handles Average.CheckedChanged
+        Original_CheckedChanged(sender, e)
+    End Sub
+
+    Private Sub WindowSizeBtn_Click(sender As Object, e As EventArgs) Handles WindowSizeBtn.Click
+        movingAverageWindowSize = WindowSizeTextBox.Text
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades15sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades30sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades60sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades300sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades900sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec)
+        TypeOfGraphic_SelectedIndexChanged(sender, e)
+    End Sub
+
+    Public Sub ReCalculateMovingAverage(pointsTradesNsec As List(Of PointTradesNsec))
+        Dim movingAvgBuy As New MovingAverage(movingAverageWindowSize)
+        Dim movingAvgSell As New MovingAverage(movingAverageWindowSize)
+        Dim movingAvgBuyPlusSell As New MovingAverage(movingAverageWindowSize)
+        For index = 0 To pointsTradesNsec.Count - 1
+            pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
+            pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
+            pointsTradesNsec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
+        Next
     End Sub
 End Class

@@ -59,9 +59,12 @@ Partial Class Form1Clone
         Me.Tabs = New System.Windows.Forms.TabControl()
         Me.TicksOrSeconds = New System.Windows.Forms.ComboBox()
         Me.TypeOfGraphic = New System.Windows.Forms.ComboBox()
+        Me.BuyPlusSell = New System.Windows.Forms.RadioButton()
         Me.BuyAndSell = New System.Windows.Forms.RadioButton()
-        Me.Sell = New System.Windows.Forms.RadioButton()
-        Me.Buy = New System.Windows.Forms.RadioButton()
+        Me.Average = New System.Windows.Forms.CheckBox()
+        Me.Original = New System.Windows.Forms.CheckBox()
+        Me.WindowSizeBtn = New System.Windows.Forms.Button()
+        Me.WindowSizeTextBox = New System.Windows.Forms.TextBox()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -425,7 +428,7 @@ Partial Class Form1Clone
         'Tabs
         '
         Me.Tabs.Controls.Add(Me.TabPage0)
-        Me.Tabs.Location = New System.Drawing.Point(23, 82)
+        Me.Tabs.Location = New System.Drawing.Point(27, 92)
         Me.Tabs.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Tabs.Name = "Tabs"
         Me.Tabs.SelectedIndex = 0
@@ -435,64 +438,95 @@ Partial Class Form1Clone
         'TicksOrSeconds
         '
         Me.TicksOrSeconds.FormattingEnabled = True
-        Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "15 секунд", "30 секунд", "60 секунд"})
-        Me.TicksOrSeconds.Location = New System.Drawing.Point(289, 11)
+        Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "15 секунд", "30 секунд", "1 минута", "5 минут", "15 минут", "30 минут", "1 час"})
+        Me.TicksOrSeconds.Location = New System.Drawing.Point(183, 7)
         Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
-        Me.TicksOrSeconds.Size = New System.Drawing.Size(291, 24)
+        Me.TicksOrSeconds.Size = New System.Drawing.Size(396, 24)
         Me.TicksOrSeconds.TabIndex = 44
         '
         'TypeOfGraphic
         '
         Me.TypeOfGraphic.FormattingEnabled = True
         Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
-        Me.TypeOfGraphic.Location = New System.Drawing.Point(601, 10)
+        Me.TypeOfGraphic.Location = New System.Drawing.Point(585, 7)
         Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
-        Me.TypeOfGraphic.Size = New System.Drawing.Size(179, 24)
+        Me.TypeOfGraphic.Size = New System.Drawing.Size(227, 24)
         Me.TypeOfGraphic.TabIndex = 45
+        '
+        'BuyPlusSell
+        '
+        Me.BuyPlusSell.AutoSize = True
+        Me.BuyPlusSell.Location = New System.Drawing.Point(419, 57)
+        Me.BuyPlusSell.Name = "BuyPlusSell"
+        Me.BuyPlusSell.Size = New System.Drawing.Size(151, 21)
+        Me.BuyPlusSell.TabIndex = 52
+        Me.BuyPlusSell.TabStop = True
+        Me.BuyPlusSell.Text = "Покупка+Продажа"
+        Me.BuyPlusSell.UseVisualStyleBackColor = True
         '
         'BuyAndSell
         '
         Me.BuyAndSell.AutoSize = True
-        Me.BuyAndSell.Location = New System.Drawing.Point(473, 56)
+        Me.BuyAndSell.Location = New System.Drawing.Point(183, 57)
         Me.BuyAndSell.Name = "BuyAndSell"
-        Me.BuyAndSell.Size = New System.Drawing.Size(151, 21)
-        Me.BuyAndSell.TabIndex = 52
+        Me.BuyAndSell.Size = New System.Drawing.Size(219, 21)
+        Me.BuyAndSell.TabIndex = 50
         Me.BuyAndSell.TabStop = True
-        Me.BuyAndSell.Text = "Покупка+Продажа"
+        Me.BuyAndSell.Text = "Покупка / продажа отдельно"
         Me.BuyAndSell.UseVisualStyleBackColor = True
         '
-        'Sell
+        'Average
         '
-        Me.Sell.AutoSize = True
-        Me.Sell.Location = New System.Drawing.Point(379, 56)
-        Me.Sell.Name = "Sell"
-        Me.Sell.Size = New System.Drawing.Size(88, 21)
-        Me.Sell.TabIndex = 51
-        Me.Sell.TabStop = True
-        Me.Sell.Text = "Продажа"
-        Me.Sell.UseVisualStyleBackColor = True
+        Me.Average.AutoSize = True
+        Me.Average.Location = New System.Drawing.Point(676, 59)
+        Me.Average.Name = "Average"
+        Me.Average.Size = New System.Drawing.Size(129, 21)
+        Me.Average.TabIndex = 54
+        Me.Average.Text = "Сглаживающая"
+        Me.Average.UseVisualStyleBackColor = True
         '
-        'Buy
+        'Original
         '
-        Me.Buy.AutoSize = True
-        Me.Buy.Location = New System.Drawing.Point(289, 56)
-        Me.Buy.Name = "Buy"
-        Me.Buy.Size = New System.Drawing.Size(84, 21)
-        Me.Buy.TabIndex = 50
-        Me.Buy.TabStop = True
-        Me.Buy.Text = "Покупка"
-        Me.Buy.UseVisualStyleBackColor = True
+        Me.Original.AutoSize = True
+        Me.Original.Checked = True
+        Me.Original.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.Original.Location = New System.Drawing.Point(585, 58)
+        Me.Original.Name = "Original"
+        Me.Original.Size = New System.Drawing.Size(85, 21)
+        Me.Original.TabIndex = 53
+        Me.Original.Text = "Объемы"
+        Me.Original.UseVisualStyleBackColor = True
+        '
+        'WindowSizeBtn
+        '
+        Me.WindowSizeBtn.Location = New System.Drawing.Point(913, 57)
+        Me.WindowSizeBtn.Name = "WindowSizeBtn"
+        Me.WindowSizeBtn.Size = New System.Drawing.Size(117, 27)
+        Me.WindowSizeBtn.TabIndex = 56
+        Me.WindowSizeBtn.Text = "Применить"
+        Me.WindowSizeBtn.UseVisualStyleBackColor = True
+        '
+        'WindowSizeTextBox
+        '
+        Me.WindowSizeTextBox.Location = New System.Drawing.Point(870, 59)
+        Me.WindowSizeTextBox.Name = "WindowSizeTextBox"
+        Me.WindowSizeTextBox.Size = New System.Drawing.Size(37, 22)
+        Me.WindowSizeTextBox.TabIndex = 55
+        Me.WindowSizeTextBox.Text = "5"
         '
         'Form1Clone
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1740, 1017)
+        Me.Controls.Add(Me.WindowSizeBtn)
+        Me.Controls.Add(Me.WindowSizeTextBox)
+        Me.Controls.Add(Me.Average)
+        Me.Controls.Add(Me.BuyPlusSell)
         Me.Controls.Add(Me.BuyAndSell)
-        Me.Controls.Add(Me.Sell)
-        Me.Controls.Add(Me.Buy)
+        Me.Controls.Add(Me.Original)
         Me.Controls.Add(Me.TypeOfGraphic)
         Me.Controls.Add(Me.TicksOrSeconds)
         Me.Controls.Add(Me.TradeVolumeLabel)
@@ -567,7 +601,10 @@ Partial Class Form1Clone
     Friend WithEvents Tabs As TabControl
     Friend WithEvents TicksOrSeconds As ComboBox
     Friend WithEvents TypeOfGraphic As ComboBox
+    Friend WithEvents BuyPlusSell As RadioButton
     Friend WithEvents BuyAndSell As RadioButton
-    Friend WithEvents Sell As RadioButton
-    Friend WithEvents Buy As RadioButton
+    Friend WithEvents Average As CheckBox
+    Friend WithEvents Original As CheckBox
+    Friend WithEvents WindowSizeBtn As Button
+    Friend WithEvents WindowSizeTextBox As TextBox
 End Class

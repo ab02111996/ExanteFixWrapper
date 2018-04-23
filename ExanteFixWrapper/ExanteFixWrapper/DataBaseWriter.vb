@@ -4,27 +4,30 @@ Imports System.IO
 Imports System.Text
 
 Public Class DataBaseWriter
-    Private currentConnection As Connection
-    Private currentCatalog As Catalog
-    Private connectionString As String
-    Private dbPath As String
-    Private currentFileName As String
+    Private currentConnection As Connection 'Текущее соединение
+    Private currentCatalog As Catalog 'Переменная для создания БД
+    Private connectionString As String 'Строка(параметры) соединения с БД
+    Private dbPath As String 'Путь до баз данных
+    Private currentFileName As String 'Имя текущего файла БД
     Private currentFileCreationDate As DateTime
 
     Sub New()
         '"Jet OLEDB:Engine Type=5"
     End Sub
     Private Sub CreateDBFile(instrumentName As String)
+        'Создаем имя файла. Имя файла состоит из названия инструмента и времени его создания(в тактах системы). При наличии символа "/" он заменяется на "_"
         currentFileName = instrumentName.Replace("/", "_") + "_" + DateTime.Now.Ticks.ToString() + ".accdb"
         currentFileCreationDate = DateTime.Now
         connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
                     "Data Source=" + dbPath + "\" + currentFileName + ";"
         Try
+            'Пытаемся создать БД
             currentCatalog = New Catalog()
             currentCatalog.Create(connectionString)
             currentConnection = New Connection()
             currentConnection.Open(connectionString)
             currentCatalog.ActiveConnection = currentConnection
+            'Создаем таблицы
             Dim fiveSecondsDataTable = New Table()
             Dim primaryKeyColumn = New Column()
             primaryKeyColumn.Name = "ID"
@@ -82,6 +85,7 @@ Public Class DataBaseWriter
         Me.dbPath = path
     End Sub
     Sub OpenConnection(instrumentName As String)
+        'Ищем последний созданный файл, если находим то открываем с ним соединение, а не находим то создаем новый файл БД
         Dim files = Directory.GetFiles(dbPath, instrumentName.Replace("/", "_" + "_") + "_*.accdb")
         currentFileCreationDate = New DateTime(0)
         For Each item As String In files
@@ -101,11 +105,11 @@ Public Class DataBaseWriter
         End If
     End Sub
     Sub InsertBufferIntoDB(buffer As Buffer)
+        'Если база старше 7 дней, то создаем новый файл
         If (DateTime.Now - currentFileCreationDate).Days > 7 Then
             Me.OpenConnection(buffer.exanteID)
         Else
-            'Dim metaData = buffer.GetBufferMetaData()
-            'If metaData IsNot Nothing Then
+            'Записываем данные в базу
             Dim sb = New StringBuilder()
             sb.Append("INSERT INTO FiveSecondsDataTable([StartTime], [StartTimeMilliseconds], [EndTime], [EndTimeMilliseconds], " +
                       "[Instrument], [Open], [High], [Low], [Close], [VolumeSell], [VolumeBuy], [CountSell], [CountBuy], [PriceSell], " +
@@ -128,9 +132,9 @@ Public Class DataBaseWriter
             sb.Append(buffer.priceBuy.ToString().Replace(",", "."))
             sb.Append(");")
             currentConnection.Execute(sb.ToString())
-            'End If
         End If
     End Sub
+    'Данный метод записывает тиковые данные в базу
     Sub InsertBufferMetaDataIntoDB(buffer As Buffer)
         If (DateTime.Now - currentFileCreationDate).Days > 7 Then
             Me.OpenConnection(buffer.exanteID)
@@ -156,6 +160,7 @@ Public Class DataBaseWriter
             End If
         End If
     End Sub
+    'Метод закрывает соединение
     Sub CloseConnection()
         currentConnection.Close()
         currentConnection = Nothing
