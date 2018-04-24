@@ -4,16 +4,13 @@
 Public Class ChartPainting
     Public pointsQuotes As List(Of PointQuotes) 'список котировок
     Public pointsTrades As List(Of PointTrades) 'список сделок
-    Public pointsAverage As List(Of PointTrades)
     Public pointsTrades5sec As List(Of PointTradesNsec) 'список сделок для 5-секундного графика
-    'Public pointsAverage5sec As List(Of PointTradesNsec)
+    Public pointsTrades10sec As List(Of PointTradesNsec)
     Public pointsTrades15sec As List(Of PointTradesNsec)
-    'Public pointsAverage15sec As List(Of PointTradesNsec)
     Public pointsTrades30sec As List(Of PointTradesNsec)
-    'Public pointsAverage30sec As List(Of PointTradesNsec)
     Public pointsTrades60sec As List(Of PointTradesNsec)
-    'Public pointsAverage60sec As List(Of PointTradesNsec)
     Public pointsTrades300sec As List(Of PointTradesNsec)
+    Public pointsTrades600sec As List(Of PointTradesNsec)
     Public pointsTrades900sec As List(Of PointTradesNsec)
     Public pointsTrades1800sec As List(Of PointTradesNsec)
     Public pointsTrades3600sec As List(Of PointTradesNsec)
@@ -84,7 +81,6 @@ Public Class ChartPainting
         Me.minPointsOnScreenQuotes = 10
         'сделки - тики
         Me.pointsTrades = New List(Of PointTrades)
-        Me.pointsAverage = New List(Of PointTrades)
         Me.pointsOnScreenTrades = 40
         Me.currentPointTrades = 0
         Me.needRePaintingTrades = True
@@ -93,10 +89,12 @@ Public Class ChartPainting
         Me.maxVolumeTrades = 0
         'сделки - N секунд
         Me.pointsTrades5sec = New List(Of PointTradesNsec)
+        Me.pointsTrades10sec = New List(Of PointTradesNsec)
         Me.pointsTrades15sec = New List(Of PointTradesNsec)
         Me.pointsTrades30sec = New List(Of PointTradesNsec)
         Me.pointsTrades60sec = New List(Of PointTradesNsec)
         Me.pointsTrades300sec = New List(Of PointTradesNsec)
+        Me.pointsTrades600sec = New List(Of PointTradesNsec)
         Me.pointsTrades900sec = New List(Of PointTradesNsec)
         Me.pointsTrades1800sec = New List(Of PointTradesNsec)
         Me.pointsTrades3600sec = New List(Of PointTradesNsec)
@@ -367,18 +365,6 @@ Public Class ChartPainting
                     p2Trades.X = (index + 1 - Me.currentPointTrades) * Me.intervalTrades
                     p2Trades.Y = TradesPctBox.Height - TradesPctBox.Height * procents2
 
-                    If (Me.isNeedShowAvg) Then
-                        procents1 = ((Me.pointsAverage(index).tradePrice - lowBorderTrades) / yRangeTrades)
-                        procents2 = ((Me.pointsAverage(index + 1).tradePrice - lowBorderTrades) / yRangeTrades)
-                        Dim p1Avg As PointF
-                        Dim p2Avg As PointF
-                        p1Avg.X = (index - Me.currentPointTrades) * Me.intervalTrades
-                        p1Avg.Y = TradesPctBox.Height - TradesPctBox.Height * procents1
-                        p2Avg.X = (index + 1 - Me.currentPointTrades) * Me.intervalTrades
-                        p2Avg.Y = TradesPctBox.Height - TradesPctBox.Height * procents2
-                        G_btmTrades.DrawLine(New Pen(Color.LightPink), p1Avg, p2Avg)
-                    End If
-
                     yRangeVolumesTrades = highBorderVolumesTrades
                     Dim procentsRectangle As Double = Me.pointsTrades(index).tradeVolume / yRangeVolumesTrades
                     Dim rectangle As RectangleF
@@ -493,6 +479,8 @@ Public Class ChartPainting
             Select Case N
                 Case 5
                     pointsTradesNsec = Me.pointsTrades5sec
+                Case 10
+                    pointsTradesNsec = Me.pointsTrades10sec
                 Case 15
                     pointsTradesNsec = Me.pointsTrades15sec
                 Case 30
@@ -501,6 +489,8 @@ Public Class ChartPainting
                     pointsTradesNsec = Me.pointsTrades60sec
                 Case 300
                     pointsTradesNsec = Me.pointsTrades300sec
+                Case 600
+                    pointsTradesNsec = Me.pointsTrades600sec
                 Case 900
                     pointsTradesNsec = Me.pointsTrades900sec
                 Case 1800

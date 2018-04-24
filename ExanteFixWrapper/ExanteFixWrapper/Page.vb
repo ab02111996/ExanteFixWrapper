@@ -27,10 +27,12 @@ Public Class Page
     Private movingAvgBuy As MovingAverage
     Private movingAvgSell As MovingAverage
     Private movingAvgBuyPlusSell As MovingAverage
+    Private counter10sec As Integer
     Private counter15sec As Integer
     Private counter30sec As Integer
     Private counter60sec As Integer
     Private counter300sec As Integer
+    Private counter600sec As Integer
     Private counter900sec As Integer
     Private counter1800sec As Integer
     Private counter3600sec As Integer
@@ -79,10 +81,12 @@ Public Class Page
         Me.Chart = Chart
         Me.VolumesTradesPctBox = VolumesTradesPctBox
         Me.VolumesVolumesTradesPctBox = VolumesVolumesTradesPctBox
+        Me.counter10sec = 0
         Me.counter15sec = 0
         Me.counter30sec = 0
         Me.counter60sec = 0
         Me.counter300sec = 0
+        Me.counter600sec = 0
         Me.counter900sec = 0
         Me.counter1800sec = 0
         Me.counter3600sec = 0
@@ -143,21 +147,29 @@ Public Class Page
     End Sub
 
     Public Sub AddNSecondsPointOffline(pointsTrades5sec As List(Of PointTradesNsec))
+        Dim counter10sec As Integer = 0
         Dim counter15sec As Integer = 0
         Dim counter30sec As Integer = 0
         Dim counter60sec As Integer = 0
         Dim counter300sec As Integer = 0
+        Dim counter600sec As Integer = 0
         Dim counter900sec As Integer = 0
         Dim counter1800sec As Integer = 0
         Dim counter3600sec As Integer = 0
         For index = 0 To pointsTrades5sec.Count - 1
+            counter10sec += 1
             counter15sec += 1
             counter30sec += 1
             counter60sec += 1
             counter300sec += 1
+            counter600sec += 1
             counter900sec += 1
             counter1800sec += 1
             counter3600sec += 1
+            If counter10sec = 2 Then
+                AddNSecondsPoint(counter10sec, index)
+                counter10sec = 0
+            End If
             If counter15sec = 3 Then
                 AddNSecondsPoint(counter15sec, index)
                 counter15sec = 0
@@ -173,6 +185,10 @@ Public Class Page
             If counter300sec = 60 Then
                 AddNSecondsPoint(counter300sec, index)
                 counter300sec = 0
+            End If
+            If counter600sec = 120 Then
+                AddNSecondsPoint(counter600sec, index)
+                counter600sec = 0
             End If
             If counter900sec = 180 Then
                 AddNSecondsPoint(counter900sec, index)
@@ -191,14 +207,25 @@ Public Class Page
 
     Public Sub AddNSecondsPoint(counterNsec As Integer, _index As Integer)
         Dim count As Integer
+        Dim ticksOrSeconds As String
+        Dim isOnline As Boolean = False
         If (cp.isCloned) Then
             If (CType(cp.usedForm, Form1Clone).isOnline) Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem.ToString
+                                      End Sub)
+                ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem
+                isOnline = True
                 count = cp.pointsTrades5sec.Count
             Else
                 count = _index + 1
             End If
         Else
             If (CType(cp.usedForm, Form1).isOnline) Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          ticksOrSeconds = CType(cp.usedForm, Form1).TicksOrSeconds.SelectedItem.ToString
+                                      End Sub)
+                isOnline = True
                 count = cp.pointsTrades5sec.Count
             Else
                 count = _index + 1
@@ -238,38 +265,94 @@ Public Class Page
         Console.WriteLine(counterNsec.ToString + " " + point.time.ToString + " " + point.highPrice.ToString + " " + point.openPrice.ToString + " " + point.closePrice.ToString + " " + point.lowPrice.ToString + " " + (point.volumeBuy + point.volumeSell).ToString)
         If (counterNsec = 3) Then
             cp.pointsTrades15sec.Add(point)
+            If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                      End Sub)
+            End If
+        ElseIf (counterNsec = 2) Then
+            cp.pointsTrades10sec.Add(point)
+            If isOnline And ticksOrSeconds = "10 секунд" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 10)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 6) Then
             cp.pointsTrades30sec.Add(point)
+            If isOnline And ticksOrSeconds = "30 секунд" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 12) Then
             cp.pointsTrades60sec.Add(point)
+            If isOnline And ticksOrSeconds = "1 минута" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 60) Then
             cp.pointsTrades300sec.Add(point)
+            If isOnline And ticksOrSeconds = "5 минут" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
+                                      End Sub)
+            End If
+        ElseIf (counterNsec = 120) Then
+            cp.pointsTrades600sec.Add(point)
+            If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 180) Then
             cp.pointsTrades900sec.Add(point)
+            If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 360) Then
             cp.pointsTrades1800sec.Add(point)
+            If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
+                                      End Sub)
+            End If
         ElseIf (counterNsec = 720) Then
             cp.pointsTrades3600sec.Add(point)
+            If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
+                Me.cp.usedForm.Invoke(Sub()
+                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
+                                      End Sub)
+            End If
         End If
+
     End Sub
 
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
         Dim buffer = CType(sender, Buffer)
-        Dim newPoint As New PointTradesNsec(sender)
+        Dim newPoint As New PointTradesNsec(buffer)
         newPoint.avgBuy = movingAvgBuy.Calculate(newPoint.volumeBuy)
         newPoint.avgSell = movingAvgSell.Calculate(newPoint.volumeSell)
         newPoint.avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(newPoint.volumeBuy + newPoint.volumeSell)
         cp.pointsTrades5sec.Add(newPoint)
 
+        counter10sec += 1
         counter15sec += 1
         counter30sec += 1
         counter60sec += 1
         counter300sec += 1
+        counter600sec += 1
         counter900sec += 1
         counter1800sec += 1
         counter3600sec += 1
 
         Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (Buffer.volumeBuy + Buffer.volumeSell).ToString)
+        If counter10sec = 2 Then
+            AddNSecondsPoint(counter10sec, Nothing)
+            counter10sec = 0
+        End If
         If counter15sec = 3 Then
             AddNSecondsPoint(counter15sec, Nothing)
             counter15sec = 0
@@ -285,6 +368,10 @@ Public Class Page
         If counter300sec = 60 Then
             AddNSecondsPoint(counter300sec, Nothing)
             counter300sec = 0
+        End If
+        If counter600sec = 120 Then
+            AddNSecondsPoint(counter600sec, Nothing)
+            counter600sec = 0
         End If
         If counter900sec = 180 Then
             AddNSecondsPoint(counter900sec, Nothing)
@@ -310,20 +397,20 @@ Public Class Page
                                        Select Case ticksOrSeconds.SelectedItem
                                            Case "5 секунд"
                                                cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 5)
-                                           Case "15 секунд"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
-                                           Case "30 секунд"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
-                                           Case "1 минута"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
-                                           Case "5 минут"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
-                                           Case "15 минут"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
-                                           Case "30 минут"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
-                                           Case "1 час"
-                                               cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
+                                               'Case "15 секунд"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                               'Case "30 секунд"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
+                                               'Case "1 минута"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                               'Case "5 минут"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
+                                               'Case "15 минут"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
+                                               'Case "30 минут"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
+                                               'Case "1 час"
+                                               '    cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
                                        End Select
                                    End If
                                End Sub)

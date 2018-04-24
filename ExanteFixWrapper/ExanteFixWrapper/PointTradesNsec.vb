@@ -19,7 +19,7 @@
         lowPrice = buffer.lowPrice
         volumeBuy = buffer.volumeBuy
         volumeSell = buffer.volumeSell
-        time = buffer.endTimeFrame
+        time = buffer.startTimeFrame
         avgBuy = Nothing
         avgSell = Nothing
         avgBuyPlusSell = Nothing

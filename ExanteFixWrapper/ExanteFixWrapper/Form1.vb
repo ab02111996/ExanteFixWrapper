@@ -33,6 +33,8 @@ Public Class Form1
         Select Case TicksOrSeconds.SelectedItem
             Case "5 секунд"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 5)
+            Case "10 секунд"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 10)
             Case "15 секунд"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 15)
             Case "30 секунд"
@@ -41,6 +43,8 @@ Public Class Form1
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 60)
             Case "5 минут"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 300)
+            Case "10 минут"
+                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 600)
             Case "15 минут"
                 pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 900)
             Case "30 минут"
@@ -341,15 +345,40 @@ Public Class Form1
                     End If
                 End If
             Case Else
+                Dim pointsTradesNsec As List(Of PointTradesNsec)
+                Select Case TicksOrSeconds.SelectedItem
+                    Case "5 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                    Case "10 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades10sec
+                    Case "15 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
+                    Case "30 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades30sec
+                    Case "1 минута"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades60sec
+                    Case "5 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades300sec
+                    Case "10 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades600sec
+                    Case "15 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades900sec
+                    Case "30 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec
+                    Case "1 час"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
+                    Case Else
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                End Select
                 pageList(Tabs.SelectedIndex).cp.needDrawLineTrades = False
                 pageList(Tabs.SelectedIndex).cp.isLineReadyTrades = False
-                If (pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec) Then
+                If pointsTradesNsec.Count > pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec Then
                     pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + 10
                     If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec > pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
-                        pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec
+                        pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pointsTradesNsec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec
                     End If
 
-                    If (Not pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1) Then
+                    If (Not pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec = pointsTradesNsec.Count - 1) Then
                         Try
                             CaseN_AndDraw()
                         Catch ex As Exception
@@ -894,12 +923,39 @@ Public Class Form1
 
     Private Sub TicksOrSeconds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TicksOrSeconds.SelectedIndexChanged
         If (TicksOrSeconds.SelectedItem = "Тики") Then
-            pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
-            pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+            pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades - 1
+            If pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0 Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
+            End If
+            pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
             pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
         Else
-            pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
-            pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+            Select Case TicksOrSeconds.SelectedItem
+                Case "5 секунд"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "10 секунд"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades10sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "15 секунд"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades15sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "30 секунд"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades30sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "1 минута"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades60sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "5 минут"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades300sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "10 минут"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades600sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "15 минут"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades900sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "30 минут"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+                Case "1 час"
+                    pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
+            End Select
+            If pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec < 0 Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
+            End If
+            pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
             CaseN_AndDraw()
         End If
     End Sub
@@ -928,23 +984,24 @@ Public Class Form1
                 pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
             End If
         Else
-            If (TicksOrSeconds.SelectedItem = "Тики") Then
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
-                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
-                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
-                End If
-            Else
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
-                    CaseN_AndDraw()
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
-                    CaseN_AndDraw()
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
-                End If
-            End If
+            TicksOrSeconds_SelectedIndexChanged(sender, e)
+            'If (TicksOrSeconds.SelectedItem = "Тики") Then
+            '    If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
+            '        pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+            '    Else
+            '        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+            '        pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+            '        pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+            '    End If
+            'Else
+            '    If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+            '        CaseN_AndDraw()
+            '    Else
+            '        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+            '        CaseN_AndDraw()
+            '        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+            '    End If
+            'End If
         End If
     End Sub
 
@@ -952,9 +1009,8 @@ Public Class Form1
         Dim cloneForm As Form1Clone = New Form1Clone(Me.feedReciever)
         cloneForm.isOnline = Me.isOnline
         If (Not isOnline) Then
-
             Dim newPage = New Page(New ChartPainting(cloneForm), cloneForm.QuotesPctBox0, cloneForm.PricesQuotesPctBox0, cloneForm.TimesQuotesPctBox0, cloneForm.TradesPctBox0, cloneForm.PricesTradesPctBox0, cloneForm.TimesTradesPctBox0,
-                cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, 5)
+                cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, Me.WindowSizeTextBox.Text)
             cloneForm.pageList.Add(newPage)
             cloneForm.pageList(0).cp.pointsTrades5sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
             cloneForm.pageList(0).cp.pointsTrades15sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
@@ -988,10 +1044,12 @@ Public Class Form1
     Private Sub WindowSizeBtn_Click(sender As Object, e As EventArgs) Handles WindowSizeBtn.Click
         movingAverageWindowSize = WindowSizeTextBox.Text
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades10sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades15sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades30sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades60sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades300sec)
+        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades600sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades900sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec)
         ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec)
