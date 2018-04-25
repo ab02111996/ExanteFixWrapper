@@ -70,6 +70,10 @@ Public Class ChartPainting
     Public usedForm As Form
     Public isSubscribed As Boolean
     Public isNeedShowAvg As Boolean
+    Public isCursorOnTradesChart As Boolean
+    Public pointMouseMoveTrades As PointF
+    Public isCursorOnVolumesChart As Boolean
+    Public pointMouseMoveVolumes As PointF
 
     Public Sub New(usedForm As Form)
         'котировки - тики
@@ -118,6 +122,8 @@ Public Class ChartPainting
         Me.isCloned = False
         Me.usedForm = usedForm
         Me.isSubscribed = False
+        Me.isCursorOnTradesChart = False
+        Me.isCursorOnVolumesChart = False
     End Sub
 
     Public Sub paintingQuotes(QuotesPctBox As PictureBox, TimesQuotesPctBox As PictureBox, PricesQuotesPctBox As PictureBox)
@@ -455,6 +461,21 @@ Public Class ChartPainting
                 Dim P_BlackLine As New Pen(Color.Black, 1)
                 G_btmTrades.DrawLine(P_BlackLine, Me.point1Trades, Me.point2Trades)
             End If
+
+            If (Me.isCursorOnTradesChart) Then
+                G_btmTrades.DrawLine(New Pen(Color.Black), pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, TradesPctBox.Height)
+                G_btmTrades.DrawLine(New Pen(Color.Black), 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
+                G_btmVolumes.DrawLine(New Pen(Color.Black), pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
+                G_Prices.DrawLine(New Pen(Color.Black), 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+            End If
+
+            If (Me.isCursorOnVolumesChart) Then
+                G_btmVolumes.DrawLine(New Pen(Color.Black), pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, VolumesTradesPctBox.Height)
+                G_btmVolumes.DrawLine(New Pen(Color.Black), 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                G_btmTrades.DrawLine(New Pen(Color.Black), pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
+                G_VolumesVolumes.DrawLine(New Pen(Color.Black), 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+            End If
+
             TradesPctBox.Refresh()
             VolumesTradesPctBox.Refresh()
         Catch ex As Exception
@@ -1052,6 +1073,21 @@ Public Class ChartPainting
                 Dim P_BlackLine As New Pen(Color.Black, 1)
                 G_btmTrades.DrawLine(P_BlackLine, Me.point1Trades, Me.point2Trades)
             End If
+
+            If (Me.isCursorOnTradesChart) Then
+                G_btmTrades.DrawLine(New Pen(Color.Black), pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, TradesPctBox.Height)
+                G_btmTrades.DrawLine(New Pen(Color.Black), 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
+                G_btmVolumes.DrawLine(New Pen(Color.Black), pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
+                G_Prices.DrawLine(New Pen(Color.Black), 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+            End If
+
+            If (Me.isCursorOnVolumesChart) Then
+                G_btmVolumes.DrawLine(New Pen(Color.Black), pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, VolumesTradesPctBox.Height)
+                G_btmVolumes.DrawLine(New Pen(Color.Black), 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                G_btmTrades.DrawLine(New Pen(Color.Black), pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
+                G_VolumesVolumes.DrawLine(New Pen(Color.Black), 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+            End If
+
             TradesPctBox.Refresh()
             VolumesTradesPctBox.Refresh()
 
@@ -1068,6 +1104,6 @@ Public Class ChartPainting
                 Me.needRePaintingTradesNsec = True
             End If
         End Try
-
     End Sub
+
 End Class

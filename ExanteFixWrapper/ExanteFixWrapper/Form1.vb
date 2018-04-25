@@ -510,8 +510,17 @@ Public Class Form1
     End Sub
 
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove
+        pageList(Tabs.SelectedIndex).cp.pointMouseMoveTrades.X = e.X
+        pageList(Tabs.SelectedIndex).cp.pointMouseMoveTrades.Y = e.Y
         If (Me.TicksOrSeconds.SelectedItem = "Тики") Then
             If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+                End If
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0 And Not pageList(Tabs.SelectedIndex).cp.pointsTrades.Count = 0) Then
                     Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades) + proportion, "0.00")
@@ -536,31 +545,62 @@ Public Class Form1
             End If
         Else
             If (pageList.Count > 0) Then
-                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTradesNsec = 0 And Not pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count = 0) Then
+                Dim pointsTradesNsec As List(Of PointTradesNsec)
+                Select Case TicksOrSeconds.SelectedItem
+                    Case "5 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                    Case "10 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades10sec
+                    Case "15 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
+                    Case "30 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades30sec
+                    Case "1 минута"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades60sec
+                    Case "5 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades300sec
+                    Case "10 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades600sec
+                    Case "15 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades900sec
+                    Case "30 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec
+                    Case "1 час"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
+                    Case Else
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                End Select
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+                    CaseN_AndDraw()
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                    CaseN_AndDraw()
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+                End If
+                If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTradesNsec = 0 And Not pointsTradesNsec.Count = 0) Then
                     Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTradesNsec - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTradesNsec
                     PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTradesNsec) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTradesNsec))
                     If (indexOfPoint < 0) Then
                         indexOfPoint = 0
                     End If
-                    If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
-                        indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1
+                    If (indexOfPoint >= pointsTradesNsec.Count) Then
+                        indexOfPoint = pointsTradesNsec.Count - 1
                         If (indexOfPoint < 0) Then
                             indexOfPoint = 0
                         End If
-                        TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).time.ToLongTimeString
+                        TimeLabel0.Text = pointsTradesNsec(indexOfPoint).time.ToLongTimeString
                     Else
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
-                            TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).time.ToLongTimeString
+                        If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint > pointsTradesNsec.Count) Then
+                            TimeLabel0.Text = pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).time.ToLongTimeString
                         Else
-                            TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).time.ToLongTimeString
+                            TimeLabel0.Text = pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).time.ToLongTimeString
                         End If
                     End If
                 End If
             End If
+
         End If
-
-
     End Sub
 
     Private Sub DrawLineTrades_Click(sender As Object, e As EventArgs) Handles DrawLineTrades0.Click
@@ -624,8 +664,17 @@ Public Class Form1
     End Sub
 
     Private Sub VolumesTradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles VolumesTradesPctBox0.MouseMove
+        pageList(Tabs.SelectedIndex).cp.pointMouseMoveVolumes.X = e.X
+        pageList(Tabs.SelectedIndex).cp.pointMouseMoveVolumes.Y = e.Y
         If (TicksOrSeconds.SelectedItem = "Тики") Then
             If (pageList.Count > 0) Then
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+                    pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+                End If
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0) Then
                     Try
                         Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades - (e.Y / pageList(Tabs.SelectedIndex).VolumesTradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTrades
@@ -653,6 +702,38 @@ Public Class Form1
             End If
         Else
             If (pageList.Count > 0) Then
+                Dim pointsTradesNsec As List(Of PointTradesNsec)
+                Select Case TicksOrSeconds.SelectedItem
+                    Case "5 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                    Case "10 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades10sec
+                    Case "15 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
+                    Case "30 секунд"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades30sec
+                    Case "1 минута"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades60sec
+                    Case "5 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades300sec
+                    Case "10 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades600sec
+                    Case "15 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades900sec
+                    Case "30 минут"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec
+                    Case "1 час"
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
+                    Case Else
+                        pointsTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+                End Select
+                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+                    CaseN_AndDraw()
+                Else
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                    CaseN_AndDraw()
+                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+                End If
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTradesNsec = 0) Then
                     Try
                         Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeVolumesTradesNsec - (e.Y / pageList(Tabs.SelectedIndex).VolumesTradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeVolumesTradesNsec
@@ -662,15 +743,15 @@ Public Class Form1
                         If (indexOfPoint < 0) Then
                             indexOfPoint = 0
                         End If
-                        If (indexOfPoint >= pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
-                            indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1
-                            CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(indexOfPoint).volumeSell
+                        If (indexOfPoint >= pointsTradesNsec.Count) Then
+                            indexOfPoint = pointsTradesNsec.Count - 1
+                            CurVolumeLabel.Text = pointsTradesNsec(indexOfPoint).volumeBuy + pointsTradesNsec(indexOfPoint).volumeSell
                         Else
-                            If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count) Then
-                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).volumeSell
+                            If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint > pointsTradesNsec.Count) Then
+                                CurVolumeLabel.Text = pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).volumeBuy + pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec).volumeSell
 
                             Else
-                                CurVolumeLabel.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).volumeSell + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).volumeBuy
+                                CurVolumeLabel.Text = pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).volumeSell + pointsTradesNsec(pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec + indexOfPoint).volumeBuy
                             End If
                         End If
                     Catch ex As Exception
@@ -1065,5 +1146,39 @@ Public Class Form1
             pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
             pointsTradesNsec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
         Next
+    End Sub
+
+    Private Sub TradesPctBox0_MouseEnter(sender As Object, e As EventArgs) Handles TradesPctBox0.MouseEnter
+        pageList(Tabs.SelectedIndex).cp.isCursorOnTradesChart = True
+    End Sub
+
+    Private Sub TradesPctBox0_MouseLeave(sender As Object, e As EventArgs) Handles TradesPctBox0.MouseLeave
+        pageList(Tabs.SelectedIndex).cp.isCursorOnTradesChart = False
+        If (Me.TicksOrSeconds.SelectedItem = "Тики") Then
+            If (pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False) Then
+                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+            Else
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
+                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+            End If
+        Else
+            If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+                CaseN_AndDraw()
+            Else
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                CaseN_AndDraw()
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+            End If
+        End If
+    End Sub
+
+    Private Sub VolumesTradesPctBox0_MouseEnter(sender As Object, e As EventArgs) Handles VolumesTradesPctBox0.MouseEnter
+        pageList(Tabs.SelectedIndex).cp.isCursorOnVolumesChart = True
+    End Sub
+
+    Private Sub VolumesTradesPctBox0_MouseLeave(sender As Object, e As EventArgs) Handles VolumesTradesPctBox0.MouseLeave
+        pageList(Tabs.SelectedIndex).cp.isCursorOnVolumesChart = False
+        TradesPctBox0_MouseLeave(sender, e)
     End Sub
 End Class

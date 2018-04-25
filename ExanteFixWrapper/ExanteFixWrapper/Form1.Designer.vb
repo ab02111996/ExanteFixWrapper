@@ -415,10 +415,10 @@ Partial Class Form1
         '
         'PricesTradesPctBox0
         '
-        Me.PricesTradesPctBox0.Location = New System.Drawing.Point(3, 2)
+        Me.PricesTradesPctBox0.Location = New System.Drawing.Point(3, 0)
         Me.PricesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PricesTradesPctBox0.Name = "PricesTradesPctBox0"
-        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(105, 422)
+        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(105, 425)
         Me.PricesTradesPctBox0.TabIndex = 37
         Me.PricesTradesPctBox0.TabStop = False
         '
