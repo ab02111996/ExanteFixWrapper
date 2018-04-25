@@ -6,6 +6,8 @@ Public Class Form1
     Public pageList As List(Of Page) = New List(Of Page)
     Public isOnline As Boolean
     Public movingAverageWindowSize As Integer
+    Private oldWidth As Integer
+    Private oldHeight As Integer
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -1064,6 +1066,45 @@ Public Class Form1
             pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
             pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
             pointsTradesNsec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
+        Next
+    End Sub
+
+    Private Sub Form1_ResizeBegin(sender As Object, e As EventArgs) Handles MyBase.ResizeBegin
+        Me.oldHeight = Me.Height
+        Me.oldWidth = Me.Width
+    End Sub
+
+    Private Sub Form1_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
+        Dim deltaH, deltaW As Integer
+        If Me.oldHeight <> Me.Height Or Me.oldWidth <> Me.Width Then
+            deltaH = Me.Height - Me.oldHeight
+            deltaW = Me.Width - Me.oldWidth
+            Tabs.Height += deltaH
+            Tabs.Width += deltaW
+            ResizeChildren(Tabs, deltaH, deltaW)
+        End If
+    End Sub
+    Private Sub ResizeChildren(control As Control, deltaH As Integer, deltaW As Integer)
+        For Each child As Control In control.Controls
+            If child.Name.IndexOf("Button") = -1 Then
+                If child.Name.IndexOf("Prices") = -1 And child.Name.IndexOf("VolumesVolumes") = -1 Then
+                    child.Width += deltaW
+                End If
+                If child.Name.IndexOf("Times") = -1 And child.Name.IndexOf("VolumesVolumes") = -1 And child.Name.IndexOf("VolumesTrades") = -1 Then
+                    child.Height += deltaH
+                End If
+                If child.Name.IndexOf("Times") <> -1 Or child.Name.IndexOf("VolumesVolumes") <> -1 Or child.Name.IndexOf("VolumesTrades") <> -1 Then
+                    child.Top += deltaH
+                End If
+            Else
+                child.Top += deltaH
+                child.Left += deltaW
+            End If
+
+            If child.HasChildren Then
+                ResizeChildren(child, deltaH, deltaW)
+            End If
+
         Next
     End Sub
 End Class
