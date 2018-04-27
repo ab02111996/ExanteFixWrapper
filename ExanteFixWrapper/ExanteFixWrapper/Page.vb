@@ -3,6 +3,15 @@ Imports System.Threading.Tasks
 
 Public Class Page
     Public bufferTrades As Buffer
+    Public bufferTrades10sec As Buffer
+    Public bufferTrades15sec As Buffer
+    Public bufferTrades30sec As Buffer
+    Public bufferTrades60sec As Buffer
+    Public bufferTrades300sec As Buffer
+    Public bufferTrades600sec As Buffer
+    Public bufferTrades900sec As Buffer
+    Public bufferTrades1800sec As Buffer
+    Public bufferTrades3600sec As Buffer
     Public subscribeInfo As SubscribeInfo
     Public cp As ChartPainting
     Public QuotesPctBox As PictureBox
@@ -76,8 +85,26 @@ Public Class Page
         Me.movingAvgSell = New MovingAverage(MovingAverageWindow)
         Me.movingAvgBuyPlusSell = New MovingAverage(MovingAverageWindow)
         'AddHandler LeftQuotesButton.Click 
-        Me.bufferTrades = New Buffer(5000, False, "D:\Bases")
+        Me.bufferTrades = New Buffer(5000, True, "D:\Bases")
+        Me.bufferTrades10sec = New Buffer(10000, False)
+        Me.bufferTrades15sec = New Buffer(15000, False)
+        Me.bufferTrades30sec = New Buffer(30000, False)
+        Me.bufferTrades60sec = New Buffer(60000, False)
+        Me.bufferTrades300sec = New Buffer(300000, False)
+        Me.bufferTrades600sec = New Buffer(600000, False)
+        Me.bufferTrades900sec = New Buffer(900000, False)
+        Me.bufferTrades1800sec = New Buffer(1800000, False)
+        Me.bufferTrades3600sec = New Buffer(3600000, False)
         AddHandler Me.bufferTrades.BufferClearing, AddressOf Add5SecondsPoint
+        AddHandler Me.bufferTrades10sec.BufferClearing, AddressOf Add10SecondsPoint
+        AddHandler Me.bufferTrades15sec.BufferClearing, AddressOf Add15SecondsPoint
+        AddHandler Me.bufferTrades30sec.BufferClearing, AddressOf Add30SecondsPoint
+        AddHandler Me.bufferTrades60sec.BufferClearing, AddressOf Add60SecondsPoint
+        AddHandler Me.bufferTrades300sec.BufferClearing, AddressOf Add300SecondsPoint
+        AddHandler Me.bufferTrades600sec.BufferClearing, AddressOf Add600SecondsPoint
+        AddHandler Me.bufferTrades900sec.BufferClearing, AddressOf Add900SecondsPoint
+        AddHandler Me.bufferTrades1800sec.BufferClearing, AddressOf Add1800SecondsPoint
+        AddHandler Me.bufferTrades3600sec.BufferClearing, AddressOf Add3600SecondsPoint
         Me.Chart = Chart
         Me.VolumesTradesPctBox = VolumesTradesPctBox
         Me.VolumesVolumesTradesPctBox = VolumesVolumesTradesPctBox
@@ -111,9 +138,27 @@ Public Class Page
                                        End Sub)
             End If
             bufferTrades.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades10sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades15sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades30sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades60sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades300sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades600sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades900sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades1800sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
+            bufferTrades3600sec.midAskBid = (quotesInfo.AskPrice + quotesInfo.BidPrice) / 2
         Else
             'сделки
             bufferTrades.PutInBuffer(quotesInfo)
+            bufferTrades10sec.PutInBuffer(quotesInfo)
+            bufferTrades15sec.PutInBuffer(quotesInfo)
+            bufferTrades30sec.PutInBuffer(quotesInfo)
+            bufferTrades60sec.PutInBuffer(quotesInfo)
+            bufferTrades300sec.PutInBuffer(quotesInfo)
+            bufferTrades600sec.PutInBuffer(quotesInfo)
+            bufferTrades900sec.PutInBuffer(quotesInfo)
+            bufferTrades1800sec.PutInBuffer(quotesInfo)
+            bufferTrades3600sec.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
 
             Dim ticksOrSeconds As ComboBox
@@ -262,7 +307,6 @@ Public Class Page
         point.avgBuy = cp.pointsTrades5sec(count - 1).avgBuy
         point.avgSell = cp.pointsTrades5sec(count - 1).avgSell
         point.avgBuyPlusSell = cp.pointsTrades5sec(count - 1).avgBuyPlusSell
-        Console.WriteLine(counterNsec.ToString + " " + point.time.ToString + " " + point.highPrice.ToString + " " + point.openPrice.ToString + " " + point.closePrice.ToString + " " + point.lowPrice.ToString + " " + (point.volumeBuy + point.volumeSell).ToString)
         If (counterNsec = 3) Then
             cp.pointsTrades15sec.Add(point)
             If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
@@ -348,7 +392,7 @@ Public Class Page
         counter1800sec += 1
         counter3600sec += 1
 
-        Console.WriteLine(CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (Buffer.volumeBuy + Buffer.volumeSell).ToString)
+        Console.WriteLine("5 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (buffer.volumeBuy + buffer.volumeSell).ToString)
         If counter10sec = 2 Then
             AddNSecondsPoint(counter10sec, Nothing)
             counter10sec = 0
@@ -421,6 +465,34 @@ Public Class Page
             Next
         End If
     End Sub
+    Public Sub Add10SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("10 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add15SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("15 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add30SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("30 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add60SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("1 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add300SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("5 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add600SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("10 min sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add900SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("15 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add1800SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("30 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+    Public Sub Add3600SecondsPoint(sender As Object, e As EventArgs)
+        Console.WriteLine("1 hour " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+    End Sub
+
 
 End Class
 'Класс накапливающий данные для определенного временного промежутка
@@ -440,7 +512,8 @@ Public Class Buffer
     Public countBuy As Integer 'Кол-во покупок
     Public priceSell As Double 'Общая цена продаж
     Public priceBuy As Double 'Общая цена покупок
-    Private isQuotes As Boolean 'Является ли буфером для котировок
+    Private timeFrame As Integer ' Временной промежуток
+    Private writeToDB As Boolean 'Записывать ли данные в базу
     Private bufferIsNotEmpty As Boolean 'Буфер не пустой
     Private quotesInfos As List(Of QuotesInfo) 'Список для накопления данных
     Private timer As Timer 'Таймер для отмера временного промежутка
@@ -484,20 +557,26 @@ Public Class Buffer
         quotesInfos = Nothing
     End Sub
     'Конструктор буфера
-    Public Sub New(timeframe As Double, isquotes As Boolean, dbPath As String)
+    Public Sub New(timeframe As Integer, writeToDB As Boolean, Optional dbPath As String = "")
+        Me.timeFrame = timeframe
         Me.timer = New Timer(timeframe)
-        Me.isQuotes = isquotes
+        Me.writeToDB = writeToDB
         Me.dbWriter = New DataBaseWriter()
         _handlers = New List(Of EventHandler)
         InitBuffer()
-        dbWriter.SetDBPath(dbPath)
+        If Me.writeToDB Then
+            dbWriter.SetDBPath(dbPath)
+        End If
     End Sub
     'Начало записи данных в БД
     Public Sub StartWritingData(exanteID As String)
         If Not timer.Enabled Then
             Me.exanteID = exanteID
-            dbWriter.OpenConnection(Me.exanteID)
+            If Me.writeToDB Then
+                dbWriter.OpenConnection(Me.exanteID)
+            End If
             Me.startTimeFrame = DateTime.Now
+            Me.endTimeFrame = Me.startTimeFrame.AddMilliseconds(Me.timeFrame)
             Me.timer.Start()
             AddHandler Me.timer.Elapsed, AddressOf Me.Clear
             Me.lastClosePrice = 0
@@ -505,7 +584,6 @@ Public Class Buffer
     End Sub
     'Очищение буфера и запись накопленных данных в БД
     Public Sub Clear(source As Object, e As ElapsedEventArgs)
-        Me.endTimeFrame = Me.startTimeFrame.AddSeconds(5)
         If Me.openPrice = 0 And Me.closePrice = 0 Then
             If Me.lastClosePrice = 0 Then
                 Me.openPrice = Me.midAskBid
@@ -522,11 +600,14 @@ Public Class Buffer
         Me.lastClosePrice = Me.closePrice
         If Not Me.midAskBid = 0 Then
             RaiseEvent BufferClearing(Me, New EventArgs)
-            dbWriter.InsertBufferIntoDB(Me)
-            dbWriter.InsertBufferMetaDataIntoDB(Me)
+            If Me.writeToDB Then
+                dbWriter.InsertBufferIntoDB(Me)
+                dbWriter.InsertBufferMetaDataIntoDB(Me)
+            End If
         End If
         InitBuffer()
         Me.startTimeFrame = Me.endTimeFrame
+        Me.endTimeFrame = Me.startTimeFrame.AddMilliseconds(Me.timeFrame)
     End Sub
     'Метод помещающий данные в буфер
     Public Sub PutInBuffer(info As QuotesInfo)
@@ -561,9 +642,7 @@ Public Class Buffer
         End If
         Me.closePrice = info.TradePrice
     End Sub
-    Public Function IsQuotesBuffer() As Boolean
-        Return Me.isQuotes
-    End Function
+    
     'Метод для получения тиковой информации
     Public Function GetBufferMetaData() As List(Of QuotesInfo)
         Return quotesInfos
