@@ -564,6 +564,12 @@ Public Class Form1
                         End If
                     End If
                 End If
+
+                If (pageList(Tabs.SelectedIndex).cp.isClicked) Then
+                    If (e.X - pageList(Tabs.SelectedIndex).cp.positionOfClick.X > 10) Then
+                        LeftTradesButton_Click(sender, e)
+                    End If
+                End If
             End If
         Else
             If (pageList.Count > 0) Then
@@ -621,7 +627,19 @@ Public Class Form1
                     End If
                 End If
             End If
+            If (pageList(Tabs.SelectedIndex).cp.isClicked) Then
+                If (e.X - pageList(Tabs.SelectedIndex).cp.positionOfClick.X < -50) Then
+                    RightTradesButton_Click(sender, e)
+                    pageList(Tabs.SelectedIndex).cp.positionOfClick = New PointF(e.X, e.Y)
+                End If
+            End If
 
+            If (pageList(Tabs.SelectedIndex).cp.isClicked) Then
+                If (e.X - pageList(Tabs.SelectedIndex).cp.positionOfClick.X > 50) Then
+                    LeftTradesButton_Click(sender, e)
+                    pageList(Tabs.SelectedIndex).cp.positionOfClick = New PointF(e.X, e.Y)
+                End If
+            End If
         End If
     End Sub
 
@@ -648,6 +666,8 @@ Public Class Form1
                     Exit Sub
                 End If
             End If
+
+
         End If
     End Sub
 
@@ -1239,5 +1259,14 @@ Public Class Form1
             End If
 
         Next
+    End Sub
+
+    Private Sub TradesPctBox0_MouseUp(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseUp
+        pageList(Tabs.SelectedIndex).cp.isClicked = False
+    End Sub
+
+    Private Sub TradesPctBox0_MouseDown(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseDown
+        pageList(Tabs.SelectedIndex).cp.isClicked = True
+        pageList(Tabs.SelectedIndex).cp.positionOfClick = New PointF(e.X, e.Y)
     End Sub
 End Class

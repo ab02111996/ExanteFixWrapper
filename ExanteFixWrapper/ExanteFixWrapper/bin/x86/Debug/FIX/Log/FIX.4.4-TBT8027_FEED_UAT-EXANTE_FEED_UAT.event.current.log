@@ -8835,3 +8835,37 @@
 20180428-17:00:26.291 : Initiated logout request
 20180428-17:00:26.408 : Received logout response
 20180428-17:00:26.408 : Disconnecting
+20180428-17:24:43.462 : Created session
+20180428-17:24:43.477 : Connecting to fixuat2.exante.eu on port 8100
+20180428-17:24:43.719 : Initiated logon request
+20180428-17:24:44.112 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-17:24:44.113 : Received logon response
+20180428-17:27:06.013 : Initiated logout request
+20180428-17:27:06.127 : Received logout response
+20180428-17:27:06.127 : Disconnecting
+20180428-17:29:11.583 : Created session
+20180428-17:29:11.599 : Connecting to fixuat2.exante.eu on port 8100
+20180428-17:29:11.764 : Initiated logon request
+20180428-17:29:12.161 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-17:29:12.162 : Received logon response
+20180428-17:29:27.376 : Initiated logout request
+20180428-17:29:27.492 : Received logout response
+20180428-17:29:27.492 : Disconnecting
+20180428-17:31:26.565 : Created session
+20180428-17:31:26.581 : Connecting to fixuat2.exante.eu on port 8100
+20180428-17:31:26.827 : Initiated logon request
+20180428-17:31:27.216 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-17:31:27.217 : Received logon response
+20180428-17:34:01.001 : Initiated logout request
+20180428-17:34:01.113 : Received logout response
+20180428-17:34:01.114 : Disconnecting
+20180428-17:35:06.021 : Created session
+20180428-17:35:06.037 : Connecting to fixuat2.exante.eu on port 8100
+20180428-17:35:06.194 : Initiated logon request
+20180428-17:35:06.589 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-17:35:06.590 : Received logon response
+20180428-17:36:17.883 : Created session
+20180428-17:36:17.899 : Connecting to fixuat2.exante.eu on port 8100
+20180428-17:36:18.059 : Initiated logon request
+20180428-17:36:18.455 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-17:36:18.456 : Received logon response

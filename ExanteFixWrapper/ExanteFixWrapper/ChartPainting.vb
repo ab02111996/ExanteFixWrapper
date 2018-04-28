@@ -74,6 +74,8 @@ Public Class ChartPainting
     Public pointMouseMoveTrades As PointF
     Public isCursorOnVolumesChart As Boolean
     Public pointMouseMoveVolumes As PointF
+    Public isClicked As Boolean
+    Public positionOfClick As PointF
 
 
     Public Sub New(usedForm As Form)
