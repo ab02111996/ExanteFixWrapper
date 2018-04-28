@@ -179,6 +179,61 @@ Public Class Page
                                                Form1.TradePriceLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradePrice
                                                Form1.TradeVolumeLabel.Text = Form1.pageList(selInd).cp.pointsTrades(c - 1).tradeVolume
                                            End If
+                                           If Not ticksOrSeconds.SelectedItem = "Тики" Then
+                                               Dim N As Integer
+                                               Select Case ticksOrSeconds.SelectedItem
+                                                   Case "5 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades)
+                                                       Me.cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
+                                                       N = 5
+                                                       DrawEveryTick(N)
+                                                   Case "10 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades10sec)
+                                                       Me.cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
+                                                       N = 10
+                                                       DrawEveryTick(N)
+                                                   Case "15 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades15sec)
+                                                       Me.cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
+                                                       N = 15
+                                                       DrawEveryTick(N)
+                                                   Case "30 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades30sec)
+                                                       Me.cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
+                                                       N = 30
+                                                       DrawEveryTick(N)
+                                                   Case "1 минута"
+                                                       Dim point As New PointTradesNsec(bufferTrades60sec)
+                                                       Me.cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
+                                                       N = 60
+                                                       DrawEveryTick(N)
+                                                   Case "5 минут"
+                                                       Dim point As New PointTradesNsec(bufferTrades300sec)
+                                                       Me.cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
+                                                       N = 300
+                                                       DrawEveryTick(N)
+                                                   Case "10 минут"
+                                                       Dim point As New PointTradesNsec(bufferTrades600sec)
+                                                       Me.cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
+                                                       N = 600
+                                                       DrawEveryTick(N)
+                                                   Case "15 минут"
+                                                       Dim point As New PointTradesNsec(bufferTrades900sec)
+                                                       Me.cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
+                                                       N = 900
+                                                       DrawEveryTick(N)
+                                                   Case "30 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades1800sec)
+                                                       Me.cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
+                                                       N = 1800
+                                                       DrawEveryTick(N)
+                                                   Case "60 секунд"
+                                                       Dim point As New PointTradesNsec(bufferTrades3600sec)
+                                                       Me.cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
+                                                       N = 3600
+                                                       DrawEveryTick(N)
+                                               End Select
+                                           End If
                                        End Sub)
             End If
         End If
@@ -190,6 +245,17 @@ Public Class Page
         End If
 
     End Sub
+
+    Private Sub DrawEveryTick(N As Integer)
+        If (Me.cp.needRePaintingTradesNsec) Then
+            cp.needRePaintingTradesNsec = False
+            cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, N)
+            cp.needRePaintingTradesNsec = False
+        Else
+            cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, N)
+        End If
+    End Sub
+
 
     Public Sub AddNSecondsPointOffline(pointsTrades5sec As List(Of PointTradesNsec))
         Dim counter10sec As Integer = 0
@@ -308,63 +374,99 @@ Public Class Page
         point.avgSell = cp.pointsTrades5sec(count - 1).avgSell
         point.avgBuyPlusSell = cp.pointsTrades5sec(count - 1).avgBuyPlusSell
         If (counterNsec = 3) Then
-            cp.pointsTrades15sec.Add(point)
+            cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(15)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades15sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
                                       End Sub)
             End If
         ElseIf (counterNsec = 2) Then
-            cp.pointsTrades10sec.Add(point)
+            cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(10)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades10sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "10 секунд" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 10)
                                       End Sub)
             End If
         ElseIf (counterNsec = 6) Then
-            cp.pointsTrades30sec.Add(point)
+            cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(30)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades30sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "30 секунд" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
                                       End Sub)
             End If
         ElseIf (counterNsec = 12) Then
-            cp.pointsTrades60sec.Add(point)
+            cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(60)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades60sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "1 минута" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
                                       End Sub)
             End If
         ElseIf (counterNsec = 60) Then
-            cp.pointsTrades300sec.Add(point)
+            cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(300)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades300sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "5 минут" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
                                       End Sub)
             End If
         ElseIf (counterNsec = 120) Then
-            cp.pointsTrades600sec.Add(point)
+            cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(600)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades600sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
                                       End Sub)
             End If
         ElseIf (counterNsec = 180) Then
-            cp.pointsTrades900sec.Add(point)
+            cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(900)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades900sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
                                       End Sub)
             End If
         ElseIf (counterNsec = 360) Then
-            cp.pointsTrades1800sec.Add(point)
+            cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(1800)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades1800sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
                                       End Sub)
             End If
         ElseIf (counterNsec = 720) Then
-            cp.pointsTrades3600sec.Add(point)
+            cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
+            Dim newPoint As New PointTradesNsec()
+            newPoint.time = point.time.AddSeconds(3600)
+            SetPricesInNewPoint(newPoint, point)
+            cp.pointsTrades3600sec.Add(newPoint)
             If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
                 Me.cp.usedForm.Invoke(Sub()
                                           cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
@@ -374,12 +476,23 @@ Public Class Page
 
     End Sub
 
+    Private Sub SetPricesInNewPoint(newPoint As PointTradesNsec, point As PointTradesNsec)
+        newPoint.highPrice = point.closePrice
+        newPoint.openPrice = point.closePrice
+        newPoint.closePrice = point.closePrice
+        newPoint.lowPrice = point.closePrice
+    End Sub
+
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
         Dim buffer = CType(sender, Buffer)
-        Dim newPoint As New PointTradesNsec(buffer)
-        newPoint.avgBuy = movingAvgBuy.Calculate(newPoint.volumeBuy)
-        newPoint.avgSell = movingAvgSell.Calculate(newPoint.volumeSell)
-        newPoint.avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(newPoint.volumeBuy + newPoint.volumeSell)
+        Dim point As New PointTradesNsec(buffer)
+        point.avgBuy = movingAvgBuy.Calculate(point.volumeBuy)
+        point.avgSell = movingAvgSell.Calculate(point.volumeSell)
+        point.avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(point.volumeBuy + point.volumeSell)
+        cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
+        Dim newPoint As New PointTradesNsec()
+        newPoint.time = point.time.AddSeconds(5)
+        SetPricesInNewPoint(newPoint, point)
         cp.pointsTrades5sec.Add(newPoint)
 
         counter10sec += 1
@@ -466,34 +579,32 @@ Public Class Page
         End If
     End Sub
     Public Sub Add10SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("10 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("10 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add15SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("15 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("15 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add30SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("30 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("30 sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add60SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("1 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("1 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add300SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("5 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("5 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add600SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("10 min sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("10 min sec " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add900SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("15 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("15 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add1800SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("30 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("30 min " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
     Public Sub Add3600SecondsPoint(sender As Object, e As EventArgs)
-        Console.WriteLine("1 hour " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
+        'Console.WriteLine("1 hour " + CType(sender, Buffer).endTimeFrame.ToString + " " + CType(sender, Buffer).highPrice.ToString + " " + CType(sender, Buffer).openPrice.ToString + " " + CType(sender, Buffer).closePrice.ToString + " " + CType(sender, Buffer).lowPrice.ToString + " " + (CType(sender, Buffer).volumeBuy + CType(sender, Buffer).volumeSell).ToString)
     End Sub
-
-
 End Class
 'Класс накапливающий данные для определенного временного промежутка
 Public Class Buffer
