@@ -29,8 +29,8 @@
         volumeBuy = buffer.volumeBuy
         volumeSell = buffer.volumeSell
         time = buffer.startTimeFrame
-        avgBuy = Nothing
-        avgSell = Nothing
-        avgBuyPlusSell = Nothing
+        avgBuy = buffer.avgVolumeBuy
+        avgSell = buffer.avgVolumeSell
+        avgBuyPlusSell = avgBuyPlusSell
     End Sub
 End Class

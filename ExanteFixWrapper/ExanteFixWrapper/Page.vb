@@ -86,6 +86,7 @@ Public Class Page
         Me.movingAvgBuyPlusSell = New MovingAverage(MovingAverageWindow)
         'AddHandler LeftQuotesButton.Click 
         Me.bufferTrades = New Buffer(5000, True, "D:\Bases")
+        Me.bufferTrades.SetMovingAvg(Me.movingAvgBuy, Me.movingAvgSell, Me.movingAvgBuyPlusSell)
         Me.bufferTrades10sec = New Buffer(10000, False)
         Me.bufferTrades15sec = New Buffer(15000, False)
         Me.bufferTrades30sec = New Buffer(30000, False)
@@ -619,6 +620,9 @@ Public Class Buffer
     Public midAskBid As Double 'Среднее значение цены на текущий момент
     Public volumeSell As Double 'Объем продаж
     Public volumeBuy As Double 'Объем покупок
+    Public avgVolumeSell As Double 'Значения сглаживающей
+    Public avgVolumeBuy As Double
+    Public avgVolumeCommon As Double
     Public countSell As Integer 'Кол-во продаж 
     Public countBuy As Integer 'Кол-во покупок
     Public priceSell As Double 'Общая цена продаж
@@ -630,6 +634,9 @@ Public Class Buffer
     Private timer As Timer 'Таймер для отмера временного промежутка
     Private dbWriter As DataBaseWriter 'Объект класса для записи в БД
     Private _handlers As List(Of EventHandler) 'Список обработчиков события очищения буфера
+    Private movingAvgBuy As MovingAverage
+    Private movingAvgSell As MovingAverage
+    Private movingAvgBuySell As MovingAverage
     'Событие очищения буфера
     Public Custom Event BufferClearing As EventHandler
         AddHandler(ByVal value As EventHandler)
@@ -661,6 +668,9 @@ Public Class Buffer
         closePrice = 0
         volumeSell = 0
         volumeBuy = 0
+        avgVolumeSell = 0
+        avgVolumeBuy = 0
+        avgVolumeCommon = 0
         countSell = 0
         countBuy = 0
         priceSell = 0
@@ -751,9 +761,18 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
+        If movingAvgBuy IsNot Nothing Then
+            avgVolumeBuy = movingAvgBuy.Calculate(volumeBuy)
+            avgVolumeSell = movingAvgSell.Calculate(volumeSell)
+            avgVolumeCommon = movingAvgBuySell.Calculate(volumeSell + volumeBuy)
+        End If
         Me.closePrice = info.TradePrice
     End Sub
-    
+    Public Sub SetMovingAvg(movingAvgBuy As MovingAverage, movingAvgSell As MovingAverage, movingAvgBuySell As MovingAverage)
+        Me.movingAvgBuy = movingAvgBuy
+        Me.movingAvgSell = movingAvgSell
+        Me.movingAvgBuySell = movingAvgBuySell
+    End Sub
     'Метод для получения тиковой информации
     Public Function GetBufferMetaData() As List(Of QuotesInfo)
         Return quotesInfos
@@ -762,4 +781,5 @@ Public Class Buffer
     Public Function IsNotEmpty() As Boolean
         Return bufferIsNotEmpty
     End Function
+
 End Class
