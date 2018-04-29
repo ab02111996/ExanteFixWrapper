@@ -8869,3 +8869,38 @@
 20180428-17:36:18.059 : Initiated logon request
 20180428-17:36:18.455 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
 20180428-17:36:18.456 : Received logon response
+20180428-18:20:20.763 : Created session
+20180428-18:20:20.781 : Connecting to fixuat2.exante.eu on port 8100
+20180428-18:20:21.018 : Initiated logon request
+20180428-18:20:21.407 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180428-18:20:21.408 : Received logon response
+20180428-18:24:10.826 : Initiated logout request
+20180428-18:24:10.936 : Received logout response
+20180428-18:24:10.936 : Disconnecting
+20180429-07:02:09.458 : Created session
+20180429-07:02:09.532 : Connecting to fixuat2.exante.eu on port 8100
+20180429-07:02:09.905 : Initiated logon request
+20180429-07:02:10.029 : Received logout request
+20180429-07:02:10.029 : Sending logout response
+20180429-07:02:10.029 : Disconnecting
+20180429-07:02:10.530 : Connecting to fixuat2.exante.eu on port 8100
+20180429-07:02:10.651 : Initiated logon request
+20180429-07:02:10.767 : Received logout request
+20180429-07:02:10.767 : Sending logout response
+20180429-07:02:10.767 : Disconnecting
+20180429-07:02:36.692 : Created session
+20180429-07:02:36.712 : Connecting to fixuat2.exante.eu on port 8100
+20180429-07:02:36.866 : Initiated logon request
+20180429-07:02:37.259 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180429-07:02:37.260 : Received logon response
+20180429-07:05:23.810 : Initiated logout request
+20180429-07:05:23.923 : Received logout response
+20180429-07:05:23.923 : Disconnecting
+20180429-07:50:37.582 : Created session
+20180429-07:50:37.599 : Connecting to fixuat2.exante.eu on port 8100
+20180429-07:50:37.871 : Initiated logon request
+20180429-07:50:38.278 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180429-07:50:38.279 : Received logon response
+20180429-07:51:27.617 : Initiated logout request
+20180429-07:51:27.733 : Received logout response
+20180429-07:51:27.733 : Disconnecting

@@ -139,6 +139,7 @@ Public Class Form1
         BuyPlusSell.Checked = True
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.BuyPlusSell.CheckedChanged, AddressOf RadiobuttonOnChange
+        AddHandler Me.MouseWheel, AddressOf MouseWheelScroll
         TypeOfGraphic.SelectedItem = "Японские свечи"
         pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = False
     End Sub
@@ -432,6 +433,7 @@ Public Class Form1
                 End If
                 If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades > pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTrades) Then
                     pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades = pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTrades
+                    Exit Sub
                 End If
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = False
                 If (pageList(Tabs.SelectedIndex).cp.lastPointTrades < pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1) Then
@@ -467,6 +469,7 @@ Public Class Form1
                 End If
                 If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec > pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTradesNsec) Then
                     pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec = pageList(Tabs.SelectedIndex).cp.maxPointsOnScreenTradesNsec
+                    Exit Sub
                 End If
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
                 If (pageList(Tabs.SelectedIndex).cp.lastPointTradesNsec < pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1) Then
@@ -532,6 +535,16 @@ Public Class Form1
                     End If
                 End Try
         End Select
+    End Sub
+
+    Private Sub MouseWheelScroll(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+        If (e.Delta < -30) Then
+            MinusTradesButton_Click(sender, e)
+        End If
+
+        If (e.Delta > 30) Then
+            PlusTradesButton_Click(sender, e)
+        End If
     End Sub
 
     Private Sub TradesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles TradesPctBox0.MouseMove
