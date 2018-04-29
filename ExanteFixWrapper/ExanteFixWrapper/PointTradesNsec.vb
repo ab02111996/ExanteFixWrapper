@@ -31,6 +31,6 @@
         time = buffer.startTimeFrame
         avgBuy = buffer.avgVolumeBuy
         avgSell = buffer.avgVolumeSell
-        avgBuyPlusSell = avgBuyPlusSell
+        avgBuyPlusSell = buffer.avgVolumeCommon
     End Sub
 End Class
