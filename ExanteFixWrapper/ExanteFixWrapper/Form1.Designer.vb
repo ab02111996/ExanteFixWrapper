@@ -40,7 +40,7 @@ Partial Class Form1
         Me.BidPriceLabel = New System.Windows.Forms.Label()
         Me.TradeVolumeLabel = New System.Windows.Forms.Label()
         Me.TradePriceLabel = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.AddTab = New System.Windows.Forms.Button()
         Me.TabPage0 = New System.Windows.Forms.TabPage()
         Me.Charts0 = New System.Windows.Forms.TabControl()
         Me.QuotesTab0 = New System.Windows.Forms.TabPage()
@@ -257,15 +257,15 @@ Partial Class Form1
         Me.TradePriceLabel.TabIndex = 41
         Me.TradePriceLabel.Text = "-"
         '
-        'Button2
+        'AddTab
         '
-        Me.Button2.Location = New System.Drawing.Point(23, 47)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(241, 26)
-        Me.Button2.TabIndex = 43
-        Me.Button2.Text = "Добавить вкладку"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.AddTab.Location = New System.Drawing.Point(23, 47)
+        Me.AddTab.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.AddTab.Name = "AddTab"
+        Me.AddTab.Size = New System.Drawing.Size(241, 26)
+        Me.AddTab.TabIndex = 43
+        Me.AddTab.Text = "Добавить вкладку"
+        Me.AddTab.UseVisualStyleBackColor = True
         '
         'TabPage0
         '
@@ -583,7 +583,7 @@ Partial Class Form1
         '
         'Form1
         '
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1900, 1045)
         Me.Controls.Add(Me.WindowSizeBtn)
@@ -595,7 +595,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TypeOfGraphic)
         Me.Controls.Add(Me.TicksOrSeconds)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.AddTab)
         Me.Controls.Add(Me.TradeVolumeLabel)
         Me.Controls.Add(Me.BidPriceLabel)
         Me.Controls.Add(Me.AskPriceLabel)
@@ -653,7 +653,7 @@ Partial Class Form1
     Friend WithEvents BidPriceLabel As Label
     Friend WithEvents TradeVolumeLabel As Label
     Friend WithEvents TradePriceLabel As Label
-    Friend WithEvents Button2 As Button
+    Friend WithEvents AddTab As Button
     Friend WithEvents TabPage0 As TabPage
     Friend WithEvents Charts0 As TabControl
     Friend WithEvents QuotesTab0 As TabPage

@@ -72,8 +72,10 @@ Public Class ChartPainting
     Public isNeedShowAvg As Boolean
     Public isCursorOnTradesChart As Boolean
     Public pointMouseMoveTrades As PointF
+    Public currentPriceMM As Double
     Public isCursorOnVolumesChart As Boolean
     Public pointMouseMoveVolumes As PointF
+    Public currentVolumeMM As Double
     Public isClicked As Boolean
     Public positionOfClick As PointF
 
@@ -319,23 +321,27 @@ Public Class ChartPainting
             G_Times.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             Dim btmTimes As New Bitmap(TimesTradesPctBox.Width, TimesTradesPctBox.Height)
             Dim G_btmTimes = Graphics.FromImage(btmTimes)
+            G_btmTimes.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit
             G_btmTimes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
             Dim G_Prices As Graphics = PricesTradesPctBox.CreateGraphics
             G_Prices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             Dim btmPrices As New Bitmap(PricesTradesPctBox.Width, PricesTradesPctBox.Height)
             Dim G_btmPrices = Graphics.FromImage(btmPrices)
+            G_btmPrices.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit
             G_btmPrices.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
             Dim G_Volumes As Graphics = VolumesTradesPctBox.CreateGraphics
             G_Volumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             Dim btmVolumes As New Bitmap(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height)
             Dim G_btmVolumes = Graphics.FromImage(btmVolumes)
+            G_btmVolumes.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit
             G_btmVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
             Dim G_VolumesVolumes = VolumesVolumesTradesPctBox.CreateGraphics
             Dim btmVolumesVolumes As New Bitmap(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height)
             Dim G_btmVolumesVolumes = Graphics.FromImage(btmVolumesVolumes)
+            G_btmVolumesVolumes.TextRenderingHint = Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit
             G_VolumesVolumes.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
 
             Dim brush As New SolidBrush(Color.Black)
@@ -489,6 +495,20 @@ Public Class ChartPainting
                 G_btmTrades.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
                 G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
                 G_btmPrices.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+                Dim rectangleForPrice As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForPrice.X = 0
+                rectangleForPrice.Width = PricesTradesPctBox.Width
+                rectangleForPrice.Height = heightOfRectangle
+                If pointMouseMoveTrades.Y < TradesPctBox.Height / 2 Then
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentPriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y + 4))
+                Else
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y - heightOfRectangle
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentPriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y - 17))
+                End If
             End If
 
             If (Me.isCursorOnVolumesChart) Then
@@ -496,6 +516,20 @@ Public Class ChartPainting
                 G_btmVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
                 G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
                 G_btmVolumesVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                Dim rectangleForVolume As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForVolume.X = 0
+                rectangleForVolume.Width = VolumesTradesPctBox.Width
+                rectangleForVolume.Height = heightOfRectangle
+                If pointMouseMoveVolumes.Y < VolumesTradesPctBox.Height / 2 Then
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y + 4))
+                Else
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y - heightOfRectangle
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y - 17))
+                End If
             End If
 
             TradesPctBox.Refresh()
@@ -1122,6 +1156,20 @@ Public Class ChartPainting
                 G_btmTrades.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
                 G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
                 G_btmPrices.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+                Dim rectangleForPrice As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForPrice.X = 0
+                rectangleForPrice.Width = PricesTradesPctBox.Width
+                rectangleForPrice.Height = heightOfRectangle
+                If pointMouseMoveTrades.Y < TradesPctBox.Height / 2 Then
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentPriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y + 4))
+                Else
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y - heightOfRectangle
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentPriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y - 17))
+                End If
             End If
 
             If (Me.isCursorOnVolumesChart) Then
@@ -1129,6 +1177,20 @@ Public Class ChartPainting
                 G_btmVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
                 G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
                 G_btmVolumesVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                Dim rectangleForVolume As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForVolume.X = 0
+                rectangleForVolume.Width = VolumesTradesPctBox.Width
+                rectangleForVolume.Height = heightOfRectangle
+                If pointMouseMoveVolumes.Y < VolumesTradesPctBox.Height / 2 Then
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y + 4))
+                Else
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y - heightOfRectangle
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y - 17))
+                End If
             End If
 
             TradesPctBox.Refresh()

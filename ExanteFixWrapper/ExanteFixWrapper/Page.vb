@@ -326,11 +326,11 @@ Public Class Page
                 Me.cp.usedForm.Invoke(Sub()
                                           ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem.ToString
                                       End Sub)
-                ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem
+                'ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem
                 isOnline = True
                 count = cp.pointsTrades5sec.Count
             Else
-                count = _index + 1
+                count = _index + 2
             End If
         Else
             If (CType(cp.usedForm, Form1).isOnline) Then
@@ -340,24 +340,24 @@ Public Class Page
                 isOnline = True
                 count = cp.pointsTrades5sec.Count
             Else
-                count = _index + 1
+                count = _index + 2
             End If
         End If
 
         Dim point As New PointTradesNsec
-        point.time = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).time
-        point.openPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).openPrice
-        point.closePrice = cp.pointsTrades5sec(count - 1).closePrice
+        point.time = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).time
+        point.openPrice = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).openPrice
+        point.closePrice = cp.pointsTrades5sec(count - 2).closePrice
         Dim highPrice As Double
         Dim lowPrice As Double
         Dim volumeBuy As Double = 0
         Dim volumeSell As Double = 0
-        For index = (count - 1) - (counterNsec - 1) To (count - 1)
+        For index = (count - 2) - (counterNsec - 1) To (count - 2)
             volumeBuy += cp.pointsTrades5sec(index).volumeBuy
             volumeSell += cp.pointsTrades5sec(index).volumeSell
-            If index = ((count - 1) - (counterNsec - 1)) Then
-                highPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).highPrice
-                lowPrice = cp.pointsTrades5sec((count - 1) - (counterNsec - 1)).lowPrice
+            If index = ((count - 2) - (counterNsec - 1)) Then
+                highPrice = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).highPrice
+                lowPrice = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).lowPrice
             Else
                 If cp.pointsTrades5sec(index).highPrice > highPrice Then
                     highPrice = cp.pointsTrades5sec(index).highPrice
@@ -371,110 +371,145 @@ Public Class Page
         point.lowPrice = lowPrice
         point.volumeBuy = volumeBuy
         point.volumeSell = volumeSell
-        point.avgBuy = cp.pointsTrades5sec(count - 1).avgBuy
-        point.avgSell = cp.pointsTrades5sec(count - 1).avgSell
-        point.avgBuyPlusSell = cp.pointsTrades5sec(count - 1).avgBuyPlusSell
+        point.avgBuy = cp.pointsTrades5sec(count - 2).avgBuy
+        point.avgSell = cp.pointsTrades5sec(count - 2).avgSell
+        point.avgBuyPlusSell = cp.pointsTrades5sec(count - 2).avgBuyPlusSell
         If (counterNsec = 3) Then
-            cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(15)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades15sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(15)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades15sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades15sec.Add(point)
             End If
         ElseIf (counterNsec = 2) Then
-            cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(10)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades10sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "10 секунд" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 10)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(10)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades10sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "10 секунд" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 10)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades10sec.Add(point)
             End If
         ElseIf (counterNsec = 6) Then
-            cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(30)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades30sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "30 секунд" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(30)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades30sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "30 секунд" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades30sec.Add(point)
             End If
         ElseIf (counterNsec = 12) Then
-            cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(60)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades60sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "1 минута" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(60)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades60sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "1 минута" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades60sec.Add(point)
             End If
         ElseIf (counterNsec = 60) Then
-            cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(300)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades300sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "5 минут" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(300)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades300sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "5 минут" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades300sec.Add(point)
             End If
         ElseIf (counterNsec = 120) Then
-            cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(600)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades600sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(600)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades600sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades600sec.Add(point)
             End If
         ElseIf (counterNsec = 180) Then
-            cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(900)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades900sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(900)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades900sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades900sec.Add(point)
             End If
         ElseIf (counterNsec = 360) Then
-            cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(1800)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades1800sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(1800)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades1800sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades1800sec.Add(point)
             End If
         ElseIf (counterNsec = 720) Then
-            cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
-            Dim newPoint As New PointTradesNsec()
-            newPoint.time = point.time.AddSeconds(3600)
-            SetPricesInNewPoint(newPoint, point)
-            cp.pointsTrades3600sec.Add(newPoint)
-            If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
-                Me.cp.usedForm.Invoke(Sub()
-                                          cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
-                                      End Sub)
+            If isOnline Then
+                cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(3600)
+                SetPricesInNewPoint(newPoint, point)
+                cp.pointsTrades3600sec.Add(newPoint)
+                If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
+                                          End Sub)
+                End If
+            Else
+                cp.pointsTrades3600sec.Add(point)
             End If
         End If
-
     End Sub
 
     Private Sub SetPricesInNewPoint(newPoint As PointTradesNsec, point As PointTradesNsec)
