@@ -779,7 +779,7 @@ Public Class ChartPainting
                                     p1AvgBuy.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgBuy1
                                     p2AvgBuy.X = p2Trades.X
                                     p2AvgBuy.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgBuy2
-                                    G_btmVolumes.DrawLine(New Pen(Color.LightPink), p1AvgBuy, p2AvgBuy)
+                                    G_btmVolumes.DrawLine(New Pen(Color.LightBlue), p1AvgBuy, p2AvgBuy)
 
                                     Dim procentsAvgSell1 As Double = ((pointsTradesNsec(index).avgSell) / yRangeVolumesTradesNsec)
                                     Dim procentsAvgSell2 As Double = ((pointsTradesNsec(index + 1).avgSell) / yRangeVolumesTradesNsec)
@@ -789,7 +789,7 @@ Public Class ChartPainting
                                     p1AvgSell.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgSell1
                                     p2AvgSell.X = p2Trades.X
                                     p2AvgSell.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgSell2
-                                    G_btmVolumes.DrawLine(New Pen(Color.LightBlue), p1AvgSell, p2AvgSell)
+                                    G_btmVolumes.DrawLine(New Pen(Color.LightPink), p1AvgSell, p2AvgSell)
                                 End If
                             End If
                         End If
@@ -988,7 +988,7 @@ Public Class ChartPainting
                                     p1AvgBuy.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgBuy1
                                     p2AvgBuy.X = (index + 1 - Me.currentPointTradesNsec) * Me.intervalTradesNsec
                                     p2AvgBuy.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgBuy2
-                                    G_btmVolumes.DrawLine(New Pen(Color.LightPink), p1AvgBuy, p2AvgBuy)
+                                    G_btmVolumes.DrawLine(New Pen(Color.LightBlue), p1AvgBuy, p2AvgBuy)
 
                                     Dim procentsAvgSell1 As Double = ((pointsTradesNsec(index).avgSell) / yRangeVolumesTradesNsec)
                                     Dim procentsAvgSell2 As Double = ((pointsTradesNsec(index + 1).avgSell) / yRangeVolumesTradesNsec)
@@ -998,7 +998,7 @@ Public Class ChartPainting
                                     p1AvgSell.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgSell1
                                     p2AvgSell.X = (index + 1 - Me.currentPointTradesNsec) * Me.intervalTradesNsec
                                     p2AvgSell.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvgSell2
-                                    G_btmVolumes.DrawLine(New Pen(Color.LightBlue), p1AvgSell, p2AvgSell)
+                                    G_btmVolumes.DrawLine(New Pen(Color.LightPink), p1AvgSell, p2AvgSell)
                                 End If
                             End If
                         End If
@@ -1044,7 +1044,7 @@ Public Class ChartPainting
                                 G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
                                 G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
                             Else
-                                If (pointsTradesNsec(index - 1).closePrice < pointsTradesNsec(index).closePrice) Then
+                                If (pointsTradesNsec(index).closePrice < pointsTradesNsec(index).openPrice) Then
                                     G_btmTrades.FillRectangle(Brushes.Red, rectangleForCandle)
                                     G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
                                 Else
@@ -1058,7 +1058,7 @@ Public Class ChartPainting
                                 G_btmTrades.DrawLine(New Pen(Color.Red, 2), New PointF(p4Trades.X + intervalTradesNsec / 2, p4Trades.Y), New PointF(p4Trades.X + intervalTradesNsec, p4Trades.Y))
                                 G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)
                             Else
-                                If (pointsTradesNsec(index - 1).closePrice < pointsTradesNsec(index).closePrice) Then
+                                If (pointsTradesNsec(index).closePrice < pointsTradesNsec(index).openPrice) Then
                                     G_btmTrades.DrawLine(New Pen(Color.Red, 2), p3Trades, New PointF(p3Trades.X + intervalTradesNsec / 2, p3Trades.Y))
                                     G_btmTrades.DrawLine(New Pen(Color.Red, 2), New PointF(p4Trades.X + intervalTradesNsec / 2, p4Trades.Y), New PointF(p4Trades.X + intervalTradesNsec, p4Trades.Y))
                                     G_btmTrades.DrawLine(New Pen(Color.Red, 2), p1Trades, p2Trades)

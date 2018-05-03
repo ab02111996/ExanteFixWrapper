@@ -1142,7 +1142,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim cloneForm As Form1Clone = New Form1Clone(Me.feedReciever)
+        Dim cloneForm As Form1Clone = New Form1Clone()
         cloneForm.isOnline = Me.isOnline
         Dim newPage = New Page(New ChartPainting(cloneForm), cloneForm.QuotesPctBox0, cloneForm.PricesQuotesPctBox0, cloneForm.TimesQuotesPctBox0, cloneForm.TradesPctBox0, cloneForm.PricesTradesPctBox0, cloneForm.TimesTradesPctBox0,
                 cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, Me.WindowSizeTextBox.Text)
@@ -1189,7 +1189,6 @@ Public Class Form1
         cloneForm.Show()
         'cloneForm.TicksOrSeconds.SelectedItem = "5 секунд"
         'cloneForm.TypeOfGraphic.SelectedItem = "Японские свечи"
-        pageList(Tabs.SelectedIndex).listOfClonedForms = New List(Of Form1Clone)
         pageList(Tabs.SelectedIndex).listOfClonedForms.Add(cloneForm)
     End Sub
 
