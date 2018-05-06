@@ -5,7 +5,7 @@ Public Class Form1
     Dim feedReciever As QuoteFixReciever
     Public pageList As List(Of Page) = New List(Of Page)
     Public isOnline As Boolean
-    Public movingAverageWindowSize As Integer
+    Public Shared movingAverageWindowSize As Integer
     Private oldWidth As Integer
     Private oldHeight As Integer
 
@@ -1114,17 +1114,20 @@ Public Class Form1
     End Sub
 
     Private Sub TypeOfGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfGraphic.SelectedIndexChanged
-        If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
-            If (Not TicksOrSeconds.SelectedItem = "Тики") Then
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
-                    CaseN_AndDraw()
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
-                    CaseN_AndDraw()
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+        If pageList.Count > 0 Then
+            If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
+                If (Not TicksOrSeconds.SelectedItem = "Тики") Then
+                    If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+                        CaseN_AndDraw()
+                    Else
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                        CaseN_AndDraw()
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+                    End If
                 End If
             End If
         End If
+
     End Sub
 
     Private Sub Charts0_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Charts0.SelectedIndexChanged
@@ -1210,30 +1213,24 @@ Public Class Form1
     End Sub
 
     Private Sub WindowSizeBtn_Click(sender As Object, e As EventArgs) Handles WindowSizeBtn.Click
-        movingAverageWindowSize = WindowSizeTextBox.Text
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades10sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades15sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades30sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades60sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades300sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades600sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades900sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec)
-        ReCalculateMovingAverage(pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec)
+        pageList(Tabs.SelectedIndex).movingAvgBuy = New MovingAverage(WindowSizeTextBox.Text)
+        pageList(Tabs.SelectedIndex).movingAvgSell = New MovingAverage(WindowSizeTextBox.Text)
+        pageList(Tabs.SelectedIndex).movingAvgBuyPlusSell = New MovingAverage(WindowSizeTextBox.Text)
+        pageList(Tabs.SelectedIndex).ReCalculateMovingAverage()
         TypeOfGraphic_SelectedIndexChanged(sender, e)
     End Sub
 
-    Public Sub ReCalculateMovingAverage(pointsTradesNsec As List(Of PointTradesNsec))
-        Dim movingAvgBuy As New MovingAverage(movingAverageWindowSize)
-        Dim movingAvgSell As New MovingAverage(movingAverageWindowSize)
-        Dim movingAvgBuyPlusSell As New MovingAverage(movingAverageWindowSize)
-        For index = 0 To pointsTradesNsec.Count - 1
-            pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
-            pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
-            pointsTradesNsec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
-        Next
-    End Sub
+    'Public Sub ReCalculateMovingAverage(pointsTradesNsec As List(Of PointTradesNsec))
+    '    'Dim movingAvgBuy As New MovingAverage(WindowSizeTextBox.Text)
+    '    'Dim movingAvgSell As New MovingAverage(WindowSizeTextBox.Text)
+    '    'Dim movingAvgBuyPlusSell As New MovingAverage(WindowSizeTextBox.Text)
+    '    'For index = 0 To pointsTradesNsec.Count - 1
+    '    '    pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
+    '    '    pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
+    '    '    pointsTradesNsec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
+    '    'Next
+
+    'End Sub
     Private Sub TradesPctBox0_MouseEnter(sender As Object, e As EventArgs) Handles TradesPctBox0.MouseEnter
         pageList(Tabs.SelectedIndex).cp.isCursorOnTradesChart = True
     End Sub

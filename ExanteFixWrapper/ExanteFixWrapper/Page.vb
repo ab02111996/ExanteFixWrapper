@@ -33,9 +33,9 @@ Public Class Page
     Public VolumesVolumesTradesPctBox As PictureBox
     Public TabId As Integer
     Public listOfClonedForms As List(Of Form1Clone)
-    Private movingAvgBuy As MovingAverage
-    Private movingAvgSell As MovingAverage
-    Private movingAvgBuyPlusSell As MovingAverage
+    Public movingAvgBuy As MovingAverage
+    Public movingAvgSell As MovingAverage
+    Public movingAvgBuyPlusSell As MovingAverage
     Private counter10sec As Integer
     Private counter15sec As Integer
     Private counter30sec As Integer
@@ -454,7 +454,6 @@ Public Class Page
             point.avgBuy = cp.pointsTrades5sec(count - 2).avgBuy
             point.avgSell = cp.pointsTrades5sec(count - 2).avgSell
             point.avgBuyPlusSell = cp.pointsTrades5sec(count - 2).avgBuyPlusSell
-            ReCalculateMovingAverage()
             If (counterNsec = 3) Then
                 If isOnline Then
                     cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
@@ -600,7 +599,7 @@ Public Class Page
                                                        form.pageList(0).cp.pointsTrades600sec(form.pageList(0).cp.pointsTrades600sec.Count - 1) = point
                                                        form.pageList(0).cp.pointsTrades600sec.Add(newPoint)
                                                        If form.TicksOrSeconds.SelectedItem = "10 минут" Then
-                                                           ReCalculateMovingAverage()
+                                                           'ReCalculateMovingAverage()
                                                            form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 600)
                                                        End If
                                                    Next
@@ -608,7 +607,7 @@ Public Class Page
                                            End Sub)
                     If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
                         Me.cp.usedForm.Invoke(Sub()
-                                                  ReCalculateMovingAverage()
+                                                  'ReCalculateMovingAverage()
                                                   cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
                                               End Sub)
                     End If
@@ -628,7 +627,7 @@ Public Class Page
                                                        form.pageList(0).cp.pointsTrades900sec(form.pageList(0).cp.pointsTrades900sec.Count - 1) = point
                                                        form.pageList(0).cp.pointsTrades900sec.Add(newPoint)
                                                        If form.TicksOrSeconds.SelectedItem = "15 минут" Then
-                                                           ReCalculateMovingAverage()
+                                                           'ReCalculateMovingAverage()
                                                            form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 900)
                                                        End If
                                                    Next
@@ -636,7 +635,7 @@ Public Class Page
                                            End Sub)
                     If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
                         Me.cp.usedForm.Invoke(Sub()
-                                                  ReCalculateMovingAverage()
+                                                  'ReCalculateMovingAverage()
                                                   cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
                                               End Sub)
                     End If
@@ -656,7 +655,7 @@ Public Class Page
                                                        form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
                                                        form.pageList(0).cp.pointsTrades1800sec.Add(newPoint)
                                                        If form.TicksOrSeconds.SelectedItem = "30 минут" Then
-                                                           ReCalculateMovingAverage()
+                                                           'ReCalculateMovingAverage()
                                                            form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 1800)
                                                        End If
                                                    Next
@@ -664,7 +663,7 @@ Public Class Page
                                            End Sub)
                     If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
                         Me.cp.usedForm.Invoke(Sub()
-                                                  ReCalculateMovingAverage()
+                                                  'ReCalculateMovingAverage()
                                                   cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
                                               End Sub)
                     End If
@@ -684,7 +683,7 @@ Public Class Page
                                                        form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
                                                        form.pageList(0).cp.pointsTrades3600sec.Add(newPoint)
                                                        If form.TicksOrSeconds.SelectedItem = "5 минут" Then
-                                                           ReCalculateMovingAverage()
+                                                           'ReCalculateMovingAverage()
                                                            form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 3600)
                                                        End If
                                                    Next
@@ -692,7 +691,7 @@ Public Class Page
                                            End Sub)
                     If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
                         Me.cp.usedForm.Invoke(Sub()
-                                                  ReCalculateMovingAverage()
+                                                  'ReCalculateMovingAverage()
                                                   cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
                                               End Sub)
                     End If
@@ -703,11 +702,7 @@ Public Class Page
         End If
     End Sub
 
-    Private Function GetMovingAvgWindowSize()
-        Return Form1.WindowSizeTextBox.Text
-    End Function
-
-    Private Sub ReCalculateMovingAverage()
+    Public Sub ReCalculateMovingAverage()
         ReCalculateMovingAvgList(Me.cp.pointsTrades5sec)
         ReCalculateMovingAvgList(Me.cp.pointsTrades10sec)
         ReCalculateMovingAvgList(Me.cp.pointsTrades15sec)
@@ -721,10 +716,6 @@ Public Class Page
     End Sub
 
     Public Sub ReCalculateMovingAvgList(pointsTradesNsec As List(Of PointTradesNsec))
-        Dim movingAverageWindowSize As Integer = GetMovingAvgWindowSize()
-        Dim movingAvgBuy As New MovingAverage(movingAverageWindowSize)
-        Dim movingAvgSell As New MovingAverage(movingAverageWindowSize)
-        Dim movingAvgBuyPlusSell As New MovingAverage(movingAverageWindowSize)
         For index = 0 To pointsTradesNsec.Count - 1
             pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
             pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
@@ -751,7 +742,6 @@ Public Class Page
             newPoint.time = point.time.AddSeconds(5)
             SetPricesInNewPoint(newPoint, point)
             cp.pointsTrades5sec.Add(newPoint)
-            ReCalculateMovingAverage()
             If listOfClonedForms.Count > 0 Then
                 For Each form In listOfClonedForms
                     form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point

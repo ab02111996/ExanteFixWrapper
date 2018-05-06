@@ -9637,3 +9637,1230 @@
 20180503-15:53:13.495 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
 20180503-15:53:13.495 : Received logon response
 20180503-15:53:29.350 : Sent test request TEST
+20180503-15:55:49.905 : Created session
+20180503-15:55:49.939 : Connecting to fixuat2.exante.eu on port 8100
+20180503-15:55:50.153 : Initiated logon request
+20180503-15:55:50.626 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-15:55:50.627 : Received logon response
+20180503-15:57:10.744 : Initiated logout request
+20180503-15:57:10.905 : Received logout response
+20180503-15:57:10.905 : Disconnecting
+20180503-15:59:23.727 : Created session
+20180503-15:59:23.746 : Connecting to fixuat2.exante.eu on port 8100
+20180503-15:59:23.943 : Initiated logon request
+20180503-15:59:24.427 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-15:59:24.428 : Received logon response
+20180503-16:02:19.260 : Created session
+20180503-16:02:19.276 : Connecting to fixuat2.exante.eu on port 8100
+20180503-16:02:19.471 : Initiated logon request
+20180503-16:02:19.936 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-16:02:19.938 : Received logon response
+20180503-16:06:22.983 : Created session
+20180503-16:06:22.998 : Connecting to fixuat2.exante.eu on port 8100
+20180503-16:06:23.179 : Initiated logon request
+20180503-16:06:23.638 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-16:06:23.639 : Received logon response
+20180503-16:09:27.943 : Initiated logout request
+20180503-16:09:28.390 : Received logout response
+20180503-16:09:28.390 : Disconnecting
+20180503-16:42:20.711 : Created session
+20180503-16:42:20.729 : Connecting to fixuat2.exante.eu on port 8100
+20180503-16:42:21.198 : Initiated logon request
+20180503-16:42:21.637 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-16:42:21.638 : Received logon response
+20180503-16:42:56.611 : Initiated logout request
+20180503-16:42:56.759 : Received logout response
+20180503-16:42:56.759 : Disconnecting
+20180503-16:47:11.184 : Created session
+20180503-16:47:11.201 : Connecting to fixuat2.exante.eu on port 8100
+20180503-16:47:11.383 : Initiated logon request
+20180503-16:47:11.824 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-16:47:11.825 : Received logon response
+20180503-17:05:18.403 : Created session
+20180503-17:05:18.418 : Connecting to fixuat2.exante.eu on port 8100
+20180503-17:05:18.615 : Initiated logon request
+20180503-17:05:19.091 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-17:05:19.092 : Received logon response
+20180503-17:06:51.383 : Created session
+20180503-17:06:51.421 : Connecting to fixuat2.exante.eu on port 8100
+20180503-17:06:51.618 : Initiated logon request
+20180503-17:06:52.157 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180503-17:06:52.158 : Received logon response
+20180504-06:32:51.619 : Created session
+20180504-06:32:51.681 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:32:52.522 : Initiated logon request
+20180504-06:32:52.663 : Socket Error: Connection reset by peer.
+20180504-06:32:52.663 : Disconnecting
+20180504-06:32:52.694 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:32:52.850 : Initiated logon request
+20180504-06:32:52.991 : Socket Error: Connection reset by peer.
+20180504-06:32:52.991 : Disconnecting
+20180504-06:33:22.138 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:33:22.373 : Initiated logon request
+20180504-06:33:22.507 : Socket Error: Connection reset by peer.
+20180504-06:33:22.507 : Disconnecting
+20180504-06:33:52.568 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:33:52.693 : Initiated logon request
+20180504-06:33:52.833 : Socket Error: Connection reset by peer.
+20180504-06:33:52.833 : Disconnecting
+20180504-06:34:23.004 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:34:23.160 : Initiated logon request
+20180504-06:34:23.285 : Socket Error: Connection reset by peer.
+20180504-06:34:23.285 : Disconnecting
+20180504-06:34:53.395 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:34:53.582 : Initiated logon request
+20180504-06:34:53.719 : Socket Error: Connection reset by peer.
+20180504-06:34:53.719 : Disconnecting
+20180504-06:35:23.863 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:35:24.019 : Initiated logon request
+20180504-06:35:24.175 : Socket Error: Connection reset by peer.
+20180504-06:35:24.175 : Disconnecting
+20180504-06:35:53.302 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:35:53.463 : Initiated logon request
+20180504-06:35:53.612 : Socket Error: Connection reset by peer.
+20180504-06:35:53.612 : Disconnecting
+20180504-06:36:23.753 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:36:23.941 : Initiated logon request
+20180504-06:36:24.081 : Socket Error: Connection reset by peer.
+20180504-06:36:24.081 : Disconnecting
+20180504-06:36:53.210 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:36:53.367 : Initiated logon request
+20180504-06:36:53.516 : Socket Error: Connection reset by peer.
+20180504-06:36:53.516 : Disconnecting
+20180504-06:37:23.585 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:37:23.800 : Initiated logon request
+20180504-06:37:24.050 : Socket Error: Connection reset by peer.
+20180504-06:37:24.050 : Disconnecting
+20180504-06:37:53.066 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:37:53.294 : Initiated logon request
+20180504-06:37:53.767 : Socket Error: Connection reset by peer.
+20180504-06:37:53.767 : Disconnecting
+20180504-06:38:23.520 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:38:23.704 : Initiated logon request
+20180504-06:38:23.860 : Socket Error: Connection reset by peer.
+20180504-06:38:23.860 : Disconnecting
+20180504-06:38:54.001 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:38:55.660 : Initiated logon request
+20180504-06:38:55.816 : Socket Error: Connection reset by peer.
+20180504-06:38:55.816 : Disconnecting
+20180504-06:39:24.948 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:39:25.662 : Initiated logon request
+20180504-06:39:26.396 : Socket Error: Connection reset by peer.
+20180504-06:39:26.396 : Disconnecting
+20180504-06:39:54.951 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:39:56.226 : Initiated logon request
+20180504-06:39:56.675 : Socket Error: Connection reset by peer.
+20180504-06:39:56.675 : Disconnecting
+20180504-06:40:24.413 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:40:24.574 : Initiated logon request
+20180504-06:40:24.730 : Socket Error: Connection reset by peer.
+20180504-06:40:24.730 : Disconnecting
+20180504-06:40:54.838 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:40:55.010 : Initiated logon request
+20180504-06:40:55.166 : Socket Error: Connection reset by peer.
+20180504-06:40:55.166 : Disconnecting
+20180504-06:41:24.271 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:41:24.413 : Initiated logon request
+20180504-06:41:24.574 : Socket Error: Connection reset by peer.
+20180504-06:41:24.574 : Disconnecting
+20180504-06:41:54.653 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:41:54.778 : Initiated logon request
+20180504-06:41:54.966 : Socket Error: Connection reset by peer.
+20180504-06:41:54.966 : Disconnecting
+20180504-06:42:24.066 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:42:24.191 : Initiated logon request
+20180504-06:42:24.352 : Socket Error: Connection reset by peer.
+20180504-06:42:24.352 : Disconnecting
+20180504-06:42:54.444 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:42:54.781 : Initiated logon request
+20180504-06:42:55.521 : Socket Error: Connection reset by peer.
+20180504-06:42:55.537 : Disconnecting
+20180504-06:43:24.067 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:43:24.223 : Initiated logon request
+20180504-06:43:24.400 : Socket Error: Connection reset by peer.
+20180504-06:43:24.400 : Disconnecting
+20180504-06:43:54.446 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:43:54.576 : Initiated logon request
+20180504-06:43:54.701 : Socket Error: Connection reset by peer.
+20180504-06:43:54.701 : Disconnecting
+20180504-06:44:24.836 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:44:54.913 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:45:24.115 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:45:54.323 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:46:24.477 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:46:54.680 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:47:24.870 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:47:54.039 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:48:24.137 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:48:54.293 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:49:24.387 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:49:54.616 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:50:24.691 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:50:54.765 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:51:24.904 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:51:54.009 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:52:24.131 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:52:54.249 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:53:24.404 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:53:54.550 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:54:24.659 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:54:54.796 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:55:24.869 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:55:55.000 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:55:55.186 : Initiated logon request
+20180504-06:55:55.310 : Socket Error: Connection reset by peer.
+20180504-06:55:55.310 : Disconnecting
+20180504-06:56:25.332 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:56:25.477 : Initiated logon request
+20180504-06:56:25.665 : Socket Error: Connection reset by peer.
+20180504-06:56:25.665 : Disconnecting
+20180504-06:56:55.702 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:56:55.905 : Initiated logon request
+20180504-06:56:56.061 : Socket Error: Connection reset by peer.
+20180504-06:56:56.061 : Disconnecting
+20180504-06:57:25.122 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:57:25.262 : Initiated logon request
+20180504-06:57:25.845 : Socket Error: Connection reset by peer.
+20180504-06:57:25.845 : Disconnecting
+20180504-06:57:55.428 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:57:55.572 : Initiated logon request
+20180504-06:57:55.728 : Socket Error: Connection reset by peer.
+20180504-06:57:55.728 : Disconnecting
+20180504-06:58:25.808 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:58:25.980 : Initiated logon request
+20180504-06:58:26.137 : Socket Error: Connection reset by peer.
+20180504-06:58:26.137 : Disconnecting
+20180504-06:58:55.106 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:58:55.903 : Initiated logon request
+20180504-06:58:56.523 : Socket Error: Connection reset by peer.
+20180504-06:58:56.523 : Disconnecting
+20180504-06:59:25.904 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:59:26.069 : Initiated logon request
+20180504-06:59:26.221 : Socket Error: Connection reset by peer.
+20180504-06:59:26.221 : Disconnecting
+20180504-06:59:55.066 : Connecting to fixuat2.exante.eu on port 8100
+20180504-06:59:55.226 : Initiated logon request
+20180504-06:59:55.366 : Socket Error: Connection reset by peer.
+20180504-06:59:55.366 : Disconnecting
+20180504-07:00:25.262 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:00:25.423 : Initiated logon request
+20180504-07:00:25.564 : Socket Error: Connection reset by peer.
+20180504-07:00:25.564 : Disconnecting
+20180504-07:00:55.595 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:00:55.736 : Initiated logon request
+20180504-07:00:55.876 : Socket Error: Connection reset by peer.
+20180504-07:00:55.876 : Disconnecting
+20180504-07:01:25.765 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:01:26.057 : Initiated logon request
+20180504-07:01:26.753 : Socket Error: Connection reset by peer.
+20180504-07:01:26.753 : Disconnecting
+20180504-07:01:55.221 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:01:55.346 : Initiated logon request
+20180504-07:01:55.734 : Socket Error: Connection reset by peer.
+20180504-07:01:55.734 : Disconnecting
+20180504-07:02:25.503 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:02:25.814 : Initiated logon request
+20180504-07:02:25.983 : Socket Error: Connection reset by peer.
+20180504-07:02:25.983 : Disconnecting
+20180504-07:02:55.936 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:02:56.068 : Initiated logon request
+20180504-07:02:56.196 : Socket Error: Connection reset by peer.
+20180504-07:02:56.196 : Disconnecting
+20180504-07:03:25.257 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:03:25.981 : Initiated logon request
+20180504-07:03:26.122 : Socket Error: Connection reset by peer.
+20180504-07:03:26.122 : Disconnecting
+20180504-07:03:55.170 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:03:55.342 : Initiated logon request
+20180504-07:03:55.486 : Socket Error: Connection reset by peer.
+20180504-07:03:55.486 : Disconnecting
+20180504-07:04:25.434 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:04:25.903 : Initiated logon request
+20180504-07:04:26.690 : Socket Error: Connection reset by peer.
+20180504-07:04:26.690 : Disconnecting
+20180504-07:04:55.125 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:04:55.297 : Initiated logon request
+20180504-07:04:55.455 : Socket Error: Connection reset by peer.
+20180504-07:04:55.455 : Disconnecting
+20180504-07:05:25.423 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:05:25.564 : Initiated logon request
+20180504-07:05:25.720 : Socket Error: Connection reset by peer.
+20180504-07:05:25.720 : Disconnecting
+20180504-07:05:55.737 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:05:55.878 : Initiated logon request
+20180504-07:05:56.019 : Socket Error: Connection reset by peer.
+20180504-07:05:56.019 : Disconnecting
+20180504-07:06:25.081 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:06:25.237 : Initiated logon request
+20180504-07:06:25.781 : Socket Error: Connection reset by peer.
+20180504-07:06:25.781 : Disconnecting
+20180504-07:06:55.407 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:06:55.626 : Initiated logon request
+20180504-07:06:56.189 : Socket Error: Connection reset by peer.
+20180504-07:06:56.189 : Disconnecting
+20180504-07:07:25.758 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:07:25.902 : Initiated logon request
+20180504-07:07:26.050 : Socket Error: Connection reset by peer.
+20180504-07:07:26.050 : Disconnecting
+20180504-07:07:55.904 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:07:56.228 : Initiated logon request
+20180504-07:07:56.384 : Socket Error: Connection reset by peer.
+20180504-07:07:56.384 : Disconnecting
+20180504-07:08:25.218 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:08:25.986 : Initiated logon request
+20180504-07:08:26.214 : Socket Error: Connection reset by peer.
+20180504-07:08:26.214 : Disconnecting
+20180504-07:08:55.984 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:08:56.120 : Initiated logon request
+20180504-07:08:56.288 : Socket Error: Connection reset by peer.
+20180504-07:08:56.288 : Disconnecting
+20180504-07:09:25.118 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:09:25.434 : Initiated logon request
+20180504-07:09:25.642 : Socket Error: Connection reset by peer.
+20180504-07:09:25.642 : Disconnecting
+20180504-07:09:55.432 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:09:55.600 : Initiated logon request
+20180504-07:09:56.752 : Socket Error: Connection reset by peer.
+20180504-07:09:56.752 : Disconnecting
+20180504-07:10:25.602 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:10:25.758 : Initiated logon request
+20180504-07:10:26.250 : Socket Error: Connection reset by peer.
+20180504-07:10:26.250 : Disconnecting
+20180504-07:10:55.757 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:10:55.901 : Initiated logon request
+20180504-07:10:56.041 : Socket Error: Connection reset by peer.
+20180504-07:10:56.041 : Disconnecting
+20180504-07:11:25.899 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:11:26.131 : Initiated logon request
+20180504-07:11:26.275 : Socket Error: Connection reset by peer.
+20180504-07:11:26.275 : Disconnecting
+20180504-07:11:55.129 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:11:55.653 : Initiated logon request
+20180504-07:11:55.849 : Socket Error: Connection reset by peer.
+20180504-07:11:55.849 : Disconnecting
+20180504-07:12:25.656 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:12:25.860 : Initiated logon request
+20180504-07:12:25.996 : Socket Error: Connection reset by peer.
+20180504-07:12:25.996 : Disconnecting
+20180504-07:12:55.862 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:12:56.070 : Initiated logon request
+20180504-07:12:56.206 : Socket Error: Connection reset by peer.
+20180504-07:12:56.206 : Disconnecting
+20180504-07:13:25.068 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:13:25.208 : Initiated logon request
+20180504-07:13:25.340 : Socket Error: Connection reset by peer.
+20180504-07:13:25.340 : Disconnecting
+20180504-07:13:55.202 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:13:55.342 : Initiated logon request
+20180504-07:13:55.486 : Socket Error: Connection reset by peer.
+20180504-07:13:55.486 : Disconnecting
+20180504-07:14:25.340 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:14:25.488 : Initiated logon request
+20180504-07:14:25.652 : Socket Error: Connection reset by peer.
+20180504-07:14:25.652 : Disconnecting
+20180504-07:14:55.486 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:14:55.622 : Initiated logon request
+20180504-07:14:55.770 : Socket Error: Connection reset by peer.
+20180504-07:14:55.770 : Disconnecting
+20180504-07:15:25.628 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:15:25.788 : Initiated logon request
+20180504-07:15:25.932 : Socket Error: Connection reset by peer.
+20180504-07:15:25.932 : Disconnecting
+20180504-07:15:55.790 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:15:55.946 : Initiated logon request
+20180504-07:15:56.070 : Socket Error: Connection reset by peer.
+20180504-07:15:56.070 : Disconnecting
+20180504-07:16:25.944 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:16:26.108 : Initiated logon request
+20180504-07:16:26.264 : Socket Error: Connection reset by peer.
+20180504-07:16:26.264 : Disconnecting
+20180504-07:16:55.105 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:16:55.241 : Initiated logon request
+20180504-07:16:55.385 : Socket Error: Connection reset by peer.
+20180504-07:16:55.385 : Disconnecting
+20180504-07:17:25.239 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:17:25.395 : Initiated logon request
+20180504-07:17:25.527 : Socket Error: Connection reset by peer.
+20180504-07:17:25.527 : Disconnecting
+20180504-07:17:55.393 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:17:55.533 : Initiated logon request
+20180504-07:17:55.753 : Socket Error: Connection reset by peer.
+20180504-07:17:55.753 : Disconnecting
+20180504-07:18:25.531 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:18:25.723 : Initiated logon request
+20180504-07:18:25.859 : Socket Error: Connection reset by peer.
+20180504-07:18:25.859 : Disconnecting
+20180504-07:18:55.721 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:18:55.877 : Initiated logon request
+20180504-07:18:56.013 : Socket Error: Connection reset by peer.
+20180504-07:18:56.013 : Disconnecting
+20180504-07:19:25.875 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:19:26.011 : Initiated logon request
+20180504-07:19:26.143 : Socket Error: Connection reset by peer.
+20180504-07:19:26.143 : Disconnecting
+20180504-07:19:55.013 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:19:55.161 : Initiated logon request
+20180504-07:19:55.325 : Socket Error: Connection reset by peer.
+20180504-07:19:55.325 : Disconnecting
+20180504-07:20:25.163 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:20:25.971 : Initiated logon request
+20180504-07:20:26.219 : Socket Error: Connection reset by peer.
+20180504-07:20:26.219 : Disconnecting
+20180504-07:20:55.973 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:20:56.125 : Initiated logon request
+20180504-07:20:56.357 : Socket Error: Connection reset by peer.
+20180504-07:20:56.357 : Disconnecting
+20180504-07:21:25.119 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:21:25.279 : Initiated logon request
+20180504-07:21:25.435 : Socket Error: Connection reset by peer.
+20180504-07:21:25.435 : Disconnecting
+20180504-07:21:55.281 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:21:55.449 : Initiated logon request
+20180504-07:21:56.001 : Socket Error: Connection reset by peer.
+20180504-07:21:56.001 : Disconnecting
+20180504-07:22:25.447 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:22:25.595 : Initiated logon request
+20180504-07:22:25.723 : Socket Error: Connection reset by peer.
+20180504-07:22:25.723 : Disconnecting
+20180504-07:22:55.593 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:22:57.029 : Initiated logon request
+20180504-07:22:57.841 : Socket Error: Connection reset by peer.
+20180504-07:22:57.841 : Disconnecting
+20180504-07:23:25.031 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:23:25.195 : Initiated logon request
+20180504-07:23:25.503 : Socket Error: Connection reset by peer.
+20180504-07:23:25.503 : Disconnecting
+20180504-07:23:55.201 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:23:55.389 : Initiated logon request
+20180504-07:23:55.513 : Socket Error: Connection reset by peer.
+20180504-07:23:55.513 : Disconnecting
+20180504-07:24:25.387 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:24:25.575 : Initiated logon request
+20180504-07:24:25.719 : Socket Error: Connection reset by peer.
+20180504-07:24:25.719 : Disconnecting
+20180504-07:24:55.581 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:24:55.745 : Initiated logon request
+20180504-07:24:55.873 : Socket Error: Connection reset by peer.
+20180504-07:24:55.873 : Disconnecting
+20180504-07:25:25.739 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:25:25.895 : Initiated logon request
+20180504-07:25:26.027 : Socket Error: Connection reset by peer.
+20180504-07:25:26.027 : Disconnecting
+20180504-07:25:55.901 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:25:56.081 : Initiated logon request
+20180504-07:25:56.213 : Socket Error: Connection reset by peer.
+20180504-07:25:56.213 : Disconnecting
+20180504-07:26:25.083 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:26:25.243 : Initiated logon request
+20180504-07:26:25.379 : Socket Error: Connection reset by peer.
+20180504-07:26:25.379 : Disconnecting
+20180504-07:26:55.241 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:26:55.401 : Initiated logon request
+20180504-07:26:55.529 : Socket Error: Connection reset by peer.
+20180504-07:26:55.529 : Disconnecting
+20180504-07:27:25.399 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:27:25.563 : Initiated logon request
+20180504-07:27:25.695 : Socket Error: Connection reset by peer.
+20180504-07:27:25.695 : Disconnecting
+20180504-07:27:55.561 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:27:55.701 : Initiated logon request
+20180504-07:27:55.865 : Socket Error: Connection reset by peer.
+20180504-07:27:55.865 : Disconnecting
+20180504-07:28:25.707 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:28:25.843 : Initiated logon request
+20180504-07:28:26.047 : Socket Error: Connection reset by peer.
+20180504-07:28:26.047 : Disconnecting
+20180504-07:28:55.845 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:28:56.001 : Initiated logon request
+20180504-07:28:56.257 : Socket Error: Connection reset by peer.
+20180504-07:28:56.257 : Disconnecting
+20180504-07:29:25.003 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:29:25.155 : Initiated logon request
+20180504-07:29:25.291 : Socket Error: Connection reset by peer.
+20180504-07:29:25.291 : Disconnecting
+20180504-07:29:55.177 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:29:55.309 : Initiated logon request
+20180504-07:29:55.453 : Socket Error: Connection reset by peer.
+20180504-07:29:55.453 : Disconnecting
+20180504-07:30:25.313 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:30:25.473 : Initiated logon request
+20180504-07:30:25.617 : Socket Error: Connection reset by peer.
+20180504-07:30:25.617 : Disconnecting
+20180504-07:30:55.477 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:30:55.661 : Initiated logon request
+20180504-07:30:55.789 : Socket Error: Connection reset by peer.
+20180504-07:30:55.789 : Disconnecting
+20180504-07:31:25.667 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:31:26.171 : Initiated logon request
+20180504-07:31:26.807 : Socket Error: Connection reset by peer.
+20180504-07:31:26.807 : Disconnecting
+20180504-07:31:55.186 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:31:55.335 : Initiated logon request
+20180504-07:31:55.482 : Socket Error: Connection reset by peer.
+20180504-07:31:55.482 : Disconnecting
+20180504-07:32:25.350 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:32:25.538 : Initiated logon request
+20180504-07:32:25.692 : Socket Error: Connection reset by peer.
+20180504-07:32:25.692 : Disconnecting
+20180504-07:32:55.554 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:32:55.751 : Initiated logon request
+20180504-07:32:55.882 : Socket Error: Connection reset by peer.
+20180504-07:32:55.882 : Disconnecting
+20180504-07:33:25.760 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:33:25.967 : Initiated logon request
+20180504-07:33:26.097 : Socket Error: Connection reset by peer.
+20180504-07:33:26.097 : Disconnecting
+20180504-07:33:55.984 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:33:56.158 : Initiated logon request
+20180504-07:33:56.288 : Socket Error: Connection reset by peer.
+20180504-07:33:56.288 : Disconnecting
+20180504-07:34:25.174 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:34:25.341 : Initiated logon request
+20180504-07:34:25.495 : Socket Error: Connection reset by peer.
+20180504-07:34:25.495 : Disconnecting
+20180504-07:34:55.358 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:34:55.500 : Initiated logon request
+20180504-07:34:55.643 : Socket Error: Connection reset by peer.
+20180504-07:34:55.644 : Disconnecting
+20180504-07:35:25.512 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:35:25.660 : Initiated logon request
+20180504-07:35:25.805 : Socket Error: Connection reset by peer.
+20180504-07:35:25.805 : Disconnecting
+20180504-07:35:55.676 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:35:55.904 : Initiated logon request
+20180504-07:35:56.055 : Socket Error: Connection reset by peer.
+20180504-07:35:56.055 : Disconnecting
+20180504-07:36:25.923 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:36:26.687 : Initiated logon request
+20180504-07:36:27.184 : Socket Error: Connection reset by peer.
+20180504-07:36:27.184 : Disconnecting
+20180504-07:36:55.691 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:36:55.839 : Initiated logon request
+20180504-07:36:55.983 : Socket Error: Connection reset by peer.
+20180504-07:36:55.983 : Disconnecting
+20180504-07:37:25.854 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:37:25.998 : Initiated logon request
+20180504-07:37:26.166 : Socket Error: Connection reset by peer.
+20180504-07:37:26.166 : Disconnecting
+20180504-07:37:55.030 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:37:55.230 : Initiated logon request
+20180504-07:37:55.564 : Socket Error: Connection reset by peer.
+20180504-07:37:55.564 : Disconnecting
+20180504-07:38:25.261 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:38:25.401 : Initiated logon request
+20180504-07:38:25.545 : Socket Error: Connection reset by peer.
+20180504-07:38:25.545 : Disconnecting
+20180504-07:38:55.403 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:38:56.347 : Initiated logon request
+20180504-07:38:57.203 : Socket Error: Connection reset by peer.
+20180504-07:38:57.203 : Disconnecting
+20180504-07:39:25.345 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:39:26.293 : Initiated logon request
+20180504-07:39:27.149 : Socket Error: Connection reset by peer.
+20180504-07:39:27.149 : Disconnecting
+20180504-07:39:55.291 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:39:55.931 : Initiated logon request
+20180504-07:39:56.419 : Socket Error: Connection reset by peer.
+20180504-07:39:56.419 : Disconnecting
+20180504-07:40:25.039 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:40:25.211 : Initiated logon request
+20180504-07:40:25.356 : Socket Error: Connection reset by peer.
+20180504-07:40:25.356 : Disconnecting
+20180504-07:40:55.385 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:40:55.546 : Initiated logon request
+20180504-07:40:55.687 : Socket Error: Connection reset by peer.
+20180504-07:40:55.687 : Disconnecting
+20180504-07:41:25.752 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:41:25.917 : Initiated logon request
+20180504-07:41:26.074 : Socket Error: Connection reset by peer.
+20180504-07:41:26.074 : Disconnecting
+20180504-07:41:55.137 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:41:55.282 : Initiated logon request
+20180504-07:41:55.420 : Socket Error: Connection reset by peer.
+20180504-07:41:55.420 : Disconnecting
+20180504-07:42:25.456 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:42:25.596 : Initiated logon request
+20180504-07:42:25.737 : Socket Error: Connection reset by peer.
+20180504-07:42:25.737 : Disconnecting
+20180504-07:42:55.880 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:42:56.005 : Initiated logon request
+20180504-07:42:56.146 : Socket Error: Connection reset by peer.
+20180504-07:42:56.146 : Disconnecting
+20180504-07:43:25.215 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:43:25.361 : Initiated logon request
+20180504-07:43:25.519 : Socket Error: Connection reset by peer.
+20180504-07:43:25.519 : Disconnecting
+20180504-07:43:55.500 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:43:55.672 : Initiated logon request
+20180504-07:43:55.813 : Socket Error: Connection reset by peer.
+20180504-07:43:55.813 : Disconnecting
+20180504-07:44:25.960 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:44:26.148 : Initiated logon request
+20180504-07:44:26.301 : Socket Error: Connection reset by peer.
+20180504-07:44:26.301 : Disconnecting
+20180504-07:44:55.383 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:44:55.549 : Initiated logon request
+20180504-07:44:55.689 : Socket Error: Connection reset by peer.
+20180504-07:44:55.689 : Disconnecting
+20180504-07:45:25.797 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:45:26.000 : Initiated logon request
+20180504-07:45:26.156 : Socket Error: Connection reset by peer.
+20180504-07:45:26.156 : Disconnecting
+20180504-07:45:55.220 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:45:55.365 : Initiated logon request
+20180504-07:45:55.495 : Socket Error: Connection reset by peer.
+20180504-07:45:55.495 : Disconnecting
+20180504-07:46:25.563 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:46:25.719 : Initiated logon request
+20180504-07:46:25.875 : Socket Error: Connection reset by peer.
+20180504-07:46:25.875 : Disconnecting
+20180504-07:46:56.001 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:46:56.209 : Initiated logon request
+20180504-07:46:56.346 : Socket Error: Connection reset by peer.
+20180504-07:46:56.346 : Disconnecting
+20180504-07:47:26.382 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:47:26.528 : Initiated logon request
+20180504-07:47:26.669 : Socket Error: Connection reset by peer.
+20180504-07:47:26.669 : Disconnecting
+20180504-07:47:56.544 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:47:56.751 : Initiated logon request
+20180504-07:47:57.236 : Socket Error: Connection reset by peer.
+20180504-07:47:57.236 : Disconnecting
+20180504-07:48:26.769 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:48:26.942 : Initiated logon request
+20180504-07:48:28.291 : Socket Error: Connection reset by peer.
+20180504-07:48:28.291 : Disconnecting
+20180504-07:48:56.957 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:48:57.321 : Initiated logon request
+20180504-07:48:57.471 : Socket Error: Connection reset by peer.
+20180504-07:48:57.471 : Disconnecting
+20180504-07:49:26.336 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:49:26.509 : Initiated logon request
+20180504-07:49:26.640 : Socket Error: Connection reset by peer.
+20180504-07:49:26.640 : Disconnecting
+20180504-07:49:56.766 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:50:01.716 : Initiated logon request
+20180504-07:50:01.945 : Socket Error: Connection reset by peer.
+20180504-07:50:01.945 : Disconnecting
+20180504-07:50:26.730 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:50:26.867 : Initiated logon request
+20180504-07:50:27.519 : Socket Error: Connection reset by peer.
+20180504-07:50:27.519 : Disconnecting
+20180504-07:50:56.074 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:51:00.619 : Initiated logon request
+20180504-07:51:00.854 : Socket Error: Connection reset by peer.
+20180504-07:51:00.854 : Disconnecting
+20180504-07:51:26.797 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:51:28.533 : Initiated logon request
+20180504-07:51:29.699 : Socket Error: Connection reset by peer.
+20180504-07:51:29.699 : Disconnecting
+20180504-07:51:56.720 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:51:56.845 : Initiated logon request
+20180504-07:51:56.986 : Socket Error: Connection reset by peer.
+20180504-07:51:56.986 : Disconnecting
+20180504-07:52:26.080 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:52:26.267 : Initiated logon request
+20180504-07:52:26.401 : Socket Error: Connection reset by peer.
+20180504-07:52:26.401 : Disconnecting
+20180504-07:52:56.432 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:52:56.588 : Initiated logon request
+20180504-07:52:56.729 : Socket Error: Connection reset by peer.
+20180504-07:52:56.729 : Disconnecting
+20180504-07:53:26.813 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:53:26.985 : Initiated logon request
+20180504-07:53:27.141 : Socket Error: Connection reset by peer.
+20180504-07:53:27.141 : Disconnecting
+20180504-07:53:56.246 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:53:56.391 : Initiated logon request
+20180504-07:53:56.533 : Socket Error: Connection reset by peer.
+20180504-07:53:56.533 : Disconnecting
+20180504-07:54:26.564 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:54:26.721 : Initiated logon request
+20180504-07:54:26.846 : Socket Error: Connection reset by peer.
+20180504-07:54:26.846 : Disconnecting
+20180504-07:54:56.957 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:54:57.113 : Initiated logon request
+20180504-07:54:57.254 : Socket Error: Connection reset by peer.
+20180504-07:54:57.254 : Disconnecting
+20180504-07:55:26.317 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:55:26.455 : Initiated logon request
+20180504-07:55:26.580 : Socket Error: Connection reset by peer.
+20180504-07:55:26.580 : Disconnecting
+20180504-07:55:56.721 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:55:56.861 : Initiated logon request
+20180504-07:55:57.018 : Socket Error: Connection reset by peer.
+20180504-07:55:57.018 : Disconnecting
+20180504-07:56:26.044 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:56:26.185 : Initiated logon request
+20180504-07:56:26.330 : Socket Error: Connection reset by peer.
+20180504-07:56:26.330 : Disconnecting
+20180504-07:56:56.379 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:56:56.527 : Initiated logon request
+20180504-07:56:56.668 : Socket Error: Connection reset by peer.
+20180504-07:56:56.668 : Disconnecting
+20180504-07:57:26.766 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:57:26.906 : Initiated logon request
+20180504-07:57:27.047 : Socket Error: Connection reset by peer.
+20180504-07:57:27.047 : Disconnecting
+20180504-07:57:56.143 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:57:56.272 : Initiated logon request
+20180504-07:57:56.422 : Socket Error: Connection reset by peer.
+20180504-07:57:56.422 : Disconnecting
+20180504-07:58:26.408 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:58:26.534 : Initiated logon request
+20180504-07:58:26.690 : Socket Error: Connection reset by peer.
+20180504-07:58:26.690 : Disconnecting
+20180504-07:58:56.796 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:58:56.968 : Initiated logon request
+20180504-07:58:57.108 : Socket Error: Connection reset by peer.
+20180504-07:58:57.108 : Disconnecting
+20180504-07:59:26.214 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:59:26.359 : Initiated logon request
+20180504-07:59:26.485 : Socket Error: Connection reset by peer.
+20180504-07:59:26.485 : Disconnecting
+20180504-07:59:56.542 : Connecting to fixuat2.exante.eu on port 8100
+20180504-07:59:56.682 : Initiated logon request
+20180504-07:59:56.823 : Socket Error: Connection reset by peer.
+20180504-07:59:56.823 : Disconnecting
+20180504-08:00:26.955 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:00:27.158 : Initiated logon request
+20180504-08:00:27.304 : Socket Error: Connection reset by peer.
+20180504-08:00:27.304 : Disconnecting
+20180504-08:00:56.383 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:00:56.590 : Initiated logon request
+20180504-08:00:56.747 : Socket Error: Connection reset by peer.
+20180504-08:00:56.747 : Disconnecting
+20180504-08:01:26.877 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:01:27.080 : Initiated logon request
+20180504-08:01:27.236 : Socket Error: Connection reset by peer.
+20180504-08:01:27.236 : Disconnecting
+20180504-08:01:56.319 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:01:56.449 : Initiated logon request
+20180504-08:01:56.589 : Socket Error: Connection reset by peer.
+20180504-08:01:56.589 : Disconnecting
+20180504-08:02:26.667 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:02:26.807 : Initiated logon request
+20180504-08:02:26.932 : Socket Error: Connection reset by peer.
+20180504-08:02:26.932 : Disconnecting
+20180504-08:02:56.998 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:02:57.123 : Initiated logon request
+20180504-08:02:57.268 : Socket Error: Connection reset by peer.
+20180504-08:02:57.268 : Disconnecting
+20180504-08:03:26.348 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:03:26.470 : Initiated logon request
+20180504-08:03:26.611 : Socket Error: Connection reset by peer.
+20180504-08:03:26.611 : Disconnecting
+20180504-08:03:56.685 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:03:56.878 : Initiated logon request
+20180504-08:03:57.049 : Socket Error: Connection reset by peer.
+20180504-08:03:57.049 : Disconnecting
+20180504-08:04:26.109 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:04:26.317 : Initiated logon request
+20180504-08:04:26.642 : Socket Error: Connection reset by peer.
+20180504-08:04:26.642 : Disconnecting
+20180504-08:04:56.484 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:04:56.641 : Initiated logon request
+20180504-08:04:56.781 : Socket Error: Connection reset by peer.
+20180504-08:04:56.781 : Disconnecting
+20180504-08:05:26.854 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:05:27.042 : Initiated logon request
+20180504-08:05:27.183 : Socket Error: Connection reset by peer.
+20180504-08:05:27.183 : Disconnecting
+20180504-08:05:56.266 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:05:56.401 : Initiated logon request
+20180504-08:05:56.541 : Socket Error: Connection reset by peer.
+20180504-08:05:56.541 : Disconnecting
+20180504-08:06:26.626 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:06:26.798 : Initiated logon request
+20180504-08:06:26.954 : Socket Error: Connection reset by peer.
+20180504-08:06:26.954 : Disconnecting
+20180504-08:06:56.010 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:06:56.151 : Initiated logon request
+20180504-08:06:56.312 : Socket Error: Connection reset by peer.
+20180504-08:06:56.312 : Disconnecting
+20180504-08:07:26.378 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:07:26.548 : Initiated logon request
+20180504-08:07:26.704 : Socket Error: Connection reset by peer.
+20180504-08:07:26.704 : Disconnecting
+20180504-08:07:56.756 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:07:56.881 : Initiated logon request
+20180504-08:07:57.037 : Socket Error: Connection reset by peer.
+20180504-08:07:57.037 : Disconnecting
+20180504-08:08:26.092 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:08:26.217 : Initiated logon request
+20180504-08:08:26.346 : Socket Error: Connection reset by peer.
+20180504-08:08:26.346 : Disconnecting
+20180504-08:08:56.438 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:08:56.563 : Initiated logon request
+20180504-08:08:56.688 : Socket Error: Connection reset by peer.
+20180504-08:08:56.688 : Disconnecting
+20180504-08:09:26.792 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:09:26.933 : Initiated logon request
+20180504-08:09:27.062 : Socket Error: Connection reset by peer.
+20180504-08:09:27.062 : Disconnecting
+20180504-08:09:56.086 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:09:56.245 : Initiated logon request
+20180504-08:09:56.376 : Socket Error: Connection reset by peer.
+20180504-08:09:56.376 : Disconnecting
+20180504-08:10:26.382 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:10:26.564 : Initiated logon request
+20180504-08:10:26.704 : Socket Error: Connection reset by peer.
+20180504-08:10:26.704 : Disconnecting
+20180504-08:10:56.636 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:10:56.779 : Initiated logon request
+20180504-08:10:56.926 : Socket Error: Connection reset by peer.
+20180504-08:10:56.926 : Disconnecting
+20180504-08:11:26.848 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:11:27.385 : Initiated logon request
+20180504-08:11:27.870 : Socket Error: Connection reset by peer.
+20180504-08:11:27.870 : Disconnecting
+20180504-08:11:56.446 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:11:56.587 : Initiated logon request
+20180504-08:11:56.722 : Socket Error: Connection reset by peer.
+20180504-08:11:56.722 : Disconnecting
+20180504-08:12:26.603 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:12:26.740 : Initiated logon request
+20180504-08:12:26.871 : Socket Error: Connection reset by peer.
+20180504-08:12:26.871 : Disconnecting
+20180504-08:12:56.756 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:12:57.044 : Initiated logon request
+20180504-08:12:57.188 : Socket Error: Connection reset by peer.
+20180504-08:12:57.188 : Disconnecting
+20180504-08:13:26.060 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:13:26.200 : Initiated logon request
+20180504-08:13:26.328 : Socket Error: Connection reset by peer.
+20180504-08:13:26.328 : Disconnecting
+20180504-08:13:56.217 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:13:56.358 : Initiated logon request
+20180504-08:13:56.482 : Socket Error: Connection reset by peer.
+20180504-08:13:56.482 : Disconnecting
+20180504-08:14:26.374 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:14:26.508 : Initiated logon request
+20180504-08:14:26.642 : Socket Error: Connection reset by peer.
+20180504-08:14:26.642 : Disconnecting
+20180504-08:14:56.525 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:14:56.693 : Initiated logon request
+20180504-08:14:56.829 : Socket Error: Connection reset by peer.
+20180504-08:14:56.830 : Disconnecting
+20180504-08:15:26.707 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:15:26.860 : Initiated logon request
+20180504-08:15:27.009 : Socket Error: Connection reset by peer.
+20180504-08:15:27.009 : Disconnecting
+20180504-08:15:56.879 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:15:57.011 : Initiated logon request
+20180504-08:15:57.144 : Socket Error: Connection reset by peer.
+20180504-08:15:57.144 : Disconnecting
+20180504-08:16:26.028 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:16:26.185 : Initiated logon request
+20180504-08:16:26.316 : Socket Error: Connection reset by peer.
+20180504-08:16:26.316 : Disconnecting
+20180504-08:16:56.204 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:16:56.341 : Initiated logon request
+20180504-08:16:56.465 : Socket Error: Connection reset by peer.
+20180504-08:16:56.465 : Disconnecting
+20180504-08:17:26.356 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:17:26.540 : Initiated logon request
+20180504-08:17:26.688 : Socket Error: Connection reset by peer.
+20180504-08:17:26.688 : Disconnecting
+20180504-08:17:56.557 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:17:56.700 : Initiated logon request
+20180504-08:17:56.839 : Socket Error: Connection reset by peer.
+20180504-08:17:56.839 : Disconnecting
+20180504-08:18:26.716 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:18:26.844 : Initiated logon request
+20180504-08:18:26.977 : Socket Error: Connection reset by peer.
+20180504-08:18:26.977 : Disconnecting
+20180504-08:18:56.861 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:18:56.994 : Initiated logon request
+20180504-08:18:57.126 : Socket Error: Connection reset by peer.
+20180504-08:18:57.127 : Disconnecting
+20180504-08:19:26.011 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:19:26.155 : Initiated logon request
+20180504-08:19:26.288 : Socket Error: Connection reset by peer.
+20180504-08:19:26.288 : Disconnecting
+20180504-08:19:56.171 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:19:56.365 : Initiated logon request
+20180504-08:19:56.516 : Socket Error: Connection reset by peer.
+20180504-08:19:56.516 : Disconnecting
+20180504-08:20:26.380 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:20:26.545 : Initiated logon request
+20180504-08:20:26.688 : Socket Error: Connection reset by peer.
+20180504-08:20:26.688 : Disconnecting
+20180504-08:20:56.559 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:20:56.697 : Initiated logon request
+20180504-08:20:56.821 : Socket Error: Connection reset by peer.
+20180504-08:20:56.821 : Disconnecting
+20180504-08:21:26.716 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:21:26.853 : Initiated logon request
+20180504-08:21:26.984 : Socket Error: Connection reset by peer.
+20180504-08:21:26.984 : Disconnecting
+20180504-08:21:56.871 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:21:57.011 : Initiated logon request
+20180504-08:21:57.151 : Socket Error: Connection reset by peer.
+20180504-08:21:57.151 : Disconnecting
+20180504-08:22:26.026 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:22:26.166 : Initiated logon request
+20180504-08:22:26.323 : Socket Error: Connection reset by peer.
+20180504-08:22:26.323 : Disconnecting
+20180504-08:22:56.183 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:22:56.318 : Initiated logon request
+20180504-08:22:56.450 : Socket Error: Connection reset by peer.
+20180504-08:22:56.450 : Disconnecting
+20180504-08:23:26.331 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:23:26.494 : Initiated logon request
+20180504-08:23:26.639 : Socket Error: Connection reset by peer.
+20180504-08:23:26.640 : Disconnecting
+20180504-08:23:56.514 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:23:56.647 : Initiated logon request
+20180504-08:23:56.784 : Socket Error: Connection reset by peer.
+20180504-08:23:56.784 : Disconnecting
+20180504-08:24:26.664 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:24:26.816 : Initiated logon request
+20180504-08:24:26.960 : Socket Error: Connection reset by peer.
+20180504-08:24:26.960 : Disconnecting
+20180504-08:24:56.831 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:24:56.967 : Initiated logon request
+20180504-08:24:57.092 : Socket Error: Connection reset by peer.
+20180504-08:24:57.092 : Disconnecting
+20180504-08:25:26.985 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:25:27.194 : Initiated logon request
+20180504-08:25:27.332 : Socket Error: Connection reset by peer.
+20180504-08:25:27.332 : Disconnecting
+20180504-08:25:56.210 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:25:56.352 : Initiated logon request
+20180504-08:25:56.486 : Socket Error: Connection reset by peer.
+20180504-08:25:56.486 : Disconnecting
+20180504-08:26:26.369 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:26:26.511 : Initiated logon request
+20180504-08:26:26.643 : Socket Error: Connection reset by peer.
+20180504-08:26:26.643 : Disconnecting
+20180504-08:26:56.529 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:26:56.664 : Initiated logon request
+20180504-08:26:56.790 : Socket Error: Connection reset by peer.
+20180504-08:26:56.790 : Disconnecting
+20180504-08:27:26.683 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:27:26.874 : Initiated logon request
+20180504-08:27:27.013 : Socket Error: Connection reset by peer.
+20180504-08:27:27.013 : Disconnecting
+20180504-08:27:56.892 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:27:57.045 : Initiated logon request
+20180504-08:27:57.183 : Socket Error: Connection reset by peer.
+20180504-08:27:57.184 : Disconnecting
+20180504-08:28:26.062 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:28:26.226 : Initiated logon request
+20180504-08:28:26.368 : Socket Error: Connection reset by peer.
+20180504-08:28:26.368 : Disconnecting
+20180504-08:28:56.242 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:28:56.390 : Initiated logon request
+20180504-08:28:56.526 : Socket Error: Connection reset by peer.
+20180504-08:28:56.526 : Disconnecting
+20180504-08:29:26.407 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:29:26.547 : Initiated logon request
+20180504-08:29:26.681 : Socket Error: Connection reset by peer.
+20180504-08:29:26.681 : Disconnecting
+20180504-08:29:56.564 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:29:56.690 : Initiated logon request
+20180504-08:29:56.816 : Socket Error: Connection reset by peer.
+20180504-08:29:56.816 : Disconnecting
+20180504-08:30:26.706 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:30:26.854 : Initiated logon request
+20180504-08:30:27.004 : Socket Error: Connection reset by peer.
+20180504-08:30:27.004 : Disconnecting
+20180504-08:30:56.866 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:30:57.013 : Initiated logon request
+20180504-08:30:57.146 : Socket Error: Connection reset by peer.
+20180504-08:30:57.146 : Disconnecting
+20180504-08:31:26.027 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:31:26.180 : Initiated logon request
+20180504-08:31:26.327 : Socket Error: Connection reset by peer.
+20180504-08:31:26.327 : Disconnecting
+20180504-08:31:56.197 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:31:56.342 : Initiated logon request
+20180504-08:31:56.485 : Socket Error: Connection reset by peer.
+20180504-08:31:56.485 : Disconnecting
+20180504-08:32:26.360 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:32:26.495 : Initiated logon request
+20180504-08:32:26.634 : Socket Error: Connection reset by peer.
+20180504-08:32:26.634 : Disconnecting
+20180504-08:32:56.512 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:32:56.667 : Initiated logon request
+20180504-08:32:56.824 : Socket Error: Connection reset by peer.
+20180504-08:32:56.824 : Disconnecting
+20180504-08:33:26.686 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:33:26.831 : Initiated logon request
+20180504-08:33:26.975 : Socket Error: Connection reset by peer.
+20180504-08:33:26.975 : Disconnecting
+20180504-08:33:56.848 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:33:56.991 : Initiated logon request
+20180504-08:33:57.125 : Socket Error: Connection reset by peer.
+20180504-08:33:57.125 : Disconnecting
+20180504-08:34:26.007 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:34:26.221 : Initiated logon request
+20180504-08:34:26.344 : Socket Error: Connection reset by peer.
+20180504-08:34:26.344 : Disconnecting
+20180504-08:34:56.239 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:34:56.619 : Initiated logon request
+20180504-08:34:56.777 : Socket Error: Connection reset by peer.
+20180504-08:34:56.777 : Disconnecting
+20180504-08:35:26.637 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:35:26.835 : Initiated logon request
+20180504-08:35:26.970 : Socket Error: Connection reset by peer.
+20180504-08:35:26.970 : Disconnecting
+20180504-08:35:56.851 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:35:56.993 : Initiated logon request
+20180504-08:35:57.130 : Socket Error: Connection reset by peer.
+20180504-08:35:57.130 : Disconnecting
+20180504-08:36:26.012 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:36:26.146 : Initiated logon request
+20180504-08:36:26.275 : Socket Error: Connection reset by peer.
+20180504-08:36:26.275 : Disconnecting
+20180504-08:36:56.164 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:36:56.351 : Initiated logon request
+20180504-08:36:56.497 : Socket Error: Connection reset by peer.
+20180504-08:36:56.497 : Disconnecting
+20180504-08:37:26.369 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:37:26.590 : Initiated logon request
+20180504-08:37:26.742 : Socket Error: Connection reset by peer.
+20180504-08:37:26.742 : Disconnecting
+20180504-08:37:56.609 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:37:56.752 : Initiated logon request
+20180504-08:37:56.886 : Socket Error: Connection reset by peer.
+20180504-08:37:56.886 : Disconnecting
+20180504-08:38:26.770 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:38:26.925 : Initiated logon request
+20180504-08:38:27.073 : Socket Error: Connection reset by peer.
+20180504-08:38:27.073 : Disconnecting
+20180504-08:38:56.943 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:38:57.115 : Initiated logon request
+20180504-08:38:57.248 : Socket Error: Connection reset by peer.
+20180504-08:38:57.248 : Disconnecting
+20180504-08:39:26.131 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:39:26.296 : Initiated logon request
+20180504-08:39:26.447 : Socket Error: Connection reset by peer.
+20180504-08:39:26.447 : Disconnecting
+20180504-08:39:56.315 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:39:56.447 : Initiated logon request
+20180504-08:39:56.583 : Socket Error: Connection reset by peer.
+20180504-08:39:56.583 : Disconnecting
+20180504-08:40:26.466 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:40:26.681 : Initiated logon request
+20180504-08:40:26.843 : Socket Error: Connection reset by peer.
+20180504-08:40:26.843 : Disconnecting
+20180504-08:40:56.702 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:40:56.845 : Initiated logon request
+20180504-08:40:56.980 : Socket Error: Connection reset by peer.
+20180504-08:40:56.980 : Disconnecting
+20180504-08:41:26.861 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:41:27.005 : Initiated logon request
+20180504-08:41:27.148 : Socket Error: Connection reset by peer.
+20180504-08:41:27.148 : Disconnecting
+20180504-08:41:56.018 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:41:56.144 : Initiated logon request
+20180504-08:41:56.269 : Socket Error: Connection reset by peer.
+20180504-08:41:56.269 : Disconnecting
+20180504-08:42:26.163 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:42:26.288 : Initiated logon request
+20180504-08:42:26.414 : Socket Error: Connection reset by peer.
+20180504-08:42:26.414 : Disconnecting
+20180504-08:42:56.305 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:42:56.452 : Initiated logon request
+20180504-08:42:56.587 : Socket Error: Connection reset by peer.
+20180504-08:42:56.587 : Disconnecting
+20180504-08:43:26.470 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:43:26.629 : Initiated logon request
+20180504-08:43:26.769 : Socket Error: Connection reset by peer.
+20180504-08:43:26.769 : Disconnecting
+20180504-08:43:56.647 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:43:56.871 : Initiated logon request
+20180504-08:43:57.025 : Socket Error: Connection reset by peer.
+20180504-08:43:57.025 : Disconnecting
+20180504-08:44:26.885 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:44:27.025 : Initiated logon request
+20180504-08:44:27.162 : Socket Error: Connection reset by peer.
+20180504-08:44:27.162 : Disconnecting
+20180504-08:44:56.042 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:44:56.219 : Initiated logon request
+20180504-08:44:56.372 : Socket Error: Connection reset by peer.
+20180504-08:44:56.372 : Disconnecting
+20180504-08:45:26.233 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:45:26.373 : Initiated logon request
+20180504-08:45:26.508 : Socket Error: Connection reset by peer.
+20180504-08:45:26.509 : Disconnecting
+20180504-08:45:56.392 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:45:56.544 : Initiated logon request
+20180504-08:45:56.689 : Socket Error: Connection reset by peer.
+20180504-08:45:56.689 : Disconnecting
+20180504-08:46:26.562 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:46:26.775 : Initiated logon request
+20180504-08:46:26.910 : Socket Error: Connection reset by peer.
+20180504-08:46:26.910 : Disconnecting
+20180504-08:46:56.793 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:46:56.936 : Initiated logon request
+20180504-08:46:57.086 : Socket Error: Connection reset by peer.
+20180504-08:46:57.086 : Disconnecting
+20180504-08:47:26.951 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:47:27.096 : Initiated logon request
+20180504-08:47:27.238 : Socket Error: Connection reset by peer.
+20180504-08:47:27.238 : Disconnecting
+20180504-08:47:56.111 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:47:56.294 : Initiated logon request
+20180504-08:47:56.446 : Socket Error: Connection reset by peer.
+20180504-08:47:56.446 : Disconnecting
+20180504-08:48:26.310 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:48:26.456 : Initiated logon request
+20180504-08:48:26.599 : Socket Error: Connection reset by peer.
+20180504-08:48:26.599 : Disconnecting
+20180504-08:48:56.474 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:48:56.620 : Initiated logon request
+20180504-08:48:56.754 : Socket Error: Connection reset by peer.
+20180504-08:48:56.754 : Disconnecting
+20180504-08:49:26.637 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:49:26.810 : Initiated logon request
+20180504-08:49:26.947 : Socket Error: Connection reset by peer.
+20180504-08:49:26.947 : Disconnecting
+20180504-08:49:56.826 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:49:56.963 : Initiated logon request
+20180504-08:49:57.093 : Socket Error: Connection reset by peer.
+20180504-08:49:57.093 : Disconnecting
+20180504-08:50:26.980 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:50:27.112 : Initiated logon request
+20180504-08:50:27.236 : Socket Error: Connection reset by peer.
+20180504-08:50:27.236 : Disconnecting
+20180504-08:50:56.128 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:50:56.327 : Initiated logon request
+20180504-08:50:56.467 : Socket Error: Connection reset by peer.
+20180504-08:50:56.467 : Disconnecting
+20180504-08:51:26.346 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:51:26.529 : Initiated logon request
+20180504-08:51:26.672 : Socket Error: Connection reset by peer.
+20180504-08:51:26.672 : Disconnecting
+20180504-08:51:56.547 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:51:56.741 : Initiated logon request
+20180504-08:51:56.884 : Socket Error: Connection reset by peer.
+20180504-08:51:56.884 : Disconnecting
+20180504-08:52:26.757 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:52:26.928 : Initiated logon request
+20180504-08:52:27.055 : Socket Error: Connection reset by peer.
+20180504-08:52:27.055 : Disconnecting
+20180504-08:52:56.944 : Connecting to fixuat2.exante.eu on port 8100
+20180504-08:52:57.089 : Initiated logon request
+20180504-08:52:57.234 : Socket Error: Connection reset by peer.
+20180504-08:52:57.234 : Disconnecting
+20180505-11:25:39.712 : Created session
+20180505-11:25:39.790 : Connecting to fixuat2.exante.eu on port 8100
+20180505-11:25:40.328 : Initiated logon request
+20180505-11:25:40.715 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180505-11:25:40.715 : Received logon response
+20180505-11:33:09.418 : Initiated logout request
+20180505-11:33:09.543 : Received logout response
+20180505-11:33:09.543 : Disconnecting
+20180506-13:10:05.964 : Created session
+20180506-13:10:06.060 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:10:06.282 : Initiated logon request
+20180506-13:10:06.398 : Received logout request
+20180506-13:10:06.398 : Sending logout response
+20180506-13:10:06.398 : Disconnecting
+20180506-13:10:07.058 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:10:07.170 : Initiated logon request
+20180506-13:10:07.554 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:10:07.554 : Received logon response
+20180506-13:12:39.493 : Created session
+20180506-13:12:39.507 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:12:39.664 : Initiated logon request
+20180506-13:12:40.050 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:12:40.051 : Received logon response
+20180506-13:12:59.243 : Created session
+20180506-13:12:59.257 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:12:59.421 : Initiated logon request
+20180506-13:12:59.814 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:12:59.815 : Received logon response
+20180506-13:15:07.022 : Created session
+20180506-13:15:07.057 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:15:07.308 : Initiated logon request
+20180506-13:15:07.701 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:15:07.702 : Received logon response
+20180506-13:30:33.159 : Created session
+20180506-13:30:33.173 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:30:33.433 : Initiated logon request
+20180506-13:30:33.824 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:30:33.825 : Received logon response
+20180506-13:31:02.952 : Initiated logout request
+20180506-13:31:03.064 : Received logout response
+20180506-13:31:03.064 : Disconnecting
+20180506-13:31:56.975 : Created session
+20180506-13:31:56.990 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:31:57.144 : Initiated logon request
+20180506-13:31:57.536 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:31:57.537 : Received logon response
+20180506-13:33:35.032 : Initiated logout request
+20180506-13:33:35.142 : Received logout response
+20180506-13:33:35.142 : Disconnecting
+20180506-13:33:50.673 : Created session
+20180506-13:33:50.691 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:33:50.853 : Initiated logon request
+20180506-13:33:51.242 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:33:51.243 : Received logon response
+20180506-13:34:20.410 : Initiated logout request
+20180506-13:34:20.521 : Received logout response
+20180506-13:34:20.521 : Disconnecting
+20180506-13:36:07.487 : Created session
+20180506-13:36:07.507 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:36:07.752 : Initiated logon request
+20180506-13:36:08.141 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:36:08.142 : Received logon response
+20180506-13:49:21.111 : Created session
+20180506-13:49:21.129 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:49:21.384 : Initiated logon request
+20180506-13:49:21.777 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:49:21.778 : Received logon response
+20180506-13:50:28.850 : Initiated logout request
+20180506-13:50:28.967 : Received logout response
+20180506-13:50:28.967 : Disconnecting
+20180506-13:59:09.645 : Created session
+20180506-13:59:09.683 : Connecting to fixuat2.exante.eu on port 8100
+20180506-13:59:09.948 : Initiated logon request
+20180506-13:59:10.338 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-13:59:10.339 : Received logon response
+20180506-14:00:35.185 : Initiated logout request
+20180506-14:00:35.298 : Received logout response
+20180506-14:00:35.298 : Disconnecting
+20180506-14:00:48.755 : Created session
+20180506-14:00:48.769 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:00:48.930 : Initiated logon request
+20180506-14:00:49.316 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:00:49.317 : Received logon response
+20180506-14:07:57.722 : Created session
+20180506-14:07:57.739 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:07:57.993 : Initiated logon request
+20180506-14:07:58.390 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:07:58.391 : Received logon response
+20180506-14:09:27.790 : Initiated logout request
+20180506-14:09:27.907 : Received logout response
+20180506-14:09:27.907 : Disconnecting
+20180506-14:10:41.101 : Created session
+20180506-14:10:41.136 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:10:41.296 : Initiated logon request
+20180506-14:10:41.685 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:10:41.686 : Received logon response
+20180506-14:12:10.736 : Initiated logout request
+20180506-14:12:10.850 : Received logout response
+20180506-14:12:10.850 : Disconnecting
+20180506-14:13:16.554 : Created session
+20180506-14:13:16.572 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:13:16.827 : Initiated logon request
+20180506-14:13:17.214 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:13:17.215 : Received logon response
+20180506-14:13:54.154 : Created session
+20180506-14:13:54.189 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:13:54.354 : Initiated logon request
+20180506-14:13:54.746 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:13:54.747 : Received logon response
+20180506-14:17:15.943 : Initiated logout request
+20180506-14:19:19.469 : Created session
+20180506-14:19:19.483 : Connecting to fixuat2.exante.eu on port 8100
+20180506-14:19:19.734 : Initiated logon request
+20180506-14:19:20.124 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20180506-14:19:20.125 : Received logon response
+20180506-14:19:53.861 : Initiated logout request
+20180506-14:19:53.972 : Received logout response
+20180506-14:19:53.972 : Disconnecting

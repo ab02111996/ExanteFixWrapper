@@ -24,25 +24,45 @@ Public Class Form1Clone
     Public Sub CaseN_AndDraw()
         Select Case TicksOrSeconds.SelectedItem
             Case "5 секунд"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 5)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 5)
+                End If
             Case "10 секунд"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 10)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades10sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 10)
+                End If
             Case "15 секунд"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 15)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades15sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 15)
+                End If
             Case "30 секунд"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 30)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades30sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 30)
+                End If
             Case "1 минута"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 60)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades60sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 60)
+                End If
             Case "5 минут"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 300)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades300sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 300)
+                End If
             Case "10 минут"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 600)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades600sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 600)
+                End If
             Case "15 минут"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 900)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades900sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 900)
+                End If
             Case "30 минут"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 1800)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 1800)
+                End If
             Case "1 час"
-                pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 3600)
+                If pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec(0).highPrice <> 0 Then
+                    pageList(Tabs.SelectedIndex).cp.paintingTradesNsec(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox, 3600)
+                End If
         End Select
     End Sub
 
@@ -58,11 +78,11 @@ Public Class Form1Clone
         DoubleBuffered = True
 
 
-        'TicksOrSeconds.SelectedItem = "5 секунд"
+        TicksOrSeconds.SelectedItem = "5 секунд"
         BuyPlusSell.Checked = True
         AddHandler Me.BuyAndSell.CheckedChanged, AddressOf RadiobuttonOnChange
         AddHandler Me.BuyPlusSell.CheckedChanged, AddressOf RadiobuttonOnChange
-        'TypeOfGraphic.SelectedItem = "Японские свечи"
+        TypeOfGraphic.SelectedItem = "Японские свечи"
         Try
             pageList(Tabs.SelectedIndex).cp.isSubscribed = True
             Tabs.TabPages(Tabs.SelectedIndex).Text = Form1.Tabs.TabPages(Form1.Tabs.SelectedIndex).Text
@@ -596,12 +616,15 @@ Public Class Form1Clone
 
     Private Sub TicksOrSeconds_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TicksOrSeconds.SelectedIndexChanged
         If (TicksOrSeconds.SelectedItem = "Тики") Then
-            pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades - 1
-            If pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0 Then
-                pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
+            If pageList(Tabs.SelectedIndex).cp.pointsTrades(0).tradePrice <> 0 And pageList(Tabs.SelectedIndex).cp.pointsTrades(0).tradeVolume <> 0 Then
+                pageList(Tabs.SelectedIndex).cp.currentPointTrades = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTrades - 1
+                If pageList(Tabs.SelectedIndex).cp.currentPointTrades < 0 Then
+                    pageList(Tabs.SelectedIndex).cp.currentPointTrades = 0
+                End If
+                pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
+                pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
             End If
-            pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
-            pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
+
         Else
             Select Case TicksOrSeconds.SelectedItem
                 Case "5 секунд"
@@ -637,17 +660,20 @@ Public Class Form1Clone
     End Sub
 
     Private Sub TypeOfGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfGraphic.SelectedIndexChanged
-        If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
-            If (Not TicksOrSeconds.SelectedItem = "Тики") Then
-                If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
-                    CaseN_AndDraw()
-                Else
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
-                    CaseN_AndDraw()
-                    pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+        If pageList.Count > 0 Then
+            If (pageList(Tabs.SelectedIndex).Chart.SelectedIndex = 1) Then
+                If (Not TicksOrSeconds.SelectedItem = "Тики") Then
+                    If (pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False) Then
+                        CaseN_AndDraw()
+                    Else
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+                        CaseN_AndDraw()
+                        pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
+                    End If
                 End If
             End If
         End If
+
     End Sub
 
     Private Sub Charts0_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Charts0.SelectedIndexChanged
