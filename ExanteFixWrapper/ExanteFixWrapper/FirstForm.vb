@@ -6,6 +6,6 @@
             Form1.isOnline = False
         End If
         Form1.Show()
-        'Me.Close()
+        Me.Close()
     End Sub
 End Class
