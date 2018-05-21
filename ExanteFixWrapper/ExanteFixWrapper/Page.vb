@@ -137,7 +137,7 @@ Public Class Page
                                            If (Not Me.cp.isDrawingStartedQuotes) Then
                                                Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
                                                For Each form In listOfClonedForms
-                                                   If form IsNot Nothing Then
+                                                   If Not form.IsDisposed Then
                                                        If (form.pageList(0).cp.needRePaintingQuotes) Then
                                                            form.pageList(0).cp.needRePaintingQuotes = False
                                                            form.pageList(0).cp.paintingQuotes(form.pageList(0).QuotesPctBox, form.pageList(0).TimesQuotesPctBox, form.pageList(0).PricesQuotesPctBox)
@@ -180,7 +180,9 @@ Public Class Page
             bufferTrades3600sec.PutInBuffer(quotesInfo)
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
             For Each form In listOfClonedForms
-                form.pageList(0).cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
+                If Not form.IsDisposed Then
+                    form.pageList(0).cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
+                End If
             Next
 
             Dim ticksOrSeconds As ComboBox
@@ -270,7 +272,7 @@ Public Class Page
                                                            DrawEveryTick(N)
                                                    End Select
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
+                                                       If Not form.IsDisposed Then
                                                            Select Case form.TicksOrSeconds.SelectedItem
                                                                Case "5 секунд"
                                                                    Dim point As New PointTradesNsec(bufferTrades)
@@ -865,9 +867,11 @@ Public Class Page
             Me.TradesPctBox.Invoke(Sub()
                                        If listOfClonedForms.Count > 0 Then
                                            For Each form In listOfClonedForms
-                                               If form.TicksOrSeconds.SelectedItem = "5 секунд" Then
-                                                   ReCalculateMovingAverage()
-                                                   form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 5)
+                                               If Not form.IsDisposed Then
+                                                   If form.TicksOrSeconds.SelectedItem = "5 секунд" Then
+                                                       ReCalculateMovingAverage()
+                                                       form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 5)
+                                                   End If
                                                End If
                                            Next
                                        End If
