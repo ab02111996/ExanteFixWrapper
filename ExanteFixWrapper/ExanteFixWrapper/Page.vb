@@ -241,6 +241,7 @@ Public Class Page
                                                    Me.cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
                                                    point = New PointTradesNsec(bufferTrades3600sec)
                                                    Me.cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
+                                                   ReCalculateMovingAverage()
                                                    Select Case ticksOrSeconds.SelectedItem
                                                        Case "5 секунд"
                                                            DrawEveryTick(5)
@@ -285,6 +286,7 @@ Public Class Page
                                                            form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades3600sec)
                                                            form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
+                                                           ReCalculateMovingAverage()
                                                            Select Case form.TicksOrSeconds.SelectedItem
                                                                Case "5 секунд"
                                                                    DrawEveryTickInClonedForms(5, form)
@@ -757,17 +759,20 @@ Public Class Page
         newPoint.openPrice = point.closePrice
         newPoint.closePrice = point.closePrice
         newPoint.lowPrice = point.closePrice
+        newPoint.avgBuy = point.avgBuy
+        newPoint.avgSell = point.avgSell
+        newPoint.avgBuyPlusSell = point.avgBuyPlusSell
     End Sub
 
     Public Sub Add5SecondsPoint(sender As Object, e As EventArgs)
         If Not cp.isCloned Then
-            ReCalculateMovingAverage()
             Dim buffer = CType(sender, Buffer)
             Dim point As New PointTradesNsec(buffer)
-            'point.avgBuy = movingAvgBuy.Calculate(point.volumeBuy)
-            'point.avgSell = movingAvgSell.Calculate(point.volumeSell)
-            'point.avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(point.volumeBuy + point.volumeSell)
+            'point.avgBuy = cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1).avgBuy
+            'point.avgSell = cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1).avgSell
+            'point.avgBuyPlusSell = point.avgBuy + point.avgSell
             cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
+            ReCalculateMovingAverage()
             Dim newPoint As New PointTradesNsec()
             newPoint.time = point.time.AddSeconds(5)
             SetPricesInNewPoint(newPoint, point)
