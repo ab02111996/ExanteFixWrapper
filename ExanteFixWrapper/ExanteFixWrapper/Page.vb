@@ -195,7 +195,7 @@ Public Class Page
 
 
 
-            If TradesPctBox.IsHandleCreated Then
+            If TradesPctBox.IsHandleCreated And Not TradesPctBox.IsDisposed Then
                 Me.TradesPctBox.Invoke(Sub()
                                            If (ticksOrSeconds.SelectedItem = "Тики") Then
                                                Me.cp.paintingTrades(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
@@ -482,6 +482,7 @@ Public Class Page
                     newPoint.time = point.time.AddSeconds(15)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades15sec.Add(newPoint)
+                    ReCalculateMovingAverage()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -511,6 +512,7 @@ Public Class Page
                     newPoint.time = point.time.AddSeconds(10)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades10sec.Add(newPoint)
+                    ReCalculateMovingAverage()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -536,6 +538,7 @@ Public Class Page
             ElseIf (counterNsec = 6) Then
                 If isOnline Then
                     cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(30)
                     SetPricesInNewPoint(newPoint, point)
@@ -564,6 +567,7 @@ Public Class Page
             ElseIf (counterNsec = 12) Then
                 If isOnline Then
                     cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(60)
                     SetPricesInNewPoint(newPoint, point)
@@ -592,6 +596,7 @@ Public Class Page
             ElseIf (counterNsec = 60) Then
                 If isOnline Then
                     cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(300)
                     SetPricesInNewPoint(newPoint, point)
@@ -620,6 +625,7 @@ Public Class Page
             ElseIf (counterNsec = 120) Then
                 If isOnline Then
                     cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(600)
                     SetPricesInNewPoint(newPoint, point)
@@ -648,6 +654,7 @@ Public Class Page
             ElseIf (counterNsec = 180) Then
                 If isOnline Then
                     cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(900)
                     SetPricesInNewPoint(newPoint, point)
@@ -676,6 +683,7 @@ Public Class Page
             ElseIf (counterNsec = 360) Then
                 If isOnline Then
                     cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(1800)
                     SetPricesInNewPoint(newPoint, point)
@@ -704,6 +712,7 @@ Public Class Page
             ElseIf (counterNsec = 720) Then
                 If isOnline Then
                     cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
+                    ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(3600)
                     SetPricesInNewPoint(newPoint, point)
