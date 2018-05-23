@@ -45,6 +45,7 @@ Public Class Page
     Private counter900sec As Integer
     Private counter1800sec As Integer
     Private counter3600sec As Integer
+    Public gettingHistory As Boolean = False
 
     Public Sub New(cp As ChartPainting,
                    QuotesPctBox As PictureBox,
@@ -220,112 +221,91 @@ Public Class Page
                                            End If
                                            If Not ticksOrSeconds.SelectedItem = "Тики" Then
                                                If Not cp.isCloned Then
-                                                   Dim N As Integer
+                                                   Dim point As New PointTradesNsec(bufferTrades)
+                                                   Me.cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades10sec)
+                                                   Me.cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades15sec)
+                                                   Me.cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades30sec)
+                                                   Me.cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades60sec)
+                                                   Me.cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades300sec)
+                                                   Me.cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades600sec)
+                                                   Me.cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades900sec)
+                                                   Me.cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades1800sec)
+                                                   Me.cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
+                                                   point = New PointTradesNsec(bufferTrades3600sec)
+                                                   Me.cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
                                                    Select Case ticksOrSeconds.SelectedItem
                                                        Case "5 секунд"
-                                                           Dim point As New PointTradesNsec(bufferTrades)
-                                                           Me.cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
-                                                           N = 5
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(5)
                                                        Case "10 секунд"
-                                                           Dim point As New PointTradesNsec(bufferTrades10sec)
-                                                           Me.cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
-                                                           N = 10
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(10)
                                                        Case "15 секунд"
-                                                           Dim point As New PointTradesNsec(bufferTrades15sec)
-                                                           Me.cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
-                                                           N = 15
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(15)
                                                        Case "30 секунд"
-                                                           Dim point As New PointTradesNsec(bufferTrades30sec)
-                                                           Me.cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
-                                                           N = 30
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(30)
                                                        Case "1 минута"
-                                                           Dim point As New PointTradesNsec(bufferTrades60sec)
-                                                           Me.cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
-                                                           N = 60
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(60)
                                                        Case "5 минут"
-                                                           Dim point As New PointTradesNsec(bufferTrades300sec)
-                                                           Me.cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
-                                                           N = 300
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(300)
                                                        Case "10 минут"
-                                                           Dim point As New PointTradesNsec(bufferTrades600sec)
-                                                           Me.cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
-                                                           N = 600
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(600)
                                                        Case "15 минут"
-                                                           Dim point As New PointTradesNsec(bufferTrades900sec)
-                                                           Me.cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
-                                                           N = 900
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(900)
                                                        Case "30 минут"
-                                                           Dim point As New PointTradesNsec(bufferTrades1800sec)
-                                                           Me.cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
-                                                           N = 1800
-                                                           DrawEveryTick(N)
-                                                       Case "60 минут"
-                                                           Dim point As New PointTradesNsec(bufferTrades3600sec)
-                                                           Me.cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
-                                                           N = 3600
-                                                           DrawEveryTick(N)
+                                                           DrawEveryTick(1800)
+                                                       Case "1 час"
+                                                           DrawEveryTick(3600)
                                                    End Select
                                                    For Each form In listOfClonedForms
                                                        If Not form.IsDisposed Then
+                                                           point = New PointTradesNsec(bufferTrades)
+                                                           form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades10sec)
+                                                           form.pageList(0).cp.pointsTrades10sec(form.pageList(0).cp.pointsTrades10sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades15sec)
+                                                           form.pageList(0).cp.pointsTrades15sec(form.pageList(0).cp.pointsTrades15sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades30sec)
+                                                           form.pageList(0).cp.pointsTrades30sec(form.pageList(0).cp.pointsTrades30sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades60sec)
+                                                           form.pageList(0).cp.pointsTrades60sec(form.pageList(0).cp.pointsTrades60sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades300sec)
+                                                           form.pageList(0).cp.pointsTrades300sec(form.pageList(0).cp.pointsTrades300sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades600sec)
+                                                           form.pageList(0).cp.pointsTrades600sec(form.pageList(0).cp.pointsTrades600sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades900sec)
+                                                           form.pageList(0).cp.pointsTrades900sec(form.pageList(0).cp.pointsTrades900sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades1800sec)
+                                                           form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
+                                                           point = New PointTradesNsec(bufferTrades3600sec)
+                                                           form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
                                                            Select Case form.TicksOrSeconds.SelectedItem
                                                                Case "5 секунд"
-                                                                   Dim point As New PointTradesNsec(bufferTrades)
-                                                                   form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point
-                                                                   N = 5
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(5, form)
                                                                Case "10 секунд"
-                                                                   Dim point As New PointTradesNsec(bufferTrades10sec)
-                                                                   form.pageList(0).cp.pointsTrades10sec(form.pageList(0).cp.pointsTrades10sec.Count - 1) = point
-                                                                   N = 10
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(10, form)
                                                                Case "15 секунд"
-                                                                   Dim point As New PointTradesNsec(bufferTrades15sec)
-                                                                   form.pageList(0).cp.pointsTrades15sec(form.pageList(0).cp.pointsTrades15sec.Count - 1) = point
-                                                                   N = 15
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(15, form)
                                                                Case "30 секунд"
-                                                                   Dim point As New PointTradesNsec(bufferTrades30sec)
-                                                                   form.pageList(0).cp.pointsTrades30sec(form.pageList(0).cp.pointsTrades30sec.Count - 1) = point
-                                                                   N = 30
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(30, form)
                                                                Case "1 минута"
-                                                                   Dim point As New PointTradesNsec(bufferTrades60sec)
-                                                                   form.pageList(0).cp.pointsTrades60sec(form.pageList(0).cp.pointsTrades60sec.Count - 1) = point
-                                                                   N = 60
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(60, form)
                                                                Case "5 минут"
-                                                                   Dim point As New PointTradesNsec(bufferTrades300sec)
-                                                                   form.pageList(0).cp.pointsTrades300sec(form.pageList(0).cp.pointsTrades300sec.Count - 1) = point
-                                                                   N = 300
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(300, form)
                                                                Case "10 минут"
-                                                                   Dim point As New PointTradesNsec(bufferTrades600sec)
-                                                                   form.pageList(0).cp.pointsTrades600sec(form.pageList(0).cp.pointsTrades600sec.Count - 1) = point
-                                                                   N = 600
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(600, form)
                                                                Case "15 минут"
-                                                                   Dim point As New PointTradesNsec(bufferTrades900sec)
-                                                                   form.pageList(0).cp.pointsTrades900sec(form.pageList(0).cp.pointsTrades900sec.Count - 1) = point
-                                                                   N = 900
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(900, form)
                                                                Case "30 минут"
-                                                                   Dim point As New PointTradesNsec(bufferTrades1800sec)
-                                                                   form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
-                                                                   N = 1800
-                                                                   DrawEveryTickInClonedForms(N, form)
-                                                               Case "60 минут"
-                                                                   Dim point As New PointTradesNsec(bufferTrades3600sec)
-                                                                   form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
-                                                                   N = 3600
-                                                                   DrawEveryTickInClonedForms(N, form)
+                                                                   DrawEveryTickInClonedForms(1800, form)
+                                                               Case "1 час"
+                                                                   DrawEveryTickInClonedForms(3600, form)
                                                            End Select
                                                        End If
                                                    Next
@@ -420,7 +400,7 @@ Public Class Page
             End If
             If counter3600sec = 720 Then
                 AddNSecondsPoint(counter3600sec, index)
-                counter1800sec = 0
+                counter3600sec = 0
             End If
         Next
     End Sub
@@ -437,6 +417,11 @@ Public Class Page
                                           End Sub)
                     'ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem
                     isOnline = True
+                    If gettingHistory Then
+                        count = _index + 2
+                    Else
+                        count = cp.pointsTrades5sec.Count
+                    End If
                     count = cp.pointsTrades5sec.Count
                 Else
                     count = _index + 2
@@ -447,7 +432,12 @@ Public Class Page
                                               ticksOrSeconds = CType(cp.usedForm, Form1).TicksOrSeconds.SelectedItem.ToString
                                           End Sub)
                     isOnline = True
-                    count = cp.pointsTrades5sec.Count
+                    If gettingHistory Then
+                        count = _index + 2
+                    Else
+                        count = cp.pointsTrades5sec.Count
+                    End If
+
                 Else
                     count = _index + 2
                 End If

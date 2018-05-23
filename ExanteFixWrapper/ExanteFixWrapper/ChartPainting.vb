@@ -858,12 +858,10 @@ Public Class ChartPainting
                             End If
                         End If
 
-                        If (Not Form1.isOnline) Then
-                            If (Not index = Me.lastPointTradesNsec) Then
-                                If (Not pointsTradesNsec(index).time.Date = pointsTradesNsec(index + 1).time.Date) Then
-                                    G_btmTrades.DrawLine(New Pen(Color.Orange, 2), p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                                    G_btmVolumes.DrawLine(New Pen(Color.Orange, 2), p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
-                                End If
+                        If (Not index = Me.lastPointTradesNsec) Then
+                            If (Not pointsTradesNsec(index).time.Date = pointsTradesNsec(index + 1).time.Date) Then
+                                G_btmTrades.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), TradesPctBox.Height)
+                                G_btmVolumes.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), VolumesTradesPctBox.Height)
                             End If
                         End If
 
@@ -1124,14 +1122,14 @@ Public Class ChartPainting
 
                         p1Trades.X -= intervalTradesNsec / 2
 
-                        If (Not Form1.isOnline) Then
-                            If (Not index = Me.lastPointTradesNsec) Then
-                                If (Not pointsTradesNsec(index).time.Date = pointsTradesNsec(index + 1).time.Date) Then
-                                    G_btmTrades.DrawLine(New Pen(Color.Orange, 2), p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                                    G_btmVolumes.DrawLine(New Pen(Color.Orange, 2), p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
-                                End If
+
+                        If (Not index = Me.lastPointTradesNsec) Then
+                            If (Not pointsTradesNsec(index).time.Date = pointsTradesNsec(index + 1).time.Date) Then
+                                G_btmTrades.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), TradesPctBox.Height)
+                                G_btmVolumes.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), VolumesTradesPctBox.Height)
                             End If
                         End If
+
 
                         If (Me.pointsOnScreenTradesNsec <= 20) Then
                             G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)

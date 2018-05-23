@@ -56,6 +56,33 @@ Public Class Form1
         End Select
     End Sub
 
+    Private Sub GetHistory(sender As Object, e As EventArgs)
+        Try
+            Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
+            Dim dbReader As New DataBaseReader("D:\Bases")
+            Dim tuple = dbReader.GetListOfTrades5secPoints(ExanteIDTextBox0.Text)
+            pageList(Tabs.SelectedIndex).cp.maxVolumeTradesNsec = tuple.Item2
+            pageList(Tabs.SelectedIndex).cp.isSubscribed = True
+            pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
+            pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
+            pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = tuple.Item1
+            Dim movingAvgBuy As New MovingAverage(movingAverageWindowSize)
+            Dim movingAvgSell As New MovingAverage(movingAverageWindowSize)
+            Dim movingAvgBuyPlusSell As New MovingAverage(movingAverageWindowSize)
+            For index = 0 To pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1
+                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgBuy = movingAvgBuy.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeBuy)
+                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgSell = movingAvgSell.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeSell)
+                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeSell)
+            Next
+            pageList(Tabs.SelectedIndex).AddNSecondsPointOffline(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
+            CaseN_AndDraw()
+            Charts0_SelectedIndexChanged(sender, e)
+            pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
+        Catch ex As Exception
+            MsgBox("Ошибка")
+        End Try
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
         movingAverageWindowSize = WindowSizeTextBox.Text
         If (isOnline) Then
@@ -88,36 +115,14 @@ Public Class Form1
                     .cp.pointsTrades1800sec.Add(firstPointNsec)
                     .cp.pointsTrades3600sec.Add(firstPointNsec)
                 End With
-
+                pageList(Tabs.SelectedIndex).gettingHistory = True
+                GetHistory(sender, e)
+                pageList(Tabs.SelectedIndex).gettingHistory = False
             Catch ex As Exception
                 MsgBox("Нет подключения")
             End Try
         Else
-            Try
-                Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
-                Dim dbReader As New DataBaseReader("D:\Bases")
-                Dim tuple = dbReader.GetListOfTrades5secPoints(ExanteIDTextBox0.Text)
-                pageList(Tabs.SelectedIndex).cp.maxVolumeTradesNsec = tuple.Item2
-                pageList(Tabs.SelectedIndex).cp.isSubscribed = True
-                pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = False
-                pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = 0
-                pageList(Tabs.SelectedIndex).cp.pointsTrades5sec = tuple.Item1
-                Dim movingAvgBuy As New MovingAverage(movingAverageWindowSize)
-                Dim movingAvgSell As New MovingAverage(movingAverageWindowSize)
-                Dim movingAvgBuyPlusSell As New MovingAverage(movingAverageWindowSize)
-                For index = 0 To pageList(Tabs.SelectedIndex).cp.pointsTrades5sec.Count - 1
-                    pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgBuy = movingAvgBuy.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeBuy)
-                    pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgSell = movingAvgSell.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeSell)
-                    pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).avgBuyPlusSell = movingAvgBuyPlusSell.Calculate(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeBuy + pageList(Tabs.SelectedIndex).cp.pointsTrades5sec(index).volumeSell)
-                Next
-                pageList(Tabs.SelectedIndex).AddNSecondsPointOffline(pageList(Tabs.SelectedIndex).cp.pointsTrades5sec)
-                CaseN_AndDraw()
-                Charts0_SelectedIndexChanged(sender, e)
-                pageList(Tabs.SelectedIndex).TabId = Tabs.SelectedIndex
-            Catch ex As Exception
-                MsgBox("Ошибка")
-            End Try
-
+            GetHistory(sender, e)
         End If
 
     End Sub
