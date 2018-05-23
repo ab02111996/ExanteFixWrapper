@@ -14,6 +14,7 @@ Public Class ChartPainting
     Public pointsTrades900sec As List(Of PointTradesNsec)
     Public pointsTrades1800sec As List(Of PointTradesNsec)
     Public pointsTrades3600sec As List(Of PointTradesNsec)
+    Private pointsTradesNsec As List(Of PointTradesNsec)
     'котировки - тики
     Public pointsOnScreenQuotes As Integer 'количество точек на экране
     Public intervalQuotes As Double 'интервал, приходящийся на одну точку графика в пикселях (по оси Х)
@@ -329,7 +330,10 @@ Public Class ChartPainting
                 G_btm.DrawLine(P_BlackLine, Me.point1Quotes, Me.point2Quotes)
             End If
         Catch ex As Exception
-            Me.currentPointQuotes -= 1
+            Me.currentPointQuotes = pointsQuotes.Count - pointsOnScreenQuotes - 1
+            If Me.currentPointQuotes < 0 Then
+                Me.currentPointQuotes = 0
+            End If
             If (Me.needRePaintingQuotes = False) Then
                 Me.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
             Else
@@ -585,7 +589,7 @@ Public Class ChartPainting
             PricesTradesPctBox.Refresh()
             TimesTradesPctBox.Refresh()
         Catch ex As Exception
-            Me.currentPointTrades -= 1
+            Me.currentPointTrades = pointsTrades.Count - pointsOnScreenTrades - 1
             If (Me.currentPointTrades < 0) Then
                 Me.currentPointTrades = 0
             End If
@@ -602,7 +606,6 @@ Public Class ChartPainting
 
     Public Sub paintingTradesNsec(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox, N As Integer)
         Try
-            Dim pointsTradesNsec As List(Of PointTradesNsec)
             Select Case N
                 Case 5
                     pointsTradesNsec = Me.pointsTrades5sec
@@ -1261,8 +1264,8 @@ Public Class ChartPainting
             VolumesVolumesTradesPctBox.Refresh()
             PricesTradesPctBox.Refresh()
             TimesTradesPctBox.Refresh()
-        Catch ex As Exception
-            Me.currentPointTradesNsec -= 1
+        Catch ex As ArgumentOutOfRangeException
+            Me.currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
             If (currentPointTradesNsec < 0) Then
                 currentPointTradesNsec = 0
             End If
