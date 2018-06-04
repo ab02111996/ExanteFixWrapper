@@ -756,6 +756,9 @@ Public Class Page
     End Sub
 
     Public Sub ReCalculateMovingAvgList(pointsTradesNsec As List(Of PointTradesNsec))
+        movingAvgBuy.Reinitialize()
+        movingAvgSell.Reinitialize()
+        movingAvgBuyPlusSell.Reinitialize()
         For index = 0 To pointsTradesNsec.Count - 1
             pointsTradesNsec(index).avgBuy = movingAvgBuy.Calculate(pointsTradesNsec(index).volumeBuy)
             pointsTradesNsec(index).avgSell = movingAvgSell.Calculate(pointsTradesNsec(index).volumeSell)
