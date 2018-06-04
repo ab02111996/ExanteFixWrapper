@@ -76,7 +76,14 @@ Public Class Form1Clone
         End If
         'ExanteIDTextBox0.Hide()
         DoubleBuffered = True
-
+        MinusQuotesButton0.Hide()
+        MinusTradesButton0.Hide()
+        PlusQuotesButton0.Hide()
+        PlusTradesButton0.Hide()
+        RightButtonTrades0.Hide()
+        RightQuotesButton0.Hide()
+        LeftQuotesButton0.Hide()
+        LeftTradesButton0.Hide()
 
         TicksOrSeconds.SelectedItem = "5 секунд"
         BuyPlusSell.Checked = True

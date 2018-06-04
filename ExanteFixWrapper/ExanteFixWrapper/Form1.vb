@@ -9,7 +9,7 @@ Public Class Form1
     Private oldWidth As Integer
     Private oldHeight As Integer
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ConnectButton.Click
         If feedReciever IsNot Nothing Then
             feedReciever = Nothing
         End If
@@ -28,7 +28,6 @@ Public Class Form1
         Else
             System.Windows.Forms.Application.ExitThread()
         End If
-
     End Sub
 
     Public Sub CaseN_AndDraw()
@@ -83,14 +82,66 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub AddPoint()
+        With pageList(Tabs.SelectedIndex)
+            Dim firstPointNsec As New PointTradesNsec()
+            .cp.pointsTrades5sec.Add(firstPointNsec)
+            .cp.pointsTrades10sec.Add(firstPointNsec)
+            .cp.pointsTrades15sec.Add(firstPointNsec)
+            .cp.pointsTrades30sec.Add(firstPointNsec)
+            .cp.pointsTrades60sec.Add(firstPointNsec)
+            .cp.pointsTrades300sec.Add(firstPointNsec)
+            .cp.pointsTrades600sec.Add(firstPointNsec)
+            .cp.pointsTrades900sec.Add(firstPointNsec)
+            .cp.pointsTrades1800sec.Add(firstPointNsec)
+            .cp.pointsTrades3600sec.Add(firstPointNsec)
+        End With
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
         movingAverageWindowSize = WindowSizeTextBox.Text
         If (isOnline) Then
             Try
+                AddPoint()
+                pageList(Tabs.SelectedIndex).gettingHistory = True
+                GetHistory(sender, e)
+                pageList(Tabs.SelectedIndex).gettingHistory = False
+                With pageList(Tabs.SelectedIndex)
+                    Dim firstPointNsec As New PointTradesNsec()
+                    If .cp.pointsTrades5sec.Count = 0 And Not .cp.pointsTrades5sec.Count = 1 Then
+                        .cp.pointsTrades5sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades10sec.Count = 0 And Not .cp.pointsTrades10sec.Count = 1 Then
+                        .cp.pointsTrades10sec.Add(firstPointNsec)
+                    End If
+                    If Not .cp.pointsTrades15sec.Count = 0 And Not .cp.pointsTrades15sec.Count = 1 Then
+                        .cp.pointsTrades15sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades30sec.Count = 0 And Not .cp.pointsTrades30sec.Count = 1 Then
+                        .cp.pointsTrades30sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades60sec.Count = 0 And Not .cp.pointsTrades60sec.Count = 1 Then
+                        .cp.pointsTrades60sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades300sec.Count = 0 And Not .cp.pointsTrades300sec.Count = 1 Then
+                        .cp.pointsTrades300sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades600sec.Count = 0 And Not .cp.pointsTrades600sec.Count = 1 Then
+                        .cp.pointsTrades600sec.Add(firstPointNsec)
+                    End If
+                    If .cp.pointsTrades900sec.Count = 0 And Not .cp.pointsTrades900sec.Count = 1 Then
+                        .cp.pointsTrades900sec.Add(firstPointNsec)
+                    End If
+                    If Not .cp.pointsTrades1800sec.Count = 0 And Not .cp.pointsTrades1800sec.Count = 1 Then
+                        .cp.pointsTrades1800sec.Add(firstPointNsec)
+                    End If
+                    If Not .cp.pointsTrades3600sec.Count = 0 And Not .cp.pointsTrades3600sec.Count = 1 Then
+                        .cp.pointsTrades3600sec.Add(firstPointNsec)
+                    End If
+                End With
                 pageList(Tabs.SelectedIndex).cp.isSubscribed = True
                 Tabs.TabPages(Tabs.SelectedIndex).Text = ExanteIDTextBox0.Text
                 Dim subscribes = feedReciever.GetSubscribeInfos()
-                feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
                 With pageList(Tabs.SelectedIndex)
                     .bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
                     .bufferTrades10sec.StartWritingData(ExanteIDTextBox0.Text)
@@ -103,21 +154,8 @@ Public Class Form1
                     .bufferTrades1800sec.StartWritingData(ExanteIDTextBox0.Text)
                     .bufferTrades3600sec.StartWritingData(ExanteIDTextBox0.Text)
                     .TabId = Tabs.SelectedIndex
-                    Dim firstPointNsec As New PointTradesNsec()
-                    .cp.pointsTrades5sec.Add(firstPointNsec)
-                    .cp.pointsTrades10sec.Add(firstPointNsec)
-                    .cp.pointsTrades15sec.Add(firstPointNsec)
-                    .cp.pointsTrades30sec.Add(firstPointNsec)
-                    .cp.pointsTrades60sec.Add(firstPointNsec)
-                    .cp.pointsTrades300sec.Add(firstPointNsec)
-                    .cp.pointsTrades600sec.Add(firstPointNsec)
-                    .cp.pointsTrades900sec.Add(firstPointNsec)
-                    .cp.pointsTrades1800sec.Add(firstPointNsec)
-                    .cp.pointsTrades3600sec.Add(firstPointNsec)
                 End With
-                pageList(Tabs.SelectedIndex).gettingHistory = True
-                GetHistory(sender, e)
-                pageList(Tabs.SelectedIndex).gettingHistory = False
+                feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(Tabs.SelectedIndex).OnMarketDataUpdate)
             Catch ex As Exception
                 MsgBox("Нет подключения")
             End Try
@@ -130,13 +168,21 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If (Not isOnline) Then
             Label1.Dispose()
-            Button1.Dispose()
+            ConnectButton.Dispose()
             AskPriceLabel.Dispose()
             BidPriceLabel.Dispose()
             TradePriceLabel.Dispose()
             TradeVolumeLabel.Dispose()
             SubscribreButton0.Text = "Загрузить"
         End If
+        MinusQuotesButton0.Hide()
+        MinusTradesButton0.Hide()
+        PlusQuotesButton0.Hide()
+        PlusTradesButton0.Hide()
+        RightButtonTrades0.Hide()
+        RightQuotesButton0.Hide()
+        LeftQuotesButton0.Hide()
+        LeftTradesButton0.Hide()
         DoubleBuffered = True
         Dim newPage = New Page(New ChartPainting(Me), QuotesPctBox0, PricesQuotesPctBox0, TimesQuotesPctBox0, TradesPctBox0, PricesTradesPctBox0, TimesTradesPctBox0,
                 LeftQuotesButton0, RightQuotesButton0, PlusQuotesButton0, MinusQuotesButton0, LeftTradesButton0, RightButtonTrades0, PlusTradesButton0, MinusTradesButton0, Charts0, VolumesTradesPctBox0, VolumesVolumesTradesPctBox0, WindowSizeTextBox.Text)
@@ -730,8 +776,6 @@ Public Class Form1
                     Exit Sub
                 End If
             End If
-
-
         End If
     End Sub
 
@@ -759,7 +803,6 @@ Public Class Form1
                             Else
                                 CaseN_AndDraw()
                             End If
-
                         End If
                     Catch ex As Exception
 
@@ -877,6 +920,7 @@ Public Class Form1
         Dim TimesTradesPctBox = New PictureBox()
         Dim VolumesTradesPctBox = New PictureBox()
         Dim VolumesVolumesTradesPctBox = New PictureBox()
+        Dim BorderPctBox = New PictureBox()
         Dim LeftQuotesButton = New Button()
         Dim RightQuotesButton = New Button()
         Dim PlusQuotesButton = New Button()
@@ -929,7 +973,7 @@ Public Class Form1
         QuotesPctBox.Location = New System.Drawing.Point(82, 2)
         'QuotesPctBox.BackColor = Color.Gray
         QuotesPctBox.Name = "QuotesPctBox"
-        QuotesPctBox.Size = New System.Drawing.Size(1139, 545)
+        QuotesPctBox.Size = New System.Drawing.Size(1177, 575)
         QuotesPctBox.TabIndex = 18
         QuotesPctBox.TabStop = False
         '
@@ -963,19 +1007,18 @@ Public Class Form1
         'TimesQuotesPctBox0
         '
         'TimesQuotesPctBox.BackColor = Color.Pink
-        TimesQuotesPctBox.Location = New System.Drawing.Point(82, 549)
+        TimesQuotesPctBox.Location = New System.Drawing.Point(82, 579)
         TimesQuotesPctBox.Name = "TimesQuotesPctBox"
-        TimesQuotesPctBox.Size = New System.Drawing.Size(1139, 36)
+        TimesQuotesPctBox.Size = New System.Drawing.Size(1177, 36)
         TimesQuotesPctBox.TabIndex = 22
         TimesQuotesPctBox.TabStop = False
-
         '
         'VolumesVolumesTradesPctBox0
         '
         'VolumesVolumesTradesPctBox.BackColor = Color.DeepSkyBlue
         VolumesVolumesTradesPctBox.Location = New System.Drawing.Point(2, 350)
         VolumesVolumesTradesPctBox.Name = "VolumesVolumesTradesPctBox"
-        VolumesVolumesTradesPctBox.Size = New System.Drawing.Size(79, 195)
+        VolumesVolumesTradesPctBox.Size = New System.Drawing.Size(79, 225)
         VolumesVolumesTradesPctBox.TabIndex = 39
         VolumesVolumesTradesPctBox.TabStop = False
         '
@@ -984,7 +1027,7 @@ Public Class Form1
         'VolumesTradesPctBox.BackColor = Color.DimGray
         VolumesTradesPctBox.Location = New System.Drawing.Point(82, 350)
         VolumesTradesPctBox.Name = "VolumesTradesPctBox"
-        VolumesTradesPctBox.Size = New System.Drawing.Size(1139, 195)
+        VolumesTradesPctBox.Size = New System.Drawing.Size(1177, 225)
         VolumesTradesPctBox.TabIndex = 38
         VolumesTradesPctBox.TabStop = False
         '
@@ -1011,7 +1054,7 @@ Public Class Form1
         'TradesPctBox.BackColor = Color.Gray
         TradesPctBox.Location = New System.Drawing.Point(82, 2)
         TradesPctBox.Name = "TradesPctBox"
-        TradesPctBox.Size = New System.Drawing.Size(1139, 342)
+        TradesPctBox.Size = New System.Drawing.Size(1177, 342)
         TradesPctBox.TabIndex = 30
         TradesPctBox.TabStop = False
         '
@@ -1045,12 +1088,20 @@ Public Class Form1
         'TimesTradesPctBox0
         '
         'TimesTradesPctBox.BackColor = Color.DeepPink
-        TimesTradesPctBox.Location = New System.Drawing.Point(82, 549)
+        TimesTradesPctBox.Location = New System.Drawing.Point(82, 579)
         TimesTradesPctBox.Name = "TimesTradesPctBox"
-        TimesTradesPctBox.Size = New System.Drawing.Size(1139, 36)
+        TimesTradesPctBox.Size = New System.Drawing.Size(1177, 36)
         TimesTradesPctBox.TabIndex = 22
         TimesTradesPctBox.TabStop = False
-
+        '
+        'BorderPctBox
+        '
+        BorderPctBox.BackColor = System.Drawing.Color.LightGray
+        BorderPctBox.Location = New System.Drawing.Point(82, 344)
+        BorderPctBox.Name = "BorderPctBox"
+        BorderPctBox.Size = New System.Drawing.Size(1574, 5)
+        BorderPctBox.TabIndex = 40
+        BorderPctBox.TabStop = False
 
         QuotesTab.Controls.Add(PricesQuotesPctBox)
         QuotesTab.Controls.Add(MinusQuotesButton)
@@ -1066,7 +1117,6 @@ Public Class Form1
         'QuotesTab.TabIndex = 0
         QuotesTab.Text = "Аск / Бид"
         QuotesTab.UseVisualStyleBackColor = True
-
         '
         'TradesTab0
         '
@@ -1079,6 +1129,7 @@ Public Class Form1
         TradesTab.Controls.Add(RightTradesButton)
         TradesTab.Controls.Add(LeftTradesButton)
         TradesTab.Controls.Add(TimesTradesPctBox)
+        TradesTab.Controls.Add(BorderPctBox)
         TradesTab.Location = New System.Drawing.Point(4, 25)
         TradesTab.Name = "TradesTab"
         TradesTab.Padding = New System.Windows.Forms.Padding(3)
@@ -1112,6 +1163,15 @@ Public Class Form1
         AddHandler QuotesPctBox.MouseLeave, AddressOf Me.QuotesPctBox0_MouseLeave
         AddHandler QuotesPctBox.MouseDown, AddressOf Me.QuotesPctBox0_MouseDown
         AddHandler QuotesPctBox.MouseUp, AddressOf Me.QuotesPctBox0_MouseUp
+
+        MinusQuotesButton.Hide()
+        MinusTradesButton.Hide()
+        PlusQuotesButton.Hide()
+        PlusTradesButton.Hide()
+        RightTradesButton.Hide()
+        RightQuotesButton.Hide()
+        LeftQuotesButton.Hide()
+        LeftTradesButton.Hide()
 
         Dim newPage = New Page(New ChartPainting(Me), QuotesPctBox, PricesQuotesPctBox, TimesQuotesPctBox, TradesPctBox, PricesTradesPctBox, TimesTradesPctBox,
                LeftQuotesButton, RightQuotesButton, PlusQuotesButton, MinusQuotesButton, LeftTradesButton, RightTradesButton, PlusTradesButton, MinusTradesButton, Charts, VolumesTradesPctBox, VolumesVolumesTradesPctBox, WindowSizeTextBox.Text)
@@ -1174,7 +1234,6 @@ Public Class Form1
                 End If
             End If
         End If
-
     End Sub
 
     Private Sub Charts0_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Charts0.SelectedIndexChanged
@@ -1234,10 +1293,7 @@ Public Class Form1
                 .cp.pointsTrades3600sec.Add(firstPointNsec)
             End With
         End If
-        'cloneForm.ExanteIDTextBox0.Text = Me.ExanteIDTextBox0.Text
         cloneForm.Show()
-        'cloneForm.TicksOrSeconds.SelectedItem = "5 секунд"
-        'cloneForm.TypeOfGraphic.SelectedItem = "Японские свечи"
         pageList(Tabs.SelectedIndex).listOfClonedForms.Add(cloneForm)
     End Sub
 
