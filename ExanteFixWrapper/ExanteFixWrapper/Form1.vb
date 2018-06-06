@@ -8,6 +8,9 @@ Public Class Form1
     Public Shared movingAverageWindowSize As Integer
     Private oldWidth As Integer
     Private oldHeight As Integer
+    Private currentWidth As Integer
+    Private currentHeight As Integer
+    Private normalResize As Boolean
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If feedReciever IsNot Nothing Then
@@ -1302,6 +1305,7 @@ Public Class Form1
     Private Sub Form1_ResizeBegin(sender As Object, e As EventArgs) Handles MyBase.ResizeBegin
         Me.oldHeight = Me.Height
         Me.oldWidth = Me.Width
+        Me.normalResize = True
     End Sub
 
     Private Sub Form1_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
@@ -1368,5 +1372,23 @@ Public Class Form1
             pageList(Tabs.SelectedIndex).cp.paintingQuotes(pageList(Tabs.SelectedIndex).QuotesPctBox, pageList(Tabs.SelectedIndex).TimesQuotesPctBox, pageList(Tabs.SelectedIndex).PricesQuotesPctBox)
             pageList(Tabs.SelectedIndex).cp.needRePaintingQuotes = True
         End If
+    End Sub
+
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        Dim form = CType(sender, Form1) 'иногда не увеличевается размер окна
+        Dim size = form.Size
+        If Not Me.normalResize Then
+            Dim deltaH, deltaW As Integer
+            If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width Then
+                deltaH = Me.Height - Me.currentHeight
+                deltaW = Me.Width - Me.currentWidth
+                Tabs.Height += deltaH
+                Tabs.Width += deltaW
+                ResizeChildren(Tabs, deltaH, deltaW)
+            End If
+        End If
+        currentHeight = form.Size.Height
+        currentWidth = form.Size.Width
+        normalResize = False
     End Sub
 End Class

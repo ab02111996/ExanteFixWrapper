@@ -22,6 +22,7 @@ Partial Class Form1
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        normalResize = True
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DrawLineTrades0 = New System.Windows.Forms.Button()
@@ -88,10 +89,9 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(149, 9)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Location = New System.Drawing.Point(112, 7)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(115, 28)
+        Me.Button1.Size = New System.Drawing.Size(86, 23)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Соединиться"
         Me.Button1.UseVisualStyleBackColor = True
@@ -99,66 +99,65 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(20, 14)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(15, 11)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(116, 17)
+        Me.Label1.Size = New System.Drawing.Size(89, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Нет соединения"
         '
         'DrawLineTrades0
         '
-        Me.DrawLineTrades0.Location = New System.Drawing.Point(1502, 8)
-        Me.DrawLineTrades0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DrawLineTrades0.Location = New System.Drawing.Point(1126, 6)
+        Me.DrawLineTrades0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DrawLineTrades0.Name = "DrawLineTrades0"
-        Me.DrawLineTrades0.Size = New System.Drawing.Size(212, 30)
+        Me.DrawLineTrades0.Size = New System.Drawing.Size(159, 24)
         Me.DrawLineTrades0.TabIndex = 32
         Me.DrawLineTrades0.Text = "Рисовать линию (Сделки)"
         Me.DrawLineTrades0.UseVisualStyleBackColor = True
         '
         'DrawLineQuotes0
         '
-        Me.DrawLineQuotes0.Location = New System.Drawing.Point(1283, 8)
-        Me.DrawLineQuotes0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.DrawLineQuotes0.Location = New System.Drawing.Point(962, 6)
+        Me.DrawLineQuotes0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DrawLineQuotes0.Name = "DrawLineQuotes0"
-        Me.DrawLineQuotes0.Size = New System.Drawing.Size(212, 30)
+        Me.DrawLineQuotes0.Size = New System.Drawing.Size(159, 24)
         Me.DrawLineQuotes0.TabIndex = 31
         Me.DrawLineQuotes0.Text = "Рисовать линию (Аск / Бид)"
         Me.DrawLineQuotes0.UseVisualStyleBackColor = True
         '
         'ExanteIDTextBox0
         '
-        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(270, 11)
-        Me.ExanteIDTextBox0.Margin = New System.Windows.Forms.Padding(4)
+        Me.ExanteIDTextBox0.Location = New System.Drawing.Point(202, 9)
         Me.ExanteIDTextBox0.Name = "ExanteIDTextBox0"
-        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(376, 22)
+        Me.ExanteIDTextBox0.Size = New System.Drawing.Size(283, 20)
         Me.ExanteIDTextBox0.TabIndex = 2
         Me.ExanteIDTextBox0.Text = "BTC.EXANTE"
         '
         'TimeLabel0
         '
         Me.TimeLabel0.AutoSize = True
-        Me.TimeLabel0.Location = New System.Drawing.Point(971, 31)
+        Me.TimeLabel0.Location = New System.Drawing.Point(728, 25)
+        Me.TimeLabel0.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TimeLabel0.Name = "TimeLabel0"
-        Me.TimeLabel0.Size = New System.Drawing.Size(13, 17)
+        Me.TimeLabel0.Size = New System.Drawing.Size(10, 13)
         Me.TimeLabel0.TabIndex = 25
         Me.TimeLabel0.Text = "-"
         '
         'PriceLabel0
         '
         Me.PriceLabel0.AutoSize = True
-        Me.PriceLabel0.Location = New System.Drawing.Point(893, 33)
+        Me.PriceLabel0.Location = New System.Drawing.Point(670, 27)
+        Me.PriceLabel0.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.PriceLabel0.Name = "PriceLabel0"
-        Me.PriceLabel0.Size = New System.Drawing.Size(13, 17)
+        Me.PriceLabel0.Size = New System.Drawing.Size(10, 13)
         Me.PriceLabel0.TabIndex = 24
         Me.PriceLabel0.Text = "-"
         '
         'SubscribreButton0
         '
-        Me.SubscribreButton0.Location = New System.Drawing.Point(654, 11)
-        Me.SubscribreButton0.Margin = New System.Windows.Forms.Padding(4)
+        Me.SubscribreButton0.Location = New System.Drawing.Point(490, 9)
         Me.SubscribreButton0.Name = "SubscribreButton0"
-        Me.SubscribreButton0.Size = New System.Drawing.Size(219, 28)
+        Me.SubscribreButton0.Size = New System.Drawing.Size(164, 23)
         Me.SubscribreButton0.TabIndex = 11
         Me.SubscribreButton0.Text = "Подписаться"
         Me.SubscribreButton0.UseVisualStyleBackColor = True
@@ -166,54 +165,60 @@ Partial Class Form1
         'VolumeLabel
         '
         Me.VolumeLabel.AutoSize = True
-        Me.VolumeLabel.Location = New System.Drawing.Point(1043, 31)
+        Me.VolumeLabel.Location = New System.Drawing.Point(782, 25)
+        Me.VolumeLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.VolumeLabel.Name = "VolumeLabel"
-        Me.VolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.VolumeLabel.Size = New System.Drawing.Size(10, 13)
         Me.VolumeLabel.TabIndex = 33
         Me.VolumeLabel.Text = "-"
         '
         'CurVolumeLabel
         '
         Me.CurVolumeLabel.AutoSize = True
-        Me.CurVolumeLabel.Location = New System.Drawing.Point(1128, 31)
+        Me.CurVolumeLabel.Location = New System.Drawing.Point(846, 25)
+        Me.CurVolumeLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.CurVolumeLabel.Name = "CurVolumeLabel"
-        Me.CurVolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.CurVolumeLabel.Size = New System.Drawing.Size(10, 13)
         Me.CurVolumeLabel.TabIndex = 34
         Me.CurVolumeLabel.Text = "-"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(1128, 6)
+        Me.Label2.Location = New System.Drawing.Point(846, 5)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(81, 17)
+        Me.Label2.Size = New System.Drawing.Size(61, 13)
         Me.Label2.TabIndex = 38
         Me.Label2.Text = "Cur Volume"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(1043, 6)
+        Me.Label3.Location = New System.Drawing.Point(782, 5)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(55, 17)
+        Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 37
         Me.Label3.Text = "Volume"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(971, 6)
+        Me.Label4.Location = New System.Drawing.Point(728, 5)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 17)
+        Me.Label4.Size = New System.Drawing.Size(30, 13)
         Me.Label4.TabIndex = 36
         Me.Label4.Text = "Time"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(893, 8)
+        Me.Label5.Location = New System.Drawing.Point(670, 6)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(40, 17)
+        Me.Label5.Size = New System.Drawing.Size(31, 13)
         Me.Label5.TabIndex = 35
         Me.Label5.Text = "Price"
         '
@@ -221,9 +226,10 @@ Partial Class Form1
         '
         Me.AskPriceLabel.AutoSize = True
         Me.AskPriceLabel.ForeColor = System.Drawing.Color.Red
-        Me.AskPriceLabel.Location = New System.Drawing.Point(1294, 40)
+        Me.AskPriceLabel.Location = New System.Drawing.Point(970, 32)
+        Me.AskPriceLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.AskPriceLabel.Name = "AskPriceLabel"
-        Me.AskPriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.AskPriceLabel.Size = New System.Drawing.Size(10, 13)
         Me.AskPriceLabel.TabIndex = 39
         Me.AskPriceLabel.Text = "-"
         '
@@ -231,9 +237,10 @@ Partial Class Form1
         '
         Me.BidPriceLabel.AutoSize = True
         Me.BidPriceLabel.ForeColor = System.Drawing.Color.Blue
-        Me.BidPriceLabel.Location = New System.Drawing.Point(1403, 40)
+        Me.BidPriceLabel.Location = New System.Drawing.Point(1052, 32)
+        Me.BidPriceLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.BidPriceLabel.Name = "BidPriceLabel"
-        Me.BidPriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.BidPriceLabel.Size = New System.Drawing.Size(10, 13)
         Me.BidPriceLabel.TabIndex = 40
         Me.BidPriceLabel.Text = "-"
         '
@@ -241,9 +248,10 @@ Partial Class Form1
         '
         Me.TradeVolumeLabel.AutoSize = True
         Me.TradeVolumeLabel.ForeColor = System.Drawing.Color.Green
-        Me.TradeVolumeLabel.Location = New System.Drawing.Point(1603, 40)
+        Me.TradeVolumeLabel.Location = New System.Drawing.Point(1202, 32)
+        Me.TradeVolumeLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TradeVolumeLabel.Name = "TradeVolumeLabel"
-        Me.TradeVolumeLabel.Size = New System.Drawing.Size(13, 17)
+        Me.TradeVolumeLabel.Size = New System.Drawing.Size(10, 13)
         Me.TradeVolumeLabel.TabIndex = 42
         Me.TradeVolumeLabel.Text = "-"
         '
@@ -251,18 +259,19 @@ Partial Class Form1
         '
         Me.TradePriceLabel.AutoSize = True
         Me.TradePriceLabel.ForeColor = System.Drawing.Color.Red
-        Me.TradePriceLabel.Location = New System.Drawing.Point(1510, 40)
+        Me.TradePriceLabel.Location = New System.Drawing.Point(1132, 32)
+        Me.TradePriceLabel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.TradePriceLabel.Name = "TradePriceLabel"
-        Me.TradePriceLabel.Size = New System.Drawing.Size(13, 17)
+        Me.TradePriceLabel.Size = New System.Drawing.Size(10, 13)
         Me.TradePriceLabel.TabIndex = 41
         Me.TradePriceLabel.Text = "-"
         '
         'AddTab
         '
-        Me.AddTab.Location = New System.Drawing.Point(23, 47)
-        Me.AddTab.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.AddTab.Location = New System.Drawing.Point(17, 38)
+        Me.AddTab.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.AddTab.Name = "AddTab"
-        Me.AddTab.Size = New System.Drawing.Size(241, 26)
+        Me.AddTab.Size = New System.Drawing.Size(181, 21)
         Me.AddTab.TabIndex = 43
         Me.AddTab.Text = "Добавить вкладку"
         Me.AddTab.UseVisualStyleBackColor = True
@@ -270,11 +279,11 @@ Partial Class Form1
         'TabPage0
         '
         Me.TabPage0.Controls.Add(Me.Charts0)
-        Me.TabPage0.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabPage0.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage0.Name = "TabPage0"
-        Me.TabPage0.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TabPage0.Size = New System.Drawing.Size(1709, 845)
+        Me.TabPage0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage0.Size = New System.Drawing.Size(1280, 684)
         Me.TabPage0.TabIndex = 0
         Me.TabPage0.Text = "TabPage0"
         Me.TabPage0.UseVisualStyleBackColor = True
@@ -283,11 +292,11 @@ Partial Class Form1
         '
         Me.Charts0.Controls.Add(Me.QuotesTab0)
         Me.Charts0.Controls.Add(Me.TradesTab0)
-        Me.Charts0.Location = New System.Drawing.Point(3, 6)
-        Me.Charts0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Charts0.Location = New System.Drawing.Point(2, 5)
+        Me.Charts0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Charts0.Name = "Charts0"
         Me.Charts0.SelectedIndex = 0
-        Me.Charts0.Size = New System.Drawing.Size(1697, 801)
+        Me.Charts0.Size = New System.Drawing.Size(1273, 651)
         Me.Charts0.TabIndex = 30
         '
         'QuotesTab0
@@ -299,79 +308,79 @@ Partial Class Form1
         Me.QuotesTab0.Controls.Add(Me.RightQuotesButton0)
         Me.QuotesTab0.Controls.Add(Me.LeftQuotesButton0)
         Me.QuotesTab0.Controls.Add(Me.TimesQuotesPctBox0)
-        Me.QuotesTab0.Location = New System.Drawing.Point(4, 25)
-        Me.QuotesTab0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.QuotesTab0.Location = New System.Drawing.Point(4, 22)
+        Me.QuotesTab0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.QuotesTab0.Name = "QuotesTab0"
-        Me.QuotesTab0.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.QuotesTab0.Size = New System.Drawing.Size(1689, 772)
+        Me.QuotesTab0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.QuotesTab0.Size = New System.Drawing.Size(1265, 625)
         Me.QuotesTab0.TabIndex = 0
         Me.QuotesTab0.Text = "Аск / Бид"
         Me.QuotesTab0.UseVisualStyleBackColor = True
         '
         'PricesQuotesPctBox0
         '
-        Me.PricesQuotesPctBox0.Location = New System.Drawing.Point(3, 0)
-        Me.PricesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PricesQuotesPctBox0.Location = New System.Drawing.Point(2, 0)
+        Me.PricesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PricesQuotesPctBox0.Name = "PricesQuotesPctBox0"
-        Me.PricesQuotesPctBox0.Size = New System.Drawing.Size(105, 686)
+        Me.PricesQuotesPctBox0.Size = New System.Drawing.Size(79, 557)
         Me.PricesQuotesPctBox0.TabIndex = 20
         Me.PricesQuotesPctBox0.TabStop = False
         '
         'MinusQuotesButton0
         '
-        Me.MinusQuotesButton0.Location = New System.Drawing.Point(1635, 336)
-        Me.MinusQuotesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinusQuotesButton0.Location = New System.Drawing.Point(1226, 273)
+        Me.MinusQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MinusQuotesButton0.Name = "MinusQuotesButton0"
-        Me.MinusQuotesButton0.Size = New System.Drawing.Size(47, 318)
+        Me.MinusQuotesButton0.Size = New System.Drawing.Size(35, 258)
         Me.MinusQuotesButton0.TabIndex = 29
         Me.MinusQuotesButton0.Text = "-"
         Me.MinusQuotesButton0.UseVisualStyleBackColor = True
         '
         'QuotesPctBox0
         '
-        Me.QuotesPctBox0.Location = New System.Drawing.Point(108, 0)
-        Me.QuotesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.QuotesPctBox0.Location = New System.Drawing.Point(81, 0)
+        Me.QuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.QuotesPctBox0.Name = "QuotesPctBox0"
-        Me.QuotesPctBox0.Size = New System.Drawing.Size(1521, 686)
+        Me.QuotesPctBox0.Size = New System.Drawing.Size(1141, 557)
         Me.QuotesPctBox0.TabIndex = 18
         Me.QuotesPctBox0.TabStop = False
         '
         'PlusQuotesButton0
         '
-        Me.PlusQuotesButton0.Location = New System.Drawing.Point(1635, 2)
-        Me.PlusQuotesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PlusQuotesButton0.Location = New System.Drawing.Point(1226, 2)
+        Me.PlusQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PlusQuotesButton0.Name = "PlusQuotesButton0"
-        Me.PlusQuotesButton0.Size = New System.Drawing.Size(48, 327)
+        Me.PlusQuotesButton0.Size = New System.Drawing.Size(36, 266)
         Me.PlusQuotesButton0.TabIndex = 28
         Me.PlusQuotesButton0.Text = "+"
         Me.PlusQuotesButton0.UseVisualStyleBackColor = True
         '
         'RightQuotesButton0
         '
-        Me.RightQuotesButton0.Location = New System.Drawing.Point(887, 734)
-        Me.RightQuotesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.RightQuotesButton0.Location = New System.Drawing.Point(665, 596)
+        Me.RightQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.RightQuotesButton0.Name = "RightQuotesButton0"
-        Me.RightQuotesButton0.Size = New System.Drawing.Size(741, 33)
+        Me.RightQuotesButton0.Size = New System.Drawing.Size(556, 27)
         Me.RightQuotesButton0.TabIndex = 27
         Me.RightQuotesButton0.Text = "Right ->"
         Me.RightQuotesButton0.UseVisualStyleBackColor = True
         '
         'LeftQuotesButton0
         '
-        Me.LeftQuotesButton0.Location = New System.Drawing.Point(108, 734)
-        Me.LeftQuotesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.LeftQuotesButton0.Location = New System.Drawing.Point(81, 596)
+        Me.LeftQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LeftQuotesButton0.Name = "LeftQuotesButton0"
-        Me.LeftQuotesButton0.Size = New System.Drawing.Size(773, 33)
+        Me.LeftQuotesButton0.Size = New System.Drawing.Size(580, 27)
         Me.LeftQuotesButton0.TabIndex = 26
         Me.LeftQuotesButton0.Text = "<- Left"
         Me.LeftQuotesButton0.UseVisualStyleBackColor = True
         '
         'TimesQuotesPctBox0
         '
-        Me.TimesQuotesPctBox0.Location = New System.Drawing.Point(108, 692)
-        Me.TimesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TimesQuotesPctBox0.Location = New System.Drawing.Point(81, 562)
+        Me.TimesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TimesQuotesPctBox0.Name = "TimesQuotesPctBox0"
-        Me.TimesQuotesPctBox0.Size = New System.Drawing.Size(1521, 36)
+        Me.TimesQuotesPctBox0.Size = New System.Drawing.Size(1141, 29)
         Me.TimesQuotesPctBox0.TabIndex = 22
         Me.TimesQuotesPctBox0.TabStop = False
         '
@@ -386,136 +395,135 @@ Partial Class Form1
         Me.TradesTab0.Controls.Add(Me.RightButtonTrades0)
         Me.TradesTab0.Controls.Add(Me.LeftTradesButton0)
         Me.TradesTab0.Controls.Add(Me.TimesTradesPctBox0)
-        Me.TradesTab0.Location = New System.Drawing.Point(4, 25)
-        Me.TradesTab0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TradesTab0.Location = New System.Drawing.Point(4, 22)
+        Me.TradesTab0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TradesTab0.Name = "TradesTab0"
-        Me.TradesTab0.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TradesTab0.Size = New System.Drawing.Size(1689, 772)
+        Me.TradesTab0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TradesTab0.Size = New System.Drawing.Size(1265, 625)
         Me.TradesTab0.TabIndex = 1
         Me.TradesTab0.Text = "Сделки"
         Me.TradesTab0.UseVisualStyleBackColor = True
         '
         'VolumesVolumesTradesPctBox0
         '
-        Me.VolumesVolumesTradesPctBox0.Location = New System.Drawing.Point(3, 431)
-        Me.VolumesVolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.VolumesVolumesTradesPctBox0.Location = New System.Drawing.Point(2, 350)
+        Me.VolumesVolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.VolumesVolumesTradesPctBox0.Name = "VolumesVolumesTradesPctBox0"
-        Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(79, 206)
         Me.VolumesVolumesTradesPctBox0.TabIndex = 39
         Me.VolumesVolumesTradesPctBox0.TabStop = False
         '
         'VolumesTradesPctBox0
         '
-        Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(108, 431)
-        Me.VolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(81, 350)
+        Me.VolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.VolumesTradesPctBox0.Name = "VolumesTradesPctBox0"
-        Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1141, 206)
         Me.VolumesTradesPctBox0.TabIndex = 38
         Me.VolumesTradesPctBox0.TabStop = False
         '
         'PricesTradesPctBox0
         '
-        Me.PricesTradesPctBox0.Location = New System.Drawing.Point(3, 0)
-        Me.PricesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PricesTradesPctBox0.Location = New System.Drawing.Point(2, 0)
+        Me.PricesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PricesTradesPctBox0.Name = "PricesTradesPctBox0"
-        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(105, 425)
+        Me.PricesTradesPctBox0.Size = New System.Drawing.Size(79, 345)
         Me.PricesTradesPctBox0.TabIndex = 37
         Me.PricesTradesPctBox0.TabStop = False
         '
         'MinusTradesButton0
         '
-        Me.MinusTradesButton0.Location = New System.Drawing.Point(1635, 353)
-        Me.MinusTradesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinusTradesButton0.Location = New System.Drawing.Point(1226, 287)
+        Me.MinusTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MinusTradesButton0.Name = "MinusTradesButton0"
-        Me.MinusTradesButton0.Size = New System.Drawing.Size(47, 345)
+        Me.MinusTradesButton0.Size = New System.Drawing.Size(35, 280)
         Me.MinusTradesButton0.TabIndex = 36
         Me.MinusTradesButton0.Text = "-"
         Me.MinusTradesButton0.UseVisualStyleBackColor = True
         '
         'TradesPctBox0
         '
-        Me.TradesPctBox0.Location = New System.Drawing.Point(108, 0)
-        Me.TradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TradesPctBox0.Location = New System.Drawing.Point(81, 0)
+        Me.TradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TradesPctBox0.Name = "TradesPctBox0"
-        Me.TradesPctBox0.Size = New System.Drawing.Size(1521, 425)
+        Me.TradesPctBox0.Size = New System.Drawing.Size(1141, 345)
         Me.TradesPctBox0.TabIndex = 30
         Me.TradesPctBox0.TabStop = False
         '
         'PlusTradesButton0
         '
-        Me.PlusTradesButton0.Location = New System.Drawing.Point(1635, 6)
-        Me.PlusTradesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.PlusTradesButton0.Location = New System.Drawing.Point(1226, 5)
+        Me.PlusTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PlusTradesButton0.Name = "PlusTradesButton0"
-        Me.PlusTradesButton0.Size = New System.Drawing.Size(48, 341)
+        Me.PlusTradesButton0.Size = New System.Drawing.Size(36, 277)
         Me.PlusTradesButton0.TabIndex = 35
         Me.PlusTradesButton0.Text = "+"
         Me.PlusTradesButton0.UseVisualStyleBackColor = True
         '
         'RightButtonTrades0
         '
-        Me.RightButtonTrades0.Location = New System.Drawing.Point(869, 734)
-        Me.RightButtonTrades0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.RightButtonTrades0.Location = New System.Drawing.Point(652, 596)
+        Me.RightButtonTrades0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.RightButtonTrades0.Name = "RightButtonTrades0"
-        Me.RightButtonTrades0.Size = New System.Drawing.Size(759, 33)
+        Me.RightButtonTrades0.Size = New System.Drawing.Size(569, 27)
         Me.RightButtonTrades0.TabIndex = 34
         Me.RightButtonTrades0.Text = "Right ->"
         Me.RightButtonTrades0.UseVisualStyleBackColor = True
         '
         'LeftTradesButton0
         '
-        Me.LeftTradesButton0.Location = New System.Drawing.Point(108, 734)
-        Me.LeftTradesButton0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.LeftTradesButton0.Location = New System.Drawing.Point(81, 596)
+        Me.LeftTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LeftTradesButton0.Name = "LeftTradesButton0"
-        Me.LeftTradesButton0.Size = New System.Drawing.Size(756, 33)
+        Me.LeftTradesButton0.Size = New System.Drawing.Size(567, 27)
         Me.LeftTradesButton0.TabIndex = 33
         Me.LeftTradesButton0.Text = "<- Left"
         Me.LeftTradesButton0.UseVisualStyleBackColor = True
         '
         'TimesTradesPctBox0
         '
-        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(108, 690)
-        Me.TimesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(81, 561)
+        Me.TimesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TimesTradesPctBox0.Name = "TimesTradesPctBox0"
-        Me.TimesTradesPctBox0.Size = New System.Drawing.Size(1521, 36)
+        Me.TimesTradesPctBox0.Size = New System.Drawing.Size(1141, 29)
         Me.TimesTradesPctBox0.TabIndex = 32
         Me.TimesTradesPctBox0.TabStop = False
         '
         'Tabs
         '
         Me.Tabs.Controls.Add(Me.TabPage0)
-        Me.Tabs.Location = New System.Drawing.Point(23, 106)
-        Me.Tabs.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Tabs.Location = New System.Drawing.Point(17, 86)
+        Me.Tabs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Tabs.Name = "Tabs"
         Me.Tabs.SelectedIndex = 0
-        Me.Tabs.Size = New System.Drawing.Size(1717, 874)
+        Me.Tabs.Size = New System.Drawing.Size(1288, 710)
         Me.Tabs.TabIndex = 31
         '
         'TicksOrSeconds
         '
         Me.TicksOrSeconds.FormattingEnabled = True
         Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "10 секунд", "15 секунд", "30 секунд", "1 минута", "5 минут", "10 минут", "15 минут", "30 минут", "1 час"})
-        Me.TicksOrSeconds.Location = New System.Drawing.Point(270, 46)
-        Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TicksOrSeconds.Location = New System.Drawing.Point(202, 37)
+        Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
-        Me.TicksOrSeconds.Size = New System.Drawing.Size(376, 24)
+        Me.TicksOrSeconds.Size = New System.Drawing.Size(283, 21)
         Me.TicksOrSeconds.TabIndex = 44
         '
         'TypeOfGraphic
         '
         Me.TypeOfGraphic.FormattingEnabled = True
         Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
-        Me.TypeOfGraphic.Location = New System.Drawing.Point(654, 48)
-        Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TypeOfGraphic.Location = New System.Drawing.Point(490, 39)
+        Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
-        Me.TypeOfGraphic.Size = New System.Drawing.Size(219, 24)
+        Me.TypeOfGraphic.Size = New System.Drawing.Size(165, 21)
         Me.TypeOfGraphic.TabIndex = 45
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(23, 77)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button3.Location = New System.Drawing.Point(17, 63)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(241, 26)
+        Me.Button3.Size = New System.Drawing.Size(181, 21)
         Me.Button3.TabIndex = 46
         Me.Button3.Text = "Добавить окно"
         Me.Button3.UseVisualStyleBackColor = True
@@ -523,9 +531,10 @@ Partial Class Form1
         'BuyAndSell
         '
         Me.BuyAndSell.AutoSize = True
-        Me.BuyAndSell.Location = New System.Drawing.Point(270, 79)
+        Me.BuyAndSell.Location = New System.Drawing.Point(202, 64)
+        Me.BuyAndSell.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BuyAndSell.Name = "BuyAndSell"
-        Me.BuyAndSell.Size = New System.Drawing.Size(219, 21)
+        Me.BuyAndSell.Size = New System.Drawing.Size(173, 17)
         Me.BuyAndSell.TabIndex = 47
         Me.BuyAndSell.TabStop = True
         Me.BuyAndSell.Text = "Покупка / продажа отдельно"
@@ -534,9 +543,10 @@ Partial Class Form1
         'BuyPlusSell
         '
         Me.BuyPlusSell.AutoSize = True
-        Me.BuyPlusSell.Location = New System.Drawing.Point(495, 79)
+        Me.BuyPlusSell.Location = New System.Drawing.Point(371, 64)
+        Me.BuyPlusSell.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.BuyPlusSell.Name = "BuyPlusSell"
-        Me.BuyPlusSell.Size = New System.Drawing.Size(151, 21)
+        Me.BuyPlusSell.Size = New System.Drawing.Size(120, 17)
         Me.BuyPlusSell.TabIndex = 49
         Me.BuyPlusSell.TabStop = True
         Me.BuyPlusSell.Text = "Покупка+Продажа"
@@ -547,9 +557,10 @@ Partial Class Form1
         Me.Original.AutoSize = True
         Me.Original.Checked = True
         Me.Original.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.Original.Location = New System.Drawing.Point(654, 81)
+        Me.Original.Location = New System.Drawing.Point(490, 66)
+        Me.Original.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Original.Name = "Original"
-        Me.Original.Size = New System.Drawing.Size(85, 21)
+        Me.Original.Size = New System.Drawing.Size(69, 17)
         Me.Original.TabIndex = 50
         Me.Original.Text = "Объемы"
         Me.Original.UseVisualStyleBackColor = True
@@ -557,35 +568,38 @@ Partial Class Form1
         'Average
         '
         Me.Average.AutoSize = True
-        Me.Average.Location = New System.Drawing.Point(745, 82)
+        Me.Average.Location = New System.Drawing.Point(559, 67)
+        Me.Average.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Average.Name = "Average"
-        Me.Average.Size = New System.Drawing.Size(129, 21)
+        Me.Average.Size = New System.Drawing.Size(105, 17)
         Me.Average.TabIndex = 51
         Me.Average.Text = "Сглаживающая"
         Me.Average.UseVisualStyleBackColor = True
         '
         'WindowSizeTextBox
         '
-        Me.WindowSizeTextBox.Location = New System.Drawing.Point(896, 81)
+        Me.WindowSizeTextBox.Location = New System.Drawing.Point(672, 66)
+        Me.WindowSizeTextBox.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.WindowSizeTextBox.Name = "WindowSizeTextBox"
-        Me.WindowSizeTextBox.Size = New System.Drawing.Size(37, 22)
+        Me.WindowSizeTextBox.Size = New System.Drawing.Size(29, 20)
         Me.WindowSizeTextBox.TabIndex = 52
         Me.WindowSizeTextBox.Text = "5"
         '
         'WindowSizeBtn
         '
-        Me.WindowSizeBtn.Location = New System.Drawing.Point(939, 79)
+        Me.WindowSizeBtn.Location = New System.Drawing.Point(704, 64)
+        Me.WindowSizeBtn.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.WindowSizeBtn.Name = "WindowSizeBtn"
-        Me.WindowSizeBtn.Size = New System.Drawing.Size(117, 27)
+        Me.WindowSizeBtn.Size = New System.Drawing.Size(88, 22)
         Me.WindowSizeBtn.TabIndex = 53
         Me.WindowSizeBtn.Text = "Применить"
         Me.WindowSizeBtn.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1900, 1045)
+        Me.ClientSize = New System.Drawing.Size(1425, 849)
         Me.Controls.Add(Me.WindowSizeBtn)
         Me.Controls.Add(Me.WindowSizeTextBox)
         Me.Controls.Add(Me.Average)
@@ -615,7 +629,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ExanteIDTextBox0)
         Me.Controls.Add(Me.SubscribreButton0)
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.Text = "A&K Trader 1.0"
         Me.TabPage0.ResumeLayout(False)
