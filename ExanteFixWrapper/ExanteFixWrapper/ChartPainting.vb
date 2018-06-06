@@ -675,12 +675,16 @@ Public Class ChartPainting
                         If (index = Me.currentPointTradesNsec) Then
                             highBorderTradesNsec = pointsTradesNsec(index).highPrice
                             lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
+                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
                         Else
                             If (pointsTradesNsec(index).highPrice > highBorderTradesNsec) Then
                                 highBorderTradesNsec = pointsTradesNsec(index).highPrice
                             End If
                             If (pointsTradesNsec(index).lowPrice < lowBorderTradesNsec) Then
                                 lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
+                            End If
+                            If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
+                                highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
                             End If
                         End If
                     Next
