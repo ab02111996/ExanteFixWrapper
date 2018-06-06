@@ -65,6 +65,7 @@ Partial Class Form1Clone
         Me.Original = New System.Windows.Forms.CheckBox()
         Me.WindowSizeBtn = New System.Windows.Forms.Button()
         Me.WindowSizeTextBox = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -78,6 +79,7 @@ Partial Class Form1Clone
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Tabs.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DrawLineTrades0
@@ -322,6 +324,7 @@ Partial Class Form1Clone
         '
         'TradesTab0
         '
+        Me.TradesTab0.Controls.Add(Me.PictureBox1)
         Me.TradesTab0.Controls.Add(Me.VolumesVolumesTradesPctBox0)
         Me.TradesTab0.Controls.Add(Me.VolumesTradesPctBox0)
         Me.TradesTab0.Controls.Add(Me.PricesTradesPctBox0)
@@ -345,16 +348,16 @@ Partial Class Form1Clone
         Me.VolumesVolumesTradesPctBox0.Location = New System.Drawing.Point(3, 431)
         Me.VolumesVolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.VolumesVolumesTradesPctBox0.Name = "VolumesVolumesTradesPctBox0"
-        Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(105, 254)
+        Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(105, 299)
         Me.VolumesVolumesTradesPctBox0.TabIndex = 39
         Me.VolumesVolumesTradesPctBox0.TabStop = False
         '
         'VolumesTradesPctBox0
         '
-        Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(108, 431)
+        Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(108, 429)
         Me.VolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.VolumesTradesPctBox0.Name = "VolumesTradesPctBox0"
-        Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1521, 254)
+        Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1580, 301)
         Me.VolumesTradesPctBox0.TabIndex = 38
         Me.VolumesTradesPctBox0.TabStop = False
         '
@@ -382,7 +385,7 @@ Partial Class Form1Clone
         Me.TradesPctBox0.Location = New System.Drawing.Point(108, 0)
         Me.TradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TradesPctBox0.Name = "TradesPctBox0"
-        Me.TradesPctBox0.Size = New System.Drawing.Size(1521, 425)
+        Me.TradesPctBox0.Size = New System.Drawing.Size(1574, 425)
         Me.TradesPctBox0.TabIndex = 30
         Me.TradesPctBox0.TabStop = False
         '
@@ -418,7 +421,7 @@ Partial Class Form1Clone
         '
         'TimesTradesPctBox0
         '
-        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(108, 690)
+        Me.TimesTradesPctBox0.Location = New System.Drawing.Point(114, 731)
         Me.TimesTradesPctBox0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TimesTradesPctBox0.Name = "TimesTradesPctBox0"
         Me.TimesTradesPctBox0.Size = New System.Drawing.Size(1521, 36)
@@ -516,6 +519,15 @@ Partial Class Form1Clone
         Me.WindowSizeTextBox.TabIndex = 55
         Me.WindowSizeTextBox.Text = "5"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.LightGray
+        Me.PictureBox1.Location = New System.Drawing.Point(108, 423)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(1574, 5)
+        Me.PictureBox1.TabIndex = 41
+        Me.PictureBox1.TabStop = False
+        '
         'Form1Clone
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -560,6 +572,7 @@ Partial Class Form1Clone
         CType(Me.TradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TimesTradesPctBox0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Tabs.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -607,4 +620,5 @@ Partial Class Form1Clone
     Friend WithEvents Original As CheckBox
     Friend WithEvents WindowSizeBtn As Button
     Friend WithEvents WindowSizeTextBox As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

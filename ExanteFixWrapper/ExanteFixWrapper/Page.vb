@@ -317,13 +317,6 @@ Public Class Page
             End If
             ReCalculateMovingAverage()
         End If
-
-        'If (Me.listOfClonedForms IsNot Nothing) Then
-        '    For Each clonedForm In listOfClonedForms
-        '        clonedForm.pageList(0).OnMarketDataUpdate(quotesInfo)
-        '    Next
-        'End If
-
     End Sub
 
     Private Sub DrawEveryTick(N As Integer)
@@ -417,7 +410,6 @@ Public Class Page
                     Me.cp.usedForm.Invoke(Sub()
                                               ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem.ToString
                                           End Sub)
-                    'ticksOrSeconds = CType(cp.usedForm, Form1Clone).TicksOrSeconds.SelectedItem
                     isOnline = True
                     If gettingHistory Then
                         count = _index + 2
@@ -472,9 +464,6 @@ Public Class Page
             point.lowPrice = lowPrice
             point.volumeBuy = volumeBuy
             point.volumeSell = volumeSell
-            'point.avgBuy = cp.pointsTrades5sec(count - 2).avgBuy
-            'point.avgSell = cp.pointsTrades5sec(count - 2).avgSell
-            'point.avgBuyPlusSell = cp.pointsTrades5sec(count - 2).avgBuyPlusSell
             If (counterNsec = 3) Then
                 If isOnline Then
                     cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
@@ -780,9 +769,6 @@ Public Class Page
         If Not cp.isCloned Then
             Dim buffer = CType(sender, Buffer)
             Dim point As New PointTradesNsec(buffer)
-            'point.avgBuy = cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1).avgBuy
-            'point.avgSell = cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1).avgSell
-            'point.avgBuyPlusSell = point.avgBuy + point.avgSell
             cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
             ReCalculateMovingAverage()
             Dim newPoint As New PointTradesNsec()
@@ -874,14 +860,6 @@ Public Class Page
                                            Next
                                        End If
                                    End Sub)
-
-
-
-            'If (Me.listOfClonedForms IsNot Nothing) Then
-            '    For Each clonedForm In listOfClonedForms
-            '        clonedForm.pageList(0).Add5SecondsPoint(sender, e)
-            '    Next
-            'End If
         End If
     End Sub
     Public Sub Add10SecondsPoint(sender As Object, e As EventArgs)
@@ -1066,11 +1044,6 @@ Public Class Buffer
             Me.countBuy += 1
             Me.priceBuy += info.TradePrice * info.TradeVolume
         End If
-        If movingAvgBuy IsNot Nothing Then
-            'avgVolumeBuy = movingAvgBuy.Calculate(volumeBuy)
-            'avgVolumeSell = movingAvgSell.Calculate(volumeSell)
-            'avgVolumeCommon = movingAvgBuySell.Calculate(volumeSell + volumeBuy)
-        End If
         Me.closePrice = info.TradePrice
     End Sub
     Public Sub SetMovingAvg(movingAvgBuy As MovingAverage, movingAvgSell As MovingAverage, movingAvgBuySell As MovingAverage)
@@ -1086,5 +1059,4 @@ Public Class Buffer
     Public Function IsNotEmpty() As Boolean
         Return bufferIsNotEmpty
     End Function
-
 End Class
