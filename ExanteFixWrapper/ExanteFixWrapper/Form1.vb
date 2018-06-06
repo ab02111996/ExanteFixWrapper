@@ -8,6 +8,9 @@ Public Class Form1
     Public Shared movingAverageWindowSize As Integer
     Private oldWidth As Integer
     Private oldHeight As Integer
+    Private lastWindowState As FormWindowState = FormWindowState.Normal
+    Private currentWidth As Integer
+    Private currentHeight As Integer
     Public mouseSensitivity As Integer
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ConnectButton.Click
@@ -196,6 +199,8 @@ Public Class Form1
         TypeOfGraphic.SelectedItem = "Японские свечи"
         mouseSensitivity = 10
         pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = False
+        currentHeight = Me.Size.Height
+        currentWidth = Me.Size.Width
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -1408,18 +1413,20 @@ Public Class Form1
         TradesPctBox0_MouseLeave(sender, e)
     End Sub
     Private Sub Form1_ResizeBegin(sender As Object, e As EventArgs) Handles MyBase.ResizeBegin
-        Me.oldHeight = Me.Height
-        Me.oldWidth = Me.Width
+        Me.currentHeight = Me.Height
+        Me.currentWidth = Me.Width
     End Sub
 
     Private Sub Form1_ResizeEnd(sender As Object, e As EventArgs) Handles MyBase.ResizeEnd
         Dim deltaH, deltaW As Integer
-        If Me.oldHeight <> Me.Height Or Me.oldWidth <> Me.Width Then
-            deltaH = Me.Height - Me.oldHeight
-            deltaW = Me.Width - Me.oldWidth
+        If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width And Me.WindowState = lastWindowState Then
+            deltaH = Me.Height - Me.currentHeight
+            deltaW = Me.Width - Me.currentWidth
             Tabs.Height += deltaH
             Tabs.Width += deltaW
             ResizeChildren(Tabs, deltaH, deltaW)
+            currentHeight = Me.Size.Height
+            currentWidth = Me.Size.Width
         End If
     End Sub
     Private Sub ResizeChildren(control As Control, deltaH As Integer, deltaW As Integer)
@@ -1428,10 +1435,10 @@ Public Class Form1
                 If child.Name.IndexOf("Prices") = -1 And child.Name.IndexOf("VolumesVolumes") = -1 Then
                     child.Width += deltaW
                 End If
-                If child.Name.IndexOf("Times") = -1 And child.Name.IndexOf("VolumesVolumes") = -1 And child.Name.IndexOf("VolumesTrades") = -1 Then
+                If child.Name.IndexOf("Times") = -1 And child.Name.IndexOf("VolumesVolumes") = -1 And child.Name.IndexOf("VolumesTrades") = -1 And child.Name.IndexOf("Border") Then
                     child.Height += deltaH
                 End If
-                If child.Name.IndexOf("Times") <> -1 Or child.Name.IndexOf("VolumesVolumes") <> -1 Or child.Name.IndexOf("VolumesTrades") <> -1 Then
+                If child.Name.IndexOf("Times") <> -1 Or child.Name.IndexOf("VolumesVolumes") <> -1 Or child.Name.IndexOf("VolumesTrades") <> -1 Or child.Name.IndexOf("Border") <> -1 Then
                     child.Top += deltaH
                 End If
             Else
@@ -1505,4 +1512,20 @@ Public Class Form1
     End Sub
 
 
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If Me.WindowState <> lastWindowState Then
+            lastWindowState = WindowState
+            Dim deltaH, deltaW As Integer
+            If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width Then
+                deltaH = Me.Height - Me.currentHeight
+                deltaW = Me.Width - Me.currentWidth
+                Tabs.Height += deltaH
+                Tabs.Width += deltaW
+                ResizeChildren(Tabs, deltaH, deltaW)
+            End If
+            currentHeight = Me.Size.Height
+            currentWidth = Me.Size.Width
+        End If
+        
+    End Sub
 End Class
