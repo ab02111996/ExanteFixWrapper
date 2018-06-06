@@ -49,7 +49,7 @@ Public Class Form1
 
 
     Sub CheckingState(state As Boolean, threadAlive As Boolean)
-        If threadAlive Then
+        If Not Me.IsDisposed Then
             Label1.Invoke(Sub()
                               If state = True Then
                                   Label1.Text = "OK"
@@ -58,7 +58,6 @@ Public Class Form1
                               End If
                           End Sub)
         Else
-            System.Windows.Forms.Application.ExitThread()
         End If
 
     End Sub
@@ -66,6 +65,7 @@ Public Class Form1
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles SubscribreButton0.Click
         TabControl.TabPages(TabControl.SelectedIndex).Text = ExanteIDTextBox0.Text
         Dim subscribes = feedReciever.GetSubscribeInfos()
+        pageList(TabControl.SelectedIndex).bufferTrades.StartWritingData()
         feedReciever.SubscribeForQuotes(ExanteIDTextBox0.Text, AddressOf pageList(TabControl.SelectedIndex).OnMarketDataUpdate)
     End Sub
 
@@ -140,10 +140,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If feedReciever IsNot Nothing Then
-            feedReciever.Logout()
-        End If
-        System.Windows.Forms.Application.Exit()
+       
     End Sub
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseMove, TradesPctBox2.MouseMove, QuotesPctBox9.MouseMove, QuotesPctBox8.MouseMove, QuotesPctBox7.MouseMove, QuotesPctBox6.MouseMove, QuotesPctBox5.MouseMove, QuotesPctBox4.MouseMove, QuotesPctBox3.MouseMove, QuotesPctBox2.MouseMove, QuotesPctBox1.MouseMove
@@ -441,5 +438,11 @@ Public Class Form1
 
     Private Sub TradesTab_Click(sender As Object, e As EventArgs) Handles TradesTab0.Click
 
+    End Sub
+
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If feedReciever IsNot Nothing Then
+                feedReciever.Logout()
+        End If
     End Sub
 End Class

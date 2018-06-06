@@ -10,7 +10,7 @@ Public Class QuoteFixReciever
     Dim currentState As Boolean
     Delegate Sub UpdateConnectionStateCallBack(State As Boolean, ThreadAlive As Boolean)
     Public updateConnStateCallback As UpdateConnectionStateCallBack
-    Dim updateConnStatusThread As Thread
+    Public updateConnStatusThread As Thread
     Public Sub New(fixFeedConfigPath As String, updStateCallback As UpdateConnectionStateCallBack)
         currentState = False
         Try
@@ -47,7 +47,7 @@ Public Class QuoteFixReciever
         Dim marketDataRequest As QuickFix44.MarketDataRequest = New QuickFix44.MarketDataRequest()
         marketDataRequest.set(New MDReqID(subscribeInfo.Guid.ToString()))
         marketDataRequest.set(New SubscriptionRequestType(SubscriptionRequestType.SNAPSHOT_PLUS_UPDATES))
-        marketDataRequest.set(New MarketDepth(0))
+        marketDataRequest.set(New MarketDepth(1))
         marketDataRequest.set(New MDUpdateType(MDUpdateType.FULL_REFRESH))
         marketDataRequest.set(New AggregatedBook(True))
         Dim entryTypesGroup As QuickFix44.MarketDataRequest.NoMDEntryTypes = New QuickFix44.MarketDataRequest.NoMDEntryTypes()
@@ -96,14 +96,13 @@ Public Class QuoteFixReciever
             Thread.Sleep(1000)
             If isConnected() <> currentState Then
                 currentState = isConnected()
-                If updateConnStatusThread IsNot Nothing Then
-                    updateConnStateCallback.Invoke(currentState, True)
-                Else
-                    updateConnStateCallback.Invoke(currentState, False)
-                    Exit While
-                End If
-
-
+            End If
+            If updateConnStatusThread IsNot Nothing Then
+                updateConnStateCallback.Invoke(currentState, True)
+            Else
+                Thread.Sleep(100)
+                updateConnStateCallback.Invoke(currentState, False)
+                Exit While
             End If
         End While
     End Sub

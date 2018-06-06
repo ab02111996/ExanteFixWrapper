@@ -6,6 +6,14 @@
     Public TradePrice As Double?
     Public TradeVolume As Double?
     Public TimeStamp As DateTime
+    Public LocalTimeStamp As DateTime
+    Public ExanteId As String
+    Public Direction As Directions
+    Public Enum Directions
+        Sell
+        Buy
+        Undefined
+    End Enum
 
     Sub New()
         Me.AskPrice = Nothing
@@ -14,5 +22,6 @@
         Me.BidVolume = Nothing
         Me.TradePrice = Nothing
         Me.TradeVolume = Nothing
+        Me.Direction = Directions.Undefined
     End Sub
 End Class
