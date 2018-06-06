@@ -15,6 +15,5 @@
         Me.bidPrice = bidPrice
         Me.bidVolume = bidVolume
         Me.time = time
-
     End Sub
 End Class
