@@ -79,3 +79,8 @@ D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapp
 D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1Clone.resources
 D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.GenerateResource.Cache
 D:\exante_rep\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1Clone.resources
+D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADODB.dll
+D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\Interop.ADOX.dll
+D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.vbproj.ResolveComReference.cache
+D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.FirstForm.resources
+D:\Работа\GitRepositories\ExanteFixWrapper\ExanteFixWrapper\ExanteFixWrapper\obj\x86\Debug\ExanteFixWrapper.Form1Clone.resources
