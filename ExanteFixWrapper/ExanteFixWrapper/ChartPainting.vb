@@ -93,14 +93,14 @@ Public Class ChartPainting
         Me.pointsOnScreenQuotes = 20
         Me.currentPointQuotes = 0
         Me.needRePaintingQuotes = True
-        Me.maxPointsOnScreenQuotes = 400
+        Me.maxPointsOnScreenQuotes = 800
         Me.minPointsOnScreenQuotes = 10
         'сделки - тики
         Me.pointsTrades = New List(Of PointTrades)
         Me.pointsOnScreenTrades = 40
         Me.currentPointTrades = 0
         Me.needRePaintingTrades = True
-        Me.maxPointsOnScreenTrades = 400
+        Me.maxPointsOnScreenTrades = 800
         Me.minPointsOnScreenTrades = 10
         Me.maxVolumeTrades = 0
         'сделки - N секунд
@@ -117,7 +117,7 @@ Public Class ChartPainting
         Me.pointsOnScreenTradesNsec = 40
         Me.currentPointTradesNsec = 0
         Me.needRePaintingTradesNsec = True
-        Me.maxPointsOnScreenTradesNsec = 400
+        Me.maxPointsOnScreenTradesNsec = 800
         Me.minPointsOnScreenTradesNsec = 10
         Me.maxVolumeTradesNsec = 0
         If (Not Form1.isOnline) Then
@@ -469,8 +469,80 @@ Public Class ChartPainting
                         Form1.TradePriceLabel.ForeColor = Color.Red
                     End If
 
-                    DrawVerticalLines(index, G_btmVolumes, G_btmTrades, G_btmTimes, font, brush, P_GrayLine, p1Trades, TradesPctBox, TimesTradesPctBox, VolumesTradesPctBox)
-                    DrawHorizontalLines(index, G_btmVolumes, G_btmTrades, G_btmPrices, G_btmVolumesVolumes, VolumesTradesPctBox, VolumesVolumesTradesPctBox, PricesTradesPctBox, TradesPctBox, font, brush, P_GrayLine)
+                    If (Me.pointsTrades(index).tradePrice < Me.pointsTrades(index + 1).tradePrice) Then
+                        G_btmTrades.DrawLine(P_BlueLine, p1Trades, p2Trades)
+                        Form1.TradePriceLabel.ForeColor = Color.Blue
+                    Else
+                        G_btmTrades.DrawLine(P_RedLine, p1Trades, p2Trades)
+                        Form1.TradePriceLabel.ForeColor = Color.Red
+                    End If
+
+                    If (Me.pointsOnScreenTrades <= 20) Then
+                        G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                        G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                        G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                    Else
+                        If (Me.pointsOnScreenTrades > 20 And Me.pointsOnScreenTrades <= 45) Then
+                            If (index Mod 2 = 0) Then
+                                G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                                G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                                G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                            End If
+                        ElseIf (Me.pointsOnScreenTrades > 45 And Me.pointsOnScreenTrades <= 100) Then
+                            If (index Mod 5 = 0) Then
+                                G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                                G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                                G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                            End If
+                        ElseIf (Me.pointsOnScreenTrades > 100 And Me.pointsOnScreenTrades <= 200) Then
+                            If (index Mod 20 = 0) Then
+                                G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                                G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                                G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                            End If
+                        ElseIf (Me.pointsOnScreenTrades > 200 And Me.pointsOnScreenTrades <= 300) Then
+                            If (index Mod 40 = 0) Then
+                                G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                                G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                                G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                            End If
+                        ElseIf (Me.pointsOnScreenTrades > 300 And Me.pointsOnScreenTrades <= 400) Then
+                            If (index Mod 75 = 0) Then
+                                G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
+                                G_btmTimes.DrawString(Me.pointsTrades(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                                G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
+                            End If
+                        End If
+                    End If
+
+                    If (index = Me.lastPointTrades - 1) Then
+                        Dim p1 As Drawing.PointF = New PointF(0.0, VolumesTradesPctBox.Height / 2)
+                        Dim p2 As Drawing.PointF = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
+                        G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
+
+                        Dim stepOfGrid As Integer = MakeDigitBeauty(yRangeTrades / 10)
+                        Dim currentValue As Integer = MakeDigitBeauty(lowBorderTrades)
+                        If yRangeTrades <= 10 Then
+                            stepOfGrid = 1
+                            currentValue = Math.Floor(lowBorderTrades)
+                        ElseIf yRangeTradesNsec < 1 Then
+                            G_btmPrices.DrawString(Format(lowBorderTrades + (highBorderTrades - lowBorderTradesNsec) / 2, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
+                            G_btmTrades.DrawLine(P_GrayLine, New PointF(0.0, TradesPctBox.Height * 0.5), New PointF(TradesPctBox.Width, TradesPctBox.Height * 0.5))
+                        ElseIf yRangeTrades > 10 And yRangeTrades <= 20 Then
+                            stepOfGrid = 2
+                            currentValue = Math.Floor(lowBorderTrades)
+                        End If
+                        For i = 1 To 10
+                            Dim procents As Double = ((currentValue - lowBorderTrades) / yRangeTrades)
+                            p1 = New PointF(0.0, TradesPctBox.Height - TradesPctBox.Height * procents)
+                            p2 = New PointF(TradesPctBox.Width, TradesPctBox.Height - TradesPctBox.Height * procents)
+                            G_btmTrades.DrawLine(P_GrayLine, p1, p2)
+                            G_btmPrices.DrawString(Format(currentValue, "0.00"), font, brush, PricesTradesPctBox.Width / 2 - 15, PricesTradesPctBox.Height - PricesTradesPctBox.Height * procents)
+                            currentValue += stepOfGrid
+                        Next
+                        G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTrades, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
+                        G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTrades / 2, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
+                    End If
                 Next
                 TradesPctBox.Image = btmTrades
                 VolumesTradesPctBox.Image = btmVolumes
@@ -484,7 +556,49 @@ Public Class ChartPainting
                 G_btmTrades.DrawLine(P_BlackLine, Me.point1Trades, Me.point2Trades)
             End If
 
-            DrawLinesByMouseMove(G_btmVolumes, G_btmTrades, G_btmVolumesVolumes, G_btmPrices, font, brush, TradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+            Dim P_DashedLine As New Pen(Color.Black)
+            P_DashedLine.DashStyle = Drawing2D.DashStyle.Dash
+            If (Me.isCursorOnTradesChart) Then
+                G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, TradesPctBox.Height)
+                G_btmTrades.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
+                G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
+                G_btmPrices.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+                Dim rectangleForPrice As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForPrice.X = 0
+                rectangleForPrice.Width = PricesTradesPctBox.Width
+                rectangleForPrice.Height = heightOfRectangle
+                If pointMouseMoveTrades.Y < TradesPctBox.Height / 2 Then
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentTradePriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y + 4))
+                Else
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y - heightOfRectangle
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentTradePriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y - 17))
+                End If
+            End If
+
+            If (Me.isCursorOnVolumesChart) Then
+                G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, VolumesTradesPctBox.Height)
+                G_btmVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
+                G_btmVolumesVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                Dim rectangleForVolume As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForVolume.X = 0
+                rectangleForVolume.Width = VolumesTradesPctBox.Width
+                rectangleForVolume.Height = heightOfRectangle
+                If pointMouseMoveVolumes.Y < VolumesTradesPctBox.Height / 2 Then
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y + 4))
+                Else
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y - heightOfRectangle
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y - 17))
+                End If
+            End If
             Refreshing(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
         Catch ex As Exception
             Me.currentPointTrades = pointsTrades.Count - pointsOnScreenTrades
@@ -623,6 +737,7 @@ Public Class ChartPainting
                             highBorderTradesNsec = pointsTradesNsec(index).closePrice
                             lowBorderTradesNsec = pointsTradesNsec(index).closePrice
                             highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
                         Else
                             If (pointsTradesNsec(index).closePrice > highBorderTradesNsec) Then
                                 highBorderTradesNsec = pointsTradesNsec(index).closePrice
@@ -632,6 +747,9 @@ Public Class ChartPainting
                             End If
                             If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
                                 highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            End If
+                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
+                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
                             End If
                         End If
                     Next
@@ -667,7 +785,7 @@ Public Class ChartPainting
                         yRangeVolumesTradesNsec = highBorderVolumesTradesNsec
 
                         DrawAvg(index, G_btmVolumes, VolumesTradesPctBox, GreenBrush, P_RedLine, P_BlueLine)
-                        DrawVerticalLines(index, G_btmVolumes, G_btmTrades, G_btmTimes, font, brush, P_GrayLine, p1Trades, TradesPctBox, TimesTradesPctBox, VolumesTradesPctBox)
+                        DrawVerticalLines(index, G_btmVolumes, G_btmTrades, G_btmTimes, font, brush, P_GrayLine, p1Trades, TradesPctBox, TimesTradesPctBox, VolumesTradesPctBox, pointsTradesNsec, lastPointTradesNsec, pointsOnScreenTradesNsec)
                         DrawHorizontalLines(index, G_btmVolumes, G_btmTrades, G_btmPrices, G_btmVolumesVolumes, VolumesTradesPctBox, VolumesVolumesTradesPctBox, PricesTradesPctBox, TradesPctBox, font, brush, P_GrayLine)
                     Next
                 Else 'тип графика - японские свечи / бары
@@ -676,6 +794,7 @@ Public Class ChartPainting
                             highBorderTradesNsec = pointsTradesNsec(index).highPrice
                             lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
                             highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
                         Else
                             If (pointsTradesNsec(index).highPrice > highBorderTradesNsec) Then
                                 highBorderTradesNsec = pointsTradesNsec(index).highPrice
@@ -685,6 +804,9 @@ Public Class ChartPainting
                             End If
                             If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
                                 highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            End If
+                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
+                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
                             End If
                         End If
                     Next
@@ -779,7 +901,7 @@ Public Class ChartPainting
                             End If
                         End If
 
-                        DrawVerticalLines(index, G_btmVolumes, G_btmTrades, G_btmTimes, font, brush, P_GrayLine, p1Trades, TradesPctBox, TimesTradesPctBox, VolumesTradesPctBox)
+                        DrawVerticalLines(index, G_btmVolumes, G_btmTrades, G_btmTimes, font, brush, P_GrayLine, p1Trades, TradesPctBox, TimesTradesPctBox, VolumesTradesPctBox, pointsTradesNsec, lastPointTradesNsec, pointsOnScreenTradesNsec)
                         DrawHorizontalLines(index, G_btmVolumes, G_btmTrades, G_btmPrices, G_btmVolumesVolumes, VolumesTradesPctBox, VolumesVolumesTradesPctBox, PricesTradesPctBox, TradesPctBox, font, brush, P_GrayLine)
                     Next
                 End If
@@ -790,11 +912,53 @@ Public Class ChartPainting
                 PricesTradesPctBox.Image = btmPrices
             End If
 
+            Dim P_DashedLine As New Pen(Color.Black)
+            P_DashedLine.DashStyle = Drawing2D.DashStyle.Dash
             If (Me.isLineReadyTrades) Then
                 Dim P_BlackLine As New Pen(Color.Black, 1)
                 G_btmTrades.DrawLine(P_BlackLine, Me.point1Trades, Me.point2Trades)
             End If
-            DrawLinesByMouseMove(G_btmVolumes, G_btmTrades, G_btmVolumesVolumes, G_btmPrices, font, brush, TradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
+            If (Me.isCursorOnTradesChart) Then
+                G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, TradesPctBox.Height)
+                G_btmTrades.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, TradesPctBox.Width, pointMouseMoveTrades.Y)
+                G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveTrades.X, 0, pointMouseMoveTrades.X, VolumesTradesPctBox.Height)
+                G_btmPrices.DrawLine(P_DashedLine, 0, pointMouseMoveTrades.Y, PricesTradesPctBox.Width, pointMouseMoveTrades.Y)
+                Dim rectangleForPrice As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForPrice.X = 0
+                rectangleForPrice.Width = PricesTradesPctBox.Width
+                rectangleForPrice.Height = heightOfRectangle
+                If pointMouseMoveTrades.Y < TradesPctBox.Height / 2 Then
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentTradePriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y + 4))
+                Else
+                    rectangleForPrice.Y = pointMouseMoveTrades.Y - heightOfRectangle
+                    G_btmPrices.FillRectangle(Brushes.DarkRed, rectangleForPrice)
+                    G_btmPrices.DrawString(currentTradePriceMM, font, Brushes.White, New PointF(22, pointMouseMoveTrades.Y - 17))
+                End If
+            End If
+
+            If (Me.isCursorOnVolumesChart) Then
+                G_btmVolumes.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, VolumesTradesPctBox.Height)
+                G_btmVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                G_btmTrades.DrawLine(P_DashedLine, pointMouseMoveVolumes.X, 0, pointMouseMoveVolumes.X, TradesPctBox.Height)
+                G_btmVolumesVolumes.DrawLine(P_DashedLine, 0, pointMouseMoveVolumes.Y, VolumesVolumesTradesPctBox.Width, pointMouseMoveVolumes.Y)
+                Dim rectangleForVolume As New RectangleF
+                Dim heightOfRectangle As Double = 20
+                rectangleForVolume.X = 0
+                rectangleForVolume.Width = VolumesTradesPctBox.Width
+                rectangleForVolume.Height = heightOfRectangle
+                If pointMouseMoveVolumes.Y < VolumesTradesPctBox.Height / 2 Then
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y + 4))
+                Else
+                    rectangleForVolume.Y = pointMouseMoveVolumes.Y - heightOfRectangle
+                    G_btmVolumesVolumes.FillRectangle(Brushes.DarkGreen, rectangleForVolume)
+                    G_btmVolumesVolumes.DrawString(currentVolumeMM, font, Brushes.White, New PointF(22, pointMouseMoveVolumes.Y - 17))
+                End If
+            End If
             Refreshing(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox)
 
         Catch ex As ArgumentOutOfRangeException
@@ -874,46 +1038,47 @@ Public Class ChartPainting
     End Sub
 
     Private Sub DrawVerticalLines(index As Integer, G_btmVolumes As Graphics, G_btmTrades As Graphics, G_btmTimes As Graphics, font As Font, brush As Brush, P_GrayLine As Pen,
-                                  p1Trades As PointF, TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox)
-        If (Not index = Me.lastPointTradesNsec) Then
-            If (Not pointsTradesNsec(index).time.Date = pointsTradesNsec(index + 1).time.Date) Then
+                                  p1Trades As PointF, TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, listOfPoints As List(Of PointTradesNsec),
+                                  lastPoint As Integer, pointsOnScreen As Integer)
+        If (Not index = lastPoint) Then
+            If (Not listOfPoints(index).time.Date = listOfPoints(index + 1).time.Date) Then
                 G_btmTrades.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), TradesPctBox.Height)
                 G_btmVolumes.DrawLine(New Pen(Color.Orange, 2), p1Trades.X + CType(intervalTradesNsec, Single), 0, p1Trades.X + CType(intervalTradesNsec, Single), VolumesTradesPctBox.Height)
             End If
         End If
-        If (Me.pointsOnScreenTradesNsec <= 20) Then
+        If (pointsOnScreen <= 20) Then
             G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-            G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+            G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
             G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
         Else
-            If (Me.pointsOnScreenTradesNsec > 20 And Me.pointsOnScreenTradesNsec <= 45) Then
+            If (pointsOnScreen > 20 And pointsOnScreen <= 45) Then
                 If (index Mod 2 = 0) Then
                     G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                    G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                    G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
                     G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
                 End If
-            ElseIf (Me.pointsOnScreenTradesNsec > 45 And Me.pointsOnScreenTradesNsec <= 100) Then
+            ElseIf (pointsOnScreen > 45 And pointsOnScreen <= 100) Then
                 If (index Mod 5 = 0) Then
                     G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                    G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                    G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
                     G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
                 End If
-            ElseIf (Me.pointsOnScreenTradesNsec > 100 And Me.pointsOnScreenTradesNsec <= 200) Then
+            ElseIf (pointsOnScreen > 100 And pointsOnScreen <= 200) Then
                 If (index Mod 20 = 0) Then
                     G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                    G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                    G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
                     G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
                 End If
-            ElseIf (Me.pointsOnScreenTradesNsec > 200 And Me.pointsOnScreenTradesNsec <= 300) Then
+            ElseIf (pointsOnScreen > 200 And pointsOnScreen <= 300) Then
                 If (index Mod 40 = 0) Then
                     G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                    G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                    G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
                     G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
                 End If
-            ElseIf (Me.pointsOnScreenTradesNsec > 300 And Me.pointsOnScreenTradesNsec <= 400) Then
+            ElseIf (pointsOnScreen > 300 And pointsOnScreen <= 400) Then
                 If (index Mod 75 = 0) Then
                     G_btmTrades.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, TradesPctBox.Height)
-                    G_btmTimes.DrawString(pointsTradesNsec(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
+                    G_btmTimes.DrawString(listOfPoints(index).time.ToLongTimeString, font, brush, p1Trades.X, TimesTradesPctBox.Height / 2)
                     G_btmVolumes.DrawLine(P_GrayLine, p1Trades.X, 0, p1Trades.X, VolumesTradesPctBox.Height)
                 End If
             End If

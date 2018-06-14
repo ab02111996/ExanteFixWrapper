@@ -557,7 +557,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1900, 1045)
+        Me.ClientSize = New System.Drawing.Size(1782, 1045)
         Me.Controls.Add(Me.SetSensitivityLabel)
         Me.Controls.Add(Me.SetSensitivityTextBox)
         Me.Controls.Add(Me.SetSensitivityButton)
