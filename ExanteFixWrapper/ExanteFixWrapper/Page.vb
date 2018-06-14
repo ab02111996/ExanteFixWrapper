@@ -241,7 +241,9 @@ Public Class Page
                                                    Me.cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
                                                    point = New PointTradesNsec(bufferTrades3600sec)
                                                    Me.cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
-                                                   ReCalculateMovingAverage()
+                                                   'ReCalculateMovingAverage()
+                                                   ReCalculateLastValueMovingAvg()
+
                                                    Select Case ticksOrSeconds.SelectedItem
                                                        Case "5 секунд"
                                                            DrawEveryTick(5)
@@ -286,7 +288,6 @@ Public Class Page
                                                            form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades3600sec)
                                                            form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
-                                                           ReCalculateMovingAverage()
                                                            Select Case form.TicksOrSeconds.SelectedItem
                                                                Case "5 секунд"
                                                                    DrawEveryTickInClonedForms(5, form)
@@ -315,7 +316,6 @@ Public Class Page
                                            End If
                                        End Sub)
             End If
-            ReCalculateMovingAverage()
         End If
     End Sub
 
@@ -471,7 +471,7 @@ Public Class Page
                     newPoint.time = point.time.AddSeconds(15)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades15sec.Add(newPoint)
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -501,7 +501,7 @@ Public Class Page
                     newPoint.time = point.time.AddSeconds(10)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades10sec.Add(newPoint)
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -527,7 +527,7 @@ Public Class Page
             ElseIf (counterNsec = 6) Then
                 If isOnline Then
                     cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(30)
                     SetPricesInNewPoint(newPoint, point)
@@ -556,7 +556,7 @@ Public Class Page
             ElseIf (counterNsec = 12) Then
                 If isOnline Then
                     cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(60)
                     SetPricesInNewPoint(newPoint, point)
@@ -585,7 +585,7 @@ Public Class Page
             ElseIf (counterNsec = 60) Then
                 If isOnline Then
                     cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(300)
                     SetPricesInNewPoint(newPoint, point)
@@ -614,7 +614,7 @@ Public Class Page
             ElseIf (counterNsec = 120) Then
                 If isOnline Then
                     cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(600)
                     SetPricesInNewPoint(newPoint, point)
@@ -643,7 +643,7 @@ Public Class Page
             ElseIf (counterNsec = 180) Then
                 If isOnline Then
                     cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(900)
                     SetPricesInNewPoint(newPoint, point)
@@ -672,7 +672,7 @@ Public Class Page
             ElseIf (counterNsec = 360) Then
                 If isOnline Then
                     cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(1800)
                     SetPricesInNewPoint(newPoint, point)
@@ -701,7 +701,7 @@ Public Class Page
             ElseIf (counterNsec = 720) Then
                 If isOnline Then
                     cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
-                    ReCalculateMovingAverage()
+                    'ReCalculateMovingAverage()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(3600)
                     SetPricesInNewPoint(newPoint, point)
@@ -729,6 +729,42 @@ Public Class Page
                 End If
             End If
         End If
+    End Sub
+    Public Sub ReCalculateLastValueMovingAvg()
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades5sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades10sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades15sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades30sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades60sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades300sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades600sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades900sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades1800sec)
+        ReCalculateLastValueMovingAvgList(Me.cp.pointsTrades3600sec)
+    End Sub
+    Public Sub ReCalculateLastValueMovingAvgList(pointsTradesNsec As List(Of PointTradesNsec))
+        Dim windowSize = movingAvgBuyPlusSell.windowSize
+        Dim buyList = New List(Of Double)
+        Dim sellList = New List(Of Double)
+        Dim buyPlusSellList = New List(Of Double)
+        If pointsTradesNsec.Count > windowSize Then
+            For index = pointsTradesNsec.Count - windowSize To pointsTradesNsec.Count - 1
+                buyList.Add(pointsTradesNsec(index).volumeBuy)
+                sellList.Add(pointsTradesNsec(index).volumeSell)
+                buyPlusSellList.Add(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
+            Next
+        Else
+            For index = 0 To pointsTradesNsec.Count - 1
+                buyList.Add(pointsTradesNsec(index).volumeBuy)
+                sellList.Add(pointsTradesNsec(index).volumeSell)
+                buyPlusSellList.Add(pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell)
+            Next
+        End If
+
+        
+        pointsTradesNsec(pointsTradesNsec.Count - 1).avgBuy = movingAvgBuy.RecalculateValue(buyList)
+        pointsTradesNsec(pointsTradesNsec.Count - 1).avgSell = movingAvgSell.RecalculateValue(sellList)
+        pointsTradesNsec(pointsTradesNsec.Count - 1).avgBuyPlusSell = movingAvgBuyPlusSell.RecalculateValue(buyPlusSellList)
     End Sub
 
     Public Sub ReCalculateMovingAverage()

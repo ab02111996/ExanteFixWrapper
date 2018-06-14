@@ -1,5 +1,6 @@
-﻿Public Class MovingAverage
-    Private windowSize As Integer
+﻿Imports System.Linq
+Public Class MovingAverage
+    Public windowSize As Integer
     Private windowPoints As List(Of Double)
 
     Public Sub New(windowSize As Integer)
@@ -10,9 +11,12 @@
             windowPoints.Clear()
         End If
     End Sub
+    Public Function RecalculateValue(windowSizeList As List(Of Double)) As Double
+        Return windowSizeList.Sum() / windowSize
+    End Function
     Public Function Calculate(currentValue As Double) As Double
         Dim sum As Double = 0.0
-        'При первом использовании инициализируем список предыдущих значений текущим
+        'При первом использовании инициализируем список 
         If windowPoints Is Nothing Then
             windowPoints = New List(Of Double)
             windowPoints.Add(currentValue)
