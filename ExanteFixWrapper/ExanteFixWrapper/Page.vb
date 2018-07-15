@@ -472,6 +472,7 @@ Public Class Page
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades15sec.Add(newPoint)
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -502,6 +503,7 @@ Public Class Page
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades10sec.Add(newPoint)
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
@@ -528,6 +530,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(30)
                     SetPricesInNewPoint(newPoint, point)
@@ -557,6 +560,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(60)
                     SetPricesInNewPoint(newPoint, point)
@@ -586,6 +590,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(300)
                     SetPricesInNewPoint(newPoint, point)
@@ -615,6 +620,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(600)
                     SetPricesInNewPoint(newPoint, point)
@@ -644,6 +650,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(900)
                     SetPricesInNewPoint(newPoint, point)
@@ -673,6 +680,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(1800)
                     SetPricesInNewPoint(newPoint, point)
@@ -702,6 +710,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
                     'ReCalculateMovingAverage()
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(3600)
                     SetPricesInNewPoint(newPoint, point)
@@ -806,14 +815,15 @@ Public Class Page
             Dim buffer = CType(sender, Buffer)
             Dim point As New PointTradesNsec(buffer)
             cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
-            ReCalculateMovingAverage()
+            'ReCalculateMovingAverage()
+            ReCalculateLastValueMovingAvg() 'С этим методом все хорошо заработало
             Dim newPoint As New PointTradesNsec()
             newPoint.time = point.time.AddSeconds(5)
             SetPricesInNewPoint(newPoint, point)
             cp.pointsTrades5sec.Add(newPoint)
             If listOfClonedForms.Count > 0 Then
                 For Each form In listOfClonedForms
-                    If form IsNot Nothing Then
+                    If Not form.IsDisposed Then
                         form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point
                         form.pageList(0).cp.pointsTrades5sec.Add(newPoint)
                     End If
