@@ -1161,16 +1161,21 @@ Public Class ChartPainting
                     If (Not original) Then
                         yRangeVolumesTradesNsec = highBorderVolumesTradesAvgNsec
                         highBorderVolumesTradesNsec = highBorderVolumesTradesAvgNsec
+                    Else
+                        yRangeVolumesTradesNsec = highBorderVolumesTradesNsec
+                        highBorderVolumesTradesNsec = highBorderVolumesTradesNsec
                     End If
-                    Dim procentsAvg1 As Double = ((pointsTradesNsec(index).avgBuyPlusSell) / yRangeVolumesTradesNsec)
-                    Dim procentsAvg2 As Double = ((pointsTradesNsec(index + 1).avgBuyPlusSell) / yRangeVolumesTradesNsec)
-                    Dim p1Avg As Drawing.PointF
-                    Dim p2Avg As Drawing.PointF
-                    p1Avg.X = (index - Me.currentPointTradesNsec) * Me.intervalTradesNsec
-                    p1Avg.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvg1
-                    p2Avg.X = (index + 1 - Me.currentPointTradesNsec) * Me.intervalTradesNsec
-                    p2Avg.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvg2
-                    G_btmVolumes.DrawLine(New Pen(Color.LightPink, 2), p1Avg, p2Avg)
+                    If yRangeVolumesTradesNsec > 0 Then
+                        Dim procentsAvg1 As Double = ((pointsTradesNsec(index).avgBuyPlusSell) / yRangeVolumesTradesNsec)
+                        Dim procentsAvg2 As Double = ((pointsTradesNsec(index + 1).avgBuyPlusSell) / yRangeVolumesTradesNsec)
+                        Dim p1Avg As Drawing.PointF
+                        Dim p2Avg As Drawing.PointF
+                        p1Avg.X = (index - Me.currentPointTradesNsec) * Me.intervalTradesNsec
+                        p1Avg.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvg1
+                        p2Avg.X = (index + 1 - Me.currentPointTradesNsec) * Me.intervalTradesNsec
+                        p2Avg.Y = VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procentsAvg2
+                        G_btmVolumes.DrawLine(New Pen(Color.LightPink, 2), p1Avg, p2Avg)
+                    End If
                 End If
             End If
         Else
@@ -1202,6 +1207,9 @@ Public Class ChartPainting
                     If (Not original) Then
                         yRangeVolumesTradesNsec = highBorderVolumesTradesAvgNsec
                         highBorderVolumesTradesNsec = highBorderVolumesTradesAvgNsec
+                    Else
+                        yRangeVolumesTradesNsec = highBorderVolumesTradesNsec
+                        highBorderVolumesTradesNsec = highBorderVolumesTradesNsec
                     End If
                     Dim procentsAvgBuy1 As Double = ((pointsTradesNsec(index).avgBuy) / yRangeVolumesTradesNsec)
                     Dim procentsAvgBuy2 As Double = ((pointsTradesNsec(index + 1).avgBuy) / yRangeVolumesTradesNsec)

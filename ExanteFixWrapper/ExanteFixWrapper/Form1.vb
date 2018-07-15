@@ -6,8 +6,6 @@ Public Class Form1
     Public pageList As List(Of Page) = New List(Of Page)
     Public isOnline As Boolean
     Public Shared movingAverageWindowSize As Integer
-    Private oldWidth As Integer
-    Private oldHeight As Integer
     Private lastWindowState As FormWindowState = FormWindowState.Normal
     Private currentWidth As Integer
     Private currentHeight As Integer
