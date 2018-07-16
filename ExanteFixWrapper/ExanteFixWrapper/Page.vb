@@ -431,16 +431,41 @@ Public Class Page
                     Else
                         count = cp.pointsTrades5sec.Count
                     End If
-
                 Else
                     count = _index + 2
                 End If
             End If
 
+            'нужно убрать тонны повторяющегося кода
+            'Dim str As String 'нужно сравнить эту строку со значением в комбо боксе
+            'Select Case counterNsec
+            '    Case 2 '10 секунд
+            '        str = "10 секунд"
+            '    Case 3 '15 секунд
+            '        str = "15 секунд"
+            '    Case 6 '30 секунд
+            '        str = "30 секунд"
+            '    Case 12 '1 минута
+            '        str = "1 минута"
+            '    Case 60 '5 минут
+            '        str = "5 минут"
+            '    Case 120 '10 минут
+            '        str = "10 минут"
+            '    Case 180 '15 минут
+            '        str = "15 минут"
+            '    Case 360 '30 минут
+            '        str = "30 минут"
+            '    Case 720 '1 час
+            '        str = "1 час"
+            'End Select
+
             Dim point As New PointTradesNsec
             point.time = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).time
             point.openPrice = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).openPrice
             point.closePrice = cp.pointsTrades5sec(count - 2).closePrice
+            point.avgBuy = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).avgBuy
+            point.avgSell = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).avgSell
+            point.avgBuyPlusSell = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).avgBuyPlusSell
             Dim highPrice As Double
             Dim lowPrice As Double
             Dim volumeBuy As Double = 0
@@ -468,7 +493,7 @@ Public Class Page
                 If isOnline Then
                     cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
                     Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(15)
+                    newPoint.time = point.time.AddSeconds(counterNsec * 5)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades15sec.Add(newPoint)
                     'ReCalculateMovingAverage()
@@ -480,7 +505,7 @@ Public Class Page
                                                            form.pageList(0).cp.pointsTrades15sec(form.pageList(0).cp.pointsTrades15sec.Count - 1) = point
                                                            form.pageList(0).cp.pointsTrades15sec.Add(newPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "15 секунд" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 15)
+                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, counterNsec * 5)
                                                            End If
                                                        End If
                                                    Next
@@ -489,7 +514,7 @@ Public Class Page
 
                     If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
                         Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 15)
+                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, counterNsec * 5)
                                               End Sub)
                     End If
                 Else
@@ -498,12 +523,12 @@ Public Class Page
             ElseIf (counterNsec = 2) Then
                 If isOnline Then
                     cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
+                    ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
                     newPoint.time = point.time.AddSeconds(10)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades10sec.Add(newPoint)
                     'ReCalculateMovingAverage()
-                    ReCalculateLastValueMovingAvg()
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
