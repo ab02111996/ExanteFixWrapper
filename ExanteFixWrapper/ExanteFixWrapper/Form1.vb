@@ -1307,34 +1307,43 @@ Public Class Form1
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim cloneForm As Form1Clone = New Form1Clone()
         cloneForm.isOnline = Me.isOnline
-        Dim newPage = New Page(New ChartPainting(cloneForm), cloneForm.QuotesPctBox0, cloneForm.PricesQuotesPctBox0, cloneForm.TimesQuotesPctBox0, cloneForm.TradesPctBox0, cloneForm.PricesTradesPctBox0, cloneForm.TimesTradesPctBox0,
-                cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, Me.WindowSizeTextBox.Text)
-        cloneForm.pageList.Add(newPage)
-        cloneForm.pageList(0).cp.isCloned = True
+        'Dim newPage = New Page(New ChartPainting(cloneForm), cloneForm.QuotesPctBox0, cloneForm.PricesQuotesPctBox0, cloneForm.TimesQuotesPctBox0, cloneForm.TradesPctBox0, cloneForm.PricesTradesPctBox0, cloneForm.TimesTradesPctBox0,
+        '        cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, Me.WindowSizeTextBox.Text)
+        'cloneForm.pageList.Add(newPage)
+        cloneForm.cp = New ChartPainting(cloneForm)
+
+        cloneForm.QuotesPctBox = cloneForm.QuotesPctBox0
+        cloneForm.PricesQuotesPctBox = cloneForm.PricesQuotesPctBox0
+        cloneForm.TimesQuotesPctBox = cloneForm.TimesQuotesPctBox0
+        cloneForm.TradesPctBox = cloneForm.TradesPctBox0
+        cloneForm.PricesTradesPctBox = cloneForm.PricesTradesPctBox0
+        cloneForm.TimesTradesPctBox = cloneForm.TimesTradesPctBox0
+        cloneForm.LeftQuotesButton = cloneForm.LeftQuotesButton0
+        cloneForm.RightQuotesButton = cloneForm.RightQuotesButton0
+        cloneForm.PlusQuotesButton = cloneForm.PlusQuotesButton0
+        cloneForm.MinusQuotesButton = cloneForm.MinusQuotesButton0
+        cloneForm.LeftTradesButton = cloneForm.LeftTradesButton0
+        cloneForm.RightTradesButton = cloneForm.RightButtonTrades0
+        cloneForm.PlusTradesButton = cloneForm.PlusTradesButton0
+        cloneForm.MinusTradesButton = cloneForm.MinusTradesButton0
+        cloneForm.Chart = cloneForm.Charts0
+        cloneForm.VolumesTradesPctBox = cloneForm.VolumesTradesPctBox0
+        cloneForm.VolumesVolumesTradesPctBox = cloneForm.VolumesVolumesTradesPctBox0
+
+        cloneForm.cp.isCloned = True
         If (Not isOnline) Then
-            cloneForm.pageList(0).cp.pointsTrades5sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
-            cloneForm.pageList(0).cp.pointsTrades10sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades10sec
-            cloneForm.pageList(0).cp.pointsTrades15sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
-            cloneForm.pageList(0).cp.pointsTrades30sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades30sec
-            cloneForm.pageList(0).cp.pointsTrades60sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades60sec
-            cloneForm.pageList(0).cp.pointsTrades300sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades300sec
-            cloneForm.pageList(0).cp.pointsTrades600sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades600sec
-            cloneForm.pageList(0).cp.pointsTrades900sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades900sec
-            cloneForm.pageList(0).cp.pointsTrades1800sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec
-            cloneForm.pageList(0).cp.pointsTrades3600sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
+            cloneForm.cp.pointsTrades5sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
+            cloneForm.cp.pointsTrades10sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades10sec
+            cloneForm.cp.pointsTrades15sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades15sec
+            cloneForm.cp.pointsTrades30sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades30sec
+            cloneForm.cp.pointsTrades60sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades60sec
+            cloneForm.cp.pointsTrades300sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades300sec
+            cloneForm.cp.pointsTrades600sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades600sec
+            cloneForm.cp.pointsTrades900sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades900sec
+            cloneForm.cp.pointsTrades1800sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec
+            cloneForm.cp.pointsTrades3600sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
         Else
-            With cloneForm.pageList(0)
-                .bufferTrades.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades10sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades15sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades30sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades60sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades300sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades600sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades900sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades1800sec.StartWritingData(ExanteIDTextBox0.Text)
-                .bufferTrades3600sec.StartWritingData(ExanteIDTextBox0.Text)
-                .TabId = Tabs.SelectedIndex
+            With cloneForm
                 Dim firstPointNsec As New PointTradesNsec()
                 .cp.pointsTrades5sec.Add(firstPointNsec)
                 .cp.pointsTrades10sec.Add(firstPointNsec)

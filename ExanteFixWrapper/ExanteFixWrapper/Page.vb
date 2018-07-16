@@ -129,7 +129,7 @@ Public Class Page
             Me.cp.pointsQuotes.Add(pq)
             For Each form In listOfClonedForms
                 If form IsNot Nothing Then
-                    form.pageList(0).cp.pointsQuotes.Add(pq)
+                    form.cp.pointsQuotes.Add(pq)
                 End If
             Next
 
@@ -139,12 +139,12 @@ Public Class Page
                                                Me.cp.paintingQuotes(QuotesPctBox, TimesQuotesPctBox, PricesQuotesPctBox)
                                                For Each form In listOfClonedForms
                                                    If Not form.IsDisposed Then
-                                                       If (form.pageList(0).cp.needRePaintingQuotes) Then
-                                                           form.pageList(0).cp.needRePaintingQuotes = False
-                                                           form.pageList(0).cp.paintingQuotes(form.pageList(0).QuotesPctBox, form.pageList(0).TimesQuotesPctBox, form.pageList(0).PricesQuotesPctBox)
-                                                           form.pageList(0).cp.needRePaintingQuotes = True
+                                                       If (form.cp.needRePaintingQuotes) Then
+                                                           form.cp.needRePaintingQuotes = False
+                                                           form.cp.paintingQuotes(form.QuotesPctBox, form.TimesQuotesPctBox, form.PricesQuotesPctBox)
+                                                           form.cp.needRePaintingQuotes = True
                                                        Else
-                                                           form.pageList(0).cp.paintingQuotes(form.pageList(0).QuotesPctBox, form.pageList(0).TimesQuotesPctBox, form.pageList(0).PricesQuotesPctBox)
+                                                           form.cp.paintingQuotes(form.QuotesPctBox, form.TimesQuotesPctBox, form.PricesQuotesPctBox)
                                                        End If
                                                    End If
                                                Next
@@ -182,7 +182,7 @@ Public Class Page
             cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
             For Each form In listOfClonedForms
                 If Not form.IsDisposed Then
-                    form.pageList(0).cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
+                    form.cp.pointsTrades.Add(New PointTrades(quotesInfo.TradePrice, quotesInfo.TradeVolume, quotesInfo.TimeStamp))
                 End If
             Next
 
@@ -203,12 +203,12 @@ Public Class Page
                                            For Each form In listOfClonedForms
                                                If form IsNot Nothing Then
                                                    If form.TicksOrSeconds.SelectedItem = "Тики" Then
-                                                       If (form.pageList(0).cp.needRePaintingTrades) Then
-                                                           form.pageList(0).cp.needRePaintingTrades = False
-                                                           form.pageList(0).cp.paintingTrades(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox)
-                                                           form.pageList(0).cp.needRePaintingTrades = True
+                                                       If (form.cp.needRePaintingTrades) Then
+                                                           form.cp.needRePaintingTrades = False
+                                                           form.cp.paintingTrades(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox)
+                                                           form.cp.needRePaintingTrades = True
                                                        Else
-                                                           form.pageList(0).cp.paintingTrades(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox)
+                                                           form.cp.paintingTrades(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox)
                                                        End If
                                                    End If
                                                End If
@@ -269,25 +269,26 @@ Public Class Page
                                                    For Each form In listOfClonedForms
                                                        If Not form.IsDisposed Then
                                                            point = New PointTradesNsec(bufferTrades)
-                                                           form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point
+                                                           form.cp.pointsTrades5sec(form.cp.pointsTrades5sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades10sec)
-                                                           form.pageList(0).cp.pointsTrades10sec(form.pageList(0).cp.pointsTrades10sec.Count - 1) = point
+                                                           form.cp.pointsTrades10sec(form.cp.pointsTrades10sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades15sec)
-                                                           form.pageList(0).cp.pointsTrades15sec(form.pageList(0).cp.pointsTrades15sec.Count - 1) = point
+                                                           form.cp.pointsTrades15sec(form.cp.pointsTrades15sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades30sec)
-                                                           form.pageList(0).cp.pointsTrades30sec(form.pageList(0).cp.pointsTrades30sec.Count - 1) = point
+                                                           form.cp.pointsTrades30sec(form.cp.pointsTrades30sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades60sec)
-                                                           form.pageList(0).cp.pointsTrades60sec(form.pageList(0).cp.pointsTrades60sec.Count - 1) = point
+                                                           form.cp.pointsTrades60sec(form.cp.pointsTrades60sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades300sec)
-                                                           form.pageList(0).cp.pointsTrades300sec(form.pageList(0).cp.pointsTrades300sec.Count - 1) = point
+                                                           form.cp.pointsTrades300sec(form.cp.pointsTrades300sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades600sec)
-                                                           form.pageList(0).cp.pointsTrades600sec(form.pageList(0).cp.pointsTrades600sec.Count - 1) = point
+                                                           form.cp.pointsTrades600sec(form.cp.pointsTrades600sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades900sec)
-                                                           form.pageList(0).cp.pointsTrades900sec(form.pageList(0).cp.pointsTrades900sec.Count - 1) = point
+                                                           form.cp.pointsTrades900sec(form.cp.pointsTrades900sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades1800sec)
-                                                           form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
+                                                           form.cp.pointsTrades1800sec(form.cp.pointsTrades1800sec.Count - 1) = point
                                                            point = New PointTradesNsec(bufferTrades3600sec)
-                                                           form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
+                                                           form.cp.pointsTrades3600sec(form.cp.pointsTrades3600sec.Count - 1) = point
+                                                           form.ReCalculateLastValueMovingAvg()
                                                            Select Case form.TicksOrSeconds.SelectedItem
                                                                Case "5 секунд"
                                                                    DrawEveryTickInClonedForms(5, form)
@@ -331,12 +332,12 @@ Public Class Page
 
     Public Sub DrawEveryTickInClonedForms(N As Integer, form As Form1Clone)
         If Not form.TicksOrSeconds.SelectedItem = "Тики" Then
-            If (form.pageList(0).cp.needRePaintingTradesNsec) Then
-                form.pageList(0).cp.needRePaintingTradesNsec = False
-                form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, N)
-                form.pageList(0).cp.needRePaintingTradesNsec = True
+            If (form.cp.needRePaintingTradesNsec) Then
+                form.cp.needRePaintingTradesNsec = False
+                form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, N)
+                form.cp.needRePaintingTradesNsec = True
             Else
-                form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, N)
+                form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, N)
             End If
         End If
     End Sub
@@ -489,22 +490,35 @@ Public Class Page
             point.lowPrice = lowPrice
             point.volumeBuy = volumeBuy
             point.volumeSell = volumeSell
+            Dim pointCloned As New PointTradesNsec
+            pointCloned.time = point.time
+            pointCloned.openPrice = point.openPrice
+            pointCloned.closePrice = point.closePrice
+            pointCloned.highPrice = point.highPrice
+            pointCloned.lowPrice = point.lowPrice
+            pointCloned.volumeBuy = point.volumeBuy
+            pointCloned.volumeSell = point.volumeSell
+
             If (counterNsec = 3) Then
                 If isOnline Then
                     cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
                     ReCalculateLastValueMovingAvg()
                     Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(counterNsec * 5)
+                    newPoint.time = point.time.AddSeconds(15)
                     SetPricesInNewPoint(newPoint, point)
                     cp.pointsTrades15sec.Add(newPoint)
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades15sec(form.pageList(0).cp.pointsTrades15sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades15sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(15)
+                                                           form.cp.pointsTrades15sec(form.cp.pointsTrades15sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades15sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "15 секунд" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, counterNsec * 5)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, counterNsec * 5)
                                                            End If
                                                        End If
                                                    Next
@@ -530,11 +544,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades10sec(form.pageList(0).cp.pointsTrades10sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades10sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(10)
+                                                           form.cp.pointsTrades10sec(form.cp.pointsTrades10sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades10sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "10 секунд" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 10)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 10)
                                                            End If
                                                        End If
                                                    Next
@@ -560,11 +578,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades30sec(form.pageList(0).cp.pointsTrades30sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades30sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(30)
+                                                           form.cp.pointsTrades30sec(form.cp.pointsTrades30sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades30sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "30 секунд" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 30)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 30)
                                                            End If
                                                        End If
                                                    Next
@@ -589,11 +611,15 @@ Public Class Page
                     Me.cp.usedForm.Invoke(Sub()
                                               If listOfClonedForms.Count > 0 Then
                                                   For Each form In listOfClonedForms
-                                                      If form IsNot Nothing Then
-                                                          form.pageList(0).cp.pointsTrades60sec(form.pageList(0).cp.pointsTrades60sec.Count - 1) = point
-                                                          form.pageList(0).cp.pointsTrades60sec.Add(newPoint)
+                                                      If Not form.IsDisposed Then
+                                                          Dim newClonedPoint As New PointTradesNsec()
+                                                          newClonedPoint.time = point.time.AddSeconds(60)
+                                                          form.cp.pointsTrades60sec(form.cp.pointsTrades60sec.Count - 1) = pointCloned
+                                                          form.ReCalculateLastValueMovingAvg()
+                                                          SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                          form.cp.pointsTrades60sec.Add(newClonedPoint)
                                                           If form.TicksOrSeconds.SelectedItem = "1 минута" Then
-                                                              form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 30)
+                                                              form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 30)
                                                           End If
                                                       End If
                                                   Next
@@ -618,11 +644,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades300sec(form.pageList(0).cp.pointsTrades300sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades300sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(300)
+                                                           form.cp.pointsTrades300sec(form.cp.pointsTrades300sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades300sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "5 минут" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 300)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 300)
                                                            End If
                                                        End If
                                                    Next
@@ -647,11 +677,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades600sec(form.pageList(0).cp.pointsTrades600sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades600sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(600)
+                                                           form.cp.pointsTrades600sec(form.cp.pointsTrades600sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades600sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "10 минут" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 600)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 600)
                                                            End If
                                                        End If
                                                    Next
@@ -676,11 +710,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades900sec(form.pageList(0).cp.pointsTrades900sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades900sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(900)
+                                                           form.cp.pointsTrades900sec(form.cp.pointsTrades900sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades900sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "15 минут" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 900)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 900)
                                                            End If
                                                        End If
                                                    Next
@@ -705,11 +743,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades1800sec(form.pageList(0).cp.pointsTrades1800sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades1800sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(1800)
+                                                           form.cp.pointsTrades1800sec(form.cp.pointsTrades1800sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades1800sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "30 минут" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 1800)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 1800)
                                                            End If
                                                        End If
                                                    Next
@@ -734,11 +776,15 @@ Public Class Page
                     Me.TradesPctBox.Invoke(Sub()
                                                If listOfClonedForms.Count > 0 Then
                                                    For Each form In listOfClonedForms
-                                                       If form IsNot Nothing Then
-                                                           form.pageList(0).cp.pointsTrades3600sec(form.pageList(0).cp.pointsTrades3600sec.Count - 1) = point
-                                                           form.pageList(0).cp.pointsTrades3600sec.Add(newPoint)
+                                                       If Not form.IsDisposed Then
+                                                           Dim newClonedPoint As New PointTradesNsec()
+                                                           newClonedPoint.time = point.time.AddSeconds(3600)
+                                                           form.cp.pointsTrades3600sec(form.cp.pointsTrades3600sec.Count - 1) = pointCloned
+                                                           form.ReCalculateLastValueMovingAvg()
+                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                           form.cp.pointsTrades3600sec.Add(newClonedPoint)
                                                            If form.TicksOrSeconds.SelectedItem = "1 час" Then
-                                                               form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 3600)
+                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 3600)
                                                            End If
                                                        End If
                                                    Next
@@ -786,7 +832,7 @@ Public Class Page
             Next
         End If
 
-        
+
         pointsTradesNsec(pointsTradesNsec.Count - 1).avgBuy = movingAvgBuy.RecalculateValue(buyList)
         pointsTradesNsec(pointsTradesNsec.Count - 1).avgSell = movingAvgSell.RecalculateValue(sellList)
         pointsTradesNsec(pointsTradesNsec.Count - 1).avgBuyPlusSell = movingAvgBuyPlusSell.RecalculateValue(buyPlusSellList)
@@ -837,11 +883,16 @@ Public Class Page
             newPoint.time = point.time.AddSeconds(5)
             SetPricesInNewPoint(newPoint, point)
             cp.pointsTrades5sec.Add(newPoint)
+            Dim clonedPoint As New PointTradesNsec(buffer)
+            Dim newClonedPoint As New PointTradesNsec()
+            newClonedPoint.time = clonedPoint.time.AddSeconds(5)
             If listOfClonedForms.Count > 0 Then
                 For Each form In listOfClonedForms
                     If Not form.IsDisposed Then
-                        form.pageList(0).cp.pointsTrades5sec(form.pageList(0).cp.pointsTrades5sec.Count - 1) = point
-                        form.pageList(0).cp.pointsTrades5sec.Add(newPoint)
+                        form.cp.pointsTrades5sec(form.cp.pointsTrades5sec.Count - 1) = clonedPoint
+                        form.ReCalculateLastValueMovingAvg()
+                        SetPricesInNewPoint(newClonedPoint, clonedPoint)
+                        form.cp.pointsTrades5sec.Add(newClonedPoint)
                     End If
                 Next
             End If
@@ -916,7 +967,7 @@ Public Class Page
                                            For Each form In listOfClonedForms
                                                If Not form.IsDisposed Then
                                                    If form.TicksOrSeconds.SelectedItem = "5 секунд" Then
-                                                       form.pageList(0).cp.paintingTradesNsec(form.pageList(0).TradesPctBox, form.pageList(0).TimesTradesPctBox, form.pageList(0).PricesTradesPctBox, form.pageList(0).VolumesTradesPctBox, form.pageList(0).VolumesVolumesTradesPctBox, 5)
+                                                       form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 5)
                                                    End If
                                                End If
                                            Next
