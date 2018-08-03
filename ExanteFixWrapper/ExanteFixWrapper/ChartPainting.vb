@@ -643,6 +643,24 @@ Public Class ChartPainting
                     pointsTradesNsec = Me.pointsTrades5sec
             End Select
 
+            If (currentPointTradesNsec > pointsTradesNsec.Count) Then
+                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
+            End If
+
+            If (currentPointTradesNsec < 0) Then
+                currentPointTradesNsec = 0
+            End If
+
+            If (pointsTradesNsec.Count < pointsOnScreenTradesNsec) Then
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
+            Else
+                lastPointTradesNsec = currentPointTradesNsec + pointsOnScreenTradesNsec - 1
+            End If
+
+            If lastPointTradesNsec >= pointsTradesNsec.Count Then
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
+            End If
+
             If (Not Form1.isOnline) Then
                 needRePaintingTradesNsec = False
             End If
@@ -651,12 +669,6 @@ Public Class ChartPainting
                 If (pointsTradesNsec.Count > Me.pointsOnScreenTradesNsec) Then
                     currentPointTradesNsec += 1
                 End If
-            End If
-
-            If (pointsTradesNsec.Count < pointsOnScreenTradesNsec) Then
-                lastPointTradesNsec = pointsTradesNsec.Count - 1
-            Else
-                lastPointTradesNsec = currentPointTradesNsec + pointsOnScreenTradesNsec - 1
             End If
 
             intervalTradesNsec = TradesPctBox.Width / pointsOnScreenTradesNsec
