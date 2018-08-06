@@ -1304,14 +1304,27 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub CopyTradesNsec(pointsTradesNsec As List(Of PointTradesNsec), clonedPointsTradesNsec As List(Of PointTradesNsec))
+        For index = 0 To pointsTradesNsec.Count - 1
+            Dim newPoint As New PointTradesNsec()
+            newPoint.openPrice = pointsTradesNsec(index).openPrice
+            newPoint.closePrice = pointsTradesNsec(index).closePrice
+            newPoint.highPrice = pointsTradesNsec(index).highPrice
+            newPoint.lowPrice = pointsTradesNsec(index).lowPrice
+            newPoint.volumeBuy = pointsTradesNsec(index).volumeBuy
+            newPoint.volumeSell = pointsTradesNsec(index).volumeSell
+            newPoint.time = pointsTradesNsec(index).time
+            newPoint.avgBuy = pointsTradesNsec(index).avgBuy
+            newPoint.avgSell = pointsTradesNsec(index).avgSell
+            newPoint.avgBuyPlusSell = pointsTradesNsec(index).avgBuyPlusSell
+            clonedPointsTradesNsec.Add(newPoint)
+        Next
+    End Sub
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim cloneForm As Form1Clone = New Form1Clone()
         cloneForm.isOnline = Me.isOnline
-        'Dim newPage = New Page(New ChartPainting(cloneForm), cloneForm.QuotesPctBox0, cloneForm.PricesQuotesPctBox0, cloneForm.TimesQuotesPctBox0, cloneForm.TradesPctBox0, cloneForm.PricesTradesPctBox0, cloneForm.TimesTradesPctBox0,
-        '        cloneForm.LeftQuotesButton0, cloneForm.RightQuotesButton0, cloneForm.PlusQuotesButton0, cloneForm.MinusQuotesButton0, cloneForm.LeftTradesButton0, cloneForm.RightButtonTrades0, cloneForm.PlusTradesButton0, cloneForm.MinusTradesButton0, cloneForm.Charts0, cloneForm.VolumesTradesPctBox0, cloneForm.VolumesVolumesTradesPctBox0, Me.WindowSizeTextBox.Text)
-        'cloneForm.pageList.Add(newPage)
         cloneForm.cp = New ChartPainting(cloneForm)
-
         cloneForm.QuotesPctBox = cloneForm.QuotesPctBox0
         cloneForm.PricesQuotesPctBox = cloneForm.PricesQuotesPctBox0
         cloneForm.TimesQuotesPctBox = cloneForm.TimesQuotesPctBox0
@@ -1329,7 +1342,6 @@ Public Class Form1
         cloneForm.Chart = cloneForm.Charts0
         cloneForm.VolumesTradesPctBox = cloneForm.VolumesTradesPctBox0
         cloneForm.VolumesVolumesTradesPctBox = cloneForm.VolumesVolumesTradesPctBox0
-
         cloneForm.cp.isCloned = True
         If (Not isOnline) Then
             cloneForm.cp.pointsTrades5sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades5sec
@@ -1344,17 +1356,36 @@ Public Class Form1
             cloneForm.cp.pointsTrades3600sec = Me.pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec
         Else
             With cloneForm
-                Dim firstPointNsec As New PointTradesNsec()
-                .cp.pointsTrades5sec.Add(firstPointNsec)
-                .cp.pointsTrades10sec.Add(firstPointNsec)
-                .cp.pointsTrades15sec.Add(firstPointNsec)
-                .cp.pointsTrades30sec.Add(firstPointNsec)
-                .cp.pointsTrades60sec.Add(firstPointNsec)
-                .cp.pointsTrades300sec.Add(firstPointNsec)
-                .cp.pointsTrades600sec.Add(firstPointNsec)
-                .cp.pointsTrades900sec.Add(firstPointNsec)
-                .cp.pointsTrades1800sec.Add(firstPointNsec)
-                .cp.pointsTrades3600sec.Add(firstPointNsec)
+                Dim clonedPointsTrades5sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades10sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades15sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades30sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades60sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades300sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades600sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades900sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades1800sec As New List(Of PointTradesNsec)
+                Dim clonedPointsTrades3600sec As New List(Of PointTradesNsec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades5sec, clonedPointsTrades5sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades10sec, clonedPointsTrades10sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades15sec, clonedPointsTrades15sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades30sec, clonedPointsTrades30sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades60sec, clonedPointsTrades60sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades300sec, clonedPointsTrades300sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades600sec, clonedPointsTrades600sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades900sec, clonedPointsTrades900sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades1800sec, clonedPointsTrades1800sec)
+                CopyTradesNsec(Me.pageList(Tabs.SelectedIndex).cp.pointsTrades3600sec, clonedPointsTrades3600sec)
+                cloneForm.cp.pointsTrades5sec = clonedPointsTrades5sec
+                cloneForm.cp.pointsTrades10sec = clonedPointsTrades10sec
+                cloneForm.cp.pointsTrades15sec = clonedPointsTrades15sec
+                cloneForm.cp.pointsTrades30sec = clonedPointsTrades30sec
+                cloneForm.cp.pointsTrades60sec = clonedPointsTrades60sec
+                cloneForm.cp.pointsTrades300sec = clonedPointsTrades300sec
+                cloneForm.cp.pointsTrades600sec = clonedPointsTrades600sec
+                cloneForm.cp.pointsTrades900sec = clonedPointsTrades900sec
+                cloneForm.cp.pointsTrades1800sec = clonedPointsTrades1800sec
+                cloneForm.cp.pointsTrades3600sec = clonedPointsTrades3600sec
             End With
         End If
         cloneForm.Show()

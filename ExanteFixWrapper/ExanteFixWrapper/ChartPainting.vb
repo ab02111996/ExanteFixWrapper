@@ -986,6 +986,16 @@ Public Class ChartPainting
         Return digit
     End Function
 
+    Private Function getRank(number As Integer)
+        Dim rank As Integer = 0
+        While (number >= 1)
+            number = number / 10
+            rank += 1
+        End While
+        Return rank
+    End Function
+
+
     Private Sub Refreshing(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox)
         TradesPctBox.Refresh()
         VolumesTradesPctBox.Refresh()
@@ -1000,7 +1010,50 @@ Public Class ChartPainting
         If (index = Me.lastPointTradesNsec - 1 Or index = 0) Then
             Dim p1 As Drawing.PointF = New PointF(0.0, VolumesTradesPctBox.Height / 2)
             Dim p2 As Drawing.PointF = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
-            G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
+
+            If yRangeVolumesTradesNsec < 1 Then
+                Dim stepOfGrid As Double = 0.1
+                Dim currentValue As Double = Math.Floor(0.0)
+                While highBorderVolumesTradesNsec > currentValue
+                    Dim procents As Double = ((currentValue - 0) / yRangeVolumesTradesNsec)
+                    p1 = New PointF(0.0, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
+                    p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
+                    G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
+                    G_btmVolumesVolumes.DrawString(currentValue, font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height - VolumesVolumesTradesPctBox.Height * procents)
+                    currentValue += stepOfGrid
+                End While
+            Else
+                Dim currentValue As Integer = MakeDigitBeauty(0.0)
+                currentValue = Math.Floor(0.0)
+                Dim stepOfGrid As Integer = MakeDigitBeauty(yRangeVolumesTradesNsec / 10)
+                If yRangeVolumesTradesNsec <= 10 And yRangeVolumesTradesNsec >= 1 Then
+                    stepOfGrid = 1
+                ElseIf yRangeVolumesTradesNsec > 10 And yRangeVolumesTradesNsec <= 20 Then
+                    stepOfGrid = 2
+                ElseIf yRangeVolumesTradesNsec > 20 And yRangeVolumesTradesNsec <= 50 Then
+                    stepOfGrid = 10
+                Else
+                    Dim resOfDivision As Double = yRangeVolumesTradesNsec / 5
+                    Dim roundedResOfDivision As Integer = Math.Floor(resOfDivision)
+                    Dim rank As Integer = getRank(roundedResOfDivision)
+                    Dim numberToCompare = 5 * Math.Pow(10, rank - 1)
+
+                    If yRangeVolumesTradesNsec < numberToCompare Then
+                        stepOfGrid = Math.Pow(10, rank - 1)
+                    Else
+                        stepOfGrid = 5 * Math.Pow(10, rank - 1)
+                    End If
+                End If
+
+                For i = 1 To 10
+                    Dim procents As Double = ((currentValue - 0.0) / yRangeVolumesTradesNsec)
+                    p1 = New PointF(0.0, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
+                    p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
+                    G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
+                    G_btmVolumesVolumes.DrawString(currentValue, font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height - VolumesVolumesTradesPctBox.Height * procents)
+                    currentValue += stepOfGrid
+                Next
+            End If
 
             If yRangeTradesNsec < 1 Then
                 Dim stepOfGrid As Double = 0.1
@@ -1032,8 +1085,7 @@ Public Class ChartPainting
                     currentValue += stepOfGrid
                 Next
             End If
-            G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTradesNsec, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
-            G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTradesNsec / 2, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
+
         End If
     End Sub
 
