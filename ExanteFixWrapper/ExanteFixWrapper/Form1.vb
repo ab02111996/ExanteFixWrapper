@@ -643,6 +643,7 @@ Public Class Form1
                         pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec -= 15
                         If (pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec < pageList(Tabs.SelectedIndex).cp.minPointsOnScreenTradesNsec) Then
                             pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec = pageList(Tabs.SelectedIndex).cp.minPointsOnScreenTradesNsec
+                            Exit Sub
                         Else
                             pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = currentIndex + Math.Floor((e.X / pageList(Tabs.SelectedIndex).TradesPctBox.Width) * 15)
                             If (pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec < 0) Then

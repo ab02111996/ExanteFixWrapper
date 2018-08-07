@@ -1,11 +1,11 @@
 ﻿Imports ExanteFixWrapper.Form1
 'данный класс реализует логику отрисовки графиков
-'класс содержит три метода - отрисовка котировок и отрисовка сделок для тикового и пятисекундного графика
+'класс содержит три метода - отрисовка котировок и отрисовка сделок для тикового и N-секундного графика
 Public Class ChartPainting
     Public pointsQuotes As List(Of PointQuotes) 'список котировок
     Public pointsTrades As List(Of PointTrades) 'список сделок
     Public pointsTrades5sec As List(Of PointTradesNsec) 'список сделок для 5-секундного графика
-    Public pointsTrades10sec As List(Of PointTradesNsec)
+    Public pointsTrades10sec As List(Of PointTradesNsec) ' ниже списки сделок для всех остальных интервалов
     Public pointsTrades15sec As List(Of PointTradesNsec)
     Public pointsTrades30sec As List(Of PointTradesNsec)
     Public pointsTrades60sec As List(Of PointTradesNsec)
@@ -85,7 +85,6 @@ Public Class ChartPainting
     Public positionOfClickTrades As PointF
     Public isClickedQuotes As Boolean
     Public positionOfClickQuotes As PointF
-
 
     Public Sub New(usedForm As Form)
         'котировки - тики
@@ -618,8 +617,8 @@ Public Class ChartPainting
 
     Public Sub paintingTradesNsec(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox, N As Integer)
         Try
-            Select Case N
-                Case 5
+            Select Case N ' в момент вызова функции в качестве параметра передается N - количество секунд в необходимом интервале
+                Case 5    ' в зависимости от N в переменную pointsTradesNsec передается ссылка на массив точек по выбранному интервалу
                     pointsTradesNsec = Me.pointsTrades5sec
                 Case 10
                     pointsTradesNsec = Me.pointsTrades10sec
@@ -643,36 +642,41 @@ Public Class ChartPainting
                     pointsTradesNsec = Me.pointsTrades5sec
             End Select
 
+            ' --- удержание индексов в пределах размера массива
             If (currentPointTradesNsec > pointsTradesNsec.Count) Then
                 currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
             End If
 
-            If (currentPointTradesNsec < 0) Then
-                currentPointTradesNsec = 0
-            End If
-
             If (pointsTradesNsec.Count < pointsOnScreenTradesNsec) Then
+                currentPointTradesNsec = 0
                 lastPointTradesNsec = pointsTradesNsec.Count - 1
             Else
                 lastPointTradesNsec = currentPointTradesNsec + pointsOnScreenTradesNsec - 1
             End If
 
             If lastPointTradesNsec >= pointsTradesNsec.Count Then
+                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
                 lastPointTradesNsec = pointsTradesNsec.Count - 1
             End If
 
-            If (Not Form1.isOnline) Then
+            If (currentPointTradesNsec < 0) Then
+                currentPointTradesNsec = 0
+            End If
+            ' --------------------------------------------------
+
+            If (Not Form1.isOnline) Then ' если выбран оффлайновый режим, автоматическое смещение графика отключено
                 needRePaintingTradesNsec = False
             End If
 
-            If (needRePaintingTradesNsec) Then
+            If (needRePaintingTradesNsec) Then ' автоматическое смещение графика
                 If (pointsTradesNsec.Count > Me.pointsOnScreenTradesNsec) Then
                     currentPointTradesNsec += 1
                 End If
             End If
 
-            intervalTradesNsec = TradesPctBox.Width / pointsOnScreenTradesNsec
+            intervalTradesNsec = TradesPctBox.Width / pointsOnScreenTradesNsec ' приходящаяся на одну точку ширина в пикселях
 
+            ' --- инициализация компонентов рисования
             Dim G_Trades As Graphics = TradesPctBox.CreateGraphics
             G_Trades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             Dim btmTrades As New Bitmap(TradesPctBox.Width, TradesPctBox.Height)
@@ -712,9 +716,11 @@ Public Class ChartPainting
             Dim P_BlueLine As New Pen(Color.Blue, 1)
             Dim P_GrayLine As New Pen(Color.Gray, 0.3)
             Dim GreenBrush As New SolidBrush(Color.Green)
+            '-------------------------------------------
 
             If (pointsTradesNsec.Count > 0) Then
-                For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec - 1
+                ' --- нахождение максимальных и минимальных значений на отображаемом участке графика
+                For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
                     If (index = Me.currentPointTradesNsec) Then
                         highBorderTradesNsec = pointsTradesNsec(index).closePrice
                         lowBorderTradesNsec = pointsTradesNsec(index).closePrice
@@ -727,48 +733,29 @@ Public Class ChartPainting
                         If (pointsTradesNsec(index).closePrice < lowBorderTradesNsec) Then
                             lowBorderTradesNsec = pointsTradesNsec(index).closePrice
                         End If
-                        If (pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell > highBorderVolumesTradesNsec) Then
-                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell
-                        End If
                         If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
                             highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
                         End If
+                        If (pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell > highBorderVolumesTradesNsec) Then
+                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell
+                        End If
                     End If
                 Next
+                ' ------------------------------------------------------------------------------------
+                highBorderTradesNsec += highBorderTradesNsec * 0.0001 ' верхняя граница 
+                lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001 ' нижняя граница
+                yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec ' высота
 
-                Dim typeOfGraphic As ComboBox
+                Dim typeOfGraphic As ComboBox ' определяем, с какой формой идет работа - с основной или с клонированной
                 If (isCloned) Then
                     typeOfGraphic = CType(Me.usedForm, Form1Clone).TypeOfGraphic
                 Else
                     typeOfGraphic = CType(Me.usedForm, Form1).TypeOfGraphic
                 End If
 
+                ' на этом моменте начинается непосредственная отрисовка графиков
+                ' typeOfGraphic - комбо-бокс на форме для выбора типа графика
                 If (typeOfGraphic.SelectedItem = "Линии") Then 'тип графика - линейный
-                    For index = currentPointTradesNsec To lastPointTradesNsec
-                        If (index = currentPointTradesNsec) Then
-                            highBorderTradesNsec = pointsTradesNsec(index).closePrice
-                            lowBorderTradesNsec = pointsTradesNsec(index).closePrice
-                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
-                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
-                        Else
-                            If (pointsTradesNsec(index).closePrice > highBorderTradesNsec) Then
-                                highBorderTradesNsec = pointsTradesNsec(index).closePrice
-                            End If
-                            If (pointsTradesNsec(index).closePrice < lowBorderTradesNsec) Then
-                                lowBorderTradesNsec = pointsTradesNsec(index).closePrice
-                            End If
-                            If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
-                                highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
-                            End If
-                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
-                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
-                            End If
-                        End If
-                    Next
-                    highBorderTradesNsec += highBorderTradesNsec * 0.0001
-                    lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001
-                    yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec
-
                     For index = currentPointTradesNsec To lastPointTradesNsec - 1
                         If (pointsTradesNsec.Count > 1 And yRangeTradesNsec = 0) Then
                             Exit Sub
@@ -801,31 +788,6 @@ Public Class ChartPainting
                         DrawHorizontalLines(index, G_btmVolumes, G_btmTrades, G_btmPrices, G_btmVolumesVolumes, VolumesTradesPctBox, VolumesVolumesTradesPctBox, PricesTradesPctBox, TradesPctBox, font, brush, P_GrayLine)
                     Next
                 Else 'тип графика - японские свечи / бары
-                    For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
-                        If (index = Me.currentPointTradesNsec) Then
-                            highBorderTradesNsec = pointsTradesNsec(index).highPrice
-                            lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
-                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
-                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
-                        Else
-                            If (pointsTradesNsec(index).highPrice > highBorderTradesNsec) Then
-                                highBorderTradesNsec = pointsTradesNsec(index).highPrice
-                            End If
-                            If (pointsTradesNsec(index).lowPrice < lowBorderTradesNsec) Then
-                                lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
-                            End If
-                            If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
-                                highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
-                            End If
-                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
-                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
-                            End If
-                        End If
-                    Next
-                    highBorderTradesNsec += highBorderTradesNsec * 0.0001
-                    lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001
-                    yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec
-
                     For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
                         If (pointsTradesNsec.Count > 1 And Me.yRangeTradesNsec = 0) Then
                             Exit Sub
