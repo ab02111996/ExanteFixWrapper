@@ -655,7 +655,7 @@ Public Class ChartPainting
             End If
 
             If lastPointTradesNsec >= pointsTradesNsec.Count Then
-                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
+                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec
                 lastPointTradesNsec = pointsTradesNsec.Count - 1
             End If
 

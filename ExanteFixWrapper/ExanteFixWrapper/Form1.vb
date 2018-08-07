@@ -706,7 +706,7 @@ Public Class Form1
                 End If
                 If (pageList(Tabs.SelectedIndex).cp.isSubscribed And Not pageList(Tabs.SelectedIndex).cp.intervalTrades = 0 And Not pageList(Tabs.SelectedIndex).cp.pointsTrades.Count = 0) Then
                     Dim proportion As Double = pageList(Tabs.SelectedIndex).cp.yRangeTrades - (e.Y / pageList(Tabs.SelectedIndex).TradesPctBox.Height) * pageList(Tabs.SelectedIndex).cp.yRangeTrades
-                    'PriceLabel0.Text = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades) + proportion, "0.00")
+
                     pageList(Tabs.SelectedIndex).cp.currentTradePriceMM = Format((pageList(Tabs.SelectedIndex).cp.lowBorderTrades) + proportion, "0.00")
                     Dim indexOfPoint = CInt(Math.Floor(e.X / pageList(Tabs.SelectedIndex).cp.intervalTrades))
                     If (indexOfPoint < 0) Then
@@ -716,13 +716,6 @@ Public Class Form1
                         indexOfPoint = pageList(Tabs.SelectedIndex).cp.pointsTrades.Count - 1
                         If (indexOfPoint < 0) Then
                             indexOfPoint = 0
-                        End If
-                        'TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(indexOfPoint).time.ToLongTimeString
-                    Else
-                        If (pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint > pageList(Tabs.SelectedIndex).cp.pointsTrades.Count) Then
-                            'TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.lastPointTrades).time.ToLongTimeString
-                        Else
-                            'TimeLabel0.Text = pageList(Tabs.SelectedIndex).cp.pointsTrades(pageList(Tabs.SelectedIndex).cp.currentPointTrades + indexOfPoint).time.ToLongTimeString
                         End If
                     End If
                 End If
@@ -736,6 +729,7 @@ Public Class Form1
 
                 If (pageList(Tabs.SelectedIndex).cp.isClickedTrades) Then
                     If (e.X - pageList(Tabs.SelectedIndex).cp.positionOfClickTrades.X < -50) Then
+
                         RightTradesButton_Click(sender, e)
                         pageList(Tabs.SelectedIndex).cp.positionOfClickTrades = New PointF(e.X, e.Y)
                     End If
