@@ -1525,7 +1525,7 @@ Public Class Form1
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTrades = True
                 pageList(Tabs.SelectedIndex).cp.paintingTrades(pageList(Tabs.SelectedIndex).TradesPctBox, pageList(Tabs.SelectedIndex).TimesTradesPctBox, pageList(Tabs.SelectedIndex).PricesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesTradesPctBox, pageList(Tabs.SelectedIndex).VolumesVolumesTradesPctBox)
             Else
-                pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTradesNsec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec
+                pageList(Tabs.SelectedIndex).cp.currentPointTradesNsec = pageList(Tabs.SelectedIndex).cp.pointsTradesNsec.Count - pageList(Tabs.SelectedIndex).cp.pointsOnScreenTradesNsec - 1
                 pageList(Tabs.SelectedIndex).cp.needRePaintingTradesNsec = True
                 CaseN_AndDraw()
             End If
@@ -1546,7 +1546,7 @@ Public Class Form1
 
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        If Me.WindowState <> lastWindowState Then
+        If Me.WindowState <> lastWindowState And Me.WindowState <> Me.WindowState.Minimized Then
             lastWindowState = WindowState
             Dim deltaH, deltaW As Integer
             If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width Then
@@ -1559,6 +1559,6 @@ Public Class Form1
             currentHeight = Me.Size.Height
             currentWidth = Me.Size.Width
         End If
-        
+
     End Sub
 End Class
