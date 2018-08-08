@@ -643,24 +643,19 @@ Public Class ChartPainting
             End Select
 
             ' --- удержание индексов в пределах размера массива
-            If (currentPointTradesNsec > pointsTradesNsec.Count) Then
-                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
-            End If
-
-            If (pointsTradesNsec.Count < pointsOnScreenTradesNsec) Then
-                currentPointTradesNsec = 0
-                lastPointTradesNsec = pointsTradesNsec.Count - 1
-            Else
-                lastPointTradesNsec = currentPointTradesNsec + pointsOnScreenTradesNsec - 1
-            End If
-
-            If lastPointTradesNsec >= pointsTradesNsec.Count Then
-                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec
-                lastPointTradesNsec = pointsTradesNsec.Count - 1
-            End If
-
             If (currentPointTradesNsec < 0) Then
                 currentPointTradesNsec = 0
+            End If
+
+            If pointsTradesNsec.Count > pointsOnScreenTradesNsec Then
+                Dim numberToCompare As Integer = pointsTradesNsec.Count - pointsOnScreenTradesNsec
+                If currentPointTradesNsec > numberToCompare Then
+                    currentPointTradesNsec = numberToCompare
+                End If
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
+            Else
+                currentPointTradesNsec = 0
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
             End If
             ' --------------------------------------------------
 
@@ -742,8 +737,8 @@ Public Class ChartPainting
                     End If
                 Next
                 ' ------------------------------------------------------------------------------------
-                highBorderTradesNsec += highBorderTradesNsec * 0.0001 ' верхняя граница 
-                lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001 ' нижняя граница
+                highBorderTradesNsec += highBorderTradesNsec * 0.0003 ' верхняя граница 
+                lowBorderTradesNsec -= lowBorderTradesNsec * 0.0003 ' нижняя граница
                 yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec ' высота
 
                 Dim typeOfGraphic As ComboBox ' определяем, с какой формой идет работа - с основной или с клонированной
