@@ -437,29 +437,6 @@ Public Class Page
                 End If
             End If
 
-            'нужно убрать тонны повторяющегося кода
-            'Dim str As String 'нужно сравнить эту строку со значением в комбо боксе
-            'Select Case counterNsec
-            '    Case 2 '10 секунд
-            '        str = "10 секунд"
-            '    Case 3 '15 секунд
-            '        str = "15 секунд"
-            '    Case 6 '30 секунд
-            '        str = "30 секунд"
-            '    Case 12 '1 минута
-            '        str = "1 минута"
-            '    Case 60 '5 минут
-            '        str = "5 минут"
-            '    Case 120 '10 минут
-            '        str = "10 минут"
-            '    Case 180 '15 минут
-            '        str = "15 минут"
-            '    Case 360 '30 минут
-            '        str = "30 минут"
-            '    Case 720 '1 час
-            '        str = "1 час"
-            'End Select
-
             Dim point As New PointTradesNsec
             point.time = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).time
             point.openPrice = cp.pointsTrades5sec((count - 2) - (counterNsec - 1)).openPrice
@@ -499,306 +476,63 @@ Public Class Page
             pointCloned.volumeBuy = point.volumeBuy
             pointCloned.volumeSell = point.volumeSell
 
+            Dim key As String = ""
             If (counterNsec = 3) Then
-                If isOnline Then
-                    cp.pointsTrades15sec(cp.pointsTrades15sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(15)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades15sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(15)
-                                                           form.cp.pointsTrades15sec(form.cp.pointsTrades15sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades15sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "15 секунд" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, counterNsec * 5)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-
-                    If isOnline And ticksOrSeconds = "15 секунд" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, counterNsec * 5)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades15sec.Add(point)
-                End If
+                key = "15 секунд"
             ElseIf (counterNsec = 2) Then
-                If isOnline Then
-                    cp.pointsTrades10sec(cp.pointsTrades10sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(10)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades10sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(10)
-                                                           form.cp.pointsTrades10sec(form.cp.pointsTrades10sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades10sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "10 секунд" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 10)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-
-                    If isOnline And ticksOrSeconds = "10 секунд" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 10)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades10sec.Add(point)
-                End If
+                key = "10 секунд"
             ElseIf (counterNsec = 6) Then
-                If isOnline Then
-                    cp.pointsTrades30sec(cp.pointsTrades30sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(30)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades30sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(30)
-                                                           form.cp.pointsTrades30sec(form.cp.pointsTrades30sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades30sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "30 секунд" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 30)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "30 секунд" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 30)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades30sec.Add(point)
-                End If
+                key = "30 секунд"
             ElseIf (counterNsec = 12) Then
-                If isOnline Then
-                    cp.pointsTrades60sec(cp.pointsTrades60sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(60)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades60sec.Add(newPoint)
-                    Me.cp.usedForm.Invoke(Sub()
-                                              If listOfClonedForms.Count > 0 Then
-                                                  For Each form In listOfClonedForms
-                                                      If Not form.IsDisposed Then
-                                                          Dim newClonedPoint As New PointTradesNsec()
-                                                          newClonedPoint.time = point.time.AddSeconds(60)
-                                                          form.cp.pointsTrades60sec(form.cp.pointsTrades60sec.Count - 1) = pointCloned
-                                                          form.ReCalculateLastValueMovingAvg()
-                                                          SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                          form.cp.pointsTrades60sec.Add(newClonedPoint)
-                                                          If form.TicksOrSeconds.SelectedItem = "1 минута" Then
-                                                              form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 30)
-                                                          End If
-                                                      End If
-                                                  Next
-                                              End If
-                                          End Sub)
-                    If isOnline And ticksOrSeconds = "1 минута" And cp.needRePaintingTradesNsec Then
-                        Me.TradesPctBox.Invoke(Sub()
-                                                   cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 60)
-                                               End Sub)
-                    End If
-                Else
-                    cp.pointsTrades60sec.Add(point)
-                End If
+                key = "1 минута"
             ElseIf (counterNsec = 60) Then
-                If isOnline Then
-                    cp.pointsTrades300sec(cp.pointsTrades300sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(300)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades300sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(300)
-                                                           form.cp.pointsTrades300sec(form.cp.pointsTrades300sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades300sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "5 минут" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 300)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "5 минут" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 300)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades300sec.Add(point)
-                End If
+                key = "5 минут"
             ElseIf (counterNsec = 120) Then
-                If isOnline Then
-                    cp.pointsTrades600sec(cp.pointsTrades600sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(600)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades600sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(600)
-                                                           form.cp.pointsTrades600sec(form.cp.pointsTrades600sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades600sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "10 минут" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 600)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "10 минут" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 600)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades600sec.Add(point)
-                End If
+                key = "10 минут"
             ElseIf (counterNsec = 180) Then
-                If isOnline Then
-                    cp.pointsTrades900sec(cp.pointsTrades900sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(900)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades900sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(900)
-                                                           form.cp.pointsTrades900sec(form.cp.pointsTrades900sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades900sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "15 минут" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 900)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "15 минут" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 900)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades900sec.Add(point)
-                End If
+                key = "15 минут"
             ElseIf (counterNsec = 360) Then
-                If isOnline Then
-                    cp.pointsTrades1800sec(cp.pointsTrades1800sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(1800)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades1800sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(1800)
-                                                           form.cp.pointsTrades1800sec(form.cp.pointsTrades1800sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades1800sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "30 минут" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 1800)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "30 минут" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 1800)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades1800sec.Add(point)
-                End If
+                key = "30 минут"
             ElseIf (counterNsec = 720) Then
-                If isOnline Then
-                    cp.pointsTrades3600sec(cp.pointsTrades3600sec.Count - 1) = point
-                    ReCalculateLastValueMovingAvg()
-                    Dim newPoint As New PointTradesNsec()
-                    newPoint.time = point.time.AddSeconds(3600)
-                    SetPricesInNewPoint(newPoint, point)
-                    cp.pointsTrades3600sec.Add(newPoint)
-                    Me.TradesPctBox.Invoke(Sub()
-                                               If listOfClonedForms.Count > 0 Then
-                                                   For Each form In listOfClonedForms
-                                                       If Not form.IsDisposed Then
-                                                           Dim newClonedPoint As New PointTradesNsec()
-                                                           newClonedPoint.time = point.time.AddSeconds(3600)
-                                                           form.cp.pointsTrades3600sec(form.cp.pointsTrades3600sec.Count - 1) = pointCloned
-                                                           form.ReCalculateLastValueMovingAvg()
-                                                           SetPricesInNewPoint(newClonedPoint, pointCloned)
-                                                           form.cp.pointsTrades3600sec.Add(newClonedPoint)
-                                                           If form.TicksOrSeconds.SelectedItem = "1 час" Then
-                                                               form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, 3600)
-                                                           End If
-                                                       End If
-                                                   Next
-                                               End If
-                                           End Sub)
-                    If isOnline And ticksOrSeconds = "1 час" And cp.needRePaintingTradesNsec Then
-                        Me.cp.usedForm.Invoke(Sub()
-                                                  cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, 3600)
-                                              End Sub)
-                    End If
-                Else
-                    cp.pointsTrades3600sec.Add(point)
-                End If
+                key = "1 час"
             End If
+
+            If isOnline Then
+                Dim cnt = cp.dictionaryPointsTradesNsec(key).Count
+                cp.dictionaryPointsTradesNsec(key)(cnt - 1) = point
+                ReCalculateLastValueMovingAvg()
+                Dim newPoint As New PointTradesNsec()
+                newPoint.time = point.time.AddSeconds(counterNsec * 5)
+                SetPricesInNewPoint(newPoint, point)
+                cp.dictionaryPointsTradesNsec(key).Add(newPoint)
+                Me.TradesPctBox.Invoke(Sub()
+                                           If listOfClonedForms.Count > 0 Then
+                                               For Each form In listOfClonedForms
+                                                   If Not form.IsDisposed Then
+                                                       Dim newClonedPoint As New PointTradesNsec()
+                                                       newClonedPoint.time = point.time.AddSeconds(counterNsec * 5)
+                                                       Dim _cnt = cp.dictionaryPointsTradesNsec(key).Count
+                                                       form.cp.dictionaryPointsTradesNsec(key)(cnt - 1) = pointCloned
+                                                       form.ReCalculateLastValueMovingAvg()
+                                                       SetPricesInNewPoint(newClonedPoint, pointCloned)
+                                                       form.cp.dictionaryPointsTradesNsec(key).Add(newClonedPoint)
+                                                       If form.TicksOrSeconds.SelectedItem = key Then
+                                                           form.cp.paintingTradesNsec(form.TradesPctBox, form.TimesTradesPctBox, form.PricesTradesPctBox, form.VolumesTradesPctBox, form.VolumesVolumesTradesPctBox, counterNsec * 5)
+                                                       End If
+                                                   End If
+                                               Next
+                                           End If
+                                       End Sub)
+
+                If isOnline And ticksOrSeconds = key And cp.needRePaintingTradesNsec Then
+                    Me.cp.usedForm.Invoke(Sub()
+                                              cp.paintingTradesNsec(TradesPctBox, TimesTradesPctBox, PricesTradesPctBox, VolumesTradesPctBox, VolumesVolumesTradesPctBox, counterNsec * 5)
+                                          End Sub)
+                End If
+            Else
+                cp.dictionaryPointsTradesNsec(key).Add(point)
+            End If
+
         End If
     End Sub
     Public Sub ReCalculateLastValueMovingAvg()
@@ -877,7 +611,6 @@ Public Class Page
             Dim buffer = CType(sender, Buffer)
             Dim point As New PointTradesNsec(buffer)
             cp.pointsTrades5sec(cp.pointsTrades5sec.Count - 1) = point
-            'ReCalculateMovingAverage()
             ReCalculateLastValueMovingAvg() 'С этим методом все хорошо заработало
             Dim newPoint As New PointTradesNsec()
             newPoint.time = point.time.AddSeconds(5)
