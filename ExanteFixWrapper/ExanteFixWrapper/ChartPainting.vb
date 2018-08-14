@@ -1,11 +1,11 @@
 ﻿Imports ExanteFixWrapper.Form1
 'данный класс реализует логику отрисовки графиков
-'класс содержит три метода - отрисовка котировок и отрисовка сделок для тикового и N-секундного графика
+'класс содержит три метода - отрисовка котировок и отрисовка сделок для тикового и пятисекундного графика
 Public Class ChartPainting
     Public pointsQuotes As List(Of PointQuotes) 'список котировок
     Public pointsTrades As List(Of PointTrades) 'список сделок
     Public pointsTrades5sec As List(Of PointTradesNsec) 'список сделок для 5-секундного графика
-    Public pointsTrades10sec As List(Of PointTradesNsec) ' ниже списки сделок для всех остальных интервалов
+    Public pointsTrades10sec As List(Of PointTradesNsec)
     Public pointsTrades15sec As List(Of PointTradesNsec)
     Public pointsTrades30sec As List(Of PointTradesNsec)
     Public pointsTrades60sec As List(Of PointTradesNsec)
@@ -15,6 +15,7 @@ Public Class ChartPainting
     Public pointsTrades1800sec As List(Of PointTradesNsec)
     Public pointsTrades3600sec As List(Of PointTradesNsec)
     Public pointsTradesNsec As List(Of PointTradesNsec)
+    Public dictionaryPointsTradesNsec As Dictionary(Of String, List(Of PointTradesNsec))
     'котировки - тики
     Public pointsOnScreenQuotes As Integer 'количество точек на экране
     Public intervalQuotes As Double 'интервал, приходящийся на одну точку графика в пикселях (по оси Х)
@@ -86,6 +87,7 @@ Public Class ChartPainting
     Public isClickedQuotes As Boolean
     Public positionOfClickQuotes As PointF
 
+
     Public Sub New(usedForm As Form)
         'котировки - тики
         Me.pointsQuotes = New List(Of PointQuotes)
@@ -113,6 +115,17 @@ Public Class ChartPainting
         Me.pointsTrades900sec = New List(Of PointTradesNsec)
         Me.pointsTrades1800sec = New List(Of PointTradesNsec)
         Me.pointsTrades3600sec = New List(Of PointTradesNsec)
+        Me.dictionaryPointsTradesNsec = New Dictionary(Of String, List(Of PointTradesNsec))
+        Me.dictionaryPointsTradesNsec.Add("5 секунд", Me.pointsTrades5sec)
+        Me.dictionaryPointsTradesNsec.Add("10 секунд", Me.pointsTrades10sec)
+        Me.dictionaryPointsTradesNsec.Add("15 секунд", Me.pointsTrades15sec)
+        Me.dictionaryPointsTradesNsec.Add("30 секунд", Me.pointsTrades30sec)
+        Me.dictionaryPointsTradesNsec.Add("1 минута", Me.pointsTrades60sec)
+        Me.dictionaryPointsTradesNsec.Add("5 минут", Me.pointsTrades300sec)
+        Me.dictionaryPointsTradesNsec.Add("10 минут", Me.pointsTrades600sec)
+        Me.dictionaryPointsTradesNsec.Add("15 минут", Me.pointsTrades900sec)
+        Me.dictionaryPointsTradesNsec.Add("30 минут", Me.pointsTrades1800sec)
+        Me.dictionaryPointsTradesNsec.Add("1 час", Me.pointsTrades3600sec)
         Me.pointsOnScreenTradesNsec = 40
         Me.currentPointTradesNsec = 0
         Me.needRePaintingTradesNsec = True
@@ -617,8 +630,8 @@ Public Class ChartPainting
 
     Public Sub paintingTradesNsec(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox, N As Integer)
         Try
-            Select Case N ' в момент вызова функции в качестве параметра передается N - количество секунд в необходимом интервале
-                Case 5    ' в зависимости от N в переменную pointsTradesNsec передается ссылка на массив точек по выбранному интервалу
+            Select Case N
+                Case 5
                     pointsTradesNsec = Me.pointsTrades5sec
                 Case 10
                     pointsTradesNsec = Me.pointsTrades10sec
@@ -642,41 +655,35 @@ Public Class ChartPainting
                     pointsTradesNsec = Me.pointsTrades5sec
             End Select
 
-            ' --- удержание индексов в пределах размера массива
-            If (currentPointTradesNsec > pointsTradesNsec.Count) Then
-                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec - 1
-            End If
-
-            If (pointsTradesNsec.Count < pointsOnScreenTradesNsec) Then
-                currentPointTradesNsec = 0
-                lastPointTradesNsec = pointsTradesNsec.Count - 1
-            Else
-                lastPointTradesNsec = currentPointTradesNsec + pointsOnScreenTradesNsec - 1
-            End If
-
-            If lastPointTradesNsec >= pointsTradesNsec.Count Then
-                currentPointTradesNsec = pointsTradesNsec.Count - pointsOnScreenTradesNsec
-                lastPointTradesNsec = pointsTradesNsec.Count - 1
-            End If
-
-            If (currentPointTradesNsec < 0) Then
-                currentPointTradesNsec = 0
-            End If
-            ' --------------------------------------------------
-
-            If (Not Form1.isOnline) Then ' если выбран оффлайновый режим, автоматическое смещение графика отключено
+            If (Not Form1.isOnline) Then
                 needRePaintingTradesNsec = False
             End If
 
-            If (needRePaintingTradesNsec) Then ' автоматическое смещение графика
+            If (needRePaintingTradesNsec) Then
                 If (pointsTradesNsec.Count > Me.pointsOnScreenTradesNsec) Then
                     currentPointTradesNsec += 1
                 End If
             End If
 
-            intervalTradesNsec = TradesPctBox.Width / pointsOnScreenTradesNsec ' приходящаяся на одну точку ширина в пикселях
+            ' --- удержание индексов в пределах размера массива
+            If (currentPointTradesNsec < 0) Then
+                currentPointTradesNsec = 0
+            End If
 
-            ' --- инициализация компонентов рисования
+            If pointsTradesNsec.Count > pointsOnScreenTradesNsec Then
+                Dim numberToCompare As Integer = pointsTradesNsec.Count - pointsOnScreenTradesNsec
+                If currentPointTradesNsec > numberToCompare Then
+                    currentPointTradesNsec = numberToCompare
+                End If
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
+            Else
+                currentPointTradesNsec = 0
+                lastPointTradesNsec = pointsTradesNsec.Count - 1
+            End If
+            ' --------------------------------------------------
+
+            intervalTradesNsec = TradesPctBox.Width / pointsOnScreenTradesNsec
+
             Dim G_Trades As Graphics = TradesPctBox.CreateGraphics
             G_Trades.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             Dim btmTrades As New Bitmap(TradesPctBox.Width, TradesPctBox.Height)
@@ -716,11 +723,9 @@ Public Class ChartPainting
             Dim P_BlueLine As New Pen(Color.Blue, 1)
             Dim P_GrayLine As New Pen(Color.Gray, 0.3)
             Dim GreenBrush As New SolidBrush(Color.Green)
-            '-------------------------------------------
 
             If (pointsTradesNsec.Count > 0) Then
-                ' --- нахождение максимальных и минимальных значений на отображаемом участке графика
-                For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
+                For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec - 1
                     If (index = Me.currentPointTradesNsec) Then
                         highBorderTradesNsec = pointsTradesNsec(index).closePrice
                         lowBorderTradesNsec = pointsTradesNsec(index).closePrice
@@ -733,29 +738,48 @@ Public Class ChartPainting
                         If (pointsTradesNsec(index).closePrice < lowBorderTradesNsec) Then
                             lowBorderTradesNsec = pointsTradesNsec(index).closePrice
                         End If
-                        If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
-                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
-                        End If
                         If (pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell > highBorderVolumesTradesNsec) Then
                             highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeBuy + pointsTradesNsec(index).volumeSell
                         End If
+                        If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
+                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                        End If
                     End If
                 Next
-                ' ------------------------------------------------------------------------------------
-                highBorderTradesNsec += highBorderTradesNsec * 0.0001 ' верхняя граница 
-                lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001 ' нижняя граница
-                yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec ' высота
 
-                Dim typeOfGraphic As ComboBox ' определяем, с какой формой идет работа - с основной или с клонированной
+                Dim typeOfGraphic As ComboBox
                 If (isCloned) Then
                     typeOfGraphic = CType(Me.usedForm, Form1Clone).TypeOfGraphic
                 Else
                     typeOfGraphic = CType(Me.usedForm, Form1).TypeOfGraphic
                 End If
 
-                ' на этом моменте начинается непосредственная отрисовка графиков
-                ' typeOfGraphic - комбо-бокс на форме для выбора типа графика
                 If (typeOfGraphic.SelectedItem = "Линии") Then 'тип графика - линейный
+                    For index = currentPointTradesNsec To lastPointTradesNsec
+                        If (index = currentPointTradesNsec) Then
+                            highBorderTradesNsec = pointsTradesNsec(index).closePrice
+                            lowBorderTradesNsec = pointsTradesNsec(index).closePrice
+                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
+                        Else
+                            If (pointsTradesNsec(index).closePrice > highBorderTradesNsec) Then
+                                highBorderTradesNsec = pointsTradesNsec(index).closePrice
+                            End If
+                            If (pointsTradesNsec(index).closePrice < lowBorderTradesNsec) Then
+                                lowBorderTradesNsec = pointsTradesNsec(index).closePrice
+                            End If
+                            If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
+                                highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            End If
+                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
+                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
+                            End If
+                        End If
+                    Next
+                    highBorderTradesNsec += highBorderTradesNsec * 0.0001
+                    lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001
+                    yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec
+
                     For index = currentPointTradesNsec To lastPointTradesNsec - 1
                         If (pointsTradesNsec.Count > 1 And yRangeTradesNsec = 0) Then
                             Exit Sub
@@ -788,6 +812,31 @@ Public Class ChartPainting
                         DrawHorizontalLines(index, G_btmVolumes, G_btmTrades, G_btmPrices, G_btmVolumesVolumes, VolumesTradesPctBox, VolumesVolumesTradesPctBox, PricesTradesPctBox, TradesPctBox, font, brush, P_GrayLine)
                     Next
                 Else 'тип графика - японские свечи / бары
+                    For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
+                        If (index = Me.currentPointTradesNsec) Then
+                            highBorderTradesNsec = pointsTradesNsec(index).highPrice
+                            lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
+                            highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
+                        Else
+                            If (pointsTradesNsec(index).highPrice > highBorderTradesNsec) Then
+                                highBorderTradesNsec = pointsTradesNsec(index).highPrice
+                            End If
+                            If (pointsTradesNsec(index).lowPrice < lowBorderTradesNsec) Then
+                                lowBorderTradesNsec = pointsTradesNsec(index).lowPrice
+                            End If
+                            If (pointsTradesNsec(index).avgBuyPlusSell > highBorderVolumesTradesAvgNsec) Then
+                                highBorderVolumesTradesAvgNsec = pointsTradesNsec(index).avgBuyPlusSell
+                            End If
+                            If pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy > highBorderVolumesTradesNsec Then
+                                highBorderVolumesTradesNsec = pointsTradesNsec(index).volumeSell + pointsTradesNsec(index).volumeBuy
+                            End If
+                        End If
+                    Next
+                    highBorderTradesNsec += highBorderTradesNsec * 0.0001
+                    lowBorderTradesNsec -= lowBorderTradesNsec * 0.0001
+                    yRangeTradesNsec = highBorderTradesNsec - lowBorderTradesNsec
+
                     For index = Me.currentPointTradesNsec To Me.lastPointTradesNsec
                         If (pointsTradesNsec.Count > 1 And Me.yRangeTradesNsec = 0) Then
                             Exit Sub
@@ -960,16 +1009,6 @@ Public Class ChartPainting
         Return digit
     End Function
 
-    Private Function getRank(number As Integer)
-        Dim rank As Integer = 0
-        While (number >= 1)
-            number = number / 10
-            rank += 1
-        End While
-        Return rank
-    End Function
-
-
     Private Sub Refreshing(TradesPctBox As PictureBox, TimesTradesPctBox As PictureBox, PricesTradesPctBox As PictureBox, VolumesTradesPctBox As PictureBox, VolumesVolumesTradesPctBox As PictureBox)
         TradesPctBox.Refresh()
         VolumesTradesPctBox.Refresh()
@@ -984,50 +1023,7 @@ Public Class ChartPainting
         If (index = Me.lastPointTradesNsec - 1 Or index = 0) Then
             Dim p1 As Drawing.PointF = New PointF(0.0, VolumesTradesPctBox.Height / 2)
             Dim p2 As Drawing.PointF = New PointF(VolumesTradesPctBox.Width * 1.0, VolumesTradesPctBox.Height / 2)
-
-            If yRangeVolumesTradesNsec < 1 Then
-                Dim stepOfGrid As Double = 0.1
-                Dim currentValue As Double = Math.Floor(0.0)
-                While highBorderVolumesTradesNsec > currentValue
-                    Dim procents As Double = ((currentValue - 0) / yRangeVolumesTradesNsec)
-                    p1 = New PointF(0.0, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
-                    p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
-                    G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
-                    G_btmVolumesVolumes.DrawString(currentValue, font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height - VolumesVolumesTradesPctBox.Height * procents)
-                    currentValue += stepOfGrid
-                End While
-            Else
-                Dim currentValue As Integer = MakeDigitBeauty(0.0)
-                currentValue = Math.Floor(0.0)
-                Dim stepOfGrid As Integer = MakeDigitBeauty(yRangeVolumesTradesNsec / 10)
-                If yRangeVolumesTradesNsec <= 10 And yRangeVolumesTradesNsec >= 1 Then
-                    stepOfGrid = 1
-                ElseIf yRangeVolumesTradesNsec > 10 And yRangeVolumesTradesNsec <= 20 Then
-                    stepOfGrid = 2
-                ElseIf yRangeVolumesTradesNsec > 20 And yRangeVolumesTradesNsec <= 50 Then
-                    stepOfGrid = 10
-                Else
-                    Dim resOfDivision As Double = yRangeVolumesTradesNsec / 5
-                    Dim roundedResOfDivision As Integer = Math.Floor(resOfDivision)
-                    Dim rank As Integer = getRank(roundedResOfDivision)
-                    Dim numberToCompare = 5 * Math.Pow(10, rank - 1)
-
-                    If yRangeVolumesTradesNsec < numberToCompare Then
-                        stepOfGrid = Math.Pow(10, rank - 1)
-                    Else
-                        stepOfGrid = 5 * Math.Pow(10, rank - 1)
-                    End If
-                End If
-
-                For i = 1 To 10
-                    Dim procents As Double = ((currentValue - 0.0) / yRangeVolumesTradesNsec)
-                    p1 = New PointF(0.0, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
-                    p2 = New PointF(VolumesTradesPctBox.Width, VolumesTradesPctBox.Height - VolumesTradesPctBox.Height * procents)
-                    G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
-                    G_btmVolumesVolumes.DrawString(currentValue, font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height - VolumesVolumesTradesPctBox.Height * procents)
-                    currentValue += stepOfGrid
-                Next
-            End If
+            G_btmVolumes.DrawLine(P_GrayLine, p1, p2)
 
             If yRangeTradesNsec < 1 Then
                 Dim stepOfGrid As Double = 0.1
@@ -1059,7 +1055,8 @@ Public Class ChartPainting
                     currentValue += stepOfGrid
                 Next
             End If
-
+            G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTradesNsec, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, 7)
+            G_btmVolumesVolumes.DrawString(Format(highBorderVolumesTradesNsec / 2, "0.00"), font, brush, VolumesVolumesTradesPctBox.Width / 2 - 15, VolumesVolumesTradesPctBox.Height / 2)
         End If
     End Sub
 
