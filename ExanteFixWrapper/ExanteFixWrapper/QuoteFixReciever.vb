@@ -8,7 +8,7 @@ Public Class QuoteFixReciever
     Dim settings As SessionSettings
     Dim application As QuickFIXFeedApplication
     Dim currentState As Boolean
-    Delegate Sub UpdateConnectionStateCallBack(State As Boolean, ThreadAlive As Boolean)
+    Delegate Sub UpdateConnectionStateCallBack(State As Boolean)
     Public updateConnStateCallback As UpdateConnectionStateCallBack
     Dim updateConnStatusThread As Thread
     Public Sub New(fixFeedConfigPath As String, updStateCallback As UpdateConnectionStateCallBack)
@@ -35,10 +35,16 @@ Public Class QuoteFixReciever
     End Sub
     Sub Logout()
         Try
-            Session.lookupSession(application.sessionid).logout()
+            Dim copySubscribeInfo = New List(Of SubscribeInfo)
+            copySubscribeInfo.AddRange(application.subscribeInfos)
+            For Each info In copySubscribeInfo
+                UnsubscribeForQuotes(info)
+            Next
+            updateConnStatusThread.Abort()
+            updateConnStatusThread.Join()
             updateConnStatusThread = Nothing
         Catch ex As Exception
-
+            Console.WriteLine("Logout errors")
         End Try
     End Sub
 
@@ -97,13 +103,10 @@ Public Class QuoteFixReciever
             If isConnected() <> currentState Then
                 currentState = isConnected()
                 If updateConnStatusThread IsNot Nothing Then
-                    updateConnStateCallback.Invoke(currentState, True)
+                    updateConnStateCallback.Invoke(currentState)
                 Else
-                    updateConnStateCallback.Invoke(currentState, False)
                     Exit While
                 End If
-
-
             End If
         End While
     End Sub

@@ -68,6 +68,10 @@ Partial Class Form1
         Me.SetSensitivityButton = New System.Windows.Forms.Button()
         Me.SetSensitivityTextBox = New System.Windows.Forms.TextBox()
         Me.SetSensitivityLabel = New System.Windows.Forms.Label()
+        Me.BuyOrderButton = New System.Windows.Forms.Button()
+        Me.QuantityTextBox = New System.Windows.Forms.TextBox()
+        Me.SellOrderButton = New System.Windows.Forms.Button()
+        Me.ListViewOrders = New System.Windows.Forms.ListView()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -104,8 +108,8 @@ Partial Class Form1
         '
         'DrawLine0
         '
-        Me.DrawLine0.Location = New System.Drawing.Point(1082, 59)
-        Me.DrawLine0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DrawLine0.Location = New System.Drawing.Point(455, 83)
+        Me.DrawLine0.Margin = New System.Windows.Forms.Padding(2)
         Me.DrawLine0.Name = "DrawLine0"
         Me.DrawLine0.Size = New System.Drawing.Size(159, 24)
         Me.DrawLine0.TabIndex = 32
@@ -176,7 +180,7 @@ Partial Class Form1
         'AddTab
         '
         Me.AddTab.Location = New System.Drawing.Point(17, 38)
-        Me.AddTab.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.AddTab.Margin = New System.Windows.Forms.Padding(2)
         Me.AddTab.Name = "AddTab"
         Me.AddTab.Size = New System.Drawing.Size(175, 21)
         Me.AddTab.TabIndex = 43
@@ -187,9 +191,9 @@ Partial Class Form1
         '
         Me.TabPage0.Controls.Add(Me.Charts0)
         Me.TabPage0.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage0.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage0.Name = "TabPage0"
-        Me.TabPage0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage0.Padding = New System.Windows.Forms.Padding(2)
         Me.TabPage0.Size = New System.Drawing.Size(1280, 684)
         Me.TabPage0.TabIndex = 0
         Me.TabPage0.Text = "TabPage0"
@@ -200,7 +204,7 @@ Partial Class Form1
         Me.Charts0.Controls.Add(Me.QuotesTab0)
         Me.Charts0.Controls.Add(Me.TradesTab0)
         Me.Charts0.Location = New System.Drawing.Point(2, 3)
-        Me.Charts0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Charts0.Margin = New System.Windows.Forms.Padding(2)
         Me.Charts0.Name = "Charts0"
         Me.Charts0.SelectedIndex = 0
         Me.Charts0.Size = New System.Drawing.Size(1273, 651)
@@ -216,9 +220,9 @@ Partial Class Form1
         Me.QuotesTab0.Controls.Add(Me.LeftQuotesButton0)
         Me.QuotesTab0.Controls.Add(Me.TimesQuotesPctBox0)
         Me.QuotesTab0.Location = New System.Drawing.Point(4, 22)
-        Me.QuotesTab0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.QuotesTab0.Margin = New System.Windows.Forms.Padding(2)
         Me.QuotesTab0.Name = "QuotesTab0"
-        Me.QuotesTab0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.QuotesTab0.Padding = New System.Windows.Forms.Padding(2)
         Me.QuotesTab0.Size = New System.Drawing.Size(1265, 625)
         Me.QuotesTab0.TabIndex = 0
         Me.QuotesTab0.Text = "Аск / Бид"
@@ -227,7 +231,7 @@ Partial Class Form1
         'PricesQuotesPctBox0
         '
         Me.PricesQuotesPctBox0.Location = New System.Drawing.Point(2, 0)
-        Me.PricesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PricesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.PricesQuotesPctBox0.Name = "PricesQuotesPctBox0"
         Me.PricesQuotesPctBox0.Size = New System.Drawing.Size(79, 591)
         Me.PricesQuotesPctBox0.TabIndex = 20
@@ -236,7 +240,7 @@ Partial Class Form1
         'MinusQuotesButton0
         '
         Me.MinusQuotesButton0.Location = New System.Drawing.Point(1226, 273)
-        Me.MinusQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MinusQuotesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.MinusQuotesButton0.Name = "MinusQuotesButton0"
         Me.MinusQuotesButton0.Size = New System.Drawing.Size(35, 258)
         Me.MinusQuotesButton0.TabIndex = 29
@@ -246,7 +250,7 @@ Partial Class Form1
         'QuotesPctBox0
         '
         Me.QuotesPctBox0.Location = New System.Drawing.Point(81, 0)
-        Me.QuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.QuotesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.QuotesPctBox0.Name = "QuotesPctBox0"
         Me.QuotesPctBox0.Size = New System.Drawing.Size(1184, 591)
         Me.QuotesPctBox0.TabIndex = 18
@@ -255,7 +259,7 @@ Partial Class Form1
         'PlusQuotesButton0
         '
         Me.PlusQuotesButton0.Location = New System.Drawing.Point(1226, 2)
-        Me.PlusQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PlusQuotesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.PlusQuotesButton0.Name = "PlusQuotesButton0"
         Me.PlusQuotesButton0.Size = New System.Drawing.Size(36, 266)
         Me.PlusQuotesButton0.TabIndex = 28
@@ -265,7 +269,7 @@ Partial Class Form1
         'RightQuotesButton0
         '
         Me.RightQuotesButton0.Location = New System.Drawing.Point(652, 596)
-        Me.RightQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RightQuotesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.RightQuotesButton0.Name = "RightQuotesButton0"
         Me.RightQuotesButton0.Size = New System.Drawing.Size(556, 27)
         Me.RightQuotesButton0.TabIndex = 27
@@ -275,7 +279,7 @@ Partial Class Form1
         'LeftQuotesButton0
         '
         Me.LeftQuotesButton0.Location = New System.Drawing.Point(81, 596)
-        Me.LeftQuotesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.LeftQuotesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.LeftQuotesButton0.Name = "LeftQuotesButton0"
         Me.LeftQuotesButton0.Size = New System.Drawing.Size(580, 27)
         Me.LeftQuotesButton0.TabIndex = 26
@@ -285,7 +289,7 @@ Partial Class Form1
         'TimesQuotesPctBox0
         '
         Me.TimesQuotesPctBox0.Location = New System.Drawing.Point(80, 594)
-        Me.TimesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TimesQuotesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.TimesQuotesPctBox0.Name = "TimesQuotesPctBox0"
         Me.TimesQuotesPctBox0.Size = New System.Drawing.Size(1182, 29)
         Me.TimesQuotesPctBox0.TabIndex = 22
@@ -304,9 +308,9 @@ Partial Class Form1
         Me.TradesTab0.Controls.Add(Me.TimesTradesPctBox0)
         Me.TradesTab0.Controls.Add(Me.LeftTradesButton0)
         Me.TradesTab0.Location = New System.Drawing.Point(4, 22)
-        Me.TradesTab0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TradesTab0.Margin = New System.Windows.Forms.Padding(2)
         Me.TradesTab0.Name = "TradesTab0"
-        Me.TradesTab0.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TradesTab0.Padding = New System.Windows.Forms.Padding(2)
         Me.TradesTab0.Size = New System.Drawing.Size(1265, 625)
         Me.TradesTab0.TabIndex = 1
         Me.TradesTab0.Text = "Сделки"
@@ -316,7 +320,7 @@ Partial Class Form1
         '
         Me.BorderPctBox.BackColor = System.Drawing.Color.LightGray
         Me.BorderPctBox.Location = New System.Drawing.Point(80, 345)
-        Me.BorderPctBox.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BorderPctBox.Margin = New System.Windows.Forms.Padding(2)
         Me.BorderPctBox.Name = "BorderPctBox"
         Me.BorderPctBox.Size = New System.Drawing.Size(1180, 4)
         Me.BorderPctBox.TabIndex = 40
@@ -325,7 +329,7 @@ Partial Class Form1
         'VolumesVolumesTradesPctBox0
         '
         Me.VolumesVolumesTradesPctBox0.Location = New System.Drawing.Point(2, 350)
-        Me.VolumesVolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.VolumesVolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.VolumesVolumesTradesPctBox0.Name = "VolumesVolumesTradesPctBox0"
         Me.VolumesVolumesTradesPctBox0.Size = New System.Drawing.Size(79, 240)
         Me.VolumesVolumesTradesPctBox0.TabIndex = 39
@@ -334,7 +338,7 @@ Partial Class Form1
         'VolumesTradesPctBox0
         '
         Me.VolumesTradesPctBox0.Location = New System.Drawing.Point(81, 350)
-        Me.VolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.VolumesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.VolumesTradesPctBox0.Name = "VolumesTradesPctBox0"
         Me.VolumesTradesPctBox0.Size = New System.Drawing.Size(1179, 240)
         Me.VolumesTradesPctBox0.TabIndex = 38
@@ -343,7 +347,7 @@ Partial Class Form1
         'PricesTradesPctBox0
         '
         Me.PricesTradesPctBox0.Location = New System.Drawing.Point(2, 0)
-        Me.PricesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PricesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.PricesTradesPctBox0.Name = "PricesTradesPctBox0"
         Me.PricesTradesPctBox0.Size = New System.Drawing.Size(79, 345)
         Me.PricesTradesPctBox0.TabIndex = 37
@@ -352,7 +356,7 @@ Partial Class Form1
         'MinusTradesButton0
         '
         Me.MinusTradesButton0.Location = New System.Drawing.Point(1226, 287)
-        Me.MinusTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MinusTradesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.MinusTradesButton0.Name = "MinusTradesButton0"
         Me.MinusTradesButton0.Size = New System.Drawing.Size(35, 280)
         Me.MinusTradesButton0.TabIndex = 36
@@ -362,7 +366,7 @@ Partial Class Form1
         'TradesPctBox0
         '
         Me.TradesPctBox0.Location = New System.Drawing.Point(81, 0)
-        Me.TradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TradesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.TradesPctBox0.Name = "TradesPctBox0"
         Me.TradesPctBox0.Size = New System.Drawing.Size(1179, 345)
         Me.TradesPctBox0.TabIndex = 30
@@ -371,7 +375,7 @@ Partial Class Form1
         'PlusTradesButton0
         '
         Me.PlusTradesButton0.Location = New System.Drawing.Point(1226, 5)
-        Me.PlusTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PlusTradesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.PlusTradesButton0.Name = "PlusTradesButton0"
         Me.PlusTradesButton0.Size = New System.Drawing.Size(36, 277)
         Me.PlusTradesButton0.TabIndex = 35
@@ -381,7 +385,7 @@ Partial Class Form1
         'RightButtonTrades0
         '
         Me.RightButtonTrades0.Location = New System.Drawing.Point(652, 596)
-        Me.RightButtonTrades0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RightButtonTrades0.Margin = New System.Windows.Forms.Padding(2)
         Me.RightButtonTrades0.Name = "RightButtonTrades0"
         Me.RightButtonTrades0.Size = New System.Drawing.Size(569, 27)
         Me.RightButtonTrades0.TabIndex = 34
@@ -391,7 +395,7 @@ Partial Class Form1
         'TimesTradesPctBox0
         '
         Me.TimesTradesPctBox0.Location = New System.Drawing.Point(80, 593)
-        Me.TimesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TimesTradesPctBox0.Margin = New System.Windows.Forms.Padding(2)
         Me.TimesTradesPctBox0.Name = "TimesTradesPctBox0"
         Me.TimesTradesPctBox0.Size = New System.Drawing.Size(1179, 29)
         Me.TimesTradesPctBox0.TabIndex = 32
@@ -400,7 +404,7 @@ Partial Class Form1
         'LeftTradesButton0
         '
         Me.LeftTradesButton0.Location = New System.Drawing.Point(81, 593)
-        Me.LeftTradesButton0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.LeftTradesButton0.Margin = New System.Windows.Forms.Padding(2)
         Me.LeftTradesButton0.Name = "LeftTradesButton0"
         Me.LeftTradesButton0.Size = New System.Drawing.Size(567, 27)
         Me.LeftTradesButton0.TabIndex = 33
@@ -410,8 +414,8 @@ Partial Class Form1
         'Tabs
         '
         Me.Tabs.Controls.Add(Me.TabPage0)
-        Me.Tabs.Location = New System.Drawing.Point(17, 86)
-        Me.Tabs.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Tabs.Location = New System.Drawing.Point(17, 97)
+        Me.Tabs.Margin = New System.Windows.Forms.Padding(2)
         Me.Tabs.Name = "Tabs"
         Me.Tabs.SelectedIndex = 0
         Me.Tabs.Size = New System.Drawing.Size(1288, 710)
@@ -422,7 +426,7 @@ Partial Class Form1
         Me.TicksOrSeconds.FormattingEnabled = True
         Me.TicksOrSeconds.Items.AddRange(New Object() {"Тики", "5 секунд", "10 секунд", "15 секунд", "30 секунд", "1 минута", "5 минут", "10 минут", "15 минут", "30 минут", "1 час"})
         Me.TicksOrSeconds.Location = New System.Drawing.Point(198, 37)
-        Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TicksOrSeconds.Margin = New System.Windows.Forms.Padding(2)
         Me.TicksOrSeconds.Name = "TicksOrSeconds"
         Me.TicksOrSeconds.Size = New System.Drawing.Size(170, 21)
         Me.TicksOrSeconds.TabIndex = 44
@@ -432,7 +436,7 @@ Partial Class Form1
         Me.TypeOfGraphic.FormattingEnabled = True
         Me.TypeOfGraphic.Items.AddRange(New Object() {"Линии", "Японские свечи", "Бары"})
         Me.TypeOfGraphic.Location = New System.Drawing.Point(198, 64)
-        Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TypeOfGraphic.Margin = New System.Windows.Forms.Padding(2)
         Me.TypeOfGraphic.Name = "TypeOfGraphic"
         Me.TypeOfGraphic.Size = New System.Drawing.Size(171, 21)
         Me.TypeOfGraphic.TabIndex = 45
@@ -450,7 +454,7 @@ Partial Class Form1
         '
         Me.BuyAndSell.AutoSize = True
         Me.BuyAndSell.Location = New System.Drawing.Point(502, 63)
-        Me.BuyAndSell.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BuyAndSell.Margin = New System.Windows.Forms.Padding(2)
         Me.BuyAndSell.Name = "BuyAndSell"
         Me.BuyAndSell.Size = New System.Drawing.Size(173, 17)
         Me.BuyAndSell.TabIndex = 47
@@ -462,7 +466,7 @@ Partial Class Form1
         '
         Me.BuyPlusSell.AutoSize = True
         Me.BuyPlusSell.Location = New System.Drawing.Point(377, 63)
-        Me.BuyPlusSell.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BuyPlusSell.Margin = New System.Windows.Forms.Padding(2)
         Me.BuyPlusSell.Name = "BuyPlusSell"
         Me.BuyPlusSell.Size = New System.Drawing.Size(120, 17)
         Me.BuyPlusSell.TabIndex = 49
@@ -476,7 +480,7 @@ Partial Class Form1
         Me.Original.Checked = True
         Me.Original.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Original.Location = New System.Drawing.Point(502, 37)
-        Me.Original.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Original.Margin = New System.Windows.Forms.Padding(2)
         Me.Original.Name = "Original"
         Me.Original.Size = New System.Drawing.Size(69, 17)
         Me.Original.TabIndex = 50
@@ -487,7 +491,7 @@ Partial Class Form1
         '
         Me.Average.AutoSize = True
         Me.Average.Location = New System.Drawing.Point(377, 36)
-        Me.Average.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Average.Margin = New System.Windows.Forms.Padding(2)
         Me.Average.Name = "Average"
         Me.Average.Size = New System.Drawing.Size(105, 17)
         Me.Average.TabIndex = 51
@@ -497,7 +501,7 @@ Partial Class Form1
         'WindowSizeTextBox
         '
         Me.WindowSizeTextBox.Location = New System.Drawing.Point(604, 10)
-        Me.WindowSizeTextBox.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.WindowSizeTextBox.Margin = New System.Windows.Forms.Padding(2)
         Me.WindowSizeTextBox.Name = "WindowSizeTextBox"
         Me.WindowSizeTextBox.Size = New System.Drawing.Size(29, 20)
         Me.WindowSizeTextBox.TabIndex = 52
@@ -506,7 +510,7 @@ Partial Class Form1
         'WindowSizeBtn
         '
         Me.WindowSizeBtn.Location = New System.Drawing.Point(636, 8)
-        Me.WindowSizeBtn.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.WindowSizeBtn.Margin = New System.Windows.Forms.Padding(2)
         Me.WindowSizeBtn.Name = "WindowSizeBtn"
         Me.WindowSizeBtn.Size = New System.Drawing.Size(88, 22)
         Me.WindowSizeBtn.TabIndex = 53
@@ -515,8 +519,8 @@ Partial Class Form1
         '
         'ToEndButton
         '
-        Me.ToEndButton.Location = New System.Drawing.Point(1246, 61)
-        Me.ToEndButton.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ToEndButton.Location = New System.Drawing.Point(618, 84)
+        Me.ToEndButton.Margin = New System.Windows.Forms.Padding(2)
         Me.ToEndButton.Name = "ToEndButton"
         Me.ToEndButton.Size = New System.Drawing.Size(56, 23)
         Me.ToEndButton.TabIndex = 54
@@ -537,7 +541,7 @@ Partial Class Form1
         'SetSensitivityButton
         '
         Me.SetSensitivityButton.Location = New System.Drawing.Point(958, 9)
-        Me.SetSensitivityButton.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SetSensitivityButton.Margin = New System.Windows.Forms.Padding(2)
         Me.SetSensitivityButton.Name = "SetSensitivityButton"
         Me.SetSensitivityButton.Size = New System.Drawing.Size(74, 23)
         Me.SetSensitivityButton.TabIndex = 56
@@ -547,7 +551,7 @@ Partial Class Form1
         'SetSensitivityTextBox
         '
         Me.SetSensitivityTextBox.Location = New System.Drawing.Point(904, 10)
-        Me.SetSensitivityTextBox.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SetSensitivityTextBox.Margin = New System.Windows.Forms.Padding(2)
         Me.SetSensitivityTextBox.Name = "SetSensitivityTextBox"
         Me.SetSensitivityTextBox.Size = New System.Drawing.Size(50, 20)
         Me.SetSensitivityTextBox.TabIndex = 57
@@ -564,11 +568,50 @@ Partial Class Form1
         Me.SetSensitivityLabel.TabIndex = 58
         Me.SetSensitivityLabel.Text = "Задать чувствительность мыши"
         '
+        'BuyOrderButton
+        '
+        Me.BuyOrderButton.Location = New System.Drawing.Point(679, 59)
+        Me.BuyOrderButton.Name = "BuyOrderButton"
+        Me.BuyOrderButton.Size = New System.Drawing.Size(100, 23)
+        Me.BuyOrderButton.TabIndex = 59
+        Me.BuyOrderButton.Text = "Купить"
+        Me.BuyOrderButton.UseVisualStyleBackColor = True
+        '
+        'QuantityTextBox
+        '
+        Me.QuantityTextBox.Location = New System.Drawing.Point(679, 35)
+        Me.QuantityTextBox.Name = "QuantityTextBox"
+        Me.QuantityTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.QuantityTextBox.TabIndex = 60
+        '
+        'SellOrderButton
+        '
+        Me.SellOrderButton.Location = New System.Drawing.Point(679, 85)
+        Me.SellOrderButton.Name = "SellOrderButton"
+        Me.SellOrderButton.Size = New System.Drawing.Size(100, 23)
+        Me.SellOrderButton.TabIndex = 61
+        Me.SellOrderButton.Text = "Продать"
+        Me.SellOrderButton.UseVisualStyleBackColor = True
+        '
+        'ListViewOrders
+        '
+        Me.ListViewOrders.Location = New System.Drawing.Point(785, 35)
+        Me.ListViewOrders.Name = "ListViewOrders"
+        Me.ListViewOrders.Size = New System.Drawing.Size(516, 74)
+        Me.ListViewOrders.Sorting = System.Windows.Forms.SortOrder.Descending
+        Me.ListViewOrders.TabIndex = 62
+        Me.ListViewOrders.UseCompatibleStateImageBehavior = False
+        Me.ListViewOrders.View = System.Windows.Forms.View.Details
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1336, 849)
+        Me.Controls.Add(Me.ListViewOrders)
+        Me.Controls.Add(Me.SellOrderButton)
+        Me.Controls.Add(Me.QuantityTextBox)
+        Me.Controls.Add(Me.BuyOrderButton)
         Me.Controls.Add(Me.SetSensitivityLabel)
         Me.Controls.Add(Me.SetSensitivityTextBox)
         Me.Controls.Add(Me.SetSensitivityButton)
@@ -660,4 +703,8 @@ Partial Class Form1
     Friend WithEvents SetSensitivityButton As Button
     Friend WithEvents SetSensitivityTextBox As TextBox
     Friend WithEvents SetSensitivityLabel As Label
+    Friend WithEvents BuyOrderButton As System.Windows.Forms.Button
+    Friend WithEvents QuantityTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents SellOrderButton As System.Windows.Forms.Button
+    Friend WithEvents ListViewOrders As System.Windows.Forms.ListView
 End Class

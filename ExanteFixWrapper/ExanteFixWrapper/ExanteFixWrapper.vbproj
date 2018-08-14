@@ -146,10 +146,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="OrderFixExecutor.vb" />
+    <Compile Include="OrderInfo.vb" />
     <Compile Include="Page.vb" />
     <Compile Include="PointQuotes.vb" />
     <Compile Include="PointTrades.vb" />
     <Compile Include="PointTradesNsec.vb" />
+    <Compile Include="QuickFIXBrokerApplication.vb" />
     <Compile Include="QuickFIXFeedApplication.vb" />
     <Compile Include="QuoteFixReciever.vb" />
     <Compile Include="QuotesInfo.vb" />

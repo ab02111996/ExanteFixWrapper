@@ -6,7 +6,6 @@ Public Class QuickFIXFeedApplication
     Implements QuickFix.Application
 
     Public subscribeInfos As List(Of SubscribeInfo)
-    Public sessionid As QuickFix.SessionID
     Private fixPassword As String
     Private lastInfo As QuotesInfo
 
@@ -96,7 +95,7 @@ Public Class QuickFIXFeedApplication
     End Sub
 
     Public Sub onLogon(sessionID As SessionID) Implements Application.onLogon
-        Me.sessionid = sessionID
+
     End Sub
 
     Public Sub onLogout(sessionID As SessionID) Implements Application.onLogout

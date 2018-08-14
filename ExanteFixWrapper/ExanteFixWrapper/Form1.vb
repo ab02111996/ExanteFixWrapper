@@ -1,8 +1,13 @@
 ﻿Imports QuickFix
 Imports System.Threading
+Imports System.Linq
+Imports System.Windows.Forms.ListView
+
 Public Class Form1
-    Dim fixConfigPath As String = "FIX\fix_vendor.ini"
+    Dim fixVendorConfigPath As String = "FIX\fix_vendor.ini"
+    Dim fixBrokerConfigPath As String = "FIX\fix_broker.ini"
     Dim feedReciever As QuoteFixReciever
+    Dim orderExecutor As OrderFixExecutor
     Public pageList As List(Of Page) = New List(Of Page)
     Public isOnline As Boolean
     Public Shared movingAverageWindowSize As Integer
@@ -15,11 +20,12 @@ Public Class Form1
         If feedReciever IsNot Nothing Then
             feedReciever = Nothing
         End If
-        feedReciever = New QuoteFixReciever(fixConfigPath, AddressOf CheckingState)
+        feedReciever = New QuoteFixReciever(fixVendorConfigPath, AddressOf CheckingState)
+        orderExecutor = New OrderFixExecutor(fixBrokerConfigPath, AddressOf CheckingState, AddressOf UpdateOrdersList)
     End Sub
 
-    Sub CheckingState(state As Boolean, threadAlive As Boolean)
-        If threadAlive Then
+    Sub CheckingState(state As Boolean)
+        If Not Label1.IsDisposed Then
             Label1.Invoke(Sub()
                               If state = True Then
                                   Label1.Text = "OK"
@@ -27,11 +33,18 @@ Public Class Form1
                                   Label1.Text = "Disconnect"
                               End If
                           End Sub)
-        Else
-            System.Windows.Forms.Application.ExitThread()
         End If
     End Sub
-
+    Public Sub UpdateOrdersList(order As OrderInfo)
+        Dim item = New ListViewItem(New String() {order.ClientOrderID, order.Instrument, order.OrderDateTime.ToString(), order.OrderQuantity.ToString(), order.Type.ToString(), order.Status.ToString()})
+        item.Name = order.ClientOrderID
+        ListViewOrders.Invoke(Sub()
+                                  If ListViewOrders.Items.ContainsKey(item.Name) Then
+                                      ListViewOrders.Items.RemoveByKey(item.Name)
+                                  End If
+                                  ListViewOrders.Items.Add(item)
+                              End Sub)
+    End Sub
     Public Sub CaseN_AndDraw()
         Select Case TicksOrSeconds.SelectedItem
             Case "5 секунд"
@@ -199,13 +212,21 @@ Public Class Form1
         pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = False
         currentHeight = Me.Size.Height
         currentWidth = Me.Size.Width
+        ListViewOrders.Columns.Add("Идентификатор ордера", 180, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Инструмент", 120, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Время", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Количество", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Тип", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Статус", 80, HorizontalAlignment.Left)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Me.Hide()
         If feedReciever IsNot Nothing Then
             feedReciever.Logout()
+            orderExecutor.Logout()
         End If
-        System.Windows.Forms.Application.Exit()
+        System.Diagnostics.Process.GetCurrentProcess().Kill()
     End Sub
 
     Private Sub QuotesPctBox_MouseMove(sender As Object, e As MouseEventArgs) Handles QuotesPctBox0.MouseMove
@@ -1546,7 +1567,7 @@ Public Class Form1
 
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        If Me.WindowState <> lastWindowState Then
+        If Me.WindowState <> lastWindowState And Me.WindowState <> FormWindowState.Minimized Then
             lastWindowState = WindowState
             Dim deltaH, deltaW As Integer
             If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width Then
@@ -1559,6 +1580,14 @@ Public Class Form1
             currentHeight = Me.Size.Height
             currentWidth = Me.Size.Width
         End If
-        
+
+    End Sub
+
+    Private Sub BuyOrderButton_Click(sender As Object, e As EventArgs) Handles BuyOrderButton.Click
+        orderExecutor.PlaceOrder(New OrderInfo(Tabs.SelectedTab.Text, OrderInfo.OrderSide.BUY, Double.Parse(QuantityTextBox.Text), OrderInfo.OrderType.MARKET, OrderInfo.OrderTimeInForce.GTC))
+    End Sub
+
+    Private Sub SellOrderButton_Click(sender As Object, e As EventArgs) Handles SellOrderButton.Click
+        orderExecutor.PlaceOrder(New OrderInfo(Tabs.SelectedTab.Text, OrderInfo.OrderSide.SELL, Double.Parse(QuantityTextBox.Text), OrderInfo.OrderType.MARKET, OrderInfo.OrderTimeInForce.GTC))
     End Sub
 End Class
