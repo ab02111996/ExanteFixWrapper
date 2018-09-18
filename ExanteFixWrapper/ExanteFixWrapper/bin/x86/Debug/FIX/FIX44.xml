@@ -2989,6 +2989,7 @@
             <field name="CopyMsgIndicator" required="N"/>
             <field name="PublishTrdIndicator" required="N"/>
             <field name="ShortSaleReason" required="N"/>
+	    <field name="ProfitAndLoss" required="N"/>
         </message>
         <message name="TradeCaptureReportAck" msgtype="AR" msgcat="app">
             <field name="TradeReportID" required="Y"/>

@@ -44,7 +44,7 @@ Public Class OrderFixExecutor
         Dim clientOrderID As ClOrdID = New ClOrdID(order.ClientOrderID)
         Dim orderSide As Side = If(order.Side = OrderInfo.OrderSide.BUY, New Side(Side.BUY), New Side(Side.SELL))
         Dim placeOrder As NewOrderSingle = New NewOrderSingle(clientOrderID, orderSide, New TransactTime(order.OrderDateTime), New OrdType(OrdType.MARKET))
-        placeOrder.set(New TimeInForce(TimeInForce.DAY))
+        placeOrder.set(New TimeInForce(TimeInForce.GOOD_TILL_CANCEL))
         placeOrder.set(New OrderQty(order.OrderQuantity))
         placeOrder.set(New Symbol(order.Instrument))
         placeOrder.set(New SecurityID(order.Instrument))
@@ -52,8 +52,13 @@ Public Class OrderFixExecutor
         QuickFix.Session.sendToTarget(placeOrder, initiator.getSessions(0))
         updateOrderStateCallback.Invoke(order)
     End Sub
-    Public Sub CancelOrder()
-
+    Public Sub GetTrades()
+        Dim request As TradeCaptureReportRequest = New TradeCaptureReportRequest(New TradeRequestID(System.Guid.NewGuid().ToString()), New TradeRequestType(0))
+        Dim tDate = Date.Now.AddDays(-7).Date.ToString("yyyyMMdd")
+        Dim nDates = New QuickFix44.TradeCaptureReportRequest.NoDates()
+        nDates.set(New TradeDate(tDate))
+        request.addGroup(nDates)
+        QuickFix.Session.sendToTarget(request, initiator.getSessions(0))
     End Sub
 
     Public Sub Logout()

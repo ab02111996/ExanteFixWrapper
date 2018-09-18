@@ -12,6 +12,12 @@ Public Class QuickFIXBrokerApplication
         Me.orderStatusCallback = orderStatusCallback
     End Sub
     Public Sub fromAdmin(Param As QuickFix.Message, Param1 As SessionID) Implements Application.fromAdmin
+        Dim MessgType = New MsgType()
+        Param.getHeader().getField(MessgType)
+        Console.WriteLine("from Admin: " + MessgType.getValue().ToString())
+        If MessgType.getValue() = MsgType.Reject Then
+            Console.WriteLine(Param.getField(58))
+        End If
 
     End Sub
 
@@ -21,7 +27,6 @@ Public Class QuickFIXBrokerApplication
         If messageType.getValue() = MsgType.ExecutionReport Then
             orderStatusCallback.Invoke(message)
         End If
-
     End Sub
 
     Public Sub onCreate(Param As SessionID) Implements Application.onCreate
@@ -42,10 +47,17 @@ Public Class QuickFIXBrokerApplication
         If msgType.getValue = QuickFix.MsgType.Logon Then
             message.setField(New Password(Me.fixPassword))
         End If
+        If msgType.getValue = QuickFix.MsgType.Reject Then
+            Console.WriteLine("To Admin: " + msgType.getValue().ToString())
+        End If
+
+
     End Sub
 
     Public Sub toApp(Param As QuickFix.Message, Param1 As SessionID) Implements Application.toApp
-
+        Dim MessgType = New MsgType()
+        Param.getHeader().getField(MessgType)
+        Console.WriteLine("to App: " + MessgType.getValue().ToString())
     End Sub
 
 End Class

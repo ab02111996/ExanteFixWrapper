@@ -1567,7 +1567,8 @@ Public Class Form1
 
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        If Me.WindowState <> lastWindowState And Me.WindowState <> FormWindowState.Minimized Then            lastWindowState = WindowState
+        If Me.WindowState <> lastWindowState And Me.WindowState <> FormWindowState.Minimized Then
+            lastWindowState = WindowState
             Dim deltaH, deltaW As Integer
             If Me.currentHeight <> Me.Height Or Me.currentWidth <> Me.Width Then
                 deltaH = Me.Height - Me.currentHeight
@@ -1588,5 +1589,9 @@ Public Class Form1
 
     Private Sub SellOrderButton_Click(sender As Object, e As EventArgs) Handles SellOrderButton.Click
         orderExecutor.PlaceOrder(New OrderInfo(Tabs.SelectedTab.Text, OrderInfo.OrderSide.SELL, Double.Parse(QuantityTextBox.Text), OrderInfo.OrderType.MARKET, OrderInfo.OrderTimeInForce.GTC))
+    End Sub
+
+    Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
+        orderExecutor.GetTrades()
     End Sub
 End Class

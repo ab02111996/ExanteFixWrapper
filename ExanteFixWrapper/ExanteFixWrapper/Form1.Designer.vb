@@ -72,6 +72,7 @@ Partial Class Form1
         Me.QuantityTextBox = New System.Windows.Forms.TextBox()
         Me.SellOrderButton = New System.Windows.Forms.Button()
         Me.ListViewOrders = New System.Windows.Forms.ListView()
+        Me.RefreshButton = New System.Windows.Forms.Button()
         Me.TabPage0.SuspendLayout()
         Me.Charts0.SuspendLayout()
         Me.QuotesTab0.SuspendLayout()
@@ -570,7 +571,7 @@ Partial Class Form1
         '
         'BuyOrderButton
         '
-        Me.BuyOrderButton.Location = New System.Drawing.Point(679, 59)
+        Me.BuyOrderButton.Location = New System.Drawing.Point(679, 31)
         Me.BuyOrderButton.Name = "BuyOrderButton"
         Me.BuyOrderButton.Size = New System.Drawing.Size(100, 23)
         Me.BuyOrderButton.TabIndex = 59
@@ -579,14 +580,14 @@ Partial Class Form1
         '
         'QuantityTextBox
         '
-        Me.QuantityTextBox.Location = New System.Drawing.Point(679, 35)
+        Me.QuantityTextBox.Location = New System.Drawing.Point(576, 35)
         Me.QuantityTextBox.Name = "QuantityTextBox"
         Me.QuantityTextBox.Size = New System.Drawing.Size(100, 20)
         Me.QuantityTextBox.TabIndex = 60
         '
         'SellOrderButton
         '
-        Me.SellOrderButton.Location = New System.Drawing.Point(679, 85)
+        Me.SellOrderButton.Location = New System.Drawing.Point(680, 57)
         Me.SellOrderButton.Name = "SellOrderButton"
         Me.SellOrderButton.Size = New System.Drawing.Size(100, 23)
         Me.SellOrderButton.TabIndex = 61
@@ -603,11 +604,21 @@ Partial Class Form1
         Me.ListViewOrders.UseCompatibleStateImageBehavior = False
         Me.ListViewOrders.View = System.Windows.Forms.View.Details
         '
+        'RefreshButton
+        '
+        Me.RefreshButton.Location = New System.Drawing.Point(680, 83)
+        Me.RefreshButton.Name = "RefreshButton"
+        Me.RefreshButton.Size = New System.Drawing.Size(100, 23)
+        Me.RefreshButton.TabIndex = 63
+        Me.RefreshButton.Text = "Обновить"
+        Me.RefreshButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1336, 849)
+        Me.Controls.Add(Me.RefreshButton)
         Me.Controls.Add(Me.ListViewOrders)
         Me.Controls.Add(Me.SellOrderButton)
         Me.Controls.Add(Me.QuantityTextBox)
@@ -707,4 +718,5 @@ Partial Class Form1
     Friend WithEvents QuantityTextBox As System.Windows.Forms.TextBox
     Friend WithEvents SellOrderButton As System.Windows.Forms.Button
     Friend WithEvents ListViewOrders As System.Windows.Forms.ListView
+    Friend WithEvents RefreshButton As System.Windows.Forms.Button
 End Class
