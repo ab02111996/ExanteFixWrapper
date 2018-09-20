@@ -3,13 +3,15 @@ Imports QuickFix44
 
 Public Class QuickFIXBrokerApplication
     Implements QuickFix.Application
-    Private orderStatusCallback As OrderStatusCallbackFIX = Nothing
     Delegate Sub OrderStatusCallbackFIX(message As QuickFix.Message)
-
+    Delegate Sub PositionStateCallbackFIX(message As QuickFix.Message)
+    Private orderStatusCallback As OrderStatusCallbackFIX = Nothing
+    Private positionStateCallback As PositionStateCallbackFIX = Nothing
     Private fixPassword As String
-    Public Sub New(fixPassword As String, orderStatusCallback As OrderStatusCallbackFIX)
+    Public Sub New(fixPassword As String, orderStatusCallback As OrderStatusCallbackFIX, positionStateCallback As PositionStateCallbackFIX)
         Me.fixPassword = fixPassword
         Me.orderStatusCallback = orderStatusCallback
+        Me.positionStateCallback = positionStateCallback
     End Sub
     Public Sub fromAdmin(Param As QuickFix.Message, Param1 As SessionID) Implements Application.fromAdmin
         Dim MessgType = New MsgType()
@@ -26,6 +28,9 @@ Public Class QuickFIXBrokerApplication
         message.getHeader().getField(messageType)
         If messageType.getValue() = MsgType.ExecutionReport Then
             orderStatusCallback.Invoke(message)
+        End If
+        If messageType.getValue() = "UASR" Then
+            positionStateCallback.Invoke(message)
         End If
     End Sub
 

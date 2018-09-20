@@ -9,12 +9,12 @@ Public Class OrderFixExecutor
     Dim activeOrders As Dictionary(Of String, OrderInfo)
     Dim currentState As Boolean
     Delegate Sub UpdateConnectionStateCallBack(State As Boolean)
-    Delegate Sub OrderStatusCallbackFIX(order As OrderInfo)
+    Delegate Sub PositionStateCallbackFIX(position As PositionInfo)
 
     Public updateConnStateCallback As UpdateConnectionStateCallBack
-    Public updateOrderStateCallback As OrderStatusCallbackFIX
+    Public positionStateCallback As PositionStateCallbackFIX
     Dim updateConnStatusThread As Thread
-    Public Sub New(fixFeedConfigPath As String, updStateCallback As UpdateConnectionStateCallBack, updateOrderStateCallback As OrderStatusCallbackFIX)
+    Public Sub New(fixFeedConfigPath As String, updStateCallback As UpdateConnectionStateCallBack, positionStateCallback As PositionStateCallbackFIX)
         currentState = False
         Try
             settings = New SessionSettings(fixFeedConfigPath)
@@ -22,7 +22,7 @@ Public Class OrderFixExecutor
             Dim dict As QuickFix.Dictionary = settings.get(CType(sessions(0), QuickFix.SessionID))
             Dim fixBrokerPass As String = dict.getString("password")
             Dim storeFactory As FileStoreFactory = New FileStoreFactory(settings)
-            application = New QuickFIXBrokerApplication(fixBrokerPass, AddressOf UpdateOrder)
+            application = New QuickFIXBrokerApplication(fixBrokerPass, AddressOf UpdateOrder, AddressOf GetPositionsInfo)
             Dim logFactory As FileLogFactory = New FileLogFactory(settings)
             Dim messageFactory As QuickFix.MessageFactory = New DefaultMessageFactory()
             initiator = New SocketInitiator(application, storeFactory, settings, logFactory, messageFactory)
@@ -32,7 +32,7 @@ Public Class OrderFixExecutor
                 updateConnStatusThread = New Thread(AddressOf CheckingConnectonState)
                 updateConnStatusThread.Start()
             End If
-            Me.updateOrderStateCallback = updateOrderStateCallback
+            Me.PositionStateCallback = positionStateCallback
             activeOrders = New Dictionary(Of String, OrderInfo)
         Catch ex As Exception
 
@@ -50,17 +50,13 @@ Public Class OrderFixExecutor
         placeOrder.set(New SecurityID(order.Instrument))
         placeOrder.set(New SecurityIDSource("111"))
         QuickFix.Session.sendToTarget(placeOrder, initiator.getSessions(0))
-        updateOrderStateCallback.Invoke(order)
+        'updateOrderStateCallback.Invoke(order)
     End Sub
-    Public Sub GetTrades()
-        Dim request As TradeCaptureReportRequest = New TradeCaptureReportRequest(New TradeRequestID(System.Guid.NewGuid().ToString()), New TradeRequestType(0))
-        Dim tDate = Date.Now.AddDays(-7).Date.ToString("yyyyMMdd")
-        Dim nDates = New QuickFix44.TradeCaptureReportRequest.NoDates()
-        nDates.set(New TradeDate(tDate))
-        request.addGroup(nDates)
-        QuickFix.Session.sendToTarget(request, initiator.getSessions(0))
+    Public Sub UpdatePositionsInfo()
+        Dim message As QuickFix44.Message = New QuickFix44.Message(New MsgType("UASQ"))
+        message.setString(20020, System.Guid.NewGuid().ToString())
+        Session.sendToTarget(message, initiator.getSessions(0))
     End Sub
-
     Public Sub Logout()
         Try
             updateConnStatusThread.Abort()
@@ -114,6 +110,34 @@ Public Class OrderFixExecutor
         If activeOrders.ContainsKey(ClientOrderID.getValue()) Then
             activeOrders(ClientOrderID.getValue()).Status = parsedOrderStatus
         End If
-        updateOrderStateCallback.Invoke(activeOrders(ClientOrderID.getValue()))
+        Dim order = activeOrders(ClientOrderID.getValue())
+        Console.WriteLine("Client Order ID: " + order.ClientOrderID + " " +
+                         "Client Order ID: " + order.Instrument + " " +
+                         "Client Order ID: " + order.OrderDateTime.ToString() + " " +
+                         "Client Order ID: " + order.OrderQuantity.ToString() + " " +
+                         "Client Order ID: " + order.Type.ToString() + " " +
+                         "Client Order ID: " + order.Status.ToString())
+        'updateOrderStateCallback.Invoke(activeOrders(ClientOrderID.getValue()))
     End Sub
+    Private Sub GetPositionsInfo(message As QuickFix.Message)
+        Console.WriteLine(message.ToString())
+        Dim posInfo = New PositionInfo()
+        Dim symbol = New SecurityID()
+        posInfo.Instrument = message.getField(symbol).getValue()
+        Dim positionFieldLong = New DoubleField(704)
+        Dim positionFieldShort = New DoubleField(705)
+        Dim posLong = message.getField(positionFieldLong)
+        Dim posShort = message.getField(positionFieldShort)
+        If posShort.getValue() = 0 Then
+            posInfo.Position = posLong.getValue()
+        Else
+            posInfo.Position = -posShort.getValue()
+        End If
+        Dim avgPrice = New DoubleField(6)
+        posInfo.AvgPrice = message.getField(avgPrice).getValue()
+        Dim profitAndLoss = New DoubleField(20030)
+        posInfo.ProfitAndLoss = message.getField(profitAndLoss).getValue()
+        positionStateCallback.Invoke(posInfo)
+    End Sub
+
 End Class

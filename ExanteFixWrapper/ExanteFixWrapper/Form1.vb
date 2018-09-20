@@ -21,7 +21,7 @@ Public Class Form1
             feedReciever = Nothing
         End If
         feedReciever = New QuoteFixReciever(fixVendorConfigPath, AddressOf CheckingState)
-        orderExecutor = New OrderFixExecutor(fixBrokerConfigPath, AddressOf CheckingState, AddressOf UpdateOrdersList)
+        orderExecutor = New OrderFixExecutor(fixBrokerConfigPath, AddressOf CheckingState, AddressOf UpdatePositionsList)
     End Sub
 
     Sub CheckingState(state As Boolean)
@@ -35,14 +35,9 @@ Public Class Form1
                           End Sub)
         End If
     End Sub
-    Public Sub UpdateOrdersList(order As OrderInfo)
-        Dim item = New ListViewItem(New String() {order.ClientOrderID, order.Instrument, order.OrderDateTime.ToString(), order.OrderQuantity.ToString(), order.Type.ToString(), order.Status.ToString()})
-        item.Name = order.ClientOrderID
+    Public Sub UpdatePositionsList(position As PositionInfo)
         ListViewOrders.Invoke(Sub()
-                                  If ListViewOrders.Items.ContainsKey(item.Name) Then
-                                      ListViewOrders.Items.RemoveByKey(item.Name)
-                                  End If
-                                  ListViewOrders.Items.Add(item)
+                                  ListViewOrders.Items.Add(position.ConvertToListViewItem())
                               End Sub)
     End Sub
     Public Sub CaseN_AndDraw()
@@ -212,12 +207,10 @@ Public Class Form1
         pageList(Tabs.SelectedIndex).cp.isNeedShowAvg = False
         currentHeight = Me.Size.Height
         currentWidth = Me.Size.Width
-        ListViewOrders.Columns.Add("Идентификатор ордера", 180, HorizontalAlignment.Left)
         ListViewOrders.Columns.Add("Инструмент", 120, HorizontalAlignment.Left)
-        ListViewOrders.Columns.Add("Время", 80, HorizontalAlignment.Left)
-        ListViewOrders.Columns.Add("Количество", 80, HorizontalAlignment.Left)
-        ListViewOrders.Columns.Add("Тип", 80, HorizontalAlignment.Left)
-        ListViewOrders.Columns.Add("Статус", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Позиция", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Средняя цена", 80, HorizontalAlignment.Left)
+        ListViewOrders.Columns.Add("Прибыль/Убыток", 120, HorizontalAlignment.Left)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -1592,6 +1585,7 @@ Public Class Form1
     End Sub
 
     Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
-        orderExecutor.GetTrades()
+        ListViewOrders.Items.Clear()
+        orderExecutor.UpdatePositionsInfo()
     End Sub
 End Class

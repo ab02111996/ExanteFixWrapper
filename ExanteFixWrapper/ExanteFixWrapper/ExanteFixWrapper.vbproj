@@ -152,6 +152,7 @@
     <Compile Include="PointQuotes.vb" />
     <Compile Include="PointTrades.vb" />
     <Compile Include="PointTradesNsec.vb" />
+    <Compile Include="PositionInfo.vb" />
     <Compile Include="QuickFIXBrokerApplication.vb" />
     <Compile Include="QuickFIXFeedApplication.vb" />
     <Compile Include="QuoteFixReciever.vb" />
