@@ -117,6 +117,7 @@
     <Compile Include="ChartPainting.vb" />
     <Compile Include="DataBaseReader.vb" />
     <Compile Include="DataBaseWriter.vb" />
+    <Compile Include="Extensions.vb" />
     <Compile Include="FirstForm.Designer.vb">
       <DependentUpon>FirstForm.vb</DependentUpon>
     </Compile>
@@ -149,6 +150,7 @@
     <Compile Include="OrderFixExecutor.vb" />
     <Compile Include="OrderInfo.vb" />
     <Compile Include="Page.vb" />
+    <Compile Include="PaintingTools.vb" />
     <Compile Include="PointQuotes.vb" />
     <Compile Include="PointTrades.vb" />
     <Compile Include="PointTradesNsec.vb" />

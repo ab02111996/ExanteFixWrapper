@@ -512,7 +512,17 @@ Public Class Page
                                                        Dim newClonedPoint As New PointTradesNsec()
                                                        newClonedPoint.time = point.time.AddSeconds(counterNsec * 5)
                                                        Dim _cnt = cp.dictionaryPointsTradesNsec(key).Count
-                                                       form.cp.dictionaryPointsTradesNsec(key)(cnt - 1) = pointCloned
+                                                       Try
+                                                           form.cp.dictionaryPointsTradesNsec(key)(cnt - 1) = pointCloned
+                                                       Catch ex As Exception
+                                                           If form.cp.dictionaryPointsTradesNsec(key).Count = 0 Then
+                                                               'form.cp.dictionaryPointsTradesNsec(key)(0) = pointCloned
+                                                           Else
+                                                               form.cp.dictionaryPointsTradesNsec(key)(form.cp.dictionaryPointsTradesNsec(key).Count - 1) = pointCloned
+                                                           End If
+
+                                                       End Try
+
                                                        form.ReCalculateLastValueMovingAvg()
                                                        SetPricesInNewPoint(newClonedPoint, pointCloned)
                                                        form.cp.dictionaryPointsTradesNsec(key).Add(newClonedPoint)
