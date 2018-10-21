@@ -1,7 +1,6 @@
 # ExanteFixWrapper
 FIXWrapper for Exante FIX API
 
-This trading platform gets data from broker (Exante) and paints diagrams which show information about quotes and trades.
-Now we added the ability to buy or sell financial instruments
+This trading platform gets data from a broker (Exante) and builds diagrams, which represent the information about quotes and trades. We have recently added the ability to buy and sell financial instruments. 
 
-I implemented chart painting and visual interface part.
+I implemented chart painting and visual interface part
